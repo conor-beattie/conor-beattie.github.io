@@ -21,8 +21,8 @@ window.PORTFOLIO_DATA = {
   },
 
   owner: {
-    name: "YOUR NAME",
-    initials: "YN",
+    name: "Conor Beattie",
+    initials: "CB",
     portfolioTitle: "Engineering Portfolio",
     location: "United Kingdom",
     eyebrow: "ENGINEERING · ROBOTICS · DESIGN",
