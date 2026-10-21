@@ -1,7 +1,16 @@
 (function () {
   "use strict";
   const data = window.PORTFOLIO_DATA;
-  if (!data || !data.owner || !Array.isArray(data.projects)) return;
+  if (!data || !data.owner || !Array.isArray(data.projects)) {
+    document.addEventListener("DOMContentLoaded", () => {
+      const target = document.querySelector("main") || document.body;
+      const notice = document.createElement("div");
+      notice.className = "template-banner";
+      notice.textContent = "Portfolio information could not load. Check assets/js/site-data.js for a JavaScript syntax error or missing file.";
+      target.prepend(notice);
+    });
+    return;
+  }
   const $ = (selector, base = document) => base.querySelector(selector);
   const $$ = (selector, base = document) => Array.from(base.querySelectorAll(selector));
   const escape = (str) => String(str == null ? "" : str).replace(/[&<>"']/g, char => ({
@@ -90,7 +99,13 @@
         <div class="category-tile__info"><span class="mini-index">0${index + 1} / EXPLORE</span><h3>${text(cat.title)}</h3><p>${text(cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
       </a>`).join("");
     const featured = $("#featured-projects");
-    if (featured) featured.innerHTML = data.projects.slice(0, 3).map(projectCard).join("");
+    if (featured) {
+      // Show up to two projects per discipline on the homepage, in category order.
+      const picks = data.categories.flatMap(cat =>
+        data.projects.filter(project => project.category === cat.id).slice(0, 2)
+      );
+      featured.innerHTML = picks.map(projectCard).join("");
+    }
   }
 
   function projects() {

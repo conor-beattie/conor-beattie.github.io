@@ -2,13 +2,13 @@
   ENGINEERING PORTFOLIO — EDIT THIS FILE FIRST
   ---------------------------------------------
   This one file controls the visible name, text, projects and image paths.
-  All images are examples extracted from the reference Portfolio.docx.
+  Some images are provided as examples; several photographs are from your repository.
   Replace them with real project photographs before sharing the site.
 
   Quick steps:
   1. Replace YOUR NAME, YN and the headline / introduction below.
-  2. Replace images in assets/images and update matching image paths.
-  3. Replace the four example projects with real projects.
+  2. Replace images in assets/images and update matching image paths as needed.
+  3. Four existing projects have been preserved. Four additional example entries are ready to edit.
   4. When ready, change showTemplateNotice to false.
   5. Add actual public GitHub / video / CAD links (or leave them blank).
 
@@ -42,7 +42,7 @@ window.PORTFOLIO_DATA = {
   categories: [
     {
       id: "robotics",
-      title: "Autonomous Robotics",
+      title: "Robotics",
       subtitle: "Robot architecture, sensors, Python control and navigation",
       image: "assets/images/IMG_2627 Bobbot.jpg"
     },
@@ -74,7 +74,7 @@ window.PORTFOLIO_DATA = {
       category: "robotics",                          // robotics | cad | fabrication | software
       image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
-      summary: "Meet Bobbot. An experimental autonomous robot designed to grow and expand in capability and function. 
+      summary: "Meet Bobbot. An experimental autonomous robot designed to grow and expand in capability and function.",
       tags: ["Robotics", "Python", "Sensors"],
       date: "",                                       // e.g. 2026; leave blank if not wanted
       contribution: "Replace with what you personally designed, built, programmed or tested.",
@@ -157,6 +157,98 @@ window.PORTFOLIO_DATA = {
         iterations: "Discuss debugging, performance bottlenecks and improvements.",
         results: "Add screenshots, telemetry plots or a video of the system operating.",
         lessons: "Summarise technical insights and remaining engineering questions."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "robotics-project-2",
+      title: "Robotics Project 2 — Add Title",
+      category: "robotics",
+      image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
+      imageAlt: "Robot project photo — replace or update caption",
+      summary: "Example entry: add the second robot, what it was designed to do, and the engineering work completed.",
+      tags: ["Robotics", "Mechanical Design", "Control"],
+      date: "",
+      contribution: "Add what you personally designed, built, programmed and tested.",
+      sections: {
+        overview: "Introduce the second robotics project. What does the robot do and why was it built?",
+        objectives: "Describe the requirements, performance targets and mechanical or software constraints.",
+        design: "Add drawings or CAD images of the chassis, drivetrain and mechanisms, with design decisions.",
+        construction: "Explain how the robot was assembled, wired and fabricated. Identify custom parts.",
+        software: "Document how the robot is driven or controlled, including control logic and sensors.",
+        testing: "Show trial conditions and measured performance, such as repeatability, speed or accuracy.",
+        iterations: "Describe a problem discovered during testing and the changes made to resolve it.",
+        results: "Add a photograph or short demonstration video of the robot working.",
+        lessons: "Summarise the most valuable technical lessons and possible next improvements."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "cad-project-2",
+      title: "CAD Project 2 — Add Title",
+      category: "cad",
+      image: "assets/images/cad.webp",
+      imageAlt: "CAD illustration — replace with the second design project",
+      summary: "Example entry: add a second CAD design, its intended function and the principal design challenges.",
+      tags: ["CAD", "Engineering Design", "Mechanisms"],
+      date: "",
+      contribution: "Specify which design, calculations, assembly and drawings you produced.",
+      sections: {
+        overview: "Introduce the second CAD project and explain what the assembly or part is for.",
+        objectives: "List dimensions, fit requirements, operating forces and other design constraints.",
+        design: "Include CAD renders, section views, exploded assemblies and relevant design alternatives.",
+        construction: "Describe any model, prototype or physical assembly produced from the CAD.",
+        software: "Mention parametric modelling, simulation or scripts if used; otherwise state not applicable.",
+        testing: "Document fit checks, interference reviews, movement range or physical testing.",
+        iterations: "Compare initial and revised designs, explaining the reasons for changes.",
+        results: "Show the final design and, where available, the completed manufactured part.",
+        lessons: "Summarise important design lessons and improvements for future revisions."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "fabrication-project-2",
+      title: "3D Printing Project 2 — Add Title",
+      category: "fabrication",
+      image: "assets/images/fabrication.webp",
+      imageAlt: "3D-printing example image — replace with the second fabrication project",
+      summary: "Example entry: document a second printed component, how it was manufactured and how its fit was verified.",
+      tags: ["3D Printing", "CAD", "Prototyping"],
+      date: "",
+      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      sections: {
+        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
+        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
+        construction: "Record printer, material, settings and any finishing or assembly processes used.",
+        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
+        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
+        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
+        results: "Include photographs of the printed component installed in its working mechanism.",
+        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "electronics-project-2",
+      title: "Software & Electronics Project 2 — Add Title",
+      category: "software",
+      image: "assets/images/electronics.webp",
+      imageAlt: "Electronics example image — replace with a second software and electronics project",
+      summary: "Example entry: introduce another control, sensor, electronics or Python software project.",
+      tags: ["Python", "Sensors", "Electronics"],
+      date: "",
+      contribution: "Specify the hardware, code and testing completed individually.",
+      sections: {
+        overview: "Introduce the subsystem, its purpose and where it is used.",
+        objectives: "Describe accuracy, update rate, reliability and hardware/software integration requirements.",
+        design: "Include architecture diagrams, interface definitions or circuit drawings where useful.",
+        construction: "Show electronics assembly, connectors, sensor positions and wiring if applicable.",
+        software: "Explain Python modules, algorithms, data handling and how commands reach the hardware.",
+        testing: "Include repeatable measurements such as processing speed, sensor noise or control accuracy.",
+        iterations: "Describe bugs, calibration problems or other limitations and how they were improved.",
+        results: "Show the system operating, with graphs, screenshots or a short demonstration.",
+        lessons: "Discuss technical lessons and remaining questions for further development."
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     }
