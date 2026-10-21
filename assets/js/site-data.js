@@ -54,7 +54,7 @@ window.PORTFOLIO_DATA = {
       image: "assets/images/cad.webp"
     },
     {
-      id: "fabrication",
+      id: "",
       title: "3D Printing & Fabrication",
       subtitle: "Custom parts, prototyping, tolerances and material selection",
       image: "assets/images/IMG_2788 3d print pulley.jpg"
@@ -295,9 +295,9 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-2",
-      title: "3D Printing Project 2 — Add Title",
+      title: "Rubber Band Intake, Bumpers, Ramp",
       category: "fabrication",
-      image: "assets/images/fabrication.webp",
+      image: "rubber_band_intake_bumpers_ramp.jpeg",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
       summary: "Example entry: document a second printed component, how it was manufactured and how its fit was verified.",
       tags: ["3D Printing", "CAD", "Prototyping"],
