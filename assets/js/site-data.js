@@ -57,7 +57,7 @@ window.PORTFOLIO_DATA = {
       id: "fabrication",
       title: "3D Printing & Fabrication",
       subtitle: "Custom parts, prototyping, tolerances and material selection",
-      image: "assets/images/IMG_2788 3d print pulley.jpg"
+      image: "assets/images/pulley.png"
     },
     {
       id: "software",
@@ -205,7 +205,7 @@ window.PORTFOLIO_DATA = {
       id: "printed-mechanisms",
       title: "Pulleys",
       category: "fabrication",
-      image: "assets/images/IMG_2788 3d print pulley.jpg",
+      image: "assets/images/pulley.png",
       imageAlt: "Illustrative 3D-printed gears and fabricated components",
       summary: "",
       tags: ["3D Printing", "Prototyping", "Materials"],
@@ -364,7 +364,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-5",
-      title: "RovoClaw 2x30",
+      title: "RoboClaw 2x30",
       category: "fabrication",
       image: "assets/images/RoboClaw 2x30.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
