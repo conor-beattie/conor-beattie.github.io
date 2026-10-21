@@ -362,27 +362,7 @@ window.PORTFOLIO_DATA = {
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
-    {
-      id: "embedded-project-2",
-      title: "Electronics Project 2 — Add Title",
-      category: "electronics",
-      image: "assets/images/electro.webp",
-      imageAlt: "Illustrative electronic controller and robot wiring",
-      summary: "Example entry: document an electronics or embedded-control subsystem.",
-      tags: ["Electronics", "Sensors", "Embedded"],
-      date: "",
-      contribution: "Identify the circuits, hardware integration and tests you completed.",
-      sections: {
-        overview: "Explain the role of the circuit or embedded subsystem.",
-        objectives: "Define inputs, outputs, power requirements and accuracy or safety constraints.",
-        design: "Add circuit diagrams, interfaces, component choices and trade-offs.",
-        construction: "Show assembly, connectors, wiring and mounting.",
-        software: "If firmware is used, describe what it controls; otherwise mark not applicable.",
-        testing: "Measure signal quality, current draw, response time or repeatability as appropriate.",
-        iterations: "Explain improvements after electrical and mechanical tests.",
-        results: "Summarise what has been demonstrated and the remaining limitations.",
-        lessons: "Record what you would change in a next revision."
-      },
+    
       links: { github: "", cad: "", video: "", downloads: "" }
     }
   ]
