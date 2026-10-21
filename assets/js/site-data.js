@@ -2,23 +2,23 @@
   ENGINEERING PORTFOLIO — EDIT THIS FILE FIRST
   ---------------------------------------------
   This one file controls the visible name, text, projects, algorithms and media paths.
-  Some images are provided as examples; several photographs are from your repository.
-  Replace them with real project photographs before sharing the site.
+  Project images and descriptions are maintained here, including your own photos.
+  Some unfinished entries contain editable instructional text.
 
   Quick steps:
-  1. Replace YOUR NAME, YN and the headline / introduction below.
+  1. Update the owner information and the homepage introduction if desired.
   2. Replace images in assets/images and update matching image paths as needed.
   3. Keep the existing projects and edit the five engineering categories as needed.
   4. Add algorithm entries and optional demonstrations (same clip can link to multiple pages).
-  5. When ready, change showTemplateNotice to false.
+  5. The template banner and example badges are now disabled.
   6. Add actual public GitHub / video / CAD links (or leave them blank).
 
   Do not put private addresses, school schedules or personal contact data here.
 */
 window.PORTFOLIO_DATA = {
   settings: {
-    showTemplateNotice: true,
-    imageCredit: "Illustrative images from the supplied portfolio document — replace with your own project photos and CAD renders."
+    showTemplateNotice: false,
+    imageCredit: ""
   },
 
   owner: {
@@ -54,7 +54,7 @@ window.PORTFOLIO_DATA = {
       image: "assets/images/cad.webp"
     },
     {
-      id: "",
+      id: "fabrication",
       title: "3D Printing & Fabrication",
       subtitle: "Custom parts, prototyping, tolerances and material selection",
       image: "assets/images/IMG_2788 3d print pulley.jpg"

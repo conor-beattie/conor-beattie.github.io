@@ -2,6 +2,17 @@
 
 This is the updated GitHub Pages portfolio built **from the uploaded repository**. It preserves the existing design, owner information, eight earlier project entries, photographs, CSS and JavaScript architecture.
 
+## Latest navigation and gallery update (21 October 2026)
+
+- Two-row desktop header: general links (**Home / All work / About**) and direct links to **all five engineering sections**. Mobile uses one menu with the same destinations.
+- Corrected `categories[].id` for **3D Printing & Fabrication** from blank to `fabrication`, matching the two existing printed-component entries (`printed-mechanisms`, `fabrication-project-2`). Both now display in their own filtered gallery.
+- The two 3D-print entries are labelled **3D PRINT**, not “Engineering project”. The filtered gallery shows “3D Printing & Fabrication” as its heading.
+- Removed the published **Portfolio template** banner and project-card **EXAMPLE** badges from all pages. Project-page pictures no longer display placeholder caption text.
+- The homepage heading now says **Selected work** to cover robots, CAD designs and 3D-printed parts.
+- Existing owner name, project text, IDs, robots, algorithms, user photographs, image filenames and detailed entries are retained.
+
+**Important:** the category ID `fabrication` is a fixed link between the homepage, navigation, gallery and project records. Change its display `title` freely, but do not blank/change its `id` without updating all matching project categories.
+
 ## What's new
 
 - Five engineering disciplines: **Robotics**, **Mechanical Design & CAD**, **3D Printing & Fabrication**, **Software & Algorithms**, and **Electronics & Embedded Systems**.
@@ -30,7 +41,7 @@ Edit `assets/js/site-data.js` for virtually all routine changes. It includes:
 - `projects` — robot, CAD, fabrication, software and electronics project pages
 - `algorithms` — method descriptions plus reusable demonstrations
 
-The layout and navigation live in `assets/js/site.js`; visual styling lives in `assets/css/style.css`. You generally don't need to edit either to add a project, algorithm or video.
+The layout and navigation live in `assets/js/site.js` plus the six HTML headers; visual styling lives in `assets/css/style.css`. You generally don't need to edit either to add a project, algorithm or video.
 
 **Photos:** Upload to `assets/images/`; use their paths in `image` fields. The original `.jpg` filenames with spaces still work, but lowercase names with hyphens are easier to maintain for future files.
 
@@ -100,7 +111,7 @@ The demonstration now appears automatically on:
 - `algorithm.html?id=pid` — PID detail.
 - `algorithm.html?id=pure-pursuit` — Pure Pursuit detail.
 
-The normal project gallery remains at `projects.html`, now with five filterable categories. The new Electronics & Embedded Systems section has its own category filter.
+The project and 3D-print gallery is at `projects.html`, with five filterable categories. You can also select each category directly from the top navigation. The new Electronics & Embedded Systems section has its own category filter.
 
 ## Notes
 

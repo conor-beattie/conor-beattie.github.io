@@ -26,6 +26,32 @@
   const img = (path) => escape(path || "assets/images/robotics.webp");
   const text = (s) => escape(s || "");
   const category = (id) => data.categories.find(c => c.id === id);
+  const kindLabel = (p) => p.category === "fabrication" ? "3D PRINT" : (category(p.category)?.title || "Portfolio entry");
+  const navCategory = () => {
+    const page = document.body.dataset.page;
+    if (page === "software" || page === "algorithm") return "software";
+    if (page === "project") {
+      const id = new URLSearchParams(location.search).get("id");
+      return data.projects.find(p => p.id === id)?.category || "";
+    }
+    if (page === "projects") return new URLSearchParams(location.search).get("category") || "";
+    return "";
+  };
+  function updateNavState() {
+    const current = navCategory();
+    const page = document.body.dataset.page;
+    $$('[data-category-nav]').forEach(el => {
+      if (el.dataset.categoryNav === current) el.setAttribute('aria-current', 'page');
+      else el.removeAttribute('aria-current');
+    });
+    $$('[data-nav]').forEach(el => {
+      const selected = (page === 'home' && el.dataset.nav === 'home') ||
+        (page === 'about' && el.dataset.nav === 'about') ||
+        (page === 'projects' && !current && el.dataset.nav === 'projects');
+      if (selected) el.setAttribute('aria-current', 'page');
+      else el.removeAttribute('aria-current');
+    });
+  }
   const paragraphs = (s) => String(s || "").split(/\n\s*\n/).filter(Boolean)
     .map(p => `<p>${text(p)}</p>`).join("");
   const projectUrl = (project) => `project.html?id=${encodeURIComponent(project.id)}`;
@@ -75,18 +101,16 @@
         mobileToggle.setAttribute("aria-expanded", "false");
       }));
     }
-    const page = document.body.getAttribute("data-page");
-    $$(`[data-nav="${page}"]`).forEach(el => el.setAttribute("aria-current", "page"));
+    updateNavState();
   }
 
   function projectCard(p) {
-    const cat = category(p.category);
     return `<article class="project-card">
       <a href="${projectUrl(p)}" class="project-card__image" aria-label="View project: ${text(p.title)}">
         <img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" />
       </a>
       <div class="project-card__body">
-        <div class="eyebrow-row"><span class="eyebrow">${text(cat ? cat.title : "Engineering project")}</span>${data.settings.showTemplateNotice ? '<span class="sample-mark">EXAMPLE</span>' : ""}</div>
+        <div class="eyebrow-row"><span class="eyebrow">${text(kindLabel(p))}</span></div>
         <h3><a href="${projectUrl(p)}">${text(p.title)}</a></h3>
         <p>${text(p.summary)}</p>
         <div class="project-card__foot">
@@ -172,7 +196,7 @@
     const catGrid = $("#category-grid");
     if (catGrid) catGrid.innerHTML = data.categories.map((cat, index) => `
       <a href="${cat.id === "software" ? "algorithms.html" : `projects.html?category=${encodeURIComponent(cat.id)}`}" class="category-tile">
-        <div class="category-tile__image"><img src="${img(cat.image)}" alt="${text(cat.title)} example image" loading="lazy" /></div>
+        <div class="category-tile__image"><img src="${img(cat.image)}" alt="${text(cat.title)}" loading="lazy" /></div>
         <div class="category-tile__info"><span class="mini-index">0${index + 1} / EXPLORE</span><h3>${text(cat.title)}</h3><p>${text(cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
       </a>`).join("");
     const featured = $("#featured-projects");
@@ -182,6 +206,25 @@
         data.projects.filter(project => project.category === cat.id).slice(0, 2)
       );
       featured.innerHTML = picks.map(projectCard).join("");
+    }
+  }
+
+  function updateListingIntro(chosen) {
+    const title = $('#listing-title');
+    const intro = $('#listing-intro');
+    const eyebrow = $('#listing-eyebrow');
+    if (!title || !intro) return;
+    const cat = category(chosen);
+    if (cat) {
+      title.textContent = cat.title;
+      intro.textContent = cat.subtitle;
+      if (eyebrow) eyebrow.textContent = chosen === 'fabrication' ? '3D PRINTS & FABRICATION' : 'ENGINEERING DISCIPLINES';
+      document.title = `${cat.title} · ${data.owner.name}`;
+    } else {
+      title.textContent = 'Projects, designs & prints.';
+      intro.textContent = 'Browse robots, designs, printed parts, electronics and software development in one place.';
+      if (eyebrow) eyebrow.textContent = 'THE PORTFOLIO ARCHIVE';
+      document.title = `Portfolio archive · ${data.owner.name}`;
     }
   }
 
@@ -215,8 +258,11 @@
       else url.searchParams.set("category", chosen);
       history.replaceState({}, "", url);
       refresh();
+      updateNavState();
+      updateListingIntro(chosen);
     });
     input.addEventListener("input", refresh);
+    updateListingIntro(chosen);
     refresh();
   }
 
@@ -249,12 +295,12 @@
       <div class="container">
         <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
         <div class="project-intro">
-          <p class="eyebrow">${text(cat ? cat.title : "Engineering project")} ${p.date ? "· " + text(p.date) : ""}</p>
+          <p class="eyebrow">${text(kindLabel(p))} ${p.date ? "· " + text(p.date) : ""}</p>
           <h1>${text(p.title)}</h1>
           <p class="project-lede">${text(p.summary)}</p>
           <div class="tags tags-large">${(p.tags || []).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
         </div>
-        <figure class="project-hero-media"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /><figcaption>${data.settings.showTemplateNotice ? "Illustrative placeholder — replace with your own project image." : text(p.title)}</figcaption></figure>
+        <figure class="project-hero-media"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /><figcaption>${text(p.title)}</figcaption></figure>
         <div class="detail-layout">
           <aside class="detail-aside">
             <p class="eyebrow">ON THIS PAGE</p>

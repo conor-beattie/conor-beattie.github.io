@@ -279,3 +279,28 @@ button { cursor: pointer; }
  .category-tile:nth-child(5):last-child .category-tile__info { padding-inline:16px; }
  .algorithm-grid,.demo-grid { grid-template-columns:1fr; }
 }
+
+/* NAVIGATION v2 — five disciplines, plus Home / All work / About */
+.site-header { height: auto; }
+.site-header__top { height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 22px; }
+.site-nav-utility { display: flex; align-items: center; gap: 26px; }
+.site-nav-utility a, .site-nav-mobile-utility a { color: var(--ink-soft); font-size: .85rem; font-weight: 650; padding: 8px 0; }
+.site-nav-utility a:hover, .site-nav-mobile-utility a:hover { color: var(--accent-deep); }
+.site-nav-utility a[aria-current="page"] { color: var(--accent-deep); }
+.site-nav-wrap { border-top: 1px solid var(--line); }
+.site-nav { display: flex; justify-content: space-between; align-items: center; gap: 18px; height: 51px; white-space: nowrap; }
+.site-nav a { display: inline-flex; align-items: center; flex: none; font-size: .83rem; padding: 15px 0; }
+.site-nav a[aria-current="page"]::after { bottom: 7px; }
+.site-nav-mobile-utility { display: none; }
+.nav-toggle { display: none; }
+@media(max-width: 1080px) {
+  .site-header__top { height: 70px; }
+  .site-nav-utility { display: none; }
+  .nav-toggle { display: inline-flex; }
+  .site-nav-wrap { display: none; position: absolute; top: 70px; left: 0; right: 0; background: var(--paper); max-height: calc(100vh - 70px); overflow-y: auto; box-shadow: 0 18px 28px rgba(24,43,52,.09); }
+  .site-nav-wrap.is-open { display: block; }
+  .site-nav { display: flex; position: static; flex-direction: column; gap: 0; align-items: stretch; height: auto; box-shadow: none; border-bottom: none; background: none; padding-top: 12px; padding-bottom: 6px; white-space: normal; }
+  .site-nav a { width: 100%; padding: 10px 0; font-size: .96rem; }
+  .site-nav a[aria-current="page"]::after { bottom: 3px; right: auto; width: 40px; }
+  .site-nav-mobile-utility { display:flex; flex-wrap:wrap; gap: 24px; padding-top: 13px; padding-bottom: 20px; border-top: 1px solid var(--line); }
+}
