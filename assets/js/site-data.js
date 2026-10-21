@@ -56,13 +56,13 @@ window.PORTFOLIO_DATA = {
       id: "fabrication",
       title: "3D Printing & Fabrication",
       subtitle: "Custom parts, prototyping, tolerances and material selection",
-      image: "assets/images/fabrication.webp"
+      image: "assets/images/IMG_2788 3d print pulley.jpg"
     },
     {
       id: "software",
       title: "Software & Electronics",
       subtitle: "Python, embedded systems, motor control and computer vision",
-      image: "assets/images/electronics.webp"
+      image: "assets/images/arduino mega.jpg"
     }
   ],
 
@@ -118,7 +118,7 @@ window.PORTFOLIO_DATA = {
       id: "printed-mechanisms",
       title: "3D-Printed Mechanisms",
       category: "fabrication",
-      image: "assets/images/fabrication.webp",
+      image: "assets/images/IMG_2788 3d print pulley.jpg",
       imageAlt: "Illustrative 3D-printed gears and fabricated components",
       summary: "Example entry: present printable components with design intent, materials, tolerances and print revisions.",
       tags: ["3D Printing", "Prototyping", "Materials"],
@@ -141,7 +141,7 @@ window.PORTFOLIO_DATA = {
       id: "robot-control-electronics",
       title: "Robot Control & Electronics",
       category: "software",
-      image: "assets/images/electronics.webp",
+      image: "assets/images/arduino mega.jpg",
       imageAlt: "Illustrative electronics and Raspberry Pi robotics prototype",
       summary: "Example entry: explain how sensors, control software and electronics work together inside a robot.",
       tags: ["Python", "Electronics", "Computer Vision"],
