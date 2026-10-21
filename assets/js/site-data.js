@@ -74,12 +74,12 @@ window.PORTFOLIO_DATA = {
       category: "robotics",                          // robotics | cad | fabrication | software
       image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
-      summary: "Example entry: replace this with a short description of the robot, its purpose, and its most interesting engineering feature.",
+      summary: "Meet Bobbot. An experimental autonomous robot designed to grow and expand in capability and function. 
       tags: ["Robotics", "Python", "Sensors"],
       date: "",                                       // e.g. 2026; leave blank if not wanted
       contribution: "Replace with what you personally designed, built, programmed or tested.",
       sections: {
-        overview: "Describe the robot and the problem it was intended to solve. Include the final result in one or two sentences.",
+        overview: "Bobbot is an ongoing multi-year project working towards a fuly autonomous robot.  Describe the robot and the problem it was intended to solve. Include the final result in one or two sentences.",
         objectives: "List the main engineering requirements: movement, accuracy, payload, autonomy, cost, time or physical dimensions.",
         design: "Explain chassis layout, drivetrain choice, sensor placement and important design trade-offs. Include CAD screenshots where available.",
         construction: "Record the mechanical assembly, fabrication, wiring and hardware integration, including parts you designed yourself.",
