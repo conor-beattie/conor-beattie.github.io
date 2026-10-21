@@ -44,7 +44,7 @@ window.PORTFOLIO_DATA = {
       id: "robotics",
       title: "Autonomous Robotics",
       subtitle: "Robot architecture, sensors, Python control and navigation",
-      image: "assets/images/robotics.webp"
+      image: "assets/images/IMG_2627 Bobbot.jpg"
     },
     {
       id: "cad",
@@ -72,7 +72,7 @@ window.PORTFOLIO_DATA = {
       id: "autonomous-mobile-robot",                  // URL: project.html?id=autonomous-mobile-robot
       title: "Autonomous Mobile Robot",
       category: "robotics",                          // robotics | cad | fabrication | software
-      image: "assets/images/robotics.webp",
+      image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
       summary: "Example entry: replace this with a short description of the robot, its purpose, and its most interesting engineering feature.",
       tags: ["Robotics", "Python", "Sensors"],
