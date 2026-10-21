@@ -29,6 +29,18 @@
   const paragraphs = (s) => String(s || "").split(/\n\s*\n/).filter(Boolean)
     .map(p => `<p>${text(p)}</p>`).join("");
   const projectUrl = (project) => `project.html?id=${encodeURIComponent(project.id)}`;
+  const algorithmUrl = (algorithm) => `algorithm.html?id=${encodeURIComponent(algorithm.id)}`;
+  const algorithms = Array.isArray(data.algorithms) ? data.algorithms : [];
+  const algorithm = (id) => algorithms.find(a => a.id === id);
+  const demosForProject = (projectId) => algorithms.flatMap(a =>
+    (a.demos || []).filter(d => d.robotId === projectId && d.video)
+      .map(d => ({ algorithm: a, demo: d }))
+  );
+  // Do not show a robot/algorithm link until a real video has been assigned.
+  const localMedia = (path) => {
+    if (!path || typeof path !== "string" || !/^assets\/(videos|images)\/[a-zA-Z0-9_ ./()-]+\.(mp4|webm|webp|png|jpe?g)$/i.test(path) || path.includes("..")) return "";
+    return escape(path);
+  };
 
   function setText(selector, value) { $$(selector).forEach(el => el.textContent = value); }
   function linkMarkup(url, label, cls = "text-link") {
@@ -85,6 +97,71 @@
     </article>`;
   }
 
+  function algorithmCard(a) {
+    const count = (a.demos || []).filter(d => d.video).length;
+    return `<article class="algorithm-card">
+      <div class="algorithm-card__top"><span class="eyebrow">${text(a.group)}</span><span class="algorithm-short">${text(a.shortName)}</span></div>
+      <div class="algorithm-card__body">
+        <h3><a href="${algorithmUrl(a)}">${text(a.title)}</a></h3>
+        <p>${text(a.summary)}</p>
+        <div class="algorithm-card__bottom"><span>${count ? `${count} video demonstration${count === 1 ? "" : "s"}` : "Demonstrations to be added"}</span><a href="${algorithmUrl(a)}" class="round-arrow" aria-label="View ${text(a.shortName)}"><span aria-hidden="true">↗</span></a></div>
+      </div>
+    </article>`;
+  }
+
+  function demoMarkup(item, showAlgorithmTitle = false) {
+    const d = item.demo, a = item.algorithm;
+    const robot = data.projects.find(p => p.id === d.robotId);
+    const path = localMedia(d.video);
+    if (!path || !robot) return ""; // Avoid broken links and unassigned implementations.
+    const poster = localMedia(d.poster);
+    return `<article class="demo-card">
+      <div class="demo-card__head"><div><span class="eyebrow">${showAlgorithmTitle ? text(a.shortName) : "ROBOT DEMONSTRATION"}</span><h3>${text(d.title || a.title)}</h3></div></div>
+      <video class="demo-player" controls playsinline preload="none" ${poster ? `poster="${poster}"` : ""} aria-label="${text(d.title || a.title)}"><source src="${path}" type="${path.toLowerCase().endsWith("webm") ? "video/webm" : "video/mp4"}"/>Your browser does not support HTML video.</video>
+      ${d.description ? `<p>${text(d.description)}</p>` : ""}
+      ${d.results ? `<p class="demo-results"><strong>Results:</strong> ${text(d.results)}</p>` : ""}
+      <div class="demo-card__links"><a class="text-link" href="${projectUrl(robot)}">${text(robot.title)} ↗</a>${showAlgorithmTitle ? `<a class="text-link" href="${algorithmUrl(a)}">Algorithm details ↗</a>` : ""}</div>
+    </article>`;
+  }
+
+  function software() {
+    const examples = $("#software-projects");
+    if (examples) examples.innerHTML = data.projects.filter(p => p.category === "software").map(projectCard).join("");
+    const gallery = $("#algorithm-grid");
+    if (gallery) gallery.innerHTML = algorithms.map(algorithmCard).join("");
+    const count = $("#algorithm-count");
+    if (count) count.textContent = `${algorithms.length} algorithm${algorithms.length === 1 ? "" : "s"}`;
+  }
+
+  function algorithmDetail() {
+    const id = new URLSearchParams(location.search).get("id");
+    const a = algorithm(id);
+    const root = $("#algorithm-content");
+    if (!a) {
+      root.innerHTML = `<div class="container not-found"><p class="eyebrow">ALGORITHM NOT FOUND</p><h1>That algorithm isn't listed yet.</h1><a class="button button-primary" href="algorithms.html">Explore algorithms ↗</a></div>`;
+      return;
+    }
+    document.title = `${a.title} · ${data.owner.name}`;
+    const available = (a.demos || []).filter(d => d.video && data.projects.some(p => p.id === d.robotId))
+      .map(d => ({algorithm: a, demo:d}));
+    const source = linkMarkup(a.sourceUrl,"Source code / GitHub");
+    root.innerHTML = `<div class="container">
+      <div class="breadcrumb"><a href="algorithms.html">Software & Algorithms</a><span aria-hidden="true">/</span><span>${text(a.shortName)}</span></div>
+      <div class="project-intro"><p class="eyebrow">${text(a.group)} · SOFTWARE & ALGORITHMS</p><h1>${text(a.title)}</h1><p class="project-lede">${text(a.summary)}</p></div>
+      <div class="algorithm-detail-stack">
+        <section><h2>What it does</h2>${paragraphs(a.overview)}</section>
+        <section><h2>How it works</h2>${paragraphs(a.method)}</section>
+        <section><h2>Limitations and considerations</h2>${paragraphs(a.considerations)}</section>
+        <section><h2>Implementation notes</h2>${paragraphs(a.implementation)}</section>
+        <section id="demonstrations"><div class="section-heading"><div><p class="eyebrow">VIDEO EVIDENCE</p><h2>Robot demonstrations</h2></div></div>
+          ${available.length ? `<div class="demo-grid">${available.map(item => demoMarkup(item)).join("")}</div>` : `<div class="pending-content"><strong>No demonstrations linked yet.</strong><p>When a tested video is added in <code>assets/js/site-data.js</code>, it will appear here and on the relevant robot project page.</p></div>`}
+        </section>
+        ${source ? `<section><h2>Technical resources</h2>${source}</section>` : ""}
+      </div>
+      <div class="next-action"><div><span class="eyebrow">SOFTWARE & ALGORITHMS</span><h2>Explore other methods</h2></div><a class="button button-outline" href="algorithms.html">All algorithms ↗</a></div>
+    </div>`;
+  }
+
   function home() {
     setText("#hero-eyebrow", data.owner.eyebrow);
     setText("#hero-headline", data.owner.headline);
@@ -94,7 +171,7 @@
     if (imgEl) imgEl.src = data.projects[0]?.image || data.categories[0]?.image;
     const catGrid = $("#category-grid");
     if (catGrid) catGrid.innerHTML = data.categories.map((cat, index) => `
-      <a href="projects.html?category=${encodeURIComponent(cat.id)}" class="category-tile">
+      <a href="${cat.id === "software" ? "algorithms.html" : `projects.html?category=${encodeURIComponent(cat.id)}`}" class="category-tile">
         <div class="category-tile__image"><img src="${img(cat.image)}" alt="${text(cat.title)} example image" loading="lazy" /></div>
         <div class="category-tile__info"><span class="mini-index">0${index + 1} / EXPLORE</span><h3>${text(cat.title)}</h3><p>${text(cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
       </a>`).join("");
@@ -158,6 +235,10 @@
       ["construction", "Construction"], ["software", "Software"], ["testing", "Testing"],
       ["iterations", "Iterations"], ["results", "Results"], ["lessons", "Lessons learned"]
     ];
+    const usedDemos = demosForProject(p.id);
+    if (p.category === "robotics") {
+      entries.push(["algorithm-demonstrations", "Algorithms & demonstrations"]);
+    }
     const resources = [
       linkMarkup(p.links?.github, "Source code / GitHub"),
       linkMarkup(p.links?.cad, "CAD / 3D model"),
@@ -183,8 +264,9 @@
             <div class="detail-callout"><strong>Individual contribution</strong><p>${text(p.contribution)}</p></div>
           </aside>
           <div class="detail-main">
-            ${entries.map(([key, label], i) => `<section class="detail-section" id="${key}"><div class="detail-section__index">${String(i + 1).padStart(2, "0")}</div><div><h2>${label}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
-            ${resources.length ? `<section class="detail-section" id="resources"><div class="detail-section__index">10</div><div><h2>Technical resources</h2><div class="resource-links">${resources.join("")}</div></div></section>` : ""}
+            ${entries.filter(([key]) => key !== "algorithm-demonstrations").map(([key, label], i) => `<section class="detail-section" id="${key}"><div class="detail-section__index">${String(i + 1).padStart(2, "0")}</div><div><h2>${label}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
+            ${p.category === "robotics" ? `<section class="detail-section" id="algorithm-demonstrations"><div class="detail-section__index">10</div><div><h2>Algorithms & demonstrations</h2>${usedDemos.length ? `<p>Software methods demonstrated on this robot. Select a method for its full explanation and demonstrations on other platforms.</p><div class="demo-grid">${usedDemos.map(item => demoMarkup(item,true)).join("")}</div>` : `<p class="muted-small">No algorithm demonstration videos are linked to this robot yet.</p><a class="text-link" href="algorithms.html">Browse software & algorithms ↗</a>`}</div></section>` : ""}
+            ${resources.length ? `<section class="detail-section" id="resources"><div class="detail-section__index">${p.category === "robotics" ? "11" : "10"}</div><div><h2>Technical resources</h2><div class="resource-links">${resources.join("")}</div></div></section>` : ""}
           </div>
         </div>
         <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More engineering projects</h2></div><a class="button button-outline" href="projects.html">All projects <span aria-hidden="true">↗</span></a></div>
@@ -210,6 +292,8 @@
     const page = document.body.dataset.page;
     if (page === "home") home();
     if (page === "projects") projects();
+    if (page === "software") software();
+    if (page === "algorithm") algorithmDetail();
     if (page === "project") projectDetail();
     if (page === "about") about();
   });

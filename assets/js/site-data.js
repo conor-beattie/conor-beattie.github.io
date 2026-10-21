@@ -1,16 +1,17 @@
 /*
   ENGINEERING PORTFOLIO — EDIT THIS FILE FIRST
   ---------------------------------------------
-  This one file controls the visible name, text, projects and image paths.
+  This one file controls the visible name, text, projects, algorithms and media paths.
   Some images are provided as examples; several photographs are from your repository.
   Replace them with real project photographs before sharing the site.
 
   Quick steps:
   1. Replace YOUR NAME, YN and the headline / introduction below.
   2. Replace images in assets/images and update matching image paths as needed.
-  3. Four existing projects have been preserved. Four additional example entries are ready to edit.
-  4. When ready, change showTemplateNotice to false.
-  5. Add actual public GitHub / video / CAD links (or leave them blank).
+  3. Keep the existing projects and edit the five engineering categories as needed.
+  4. Add algorithm entries and optional demonstrations (same clip can link to multiple pages).
+  5. When ready, change showTemplateNotice to false.
+  6. Add actual public GitHub / video / CAD links (or leave them blank).
 
   Do not put private addresses, school schedules or personal contact data here.
 */
@@ -43,7 +44,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "robotics",
       title: "Robotics",
-      subtitle: "Robot architecture, sensors, Python control and navigation",
+      subtitle: "Complete robot platforms, mechanical integration and control",
       image: "assets/images/IMG_2627 Bobbot.jpg"
     },
     {
@@ -60,9 +61,95 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "software",
-      title: "Software & Electronics",
-      subtitle: "Python, embedded systems, motor control and computer vision",
+      title: "Software & Algorithms",
+      subtitle: "Python, control algorithms, navigation and vision",
+      image: "assets/images/navigation block diagram.jpg"
+    },
+    {
+      id: "electronics",
+      title: "Electronics & Embedded Systems",
+      subtitle: "Sensors, controllers, wiring and embedded interfaces",
       image: "assets/images/arduino mega.jpg"
+    }
+  ],
+
+  /*
+    ALGORITHMS — ONE entry per method, NOT one entry per robot.
+
+    Each algorithm has zero or more demonstrations. Videos are stored under
+    assets/videos/<robot>/ and linked via demos[].video. The robotId must match
+    the ID of a project under projects[].id. Once you link a real video,
+    the same demonstration is displayed automatically on BOTH pages:
+       algorithm.html?id=ibvs
+       project.html?id=autonomous-mobile-robot
+
+    Do not add a robotId / video until that implementation has been tested.
+    These initial entries are general descriptions, not claims of completed work.
+
+    Example to paste INSIDE an algorithm's demos: [
+      {
+        robotId: "autonomous-mobile-robot",
+        title: "IBVS — Bobbot",
+        description: "The robot aligns with a visual target.",
+        video: "assets/videos/bobbot/ibvs-demo.mp4",
+        poster: "", // Optional: assets/images/bobbot-ibvs-preview.webp
+        results: "Add the measured performance and test conditions."
+      }
+    ]
+    The following starting entries have demos: [] on purpose.
+  */
+  algorithms: [
+    {
+      id: "ibvs",
+      title: "IBVS — Image-Based Visual Servoing",
+      shortName: "IBVS",
+      group: "Visual Servoing",
+      summary: "Control robot motion from errors between observed and desired image features.",
+      overview: "Image-Based Visual Servoing uses feature positions in the camera image as feedback to control robot motion.",
+      method: "Choose visual features, define their target positions and reduce the image-space error using a control law. Depth estimation and camera geometry influence behaviour.",
+      considerations: "Performance depends on visibility, feature tracking, camera field of view and the control gain. Large viewpoint changes may cause features to leave the image.",
+      implementation: "Add the code structure, tuning and test setup when a robot implementation is ready.",
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "pbvs",
+      title: "PBVS — Position-Based Visual Servoing",
+      shortName: "PBVS",
+      group: "Visual Servoing",
+      summary: "Control robot motion using an estimated target position and orientation.",
+      overview: "Position-Based Visual Servoing uses an estimated relative pose, often from camera observations, to drive a robot toward a desired position and orientation.",
+      method: "Estimate the target pose, compare it with the desired pose and convert position/orientation error into a robot-motion command.",
+      considerations: "Performance depends on pose-estimation accuracy, calibration, coordinate transformations and target visibility.",
+      implementation: "Add the estimator, coordinate conventions and physical testing details when available.",
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "pid",
+      title: "PID — Proportional–Integral–Derivative Control",
+      shortName: "PID",
+      group: "Control",
+      summary: "Feedback control combining proportional, accumulated and changing error.",
+      overview: "PID adjusts a control input to reduce the difference between a measured quantity and its target value.",
+      method: "A proportional term reacts to current error, an integral term to accumulated error and a derivative term to the error's rate of change.",
+      considerations: "Tuning matters. Saturation, integral wind-up, sensor noise and sample timing can limit performance.",
+      implementation: "Document the controlled subsystem, parameters and before/after response measurements.",
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "pure-pursuit",
+      title: "Pure Pursuit — Path Following",
+      shortName: "Pure Pursuit",
+      group: "Navigation",
+      summary: "Follow a planned path by steering toward a lookahead point.",
+      overview: "Pure Pursuit follows a reference path using a target point at a specified lookahead distance along the path.",
+      method: "Locate the lookahead target in the robot's coordinate frame, compute the required curvature and generate steering or differential-drive commands.",
+      considerations: "The lookahead distance trades responsiveness against smoothness. Wheel slip, localization error and sharp path curvature affect results.",
+      implementation: "Add robot kinematics, path setup, lookahead selection and repeated-trial evidence when tested.",
+      sourceUrl: "",
+      demos: []
     }
   ],
 
@@ -71,7 +158,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "autonomous-mobile-robot",                  // URL: project.html?id=autonomous-mobile-robot
       title: "Autonomous Mobile Robot",
-      category: "robotics",                          // robotics | cad | fabrication | software
+      category: "robotics",                          // robotics | cad | fabrication | software | electronics
       image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
       summary: "Meet Bobbot. An experimental autonomous robot designed to grow and expand in capability and function.",
@@ -140,7 +227,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "robot-control-electronics",
       title: "Robot Control & Electronics",
-      category: "software",
+      category: "electronics",
       image: "assets/images/arduino mega.jpg",
       imageAlt: "Illustrative electronics and Raspberry Pi robotics prototype",
       summary: "Example entry: explain how sensors, control software and electronics work together inside a robot.",
@@ -231,12 +318,12 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "electronics-project-2",
-      title: "Software & Electronics Project 2 — Add Title",
+      title: "Software Project 1 — Add Title",
       category: "software",
       image: "assets/images/electronics.webp",
-      imageAlt: "Electronics example image — replace with a second software and electronics project",
-      summary: "Example entry: introduce another control, sensor, electronics or Python software project.",
-      tags: ["Python", "Sensors", "Electronics"],
+      imageAlt: "Software and electronics example image — replace with a software project illustration",
+      summary: "Example entry: document a Python software system, algorithms or robot-control application.",
+      tags: ["Python", "Software", "Control"],
       date: "",
       contribution: "Specify the hardware, code and testing completed individually.",
       sections: {
@@ -249,6 +336,52 @@ window.PORTFOLIO_DATA = {
         iterations: "Describe bugs, calibration problems or other limitations and how they were improved.",
         results: "Show the system operating, with graphs, screenshots or a short demonstration.",
         lessons: "Discuss technical lessons and remaining questions for further development."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "software-project-2",
+      title: "Software Project 2 — Add Title",
+      category: "software",
+      image: "assets/images/navigation block diagram.jpg",
+      imageAlt: "Illustrative software/navigation architecture diagram",
+      summary: "Example entry: add another programming project, its purpose and the results from testing.",
+      tags: ["Python", "Software", "Testing"],
+      date: "",
+      contribution: "Describe the algorithms, modules and tests you personally developed.",
+      sections: {
+        overview: "Explain the problem addressed by the software project.",
+        objectives: "Define requirements such as accuracy, latency, reliability and maintainability.",
+        design: "Describe modules, architecture, interfaces and algorithm choices.",
+        construction: "Describe the development environment and integration with other components.",
+        software: "Describe implementation, configuration and important control or processing algorithms.",
+        testing: "Document repeatable tests, metrics and comparisons.",
+        iterations: "Show changes made after debugging and measured evaluations.",
+        results: "Summarise proven outcomes and link to demonstrations where available.",
+        lessons: "Record lessons and further technical questions."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "embedded-project-2",
+      title: "Electronics Project 2 — Add Title",
+      category: "electronics",
+      image: "assets/images/electronics.webp",
+      imageAlt: "Illustrative electronic controller and robot wiring",
+      summary: "Example entry: document an electronics or embedded-control subsystem.",
+      tags: ["Electronics", "Sensors", "Embedded"],
+      date: "",
+      contribution: "Identify the circuits, hardware integration and tests you completed.",
+      sections: {
+        overview: "Explain the role of the circuit or embedded subsystem.",
+        objectives: "Define inputs, outputs, power requirements and accuracy or safety constraints.",
+        design: "Add circuit diagrams, interfaces, component choices and trade-offs.",
+        construction: "Show assembly, connectors, wiring and mounting.",
+        software: "If firmware is used, describe what it controls; otherwise mark not applicable.",
+        testing: "Measure signal quality, current draw, response time or repeatability as appropriate.",
+        iterations: "Explain improvements after electrical and mechanical tests.",
+        results: "Summarise what has been demonstrated and the remaining limitations.",
+        lessons: "Record what you would change in a next revision."
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     }
