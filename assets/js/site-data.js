@@ -297,7 +297,7 @@ window.PORTFOLIO_DATA = {
       id: "fabrication-project-2",
       title: "Rubber Band Intake, Bumpers, Ramp",
       category: "fabrication",
-      image: "rubber_band_intake_bumpers_ramp.jpeg",
+      image: "assets/images/rubber_band_intake_bumpers_ramp.jpeg",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
       summary: "3D printed rubber band intake, bumpers, and intake ramp",
       tags: ["3D Printing", "CAD", "Prototyping"],
