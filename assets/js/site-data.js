@@ -361,6 +361,6 @@ window.PORTFOLIO_DATA = {
         lessons: "Record lessons and further technical questions."
       },
       links: { github: "", cad: "", video: "", downloads: "" }
-    },
+    }
   ]
 };
