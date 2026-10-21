@@ -317,6 +317,75 @@ window.PORTFOLIO_DATA = {
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
+      id: "fabrication-project-3",
+      title: "Rubber Band Intake, Bumpers, Ramp",
+      category: "fabrication",
+      image: "assets/images/rubber_band_intake_bumpers_ramp.jpeg",
+      imageAlt: "3D-printing example image — replace with the second fabrication project",
+      summary: "3D printed rubber band intake, bumpers, and intake ramp",
+      tags: ["3D Printing", "CAD", "Prototyping"],
+      date: "",
+      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      sections: {
+        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
+        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
+        construction: "Record printer, material, settings and any finishing or assembly processes used.",
+        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
+        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
+        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
+        results: "Include photographs of the printed component installed in its working mechanism.",
+        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "fabrication-project-4",
+      title: "Rubber Band Intake, Bumpers, Ramp",
+      category: "fabrication",
+      image: "assets/images/rubber_band_intake_bumpers_ramp.jpeg",
+      imageAlt: "3D-printing example image — replace with the second fabrication project",
+      summary: "3D printed rubber band intake, bumpers, and intake ramp",
+      tags: ["3D Printing", "CAD", "Prototyping"],
+      date: "",
+      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      sections: {
+        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
+        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
+        construction: "Record printer, material, settings and any finishing or assembly processes used.",
+        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
+        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
+        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
+        results: "Include photographs of the printed component installed in its working mechanism.",
+        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "fabrication-project-5",
+      title: "Rubber Band Intake, Bumpers, Ramp",
+      category: "fabrication",
+      image: "assets/images/rubber_band_intake_bumpers_ramp.jpeg",
+      imageAlt: "3D-printing example image — replace with the second fabrication project",
+      summary: "3D printed rubber band intake, bumpers, and intake ramp",
+      tags: ["3D Printing", "CAD", "Prototyping"],
+      date: "",
+      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      sections: {
+        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
+        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
+        construction: "Record printer, material, settings and any finishing or assembly processes used.",
+        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
+        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
+        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
+        results: "Include photographs of the printed component installed in its working mechanism.",
+        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
       id: "electronics-project-2",
       title: "Software Project 1 — Add Title",
       category: "software",
