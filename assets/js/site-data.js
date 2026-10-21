@@ -362,7 +362,6 @@ window.PORTFOLIO_DATA = {
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
-    
       links: { github: "", cad: "", video: "", downloads: "" }
     }
   ]
