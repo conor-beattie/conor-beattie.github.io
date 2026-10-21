@@ -57,7 +57,7 @@ window.PORTFOLIO_DATA = {
       id: "fabrication",
       title: "3D Printing & Fabrication",
       subtitle: "Custom parts, prototyping, tolerances and material selection",
-      image: "assets/images/pulley.png"
+      image: "assets/images/Pulley.png"
     },
     {
       id: "software",
@@ -205,7 +205,7 @@ window.PORTFOLIO_DATA = {
       id: "printed-mechanisms",
       title: "Pulleys",
       category: "fabrication",
-      image: "assets/images/pulley.png",
+      image: "assets/images/Pulley.png",
       imageAlt: "Illustrative 3D-printed gears and fabricated components",
       summary: "",
       tags: ["3D Printing", "Prototyping", "Materials"],
