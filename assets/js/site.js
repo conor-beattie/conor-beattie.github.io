@@ -163,7 +163,6 @@
 
   function softwareCard(item) {
     return `<article class="software-card">
-      <a class="software-card__image" href="${softwareUrl(item)}" aria-label="Read ${text(item.title)}"><img src="${img(item.image)}" alt="${text(item.imageAlt || item.title)}" loading="lazy"></a>
       <div class="software-card__body"><div class="eyebrow-row"><span class="eyebrow">${text(item.type || "Software")}</span><span class="maturity-note">${text(item.status || "")}</span></div>
       <h3><a href="${softwareUrl(item)}">${text(item.title)}</a></h3><p>${text(item.summary)}</p>
       <div class="software-card__bottom"><span class="muted-small">${(item.algorithmIds || []).length} linked methods</span><a class="round-arrow" href="${softwareUrl(item)}" aria-label="Open ${text(item.title)}"><span aria-hidden="true">↗</span></a></div></div>
@@ -188,8 +187,8 @@
     const related = relatedAlgorithms(item.algorithmIds);
     const robots = (item.robotIds || []).map(id => data.projects.find(p => p.id === id)).filter(Boolean);
     const source = linkMarkup(item.sourceUrl, "View public source code");
-    const media = item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt || `${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>` :
-      `<figure class="project-hero-media"><img src="${img(item.image)}" alt="${text(item.imageAlt || item.title)}" loading="lazy"></figure>`;
+    // Display meaningful flowcharts where available; omit decorative cover imagery.
+    const media = item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt || `${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>` : "";
     root.innerHTML = `<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(item.type || "Software")} · ${text(item.status)}</p><h1>${text(item.title)}</h1><p class="project-lede">${text(item.summary)}</p><div class="tags tags-large">${(item.tags || []).map(tag => `<span class="tag">${text(tag)}</span>`).join("")}</div></div>
       ${media}
