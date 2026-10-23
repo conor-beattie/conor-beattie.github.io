@@ -274,7 +274,7 @@ button { cursor: pointer; }
    .algorithm-grid,.demo-grid { grid-template-columns:1fr; }
 }
 
-/* NAVIGATION — six disciplines, plus Home / All work / About */
+/* NAVIGATION — All Projects + six disciplines; utility: Home / About */
 .site-header { height: auto; }
 .site-header__top { height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 22px; }
 .site-nav-utility { display: flex; align-items: center; gap: 26px; }
@@ -345,3 +345,6 @@ button { cursor: pointer; }
 
 /* Keep the original wide horizontal discipline tiles: legible labels on desktop. */
 @media(min-width:561px) { .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+
+/* The main navigation now handles discipline selection; the gallery only needs search. */
+.filters--search-only { justify-content: flex-end; }

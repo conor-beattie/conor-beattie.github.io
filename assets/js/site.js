@@ -37,7 +37,7 @@
     }
     if (page === "projects") {
       const chosen = new URLSearchParams(location.search).get("category") || "";
-      return chosen === "software" ? "software" : chosen === "algorithms" ? "algorithms" : chosen;
+      return chosen === "software" ? "software" : chosen === "algorithms" ? "algorithms" : (category(chosen) ? chosen : "all");
     }
     return "";
   };
@@ -50,8 +50,7 @@
     });
     $$('[data-nav]').forEach(el => {
       const selected = (page === 'home' && el.dataset.nav === 'home') ||
-        (page === 'about' && el.dataset.nav === 'about') ||
-        (page === 'projects' && !current && el.dataset.nav === 'projects');
+        (page === 'about' && el.dataset.nav === 'about');
       if (selected) el.setAttribute('aria-current', 'page');
       else el.removeAttribute('aria-current');
     });
@@ -269,26 +268,21 @@
       if (eyebrow) eyebrow.textContent = chosen === 'fabrication' ? '3D PRINTS & FABRICATION' : 'ENGINEERING DISCIPLINES';
       document.title = `${cat.title} · ${data.owner.name}`;
     } else {
-      title.textContent = 'Projects, designs & prints.';
-      intro.textContent = 'Browse robots, designs, printed parts, electronics and software development in one place.';
+      title.textContent = 'All Projects';
+      intro.textContent = 'Browse robotics, mechanical design, 3D printing and electronics projects.';
       if (eyebrow) eyebrow.textContent = 'THE PORTFOLIO ARCHIVE';
-      document.title = `Portfolio archive · ${data.owner.name}`;
+      document.title = `All Projects · ${data.owner.name}`;
     }
   }
 
   function projects() {
     const container = $("#project-list");
-    const filterBar = $("#project-filters");
     const input = $("#project-search");
     const count = $("#project-count");
     let chosen = new URLSearchParams(location.search).get("category") || "all";
     if (chosen === "software") { location.replace("software.html"); return; }
     if (chosen === "algorithms") { location.replace("algorithms.html"); return; }
     if (chosen !== "all" && !category(chosen)) chosen = "all";
-    filterBar.innerHTML = [
-      {id: "all", title: "All projects"},
-      ...data.categories.filter(c => !["software", "algorithms"].includes(c.id)).map(c => ({id: c.id, title: c.title}))
-    ].map(c => `<button class="filter-button" data-filter="${text(c.id)}" aria-pressed="${c.id === chosen}">${text(c.title)}</button>`).join("");
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
       const results = data.projects.filter(p => !["software"].includes(p.category)).filter(p => {
@@ -297,20 +291,7 @@
       });
       container.innerHTML = results.length ? results.map(projectCard).join("") : `<div class="empty-state"><h3>No matching projects</h3><p>Try clearing the search or choosing another category.</p></div>`;
       count.textContent = `${results.length} project${results.length === 1 ? "" : "s"}`;
-      $$("[data-filter]", filterBar).forEach(button => button.setAttribute("aria-pressed", String(button.dataset.filter === chosen)));
     }
-    filterBar.addEventListener("click", (e) => {
-      const button = e.target.closest("[data-filter]");
-      if (!button) return;
-      chosen = button.dataset.filter;
-      const url = new URL(location.href);
-      if (chosen === "all") url.searchParams.delete("category");
-      else url.searchParams.set("category", chosen);
-      history.replaceState({}, "", url);
-      refresh();
-      updateNavState();
-      updateListingIntro(chosen);
-    });
     input.addEventListener("input", refresh);
     updateListingIntro(chosen);
     refresh();

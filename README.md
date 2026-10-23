@@ -1,4 +1,4 @@
-# Engineering Portfolio — Software & Algorithms revision (23 October 2026)
+# Engineering Portfolio — navigation revision (23 October 2026)
 
 This is a **complete GitHub Pages website**, built from the latest supplied site ZIP.
 No build tools, hosting account changes, external libraries or separate deployment services are required.
@@ -11,6 +11,12 @@ No build tools, hosting account changes, external libraries or separate deployme
 4. Commit the upload. Reload the published GitHub Pages URL after deployment (hard-refresh if your browser has cached old JavaScript/CSS).
 
 Do not upload only `index.html`: the new Software pages depend on the updated JS, CSS and diagram files.
+
+## Navigation (revised)
+
+The top utility navigation contains **Home** and **About**. The main category navigation contains **All Projects**, Robotics, Mechanical Design & CAD, 3D Printing & Fabrication, **Electronics & Embedded Systems**, Software and Algorithms.
+
+The gallery no longer repeats category filter buttons: use the main navigation to choose a category. Search and result counts remain available. All Projects shows the physical projects; Software and Algorithms retain dedicated catalogues.
 
 ## Structure
 
