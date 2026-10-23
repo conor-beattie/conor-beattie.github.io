@@ -462,7 +462,7 @@ window.PORTFOLIO_DATA = {
       category: "robotics",                          // robotics | cad | fabrication | electronics
       image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
-      summary: "Meet Bobbot. An experimental autonomous robot designed to grow and expand in capability and function.",
+      summary: "An experimental autonomous robot designed to grow and expand in capability and function.",
       tags: ["Robotics", "Python", "Sensors"],
       date: "",                                       // e.g. 2026; leave blank if not wanted
       contribution: "Replace with what you personally designed, built, programmed or tested.",
