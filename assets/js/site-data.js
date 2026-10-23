@@ -520,7 +520,7 @@ window.PORTFOLIO_DATA = {
         software: "If applicable, explain parametric CAD or scripts used to generate the part.",
         testing: "Show fit checks, load tests, endurance trials or measured dimensional accuracy.",
         iterations: "Compare revisions and explain the effect of dimensional or design changes.",
-        results: "Add photographs of printed parts installed in a working assembly.",
+        results: "assets/images/IMG_2788 3d print pulley.jpg",
         lessons: "Summarise what worked in manufacturing and what you would change."
       },
       links: { github: "", cad: "", video: "", downloads: "" }
