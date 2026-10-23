@@ -458,7 +458,7 @@ window.PORTFOLIO_DATA = {
   projects: [
     {
       id: "autonomous-mobile-robot",                  // URL: project.html?id=autonomous-mobile-robot
-      title: "Autonomous Mobile Robot",
+      title: "Bobbot - Autonomous Mobile Robot",
       category: "robotics",                          // robotics | cad | fabrication | electronics
       image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
@@ -483,7 +483,7 @@ window.PORTFOLIO_DATA = {
       id: "mechanical-gripper",
       title: "Mechanical Gripper Design",
       category: "cad",
-      image: "assets/images/cad.webp",
+      image: "assets/images/gripper_bobbot.png",
       imageAlt: "Illustrative CAD model of a mechanical gripper",
       summary: "Example entry: document a mechanical assembly with CAD models, design calculations and successive improvements.",
       tags: ["CAD", "Mechanisms", "Design"],
@@ -550,11 +550,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robotics-project-2",
-      title: "Autonomous Mobile Robot - Lite",
+      title: "Robbot - Autonomous Mobile Robot",
       category: "robotics",
       image: "assets/images/IMG_2756_robbot.jpg",
       imageAlt: "Robot project photo — replace or update caption",
-      summary: "Meet Robbot. Robbot is Bobbot on a budget.  Where Bobbot doesn’t set a specific price on utility Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost",
+      summary: "Robbot is Bobbot on a budget.  Where Bobbot doesn’t set a specific price on utility Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost",
       tags: ["Robotics", "Mechanical Design", "Control"],
       date: "",
       contribution: "Add what you personally designed, built, programmed and tested.",
@@ -575,7 +575,7 @@ window.PORTFOLIO_DATA = {
       id: "cad-project-2",
       title: "CAD Project 2 — Add Title",
       category: "cad",
-      image: "assets/images/cad.webp",
+      image: "assets/images/gripper_bobbot.png",
       imageAlt: "CAD illustration — replace with the second design project",
       summary: "Example entry: add a second CAD design, its intended function and the principal design challenges.",
       tags: ["CAD", "Engineering Design", "Mechanisms"],
@@ -598,7 +598,7 @@ window.PORTFOLIO_DATA = {
       id: "fabrication-project-2",
       title: "Rubber Band Intake, Bumpers, Ramp",
       category: "fabrication",
-      image: "assets/images/rubber_band_intake_bumpers_ramp.jpeg",
+      image: "assets/images/rubber_band_wheel.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
       summary: "3D printed rubber band intake, bumpers, and intake ramp",
       tags: ["3D Printing", "CAD", "Prototyping"],
