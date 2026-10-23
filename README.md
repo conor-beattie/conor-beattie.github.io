@@ -63,3 +63,33 @@ Two unused, generic template Software Project placeholders from the supplied web
 The flowchart summarises program structure; it is **not** full end-to-end test evidence. The Oct 2026 source includes a provisional hard-coded `Drive(750 mm)` fallback. The portfolio diagram deliberately names the category **open-loop return control** instead of presenting 750 mm as an engineered constant. Code is not changed by this website update.
 
 The accompanying notes distinguish implementation, prior development, current test evidence and work still to verify. Source URLs and performance metrics are left unset rather than invented.
+
+
+## 3D Printing & Fabrication pages — new photo galleries
+
+Each 3D-print project now has its own page style, inspired by print-sharing sites.
+
+1. **CAD render at the top:** `image: "assets/images/your-CAD.png"` (unchanged).
+2. **Real photographs immediately below:** `printPhotos` accepts **1–4** actual photographs (`.jpg`, `.jpeg`, `.png`, `.webp`). The first is large, additional photos appear beside it. Clicking a photo opens a full-size viewer with arrow navigation. If the list is empty, a neutral placeholder appears instead.
+3. **Print profile:** Optional `printDetails` fields for material, printer, layer height, infill, supports and print time. Blank entries are not shown as fabricated settings.
+4. **Engineering notes:** The original `sections` fields (overview, objectives, design, construction, software, testing, iterations, results, lessons) remain in `site-data.js`. Longer technical notes now appear in expandable groups beneath the gallery.
+5. **Technical file links:** Existing `links.cad`, `links.downloads`, etc., appear on the 3D-print page if supplied. No downloads are invented.
+
+Example to place **inside any 3D-print project** in `assets/js/site-data.js`:
+
+```javascript
+image: "assets/images/my-pulley-cad.png", // Main CAD design image
+printPhotos: [
+  { src: "assets/images/printed-pulley-front.jpeg", caption: "Front view" },
+  { src: "assets/images/printed-pulley-side.jpeg", caption: "Side view" },
+  { src: "assets/images/printed-pulley-installed.jpeg", caption: "Fitted to robot" }
+],
+printDetails: {
+  material: "PETG", printer: "Bambu P1S", layerHeight: "0.2 mm",
+  infill: "20%", supports: "No", printTime: ""
+},
+```
+
+This is **illustrative**, not a statement that the provided designs used these settings.
+
+The existing Pulleys entry uses the real `IMG_2788 3d print pulley.jpg` as its first `printPhotos` item, instead of incorrectly displaying its file path as text under Results. Other 3D prints have empty `printPhotos` arrays until you add photographs.

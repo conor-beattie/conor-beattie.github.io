@@ -345,3 +345,92 @@ button { cursor: pointer; }
 
 /* The main navigation now handles discipline selection; the gallery only needs search. */
 .filters--search-only { justify-content: flex-end; }
+
+/* ==============================================================
+   Dedicated 3D-print detail view: CAD -> real photos -> print data.
+   Applies only to projects in the fabrication category.
+   ============================================================== */
+.print-detail-page { padding-bottom: 10px; }
+.print-intro { padding-bottom: 28px; }
+.print-intro h1 { max-width: 880px; }
+.print-cad-figure { position:relative; margin:0 0 26px; padding:28px; display:flex; align-items:center; justify-content:center;
+  min-height:280px; max-height:510px; border-radius:17px; background:linear-gradient(145deg,#f1f3f2,#e9edeb); border:1px solid var(--line); overflow:hidden; }
+.print-cad-figure img { height:auto; max-width:100%; max-height:450px; width:auto; object-fit:contain; border-radius:7px; }
+.print-media-label { position:absolute; top:18px; left:19px; z-index:1; background:rgba(255,255,255,.92); border:1px solid #d8e0dc; border-radius:5px; padding:5px 10px; color:var(--ink-soft); font-size:.71rem; font-weight:750; letter-spacing:.065em; }
+.print-gallery-panel { margin:0 0 58px; }
+.print-gallery-heading { display:flex; justify-content:space-between; align-items:end; gap:20px; margin:0 0 19px; }
+.print-gallery-heading h2 { font-size:clamp(1.7rem,3vw,2.28rem); letter-spacing:-.044em; line-height:1.2; margin:5px 0; }
+.print-gallery-heading p:not(.eyebrow) { font-size:.91rem; color:var(--ink-soft); margin:0; }
+.print-photo-count { font-size:.79rem; color:var(--ink-soft); background:var(--wash); border:1px solid var(--line); border-radius:100px; padding:5px 12px; flex:none; }
+.print-photo-grid { display:grid; grid-template-columns:minmax(0,1.55fr) minmax(0,1fr); grid-template-rows:repeat(3,minmax(0,1fr)); gap:12px; height:480px; }
+.print-photo-tile { display:block; overflow:hidden; padding:0; border:1px solid var(--line); border-radius:12px; background:#edf1ef; position:relative; cursor:zoom-in; min-width:0; }
+.print-photo-tile:first-child { grid-row:1 / -1; }
+.print-photo-tile img { width:100%; height:100%; object-fit:contain; transition:transform .24s ease; }
+.print-photo-tile:hover img { transform:scale(1.025); }
+.print-photo-zoom { position:absolute; right:11px; bottom:10px; display:grid; place-items:center; background:rgba(255,255,255,.93); color:var(--ink); width:33px; height:33px; border-radius:7px; font-size:1.2rem; }
+.print-photo-grid[data-count="1"] { display:block; height:440px; }
+.print-photo-grid[data-count="1"] .print-photo-tile { width:100%; height:100%; }
+.print-photo-grid[data-count="2"] { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:1fr; height:375px; }
+.print-photo-grid[data-count="2"] .print-photo-tile:first-child { grid-row:auto; }
+.print-photo-grid[data-count="3"] { grid-template-rows:repeat(2,minmax(0,1fr)); height:460px; }
+.print-photo-empty { border:1.5px dashed #c8d5d0; border-radius:13px; padding:28px; min-height:150px; display:flex; align-items:center; gap:22px; background:#f6f9f7; color:var(--ink-soft); }
+.print-photo-placeholder { font-size:2.35rem; color:#8aa29b; line-height:1; }
+.print-photo-empty strong { color:var(--ink); font-size:1rem; }
+.print-photo-empty p { margin:3px 0 0; font-size:.89rem; }
+.print-photo-empty code, .print-settings-empty code { font-size:.83em; }
+.print-content-layout { display:grid; grid-template-columns:minmax(0,1.7fr) minmax(265px,.83fr); gap:55px; align-items:start; }
+.print-main-info { min-width:0; }
+.print-about { border-top:1px solid var(--line); padding-top:25px; margin-bottom:34px; }
+.print-about h2, .print-more-details h2 { font-size:1.65rem; margin:7px 0 17px; letter-spacing:-.035em; }
+.print-about p { color:var(--ink-soft); margin:0 0 12px; font-size:.98rem; }
+.print-more-details { margin-bottom:24px; }
+.print-notes-intro { font-size:.89rem; color:var(--muted); margin-top:-8px; }
+.print-accordion { border-bottom:1px solid var(--line); }
+.print-accordion:first-of-type { border-top:1px solid var(--line); }
+.print-accordion summary { display:flex; align-items:center; justify-content:space-between; gap:15px; cursor:pointer; padding:19px 3px; font-weight:670; color:var(--ink); list-style:none; }
+.print-accordion summary::-webkit-details-marker { display:none; }
+.print-accordion summary span { color:var(--accent-deep); font-size:1.35rem; font-weight:400; line-height:1; transition:transform .15s ease; }
+.print-accordion[open] summary span { transform:rotate(45deg); }
+.print-accordion-body { padding:3px 5px 18px; }
+.print-note + .print-note { margin-top:17px; }
+.print-note h4 { font-size:.82rem; text-transform:uppercase; letter-spacing:.04em; margin:0 0 4px; }
+.print-note p { color:var(--ink-soft); font-size:.9rem; margin:0 0 8px; }
+.print-spec-card { background:white; border:1px solid var(--line); border-radius:13px; padding:24px; margin-bottom:16px; }
+.print-spec-card h3 { font-size:1.3rem; letter-spacing:-.034em; margin:6px 0 16px; }
+.print-spec-card p { font-size:.89rem; color:var(--ink-soft); margin:0; }
+.print-spec-list { margin:0; }
+.print-spec-list > div { border-top:1px solid var(--line); display:flex; align-items:baseline; justify-content:space-between; gap:15px; padding:12px 0; font-size:.87rem; }
+.print-spec-list dt { color:var(--muted); }
+.print-spec-list dd { margin:0; text-align:right; color:var(--ink); font-weight:700; }
+.print-settings-empty { line-height:1.7; }
+.print-lightbox { border:0; border-radius:14px; padding:24px; background:#151d20; color:white; max-width:min(1100px,95vw); max-height:95vh; width:100%; box-shadow:0 25px 80px #0007; }
+.print-lightbox::backdrop { background:rgba(8,19,23,.86); }
+.print-lightbox-close { color:white; background:transparent; border:1px solid #ffffff6b; border-radius:50%; width:35px; height:35px; font-size:1.5rem; line-height:1; display:grid; place-items:center; margin:0 0 12px auto; }
+.print-lightbox-stage { display:grid; grid-template-columns:43px minmax(0,1fr) 43px; align-items:center; gap:8px; }
+.print-lightbox-stage img { max-height:68vh; width:100%; object-fit:contain; }
+.print-lightbox-stage button { background:#ffffff18; color:white; border:1px solid #ffffff45; border-radius:100px; font-size:2rem; height:43px; }
+.print-lightbox-stage button[hidden] { visibility:hidden; display:block; }
+.print-lightbox-footer { display:flex; flex-wrap:wrap; justify-content:space-between; gap:15px; margin-top:16px; font-size:.81rem; color:#dee4e1; }
+.print-lightbox-count { font-variant-numeric:tabular-nums; white-space:nowrap; }
+@media (max-width:800px) {
+ .print-cad-figure { max-height:450px; }
+ .print-content-layout { grid-template-columns:1fr; gap:15px; }
+ .print-side-info { display:grid; grid-template-columns:repeat(auto-fit,minmax(235px,1fr)); gap:14px; }
+ .print-spec-card { margin:0; }
+}
+@media (max-width:560px) {
+ .print-cad-figure { padding:15px; min-height:230px; }
+ .print-cad-figure img { max-height:350px; }
+ .print-photo-grid, .print-photo-grid[data-count="3"] { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); grid-template-rows:240px 85px; height:auto; gap:8px; }
+ .print-photo-grid .print-photo-tile:first-child { grid-column:1 / -1; grid-row:1; }
+ .print-photo-grid .print-photo-tile:not(:first-child) { grid-row:2; }
+ .print-photo-grid[data-count="1"] { display:block; height:300px; }
+ .print-photo-grid[data-count="2"] { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:230px; height:auto; }
+ .print-photo-grid[data-count="2"] .print-photo-tile:first-child { grid-column:auto; grid-row:auto; }
+ .print-gallery-heading { align-items:start; }
+ .print-photo-empty { padding:20px; }
+ .print-lightbox { padding:12px; width:98vw; }
+ .print-lightbox-stage { grid-template-columns:30px minmax(0,1fr) 30px; gap:3px; }
+ .print-lightbox-stage button { height:30px; font-size:1.5rem; }
+ .print-lightbox-close { margin:0 0 8px auto; }
+}

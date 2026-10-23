@@ -296,12 +296,122 @@
     refresh();
   }
 
+  // 3D-print entries have a MakerWorld-inspired gallery and compact technical details.
+  // Other engineering projects continue using the standard project template.
+  function printDetail(p) {
+    const root = $("#project-content");
+    const photos = (Array.isArray(p.printPhotos) ? p.printPhotos : []).slice(0, 4)
+      .map((entry) => typeof entry === "string" ? { src: entry, caption: "" } : entry)
+      .filter(entry => entry && localMedia(entry.src))
+      .map(entry => ({src: localMedia(entry.src), caption: String(entry.caption || ""), alt: String(entry.alt || entry.caption || `Actual printed ${p.title}`)}));
+    const details = p.printDetails && typeof p.printDetails === "object" ? p.printDetails : {};
+    const labels = [
+      ["material", "Material"], ["printer", "Printer"],
+      ["layerHeight", "Layer height"], ["infill", "Infill"],
+      ["supports", "Supports"], ["printTime", "Print time"]
+    ];
+    const specs = labels.filter(([key]) => String(details[key] || "").trim());
+    const resources = [
+      linkMarkup(p.links?.cad, "CAD model"),
+      linkMarkup(p.links?.downloads, "Download / print files"),
+      linkMarkup(p.links?.github, "Source / design files"),
+      linkMarkup(p.links?.video, "Demonstration video")
+    ].filter(Boolean);
+    const section = p.sections || {};
+    // Older unfinished entries have instructional template text in `overview`.
+    // Prefer the real project summary/date until the overview has been personalised.
+    const overview = String(section.overview || "").trim();
+    const unfinishedOverview = /^(Identify the component or family of parts|Explain the purpose of the second printed component)/i.test(overview);
+    const aboutDescription = (!unfinishedOverview && overview) ? overview : (p.summary || p.date || "");
+    const note = (label, value) => String(value || "").trim()
+      ? `<div class="print-note"><h4>${text(label)}</h4>${paragraphs(value)}</div>` : "";
+    const optionalNotes = [
+      ["Design & fit", [note("Objectives & constraints", section.objectives), note("Design decisions", section.design)]],
+      ["Printing & assembly", [note("Manufacture / assembly", section.construction), note("CAD & software", section.software)]],
+      ["Testing & improvements", [note("Testing", section.testing), note("Revisions", section.iterations), note("Results", section.results), note("Lessons learned", section.lessons)]]
+    ].filter(([,notes])=>notes.some(Boolean));
+    const cards = photos.map((photo,index)=>`<button type="button" class="print-photo-tile" data-print-photo="${index}" aria-label="Open print photo ${index+1} of ${photos.length}">
+      <img src="${photo.src}" alt="${text(photo.alt)}" loading="${index===0?'eager':'lazy'}" />
+      <span class="print-photo-zoom" aria-hidden="true">↗</span>
+    </button>`).join("");
+    document.title = `${p.title} · 3D Printing · ${data.owner.name}`;
+    root.innerHTML = `<div class="container print-detail-page">
+      <div class="breadcrumb"><a href="projects.html?category=fabrication">3D Printing &amp; Fabrication</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
+      <div class="project-intro print-intro"><p class="eyebrow">3D PRINT${p.date ? " · "+text(p.date) : ""}</p><h1>${text(p.title)}</h1>
+        ${p.summary ? `<p class="project-lede">${text(p.summary)}</p>` : ""}
+        <div class="tags tags-large">${(p.tags || []).map(tag=>`<span class="tag">${text(tag)}</span>`).join("")}</div>
+      </div>
+      <figure class="print-cad-figure" id="cad-design"><div class="print-media-label">CAD MODEL</div><img src="${img(p.image)}" alt="${text(p.imageAlt || `${p.title} CAD model`)}" /></figure>
+      <section class="print-gallery-panel" id="finished-photos" aria-labelledby="print-gallery-title">
+        <div class="print-gallery-heading"><div><p class="eyebrow">FROM DIGITAL TO PHYSICAL</p><h2 id="print-gallery-title">The finished print</h2><p>Photographs of the actual manufactured part.</p></div>
+          ${photos.length ? `<span class="print-photo-count">${photos.length} photo${photos.length===1?'':'s'}</span>` : ""}
+        </div>
+        ${photos.length ? `<div class="print-photo-grid" data-count="${photos.length}">${cards}</div>` :
+          `<div class="print-photo-empty"><span class="print-photo-placeholder" aria-hidden="true">▧</span><div><strong>Finished-print photos</strong><p>Add 1–4 actual print photographs in <code>site-data.js</code> to display them here.</p></div></div>`}
+      </section>
+      <div class="print-content-layout">
+        <div class="print-main-info">
+          <section class="print-about" id="description"><span class="eyebrow">DESIGN NOTES</span><h2>About this print</h2>
+            ${aboutDescription ? paragraphs(aboutDescription) : '<p>Further design details can be added here.</p>'}
+          </section>
+          ${optionalNotes.length ? `<section class="print-more-details" id="engineering-notes"><h2>Design, printing &amp; testing</h2>
+            <p class="print-notes-intro">Expand a section for the engineering decisions and test notes behind this part.</p>
+            ${optionalNotes.map(([title,notes])=>`<details class="print-accordion"><summary>${text(title)}<span aria-hidden="true">+</span></summary><div class="print-accordion-body">${notes.join("")}</div></details>`).join("")}
+          </section>` : ""}
+        </div>
+        <aside class="print-side-info" aria-label="Print information">
+          <div class="print-spec-card"><p class="eyebrow">3D PRINT INFORMATION</p><h3>Print profile</h3>
+            ${specs.length ? `<dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join("")}</dl>` : `<p class="print-settings-empty">Printer, material and settings can be added in <code>site-data.js</code>.</p>`}
+          </div>
+          ${resources.length ? `<div class="print-spec-card" id="print-downloads"><p class="eyebrow">FILES</p><h3>Model &amp; resources</h3><div class="resource-links">${resources.join("")}</div></div>` : ""}
+          ${p.contribution && !/^replace with|identify the components/i.test(p.contribution) ? `<div class="print-spec-card"><p class="eyebrow">CONTRIBUTION</p><p>${text(p.contribution)}</p></div>` : ""}
+        </aside>
+      </div>
+      <div class="next-action"><div><span class="eyebrow">SEE MORE</span><h2>More 3D prints &amp; fabrication</h2></div><a class="button button-outline" href="projects.html?category=fabrication">Browse 3D prints ↗</a></div>
+      <dialog class="print-lightbox" id="print-lightbox" aria-label="Full size print photograph"><button type="button" class="print-lightbox-close" aria-label="Close full-size photograph">×</button>
+        <div class="print-lightbox-stage"><button type="button" class="print-lightbox-prev" aria-label="Previous photograph">‹</button><img alt=""/><button type="button" class="print-lightbox-next" aria-label="Next photograph">›</button></div>
+        <div class="print-lightbox-footer"><span class="print-lightbox-count"></span><span class="print-lightbox-caption"></span></div>
+      </dialog>
+    </div>`;
+    if (!photos.length) return;
+    const modal = $("#print-lightbox", root);
+    const viewerImage = $(".print-lightbox-stage img", modal);
+    const counter = $(".print-lightbox-count", modal);
+    const caption = $(".print-lightbox-caption", modal);
+    let current = 0;
+    const updatePhoto = (index) => {
+      current = (index + photos.length) % photos.length;
+      viewerImage.src = photos[current].src;
+      viewerImage.alt = photos[current].alt;
+      caption.textContent = photos[current].caption;
+      counter.textContent = `${current+1} / ${photos.length}`;
+      $(".print-lightbox-prev", modal).hidden = photos.length===1;
+      $(".print-lightbox-next", modal).hidden = photos.length===1;
+    };
+    $$("[data-print-photo]",root).forEach(button=>button.addEventListener("click",()=>{
+      updatePhoto(Number(button.dataset.printPhoto));
+      modal.showModal();
+    }));
+    $(".print-lightbox-close",modal).addEventListener("click",()=>modal.close());
+    $(".print-lightbox-prev",modal).addEventListener("click",()=>updatePhoto(current-1));
+    $(".print-lightbox-next",modal).addEventListener("click",()=>updatePhoto(current+1));
+    modal.addEventListener("click",(event)=>{if(event.target===modal) modal.close();});
+    modal.addEventListener("keydown",(event)=>{
+      if(event.key==="ArrowLeft") {event.preventDefault();updatePhoto(current-1);}
+      if(event.key==="ArrowRight") {event.preventDefault();updatePhoto(current+1);}
+    });
+  }
+
   function projectDetail() {
     const id = new URLSearchParams(location.search).get("id");
     const p = data.projects.find(item => item.id === id);
     const root = $("#project-content");
     if (!p) {
       root.innerHTML = `<div class="not-found"><p class="eyebrow">PROJECT NOT FOUND</p><h1>That project isn't in this portfolio yet.</h1><p>Check the link or return to the project gallery.</p><a class="button button-primary" href="projects.html">Browse projects <span aria-hidden="true">↗</span></a></div>`;
+      return;
+    }
+    if (p.category === "fabrication") {
+      printDetail(p);
       return;
     }
     document.title = `${p.title} · ${data.owner.name}`;

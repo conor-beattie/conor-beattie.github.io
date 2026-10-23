@@ -14,6 +14,9 @@
   5. The template banner and example badges are now disabled.
   6. Add actual public GitHub / video / CAD links (or leave them blank).
 
+  7. For 3D prints: keep `image` as the CAD render and list 1–4 real print photos
+     under `printPhotos`. Optional printer settings belong in `printDetails`.
+
   Do not put private addresses, school schedules or personal contact data here.
 */
 window.PORTFOLIO_DATA = {
@@ -520,8 +523,21 @@ window.PORTFOLIO_DATA = {
         software: "If applicable, explain parametric CAD or scripts used to generate the part.",
         testing: "Show fit checks, load tests, endurance trials or measured dimensional accuracy.",
         iterations: "Compare revisions and explain the effect of dimensional or design changes.",
-        results: "assets/images/IMG_2788 3d print pulley.jpg",
+        results: "",
         lessons: "Summarise what worked in manufacturing and what you would change."
+      },
+      // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
+      printPhotos: [
+        { src: "assets/images/IMG_2788 3d print pulley.jpg", caption: "Photograph of the printed pulleys in the robot assembly" }
+      ],
+      // Optional print-profile details; blank values are hidden from the public page.
+      printDetails: {
+        material: "PETG",
+        printer: "",
+        layerHeight: "",
+        infill: "",
+        supports: "",
+        printTime: ""
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
@@ -615,6 +631,17 @@ window.PORTFOLIO_DATA = {
         results: "Include photographs of the printed component installed in its working mechanism.",
         lessons: "Summarise what you learned about manufacturing, material choices and print quality."
       },
+      // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
+      printPhotos: [],
+      // Optional print-profile details; blank values are hidden from the public page.
+      printDetails: {
+        material: "",
+        printer: "",
+        layerHeight: "",
+        infill: "",
+        supports: "",
+        printTime: ""
+      },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -637,6 +664,17 @@ window.PORTFOLIO_DATA = {
         iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
         results: "Include photographs of the printed component installed in its working mechanism.",
         lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+      },
+      // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
+      printPhotos: [],
+      // Optional print-profile details; blank values are hidden from the public page.
+      printDetails: {
+        material: "",
+        printer: "",
+        layerHeight: "",
+        infill: "",
+        supports: "",
+        printTime: ""
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
@@ -661,6 +699,17 @@ window.PORTFOLIO_DATA = {
         results: "Include photographs of the printed component installed in its working mechanism.",
         lessons: "Summarise what you learned about manufacturing, material choices and print quality."
       },
+      // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
+      printPhotos: [],
+      // Optional print-profile details; blank values are hidden from the public page.
+      printDetails: {
+        material: "",
+        printer: "",
+        layerHeight: "",
+        infill: "",
+        supports: "",
+        printTime: ""
+      },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -683,6 +732,17 @@ window.PORTFOLIO_DATA = {
         iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
         results: "Include photographs of the printed component installed in its working mechanism.",
         lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+      },
+      // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
+      printPhotos: [],
+      // Optional print-profile details; blank values are hidden from the public page.
+      printDetails: {
+        material: "",
+        printer: "",
+        layerHeight: "",
+        infill: "",
+        supports: "",
+        printTime: ""
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     }
