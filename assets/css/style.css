@@ -239,9 +239,6 @@ button { cursor: pointer; }
 }
 
 /* SOFTWARE & ALGORITHMS — reusable evidence and demonstration layouts */
-.category-tile:nth-child(5):last-child { grid-column: span 2; grid-template-columns: 30% 70%; min-height: 205px; }
-.category-tile:nth-child(5):last-child .category-tile__info { padding-inline: 31px; }
-.category-tile:nth-child(5):last-child h3 { margin-top: 17px; }
 .algorithm-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 20px; }
 .algorithm-card { background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
 .algorithm-card__top { display:flex; justify-content:space-between; align-items:center; padding: 20px 23px; min-height: 91px; gap:10px; background: var(--wash); border-bottom: 1px solid var(--line); }
@@ -271,16 +268,13 @@ button { cursor: pointer; }
 .detail-main .demo-grid { grid-template-columns:1fr; }
 .detail-main .demo-card { max-width:560px; }
 @media (max-width:800px) {
- .category-tile:nth-child(5):last-child { grid-column:span 2; grid-template-columns:35% 65%; }
- .algorithm-grid { grid-template-columns:1fr 1fr; }
+  .algorithm-grid { grid-template-columns:1fr 1fr; }
 }
 @media (max-width:560px) {
- .category-tile:nth-child(5):last-child { grid-column:auto; grid-template-columns:42% 58%; min-height:200px; }
- .category-tile:nth-child(5):last-child .category-tile__info { padding-inline:16px; }
- .algorithm-grid,.demo-grid { grid-template-columns:1fr; }
+   .algorithm-grid,.demo-grid { grid-template-columns:1fr; }
 }
 
-/* NAVIGATION v2 — five disciplines, plus Home / All work / About */
+/* NAVIGATION — six disciplines, plus Home / All work / About */
 .site-header { height: auto; }
 .site-header__top { height: 72px; display: flex; justify-content: space-between; align-items: center; gap: 22px; }
 .site-nav-utility { display: flex; align-items: center; gap: 26px; }
@@ -304,3 +298,50 @@ button { cursor: pointer; }
   .site-nav a[aria-current="page"]::after { bottom: 3px; right: auto; width: 40px; }
   .site-nav-mobile-utility { display:flex; flex-wrap:wrap; gap: 24px; padding-top: 13px; padding-bottom: 20px; border-top: 1px solid var(--line); }
 }
+
+/* SOFTWARE + ALGORITHM LIBRARIES */
+.category-grid { grid-template-columns:repeat(3,minmax(0,1fr)); }
+.category-tile { min-width:0; }
+.category-tile__info h3 { overflow-wrap:anywhere; }
+.software-grid { display:grid; gap:28px; }
+.software-feature { display:grid; grid-template-columns:minmax(0,1.45fr) minmax(270px,.85fr); gap:26px; align-items:stretch; margin-bottom:12px; }
+.software-feature .software-card { border-color:#b4d0c6; }
+.software-feature__copy { border-radius:var(--radius); padding:clamp(24px,3.7vw,43px); background:var(--wash); display:flex; flex-direction:column; justify-content:center; }
+.software-feature__copy h2 { font-size:clamp(1.5rem,2.5vw,2.25rem); line-height:1.2; letter-spacing:-.045em; margin:10px 0 12px; }
+.software-feature__copy p { color:var(--ink-soft); margin:0 0 20px; }
+.software-card-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+.software-card { min-width:0; display:flex; flex-direction:column; overflow:hidden; border:1px solid var(--line); background:var(--white); border-radius:var(--radius); }
+.software-card__image { display:block; aspect-ratio:16/9; background:#ecf3f1; overflow:hidden; border-bottom:1px solid var(--line); }
+.software-card__image img { width:100%; height:100%; object-fit:cover; transition:transform .2s ease; }
+.software-card__image:hover img { transform:scale(1.03); }
+.software-card__body { display:flex; flex-direction:column; flex:1; padding:21px; }
+.software-card__body h3 { font-size:1.25rem; letter-spacing:-.035em; line-height:1.25; margin:13px 0 9px; }
+.software-card__body h3 a:hover { color:var(--accent-deep); }
+.software-card__body p { color:var(--ink-soft); font-size:.88rem; margin:0 0 23px; }
+.software-card__bottom { margin-top:auto; display:flex; justify-content:space-between; align-items:center; }
+.maturity-note { color:var(--muted); font-size:.7rem; text-align:right; }
+.algorithm-group { margin-bottom:45px; scroll-margin-top:150px; }
+.algorithm-group__head { border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:baseline; padding-bottom:11px; margin-bottom:17px; gap:12px; }
+.algorithm-group__head h2 { margin:0; font-size:1.55rem; letter-spacing:-.035em; }
+.algorithm-group__head span { color:var(--muted); font-size:.85rem; }
+.flowchart-figure { margin:0 0 42px; border:1px solid var(--line); border-radius:var(--radius); background:white; padding:clamp(12px,3vw,29px); box-shadow:var(--shadow); }
+.flowchart-figure img { display:block; width:100%; height:auto; max-height:1250px; object-fit:contain; }
+.flowchart-figure a { display:block; }
+.flowchart-figure figcaption { border-top:1px solid var(--line); padding-top:12px; margin-top:15px; color:var(--muted); font-size:.83rem; }
+.method-chip-row { display:flex; flex-wrap:wrap; gap:9px; margin:16px 0; }
+.method-chip { border:1px solid #b3cdc6; background:var(--wash); border-radius:7px; display:inline-flex; gap:8px; align-items:center; padding:8px 12px; font-size:.84rem; font-weight:650; }
+.method-chip:hover { border-color:var(--accent); background:var(--accent-light); }
+.related-list { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; margin-top:18px; }
+.related-item { min-width:0; padding:15px 18px; background:var(--wash); border:1px solid var(--line); border-radius:9px; display:flex; flex-direction:column; gap:5px; }
+.related-item:hover { border-color:var(--accent); }
+.related-item strong { font-size:.94rem; }
+.related-item span { color:var(--ink-soft); font-size:.79rem; }
+.code-file-list { list-style:none; padding:0; margin:14px 0 22px; }
+.code-file-list li { padding:7px 0; border-bottom:1px solid var(--line); overflow-wrap:anywhere; }
+.code-file-list code { font: .84rem/1.5 ui-monospace, Consolas, monospace; color:var(--ink-soft); }
+@media(max-width:1100px) { .site-nav {gap:10px;} .site-nav a {font-size:.82rem;} .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));} .software-card-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }
+@media(max-width:800px) { .software-feature{grid-template-columns:1fr;} .software-feature__copy{padding:24px;} }
+@media(max-width:560px) { .category-grid,.software-card-grid,.related-list{grid-template-columns:1fr;} .flowchart-figure{padding:9px;} .software-card__image{aspect-ratio:1.65;} }
+
+/* Keep the original wide horizontal discipline tiles: legible labels on desktop. */
+@media(min-width:561px) { .category-grid{grid-template-columns:repeat(2,minmax(0,1fr));} }

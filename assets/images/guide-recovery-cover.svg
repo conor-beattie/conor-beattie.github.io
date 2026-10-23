@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="600" viewBox="0 0 1100 600" role="img" aria-labelledby="title desc">
+<title id="title">GUIDE RECOVERY — software overview illustration</title><desc id="desc">Simplified three-stage illustration; open the software page for full technical details.</desc>
+<rect width="1100" height="600" fill="#E5EFEB"/><rect x="32" y="33" width="1036" height="534" rx="28" fill="#F7FAF8" stroke="#C5D8D1" stroke-width="2"/>
+<text x="75" y="110" fill="#00685D" font-family="Arial,sans-serif" font-size="20" font-weight="bold" letter-spacing="3">BOBBOT  /  SOFTWARE</text>
+<text x="75" y="164" fill="#19353B" font-family="Arial,sans-serif" font-size="39" font-weight="bold">GUIDE RECOVERY</text>
+<g font-family="Arial,sans-serif"><rect x="75" y="206" width="255" height="126" rx="17" fill="#F4FAF7" stroke="#A9C8BF" stroke-width="2"/>
+  <circle cx="202" cy="247" r="16" fill="#0C776B"/><text x="202" y="253" text-anchor="middle" fill="white" font-size="16" font-weight="bold">1</text>
+  <text x="202" y="295" text-anchor="middle" fill="#173B43" font-size="17" font-weight="bold">DETECT LOSS</text>
+<rect x="410" y="206" width="255" height="126" rx="17" fill="#F4FAF7" stroke="#A9C8BF" stroke-width="2"/>
+  <circle cx="537" cy="247" r="16" fill="#0C776B"/><text x="537" y="253" text-anchor="middle" fill="white" font-size="16" font-weight="bold">2</text>
+  <text x="537" y="295" text-anchor="middle" fill="#173B43" font-size="17" font-weight="bold">SEARCH</text>
+<rect x="745" y="206" width="255" height="126" rx="17" fill="#F4FAF7" stroke="#A9C8BF" stroke-width="2"/>
+  <circle cx="872" cy="247" r="16" fill="#0C776B"/><text x="872" y="253" text-anchor="middle" fill="white" font-size="16" font-weight="bold">3</text>
+  <text x="872" y="295" text-anchor="middle" fill="#173B43" font-size="17" font-weight="bold">REACQUIRE</text>
+<path d="M344 270 H392" stroke="#07796B" stroke-width="5" stroke-linecap="round"/>
+<path d="M380 260 l13 10 -13 10" stroke="#07796B" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M679 270 H727" stroke="#07796B" stroke-width="5" stroke-linecap="round"/>
+<path d="M715 260 l13 10 -13 10" stroke="#07796B" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g>
+<text x="75" y="416" fill="#536E6E" font-family="Arial,sans-serif" font-size="21">Software architecture illustration · see the detailed documentation</text>
+<path d="M75 465 H1025" stroke="#B8D1C9" stroke-width="2"/><text x="75" y="520" fill="#00685D" font-family="Arial,sans-serif" font-size="17">OBJECTIVE  →  IMPLEMENTATION  →  TESTING &amp; LESSONS</text>
+</svg>

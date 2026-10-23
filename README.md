@@ -1,122 +1,59 @@
-# Engineering Portfolio — Robotics, Software & Algorithms
+# Engineering Portfolio — Software & Algorithms revision (23 October 2026)
 
-This is the updated GitHub Pages portfolio built **from the uploaded repository**. It preserves the existing design, owner information, eight earlier project entries, photographs, CSS and JavaScript architecture.
+This is a **complete GitHub Pages website**, built from the latest supplied site ZIP.
+No build tools, hosting account changes, external libraries or separate deployment services are required.
 
-## Latest navigation and gallery update (21 October 2026)
+## Upload to GitHub Pages
 
-- Two-row desktop header: general links (**Home / All work / About**) and direct links to **all five engineering sections**. Mobile uses one menu with the same destinations.
-- Corrected `categories[].id` for **3D Printing & Fabrication** from blank to `fabrication`, matching the two existing printed-component entries (`printed-mechanisms`, `fabrication-project-2`). Both now display in their own filtered gallery.
-- The two 3D-print entries are labelled **3D PRINT**, not “Engineering project”. The filtered gallery shows “3D Printing & Fabrication” as its heading.
-- Removed the published **Portfolio template** banner and project-card **EXAMPLE** badges from all pages. Project-page pictures no longer display placeholder caption text.
-- The homepage heading now says **Selected work** to cover robots, CAD designs and 3D-printed parts.
-- Existing owner name, project text, IDs, robots, algorithms, user photographs, image filenames and detailed entries are retained.
+1. Download and unzip the ZIP.
+2. Open the included `conor-beattie.github.io-main` folder.
+3. In the existing GitHub repository, replace the matching top-level HTML files and `assets/` contents with those in this folder, **including the new files**. It is easiest to drag and drop the complete contents at the repository root, with directory structure preserved. The main `index.html` must remain at the repository root.
+4. Commit the upload. Reload the published GitHub Pages URL after deployment (hard-refresh if your browser has cached old JavaScript/CSS).
 
-**Important:** the category ID `fabrication` is a fixed link between the homepage, navigation, gallery and project records. Change its display `title` freely, but do not blank/change its `id` without updating all matching project categories.
+Do not upload only `index.html`: the new Software pages depend on the updated JS, CSS and diagram files.
 
-## What's new
+## Structure
 
-- Five engineering disciplines: **Robotics**, **Mechanical Design & CAD**, **3D Printing & Fabrication**, **Software & Algorithms**, and **Electronics & Embedded Systems**.
-- Existing combined Software & Electronics entries are assigned to the appropriate new sections. Two extra editable starter projects were added so that the homepage still shows **two project cards per discipline** (10 cards in total).
-- New **Software & Algorithms** page (`algorithms.html`) and reusable algorithm page (`algorithm.html?id=ibvs`).
-- Starter reference entries for IBVS, PBVS, PID and Pure Pursuit (technical descriptions, **not** claims of completed implementations).
-- Video demonstrations, when added to an algorithm, automatically appear **both** on the algorithm page and on the corresponding robot's project page.
-- All existing project IDs are retained. Neither the Bobbot description nor the user-supplied photographs have been replaced.
+- `index.html` — home; six discipline cards
+- `projects.html`, `project.html` — robotics, CAD, fabrication, electronics (existing records preserved)
+- `software.html` — software behaviour/system gallery
+- `software-detail.html?id=return-to-base` — reusable software detail template
+- `algorithms.html` — grouped algorithm library
+- `algorithm.html?id=ibvs` — reusable algorithm detail template
+- `about.html` — About
+- `assets/js/site-data.js` — **edit content here**
+- `assets/js/site.js` — rendering and link logic; normally no edits necessary
+- `assets/css/style.css` — visual styling
+- `assets/diagrams/bobbot-return-to-base.svg` — real Return-to-Base flowchart (editable SVG)
+- `assets/images/*-cover.svg` — editable small illustrations for software cards
 
-## Publish to GitHub Pages
+## Adding a software behaviour
 
-1. Unzip the archive on your computer.
-2. Open the extracted folder and select **its contents**, not the folder itself.
-3. In the `conor-beattie.github.io` GitHub repository, upload the HTML files and the `assets/` folder into the repository root. Commit changes to `main`.
-4. Keep the `.nojekyll` file. Check Settings → Pages is configured for `main` and `/ (root)`.
-5. Wait for the Pages deployment, then refresh the site with `Ctrl+Shift+R` if the previous version is still cached.
+Open `assets/js/site-data.js` and duplicate one object under **`software: []`**. Keep the `id` unique, for example `return-to-base`.
 
-These files must sit together at the root: `index.html`, `projects.html`, `project.html`, `about.html`, **`algorithms.html`** and **`algorithm.html`**. If only the edited JavaScript is uploaded, links to the new algorithm pages will not work.
+Essential fields: `id`, `title`, `type` (`Behaviour`, `Subroutine`, or `System`), `summary`, `image`, `status`, `robotIds` and `algorithmIds`. Add `objective`, `implementation`, `changes`, `lessons`, `testing`, `next`, `codeFiles` and `sourceUrl` for the detail page. Use a `flowchart` path when you have a matching SVG.
 
-## Routine editing — ONE file
+- `robotIds: ["autonomous-mobile-robot"]` links automatically to the existing Bobbot robot project.
+- `algorithmIds: ["wall-following", "distance-angle-control"]` shows algorithm links automatically. **No video is required for these links.**
+- The matching algorithm pages automatically list software entries that reference them.
+- `demos: []` is optional and can remain empty. Only add true public video links when recordings are available.
 
-Edit `assets/js/site-data.js` for virtually all routine changes. It includes:
+## Adding an algorithm
 
-- `owner` — profile details and links
-- `categories` — all five homepage disciplines
-- `projects` — robot, CAD, fabrication, software and electronics project pages
-- `algorithms` — method descriptions plus reusable demonstrations
+Duplicate an entry under **`algorithms: []`** in `site-data.js`. Give it a unique ID, and fill `title`, `shortName`, `group`, `summary`, `overview`, `method`, `considerations`, `implementation`. It will appear automatically under its group's heading and will support automatic backlinks from software.
 
-The layout and navigation live in `assets/js/site.js` plus the six HTML headers; visual styling lives in `assets/css/style.css`. You generally don't need to edit either to add a project, algorithm or video.
+The algorithm library contains background study topics as well as documented methods. **A page or software link is not proof of physical testing.** Add measured results and any genuine public code/video URLs only when available.
 
-**Photos:** Upload to `assets/images/`; use their paths in `image` fields. The original `.jpg` filenames with spaces still work, but lowercase names with hyphens are easier to maintain for future files.
+## Project / software / algorithm distinctions
 
-## Project IDs — do not accidentally change these
+- **Projects** describe physical robots, CAD designs, prints and electronics.
+- **Software** describes behaviours, modules, design iterations and evidence.
+- **Algorithms** explains reusable techniques and limitations. One algorithm can be linked from many software modules.
 
-A robot's project has a unique `id`, used both in its own URL and in the video links.
+Two unused, generic template Software Project placeholders from the supplied website are replaced by substantive software entries. All substantive existing robotics, CAD, fabrication and electronics projects and original image files are retained.
 
-| Robot page | `projects[].id` |
-|---|---|
-| Current Bobbot entry | `autonomous-mobile-robot` |
-| Current second robot template (rename to Robbot if appropriate) | `robotics-project-2` |
+## Return-to-Base caveats
 
-You may change a project's displayed `title` without changing its `id`. This keeps existing bookmarks and demonstration references intact.
+The flowchart summarises program structure; it is **not** full end-to-end test evidence. The Oct 2026 source includes a provisional hard-coded `Drive(750 mm)` fallback. The portfolio diagram deliberately names the category **open-loop return control** instead of presenting 750 mm as an engineered constant. Code is not changed by this website update.
 
-The previous eight project IDs are preserved. New template project IDs are `software-project-2` and `embedded-project-2`.
-
-## Add short videos (MP4)
-
-Use **H.264 MP4**, ideally 720p, 5–30 seconds and reasonably compressed. Use `preload="none"` (already configured) so clips are not all downloaded on page load.
-
-Suggested file layout:
-
-```text
-assets/videos/
-  bobbot/
-    ibvs-demo.mp4
-    pbvs-demo.mp4
-  robbot/
-    ibvs-demo.mp4
-```
-
-**Each video is stored only once**, in its physical robot's folder. There is no need to duplicate files under an algorithm folder.
-
-### Link a video from IBVS to Bobbot
-
-1. Upload `ibvs-demo.mp4` to `assets/videos/bobbot/`.
-2. In `assets/js/site-data.js`, find the `algorithms` entry with `id: "ibvs"`.
-3. Replace `demos: []` with:
-
-```js
-demos: [
-  {
-    robotId: "autonomous-mobile-robot",
-    title: "IBVS — Bobbot",
-    description: "Describe what the robot does and the test conditions.",
-    video: "assets/videos/bobbot/ibvs-demo.mp4",
-    poster: "",  // Optional thumbnail path in assets/images/
-    results: "Enter actual measured performance, if available."
-  }
-]
-```
-
-The demonstration now appears automatically on:
-
-- `algorithm.html?id=ibvs` (all IBVS demonstrations)
-- `project.html?id=autonomous-mobile-robot` (all linked demonstrations on Bobbot)
-
-**For a second robot:** Add a second object in the same `demos` array, with `robotId: "robotics-project-2"` and the appropriate `assets/videos/robbot/...` file. You can do this even if you rename the second robot's displayed title to Robbot.
-
-**For a new algorithm:** Duplicate an entry under `algorithms`, choose a unique `id` (e.g. `odometry`), enter its technical description and start with `demos: []`. The gallery and detail page are generated automatically. Do not add an untested implementation as though it is complete.
-
-## New pages
-
-- `algorithms.html` — all algorithm summaries **plus software project cards**.
-- `algorithm.html?id=ibvs` — IBVS detail and available demonstrations.
-- `algorithm.html?id=pbvs` — PBVS detail.
-- `algorithm.html?id=pid` — PID detail.
-- `algorithm.html?id=pure-pursuit` — Pure Pursuit detail.
-
-The project and 3D-print gallery is at `projects.html`, with five filterable categories. You can also select each category directly from the top navigation. The new Electronics & Embedded Systems section has its own category filter.
-
-## Notes
-
-The uploaded `assets/videos/temp.mp4` is only one byte long; it is **not a working video** and has not been linked to the website. Upload real MP4s before creating live demonstration records.
-
-The four initial algorithm descriptions are general introductory content. None of the robot/algorithm links are enabled until a real demonstration is configured.
-
-No new account, server, framework, service or payment is required; this remains a static GitHub Pages website.
+The accompanying notes distinguish implementation, prior development, current test evidence and work still to verify. Source URLs and performance metrics are left unset rather than invented.
