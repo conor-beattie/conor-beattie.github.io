@@ -52,7 +52,7 @@ window.PORTFOLIO_DATA = {
       id: "cad",
       title: "Mechanical Design & CAD",
       subtitle: "Assemblies, mechanisms, design iterations and manufacturing",
-      image: "assets/images/cad.webp"
+      image: "assets/images/gripper_bobbot.png"
     },
     {
       id: "fabrication",
@@ -70,7 +70,7 @@ window.PORTFOLIO_DATA = {
       id: "software",
       title: "Software",
       subtitle: "Behaviours, Python modules, control logic and development notes",
-      image: "assets/images/navigation block diagram.jpg"
+      image: "assets/diagrams/bobbot-return-to-base.svg"
     },
     {
       id: "algorithms",
