@@ -573,9 +573,9 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "cad-project-2",
-      title: "CAD Project 2 — Add Title",
+      title: "Shooter",
       category: "cad",
-      image: "assets/images/gripper_bobbot.png",
+      image: "assets/images/Shooter CAD.png",
       imageAlt: "CAD illustration — replace with the second design project",
       summary: "Example entry: add a second CAD design, its intended function and the principal design challenges.",
       tags: ["CAD", "Engineering Design", "Mechanisms"],
