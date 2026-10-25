@@ -99,7 +99,7 @@ window.PORTFOLIO_DATA = {
   software: [
     {
       id: "return-to-base",
-      featuredOrder: 1,
+      featuredOrder: 9,
       title: "Autonomous Return to Base",
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
@@ -468,7 +468,7 @@ window.PORTFOLIO_DATA = {
   projects: [
     {
       id: "autonomous-mobile-robot",
-      featuredOrder: 2,                  // URL: project.html?id=autonomous-mobile-robot
+      featuredOrder: 1,                  // URL: project.html?id=autonomous-mobile-robot
       title: "Bobbot - Autonomous Mobile Robot",
       category: "robotics",                          // robotics | cad | fabrication | electronics
       image: "assets/images/IMG_2627 Bobbot.jpg",
@@ -517,7 +517,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "printed-mechanisms",
       featuredOrder: 6,
-      title: "Pulleys",
+      title: "Pulley",
       category: "fabrication",
       image: "assets/images/Pulley.png",
       imageAlt: "Illustrative 3D-printed gears and fabricated components",
@@ -635,7 +635,6 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robotics-project-2",
-      featuredOrder: 3,
       title: "Robbot - Autonomous Mobile Robot",
       category: "robotics",
       image: "assets/images/IMG_2756_robbot.jpg",
