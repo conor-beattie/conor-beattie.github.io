@@ -449,3 +449,14 @@ button { cursor: pointer; }
 .detail-section--clean { display:block; }
 @media (max-width:800px) { .hero { padding:38px 0 47px; } }
 @media (max-width:560px) { .footer-social { margin-left:0; } }
+
+/* Optional compact I/O table on a standard engineering project page. */
+.io-map-scroll { width:100%; overflow-x:auto; margin:18px 0 14px; border:1px solid var(--line); border-radius:12px; }
+.io-map-table { border-collapse:collapse; width:100%; font-size:.88rem; line-height:1.5; }
+.io-map-table th { text-align:left; padding:12px 13px; font-weight:750; background:var(--surface, #f5f7f5); border-bottom:1px solid var(--line); }
+.io-map-table td { padding:11px 13px; vertical-align:top; border-bottom:1px solid var(--line); color:var(--ink-soft); }
+.io-map-table tr:last-child td { border-bottom:0; }
+.io-map-table td:first-child { color:var(--ink); font-weight:650; }
+.io-map-table code { color:var(--ink); font-size:.81rem; overflow-wrap:anywhere; white-space:normal; }
+.detail-section p.io-map-note { font-size:.84rem; color:var(--ink-soft); margin:5px 0 0; }
+@media (max-width:680px) { .io-map-table { min-width:585px; font-size:.82rem; } .io-map-table td,.io-map-table th { padding:9px 10px; } }

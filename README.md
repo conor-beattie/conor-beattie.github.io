@@ -1,3 +1,22 @@
+# New Electronics project — I/O mapping (25 October 2026)
+
+This change uses the existing `project.html` layout. No standalone HTML page or new navigation category is required.
+
+**New project**: `project.html?id=robot-io-mapping` — Robot I/O Mapping & Hardware Abstraction.
+It appears under Electronics & Embedded Systems and in All Projects.
+
+The existing Arduino Mega project (`project.html?id=robot-control-electronics`) and the new project link to each other automatically via `relatedProjectIds`.
+
+The new project includes a nine-row representative I/O table drawn from the engineering mapping provided in the chat. It groups multiple device properties into one row and omits migration, firmware, and alternative-backend columns, without claiming all hardware has been tested. Change its text, rows, and columns under `projects[].ioMap` in `assets/js/site-data.js`.
+
+For now the new project uses the existing Arduino Mega wiring diagram as its image, with a caption explaining that it is the hardware reference. Replace its `image` and `imageCaption` in `site-data.js` if a dedicated diagram is available later.
+
+**Changed files:** `assets/js/site-data.js`, `assets/js/site.js`, `assets/css/style.css`, all root HTML files (cache version references), and this README. Other project content, photographs, galleries and navigation remain unchanged.
+
+To upload, extract the changed-files ZIP and replace the matching files in the GitHub Pages repository; or use the complete ZIP and upload its contents. Commit and refresh after deployment.
+
+---
+
 # Project Journal — simplified page layout (25 October 2026)
 
 This release is based on the most recently supplied GitHub repository ZIP. The original

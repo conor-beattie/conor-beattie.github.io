@@ -410,17 +410,19 @@
     // Individual projects may override labels (for example, Firmware & TeleOp).
     const sectionOptions = [
       ["overview", "Overview"], ["architecture", "System architecture"],
-      ["hardware", "Electrical interfaces"], ["construction", "Construction"],
+      ["hardware", "Electrical interfaces"], ["io-map", "Representative I/O map"], ["construction", "Construction"],
       ["software", "Software"], ["testing", "Testing"],
       ["iterations", "Iterations"], ["results", "Results"],
       ["lessons", "Lessons learned"]
     ];
     const entries = sectionOptions
-      .filter(([key]) => String(p.sections?.[key] || "").trim())
+      .filter(([key]) => key === "io-map" ? Boolean(p.ioMap?.rows?.length) : Boolean(String(p.sections?.[key] || "").trim()))
       .map(([key, fallback]) => [key, p.sectionLabels?.[key] || fallback]);
     const usedDemos = demosForProject(p.id);
     const linkedSoftware = softwareItems.filter(item => (item.robotIds || []).includes(p.id));
     if (linkedSoftware.length) entries.push(["robot-software", "Software & Algorithms"]);
+    const linkedProjects = (p.relatedProjectIds || []).map(id => data.projects.find(item => item.id === id)).filter(item => item && item.id !== p.id);
+    if (linkedProjects.length) entries.push(["related-projects", "Related projects"]);
     if (p.category === "robotics" && usedDemos.length) entries.push(["algorithm-demonstrations", "Video demonstrations"]);
     const resources = [
       linkMarkup(p.links?.github, "Source code / GitHub"),
@@ -446,9 +448,12 @@
             </nav>
           </aside>
           <div class="detail-main">
-            ${entries.filter(([key]) => !["algorithm-demonstrations", "robot-software"].includes(key) && String(p.sections?.[key] || "").trim()).map(([key, label]) => `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${label}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
+            ${entries.filter(([key]) => !["algorithm-demonstrations", "robot-software", "related-projects"].includes(key)).map(([key, label]) => key === "io-map"
+              ? `<section class="detail-section detail-section--clean" id="io-map"><div><h2>${text(label)}</h2><p>${text(p.ioMap.intro || "")}</p><div class="io-map-scroll"><table class="io-map-table"><thead><tr>${(p.ioMap.columns || []).map(col => `<th scope="col">${text(col)}</th>`).join("")}</tr></thead><tbody>${(p.ioMap.rows || []).map(row => `<tr>${row.map((cell, i) => `<td>${i === 1 ? `<code>${text(cell)}</code>` : text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>${p.ioMap.note ? `<p class="io-map-note">${text(p.ioMap.note)}</p>` : ""}</div></section>`
+              : `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
             ${linkedSoftware.length ? `<section class="detail-section detail-section--clean" id="robot-software"><div><h2>Software &amp; Algorithms</h2><p>Software systems documented for this robot. Each entry links to the relevant algorithms without requiring a video.</p><div class="related-list">${linkedSoftware.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}
             ${usedDemos.length ? `<section class="detail-section detail-section--clean" id="algorithm-demonstrations"><div><h2>Video demonstrations</h2><div class="demo-grid">${usedDemos.map(item => demoMarkup(item,true)).join("")}</div></div></section>` : ""}
+            ${linkedProjects.length ? `<section class="detail-section detail-section--clean" id="related-projects"><div><h2>Related ${linkedProjects.length === 1 ? "project" : "projects"}</h2><div class="related-list">${linkedProjects.map(item => `<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}
             ${resources.length ? `<section class="detail-section detail-section--clean" id="resources"><div><h2>Technical resources</h2><div class="resource-links">${resources.join("")}</div></div></section>` : ""}
           </div>
         </div>

@@ -544,6 +544,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-control-electronics",
+      relatedProjectIds: ["robot-io-mapping"],
       title: "Modular Robot I/O & TeleOp Controller",
       category: "electronics",
       image: "assets/images/arduino mega.jpg",
@@ -566,6 +567,55 @@ window.PORTFOLIO_DATA = {
         lessons: "A modular robot controller is as much about defining responsibilities and connections as it is about choosing the microcontroller. Separating low-level I/O from higher-level autonomy makes the design easier to understand, test and transfer to another platform.\n\nConsistent signal names, connector pinouts and power distribution are particularly valuable when the robot changes but the controller does not. The next useful evidence will be repeatable encoder, TeleOp and power-system tests that show how reliably the reusable design operates on different robots.",
         objectives: "Provide one reusable set of controller connections for multiple robots, with stable power and signal interfaces, radio TeleOp, encoder counting and selective connection of robot-specific peripherals.",
         design: "Separate low-level Arduino Mega I/O and manual control from Raspberry Pi autonomy. Document connectors, pin allocation and power distribution in a common wiring diagram."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "robot-io-mapping",
+      title: "Robot I/O Mapping & Hardware Abstraction",
+      category: "electronics",
+      image: "assets/images/arduino mega.jpg",
+      imageAlt: "Arduino Mega wiring and pin allocation diagram associated with the robot I/O mapping",
+      imageCaption: "The common Arduino Mega wiring plan provides the physical connection reference for the I/O mapping.",
+      summary: "A common device map connecting Raspberry Pi software to robot-specific sensors, motors, encoders and Arduino commands without embedding hardware pin numbers in high-level programs.",
+      tags: ["Hardware Abstraction", "I/O Mapping", "Python", "Arduino Serial"],
+      date: "",
+      relatedProjectIds: ["robot-control-electronics"],
+      sectionLabels: {
+        architecture: "System architecture",
+        hardware: "Device naming & interfaces",
+        construction: "Developing the I/O map",
+        software: "Software & serial protocol",
+        testing: "Verification approach",
+        iterations: "Design decisions & refinements",
+        results: "Current outcome"
+      },
+      sections: {
+        overview: "The robot I/O map connects the higher-level Raspberry Pi software to the equipment installed on a particular robot. Instead of programming directly against Arduino pin numbers, software refers to named devices such as drive_front_left, gripper and battery. A backend then translates each operation into the appropriate hardware request.\n\nThe design is documented in a larger interface matrix that records device names, available properties, Pi-side calls, serial messages, firmware definitions and physical connections. The table shown here is a small representative extract, not a copy of the complete working database. This project concerns the interface design; the companion Modular Robot I/O & TeleOp Controller project documents the electrical hardware.",
+        architecture: "Robot behaviours and control algorithms run on the Raspberry Pi and use a common set of named I/O operations. For an Arduino-connected device, the Pi backend converts the requested operation into a serial message, and the Mega handles the corresponding low-level input or output. Feedback is returned in a defined format for the Pi to interpret.\n\nNot every device passes through the Mega. The front camera is read directly by the Pi, while the Mega also supports its own radio-controlled TeleOp path. Separating these cases keeps the high-level robot code independent of which board physically handles a device.",
+        hardware: "Each mapping identifies what the device does, its logical software name, the board responsible and the electrical interface. The shared definition includes digital and analogue inputs, motor-driver commands, servo outputs, quadrature encoders, I²C devices and direct Pi peripherals.\n\nThe table below deliberately shows just one example for each main interface type. The complete mapping retains the individual pin assignments, signal names, firmware hooks and alternative backends needed for implementation and troubleshooting.",
+        construction: "The mapping was developed as an interface specification rather than a new circuit board. Each device is recorded against a common name and operation, then linked to its serial request and response (where needed), backend handler and Arduino pin assignment. Related properties are grouped under one device: an encoder, for example, can supply count, timestamp and validity information without becoming three separate physical devices.\n\nThe same approach can be applied to additional robot platforms by changing the configuration or hardware backend while retaining the software-facing device names. Physical wiring and connector details remain with the companion Mega controller design.",
+        software: "For example, Pi software can request io.encoder[\"drive_front_left\"].count. The mapping associates this with ENCODER drive_front_left READ; the Mega reads the quadrature encoder connected to pins 22 and 24 and returns a count with timing and validity fields. The navigation code need not know those pin numbers.\n\nFor an output, io.motor[\"collector\"].power corresponds to MOTOR collector WRITE power=<value>. The backend routes the command to the Mega, whose mapping allocates PWM and direction signals to pins 4 and 41. Direct Pi devices, such as the front camera, bypass the Arduino serial interface.\n\nThe defined message formats and backend calls are an interface contract. The working table includes planned, existing and legacy entries, so defining an operation does not by itself establish that it has been fully implemented and tested.",
+        testing: "Each mapping needs three levels of verification: first, confirm the logical name and requested operation map to the intended backend; second, test serial request/response parsing, timing and error handling; and third, test the connected device on the physical robot. Encoder tests should check count direction, timestamps and invalid readings. Motor and servo tests should check command range, direction and safe response to communication loss.\n\nA further regression test is to run the same high-level operation against different supported backends and confirm that the software-facing behaviour remains consistent. No measured test results or completed verification coverage are claimed here.",
+        iterations: "The important refinement is to map physical devices rather than create a separate hardware interface for every reported property. This reduces duplicate definitions and makes the relationship between a device, its readings and its pin allocation easier to maintain.\n\nThe original matrix also records alternate hardware and previous API calls. Those columns are useful for development and migration but are intentionally omitted from the public-facing summary. Interface names, command definitions and firmware mappings can evolve without changing the purpose of the common I/O layer.",
+        results: "The current output is a structured I/O specification spanning Pi-side names, Arduino serial requests and responses, hardware backends and physical pin mappings. It provides a consistent design reference for integrating sensors, actuators and multiple robot configurations.\n\nThe simplified table illustrates this architecture; it is not a certification that every listed connection or firmware function has been completed or tested.",
+        lessons: "Separating a device's logical identity from its electrical connection makes the system easier to extend, debug and transfer to a new robot. A stable interface also helps isolate failures: software naming, serial transport, firmware handling and wiring can be checked as distinct layers.\n\nThe central lesson is that a useful hardware abstraction is not merely a list of pins. It is an agreed contract between higher-level software and the electronics that carry out its requests."
+      },
+      ioMap: {
+        intro: "Representative mappings from the engineering I/O matrix. Multiple readings from one device are combined into a single row.",
+        columns: ["Device / function", "Pi software interface", "Handled by", "Physical connection"],
+        rows: [
+          ["Front camera", "camera[\"front\"].see()", "Raspberry Pi", "Camera interface; no Mega request"],
+          ["Left drive encoder", "encoder[\"drive_front_left\"].count", "Arduino Mega", "Quadrature input · D22 / D24"],
+          ["Front drive motors", "drive[\"front\"].set_power(left, right)", "Mega → RoboClaw", "Serial motor driver · D18 / D19"],
+          ["Collector motor", "motor[\"collector\"].power", "Arduino Mega", "PWM / direction · D4 / D41"],
+          ["Gripper servo", "servo[\"gripper\"].position", "Arduino Mega", "Two servo outputs · D11 / D13"],
+          ["Left reflectance sensor", "reflectance[\"left\"]", "Arduino Mega", "Analogue input · A5"],
+          ["IMU heading", "imu[\"main\"].heading", "Arduino Mega", "I²C · SDA20 / SCL21"],
+          ["Battery voltage", "voltage[\"battery\"].volts", "Arduino Mega", "Analogue input · A0"],
+          ["Pi / Mega selector", "selector[\"pi_arduino\"]", "Arduino Mega", "Digital input · D32"]
+        ],
+        note: "These are documented allocations, not verification results. The master I/O matrix also defines protocol responses, pin symbols, additional peripherals and alternate hardware backends."
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
