@@ -646,6 +646,27 @@ window.PORTFOLIO_DATA = {
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
+      id: "gobilda-decode-starter-bot",
+      title: "goBILDA DECODE Starter Bot",
+      category: "robotics",
+      image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
+      imageAlt: "Photograph of the goBILDA DECODE starter robot during assembly, showing its metal chassis, wheels, motors, wiring and control hardware",
+      imageCaption: "goBILDA DECODE Starter Bot — photographed during the build",
+      summary: "An FTC-style starter robot assembled from goBILDA components, providing a practical platform for mechanical assembly, electrical integration and testing robot controls.",
+      tags: ["Robotics", "goBILDA", "FTC", "Robot Assembly"],
+      date: "",
+      sections: {
+        overview: "The goBILDA DECODE Starter Bot is a practical starting point for building and understanding an FTC-style robot. Rather than designing every component from scratch, the project uses a starter platform to concentrate on how the drivetrain, mechanical structure, electronics and wiring fit together. It also provides a baseline for evaluating changes and developing additional mechanisms.\n\nThe photograph records the robot during assembly, not a completed or performance-tested final design.",
+        construction: "The chassis is built from modular metal structural components, with motors, wheels, electronic hardware and wiring mounted to the frame. Working with a modular construction system makes it possible to adjust component placement while checking physical clearances, accessibility and cable routing.\n\nThis part of the project focuses on careful mechanical assembly and integration. The starter-kit layout is a foundation; any custom parts or later modifications can be documented separately as they are made.",
+        software: "The initial software task for a starter robot is reliable manual control: mapping driver inputs to movement, confirming motor directions and controlling the mechanisms fitted to the chassis. Establishing these behaviours provides a baseline before attempting more advanced automated functions.\n\nSpecific programmed features and autonomous routines will be described here when they have been implemented and tested.",
+        testing: "Useful baseline tests include straight-line driving, turning response, repeatability of driver commands, mechanism operation and electrical reliability. These tests help distinguish limitations in the mechanical assembly from problems in wiring or software.\n\nNo measured driving or mechanism-performance results are reported on this page yet.",
+        iterations: "Starting with a known kit design makes it easier to change one feature at a time and assess whether an adjustment improves the robot. Potential areas for development include cable organisation, access to components and the positioning of mechanisms. Any actual revisions will be recorded with photographs and test observations.",
+        results: "The current photograph documents the physical starter-bot build. This project page will be expanded as control software, functional trials and any mechanical modifications are completed and recorded.",
+        lessons: "A working robot depends on much more than choosing individual components. Mechanical access, cable routes, mounting positions and compatibility between the control hardware and drivetrain all affect how easily a platform can be built, maintained and developed."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
       id: "cad-project-2",
       title: "Shooter",
       category: "cad",
