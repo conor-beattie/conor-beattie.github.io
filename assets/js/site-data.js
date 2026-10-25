@@ -492,7 +492,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mechanical-gripper",
-      featuredOrder: 5,
+      featuredOrder: 6,
       title: "Mechanical Gripper Design",
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
@@ -516,7 +516,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "printed-mechanisms",
-      featuredOrder: 6,
+      featuredOrder: 7,
       title: "Pulley",
       category: "fabrication",
       image: "assets/images/Pulley.png",
@@ -582,7 +582,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-io-mapping",
-      featuredOrder: 3,
+      featuredOrder: 5,
       title: "Robot I/O Mapping & Hardware Abstraction",
       category: "electronics",
       image: "assets/images/io-interface-contract.svg",
@@ -635,6 +635,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mobile-robot-power-distribution",
+      featuredOrder: 3,
       title: "Mobile Robot Power Distribution & Electrical Architecture",
       category: "electronics",
       image: "assets/images/one line diagram.jpg",
@@ -713,7 +714,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "cad-project-2",
-      featuredOrder: 6,
+      featuredOrder: 8,
       title: "Shooter",
       category: "cad",
       image: "assets/images/Shooter CAD.png",
@@ -737,7 +738,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-2",
-      featuredOrder: 7,
+      featuredOrder: 9,
       title: "Rubber Band Intake Wheel",
       category: "fabrication",
       image: "assets/images/rubber_band_wheel.png",
