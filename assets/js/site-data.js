@@ -554,7 +554,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "robot-control-electronics",
       featuredOrder: 2,
-      relatedProjectIds: ["robot-io-mapping"],
+      relatedProjectIds: ["robot-io-mapping", "mobile-robot-power-distribution"],
       title: "Modular Robot I/O & TeleOp Controller",
       category: "electronics",
       image: "assets/images/arduino mega.jpg",
@@ -592,7 +592,7 @@ window.PORTFOLIO_DATA = {
       summary: "A common io.* interface that lets robot software command motors, read sensors and use controllers without knowing which hardware backend implements each operation.",
       tags: ["Robot I/O", "Hardware Abstraction", "Python", "Interface Design"],
       date: "",
-      relatedProjectIds: ["robot-control-electronics"],
+      relatedProjectIds: ["robot-control-electronics", "mobile-robot-power-distribution"],
       sectionLabels: {
         architecture: "Control and I/O architecture",
         hardware: "The io.* interface contract",
@@ -630,6 +630,40 @@ window.PORTFOLIO_DATA = {
           ["Control selector", "io.selector[\"pi_arduino\"]", "Read active control selection"]
         ],
         note: "Device names and operations are the contract; firmware, controller selection and physical connections are intentionally excluded. Defined entries may still require implementation or testing."
+      },
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "mobile-robot-power-distribution",
+      title: "Mobile Robot Power Distribution & Electrical Architecture",
+      category: "electronics",
+      image: "assets/images/one line diagram.jpg",
+      imageAlt: "One-line electrical diagram of a mobile robot showing battery protection, power distribution, motor controllers, voltage regulators, servos and control electronics",
+      imageCaption: "Mobile robot one-line electrical diagram — power supplies, distribution, controller hardware and planned expansion.",
+      imageFullSize: true,
+      summary: "A one-line electrical design showing how a mobile robot distributes battery power to its drive motors, control electronics, cameras, servos and future expansion systems.",
+      tags: ["Electrical Design", "Power Distribution", "System Integration", "Robotics"],
+      date: "",
+      relatedProjectIds: ["robot-control-electronics", "robot-io-mapping"],
+      sectionLabels: {
+        architecture: "Electrical architecture",
+        hardware: "Power distribution & protection",
+        construction: "Design documentation",
+        software: "Control system integration",
+        testing: "Verification approach",
+        iterations: "Design choices & future expansion",
+        results: "Current outcome"
+      },
+      sections: {
+        overview: "This project documents the electrical architecture of a mobile robot using a one-line diagram. The aim is to show how the main electrical subsystems fit together: the battery supply, motor drivers, low-voltage control electronics, USB devices and powered actuators. It provides an overall system view alongside the more detailed Arduino Mega wiring diagram and software I/O specification.\n\nThe design is modular. Power paths and functional groups are identified separately, and provisions for future devices are shown without implying that every illustrated component is installed.",
+        architecture: "A nominal 12 V NiMH battery supplies the robot through a main fuse and on/off switch to an eight-channel power distribution board. From there the diagram identifies branches for motor controllers, regulated low-voltage supplies and additional mechanisms.\n\nThe drive system uses a RoboClaw motor controller for the front motors. A second controller and rear motors are shown as possible future additions. Separate supply paths are identified for the Raspberry Pi and other logic devices, and for the servo distribution board. The diagram also shows a USB hub linking supporting devices such as cameras and microcontrollers to the Pi.",
+        hardware: "The drawing identifies a 20 A main fuse and individual protected supply branches. It shows a 5 V regulator for control electronics and a separate 6 V regulator for servo power, alongside common supply and ground buses and labelled connectors. These choices make the intended distribution and electrical loads easier to review before wiring.\n\nThe schematic also identifies a battery-voltage monitor, main connectors and a chassis bond. Fuse values, regulator capacities, return-current paths and conductor ratings still need to be checked against actual device specifications and worst-case loads before final installation; the diagram alone is not evidence of electrical validation.",
+        construction: "The one-line diagram is an early system-level design document. Rather than show every wire and terminal, it records the functional power routes between major components. Each branch can then be developed into the detailed wiring diagram, connector list and physical harness needed for construction.\n\nDashed outlines and labels distinguish planned expansions from the core design, including additional drive motors, collector and shooter motors, an arm and further servos. That allows the electrical architecture to evolve without obscuring the current system.",
+        software: "The Raspberry Pi remains responsible for higher-level tasks such as vision, navigation and autonomous control. The Arduino Mega provides low-level TeleOp, encoder counting and hardware interfacing, while motor drivers deliver power to the motors. The electrical diagram shows how those devices are powered and connected at system level; it does not describe their software protocol or pin-by-pin I/O mapping.\n\nThose details are covered in the related Modular Robot I/O & TeleOp Controller and Robot I/O Mapping & Hardware Abstraction projects.",
+        testing: "The next stage is to verify the drawing against the actual system. Checks should include supply polarity, fuse and wire ratings, expected current draw, regulator output under load, grounding and voltage drops. Power branches should be commissioned independently before connecting the complete robot.\n\nBench checks should also establish that motor starts and servo movements do not disrupt the Pi or microcontroller supplies, and that any separate test-power arrangement cannot accidentally energise an unintended branch. These are planned verification steps; this page does not present measured results.",
+        iterations: "The electrical system is divided into functional branches so that changes to one subsystem need not require a complete redesign. Separate regulated outputs distinguish logic power from servo power, and labelled connections are intended to simplify assembly and troubleshooting.\n\nThe drawing explicitly reserves space for future capabilities, but these additions are not treated as installed equipment. As the robot develops, the diagram can be updated to reflect actual components and revised current requirements.",
+        results: "The present output is a one-line electrical diagram that brings the robot's power and control hardware into one coherent view. It documents the intended distribution architecture, identifies the major subsystems and provides a basis for more detailed wiring and electrical verification.\n\nThe design complements the Arduino Mega wiring plan and the io.* software interface: one describes electrical power flow, one defines the low-level connections and controller responsibilities, and one defines how higher-level software accesses robot hardware.",
+        lessons: "A system-level electrical drawing makes dependencies and supply requirements visible before detailed wiring begins. Separating the power architecture from control wiring and from the software-facing I/O contract keeps each document focused and easier to maintain.\n\nThe design also highlights the importance of distinguishing future provisions from installed hardware and checking protection, power budgets and grounding with measurements rather than assuming a schematic is sufficient."
       },
       links: { github: "", cad: "", video: "", downloads: "" }
     },
