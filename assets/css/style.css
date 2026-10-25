@@ -434,3 +434,18 @@ button { cursor: pointer; }
  .print-lightbox-stage button { height:30px; font-size:1.5rem; }
  .print-lightbox-close { margin:0 0 8px auto; }
 }
+
+/* October 2026 journal simplification */
+.hero { padding: 52px 0 65px; }
+.hero h1 { margin: 0 0 22px; }
+.hero-lede { margin-bottom: 0; }
+.category-tile h3 { margin-top: 14px; }
+.section--wash .section-heading h2 { margin-top:0; }
+.site-footer { padding: 15px 0 21px; }
+.footer-bottom { margin-top:0; border-top:0; padding-top:0; align-items:center; }
+.footer-social { margin-left:auto; }
+.page-top--category { position:absolute; width:1px; height:1px; padding:0; margin:0; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+.section--category-list { padding-top:42px !important; }
+.detail-section--clean { display:block; }
+@media (max-width:800px) { .hero { padding:38px 0 47px; } }
+@media (max-width:560px) { .footer-social { margin-left:0; } }

@@ -1,3 +1,27 @@
+# Project Journal — simplified page layout (25 October 2026)
+
+This release is based on the most recently supplied GitHub repository ZIP. The original
+photographs, project records, print galleries, video, algorithms and navigation are retained.
+
+- **Home:** headline "Project Journal", shorter introduction, discipline heading "Projects",
+  the existing discipline/selected-work galleries and photographs. Introductory labels,
+  overlay annotation, Explore buttons, category numbering, process and about sections removed.
+- **All Projects:** the "All Projects" heading remains; category-specific listings rely
+  on the active top navigation and do not repeat a large category heading.
+- **Project detail pages:** section numbering, "Individual contribution", Objectives and
+  Design removed from the display; "Software" and linked software sections read
+  "Software & Algorithms". The underlying project fields remain in `assets/js/site-data.js`.
+- **3D-print pages:** the original CAD-plus-1–4-photo gallery, print settings and
+  expandable printing/testing notes are preserved; Objectives and Design are no longer shown.
+- **All pages:** the repeated footer name/tagline block is removed. Compact copyright
+  and any configured social links remain.
+
+Upload the files *inside* the extracted `conor-beattie.github.io-main` folder to the
+root of the GitHub Pages repository, then commit. The HTML pages include refreshed
+asset cache versions so updated styles/scripts appear without requiring a hard refresh.
+
+---
+
 # Engineering Portfolio — navigation revision (23 October 2026)
 
 This is a **complete GitHub Pages website**, built from the latest supplied site ZIP.

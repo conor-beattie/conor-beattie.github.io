@@ -32,7 +32,8 @@ window.PORTFOLIO_DATA = {
     location: "United Kingdom",
     eyebrow: "ENGINEERING · ROBOTICS · DESIGN",
     headline: "From an idea to a working system.",
-    introduction: "A growing collection of robotics, mechanical design, electronics and software projects — documenting the thinking, building and testing behind each one.",
+    homeHeadline: "Project Journal",
+    introduction: "A collection of robotics, mechanical design, electronics and software projects.",
     shortAbout: "I enjoy turning engineering questions into physical prototypes: designing mechanisms, programming controllers, bringing systems together and improving them through testing.",
     aboutParagraphs: [
       "This portfolio is a record of projects, design decisions and technical experiments. Each entry explains the objective, the approach taken, the challenges encountered and what was learned.",

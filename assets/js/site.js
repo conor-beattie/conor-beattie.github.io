@@ -232,17 +232,15 @@
   }
 
   function home() {
-    setText("#hero-eyebrow", data.owner.eyebrow);
-    setText("#hero-headline", data.owner.headline);
+    setText("#hero-headline", data.owner.homeHeadline || data.owner.headline);
     setText("#hero-intro", data.owner.introduction);
-    setText("#about-teaser", data.owner.shortAbout);
     const imgEl = $("#home-hero-image");
     if (imgEl) imgEl.src = data.projects[0]?.image || data.categories[0]?.image;
     const catGrid = $("#category-grid");
-    if (catGrid) catGrid.innerHTML = data.categories.map((cat, index) => `
+    if (catGrid) catGrid.innerHTML = data.categories.map((cat) => `
       <a href="${cat.id === "software" ? "software.html" : cat.id === "algorithms" ? "algorithms.html" : `projects.html?category=${encodeURIComponent(cat.id)}`}" class="category-tile">
         <div class="category-tile__image"><img src="${img(cat.image)}" alt="${text(cat.title)}" loading="lazy" /></div>
-        <div class="category-tile__info"><span class="mini-index">0${index + 1} / EXPLORE</span><h3>${text(cat.title)}</h3><p>${text(cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
+        <div class="category-tile__info"><h3>${text(cat.title)}</h3><p>${text(cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
       </a>`).join("");
     const featured = $("#featured-projects");
     if (featured) {
@@ -256,22 +254,16 @@
   }
 
   function updateListingIntro(chosen) {
-    const title = $('#listing-title');
-    const intro = $('#listing-intro');
-    const eyebrow = $('#listing-eyebrow');
-    if (!title || !intro) return;
+    const title = $("#listing-title");
+    const section = $(".page-top");
+    const listing = $("#project-list")?.closest("section");
     const cat = category(chosen);
-    if (cat) {
-      title.textContent = cat.title;
-      intro.textContent = cat.subtitle;
-      if (eyebrow) eyebrow.textContent = chosen === 'fabrication' ? '3D PRINTS & FABRICATION' : 'ENGINEERING DISCIPLINES';
-      document.title = `${cat.title} · ${data.owner.name}`;
-    } else {
-      title.textContent = 'All Projects';
-      intro.textContent = 'Browse robotics, mechanical design, 3D printing and electronics projects.';
-      if (eyebrow) eyebrow.textContent = 'THE PORTFOLIO ARCHIVE';
-      document.title = `All Projects · ${data.owner.name}`;
-    }
+    if (title) title.textContent = cat ? cat.title : "All Projects";
+    // The active navigation already names the discipline. Keep the heading in
+    // the document for accessibility without repeating it above each gallery.
+    if (section) section.classList.toggle("page-top--category", Boolean(cat));
+    if (listing) listing.classList.toggle("section--category-list", Boolean(cat));
+    document.title = `${cat ? cat.title : "All Projects"} · ${data.owner.name}`;
   }
 
   function projects() {
@@ -326,7 +318,6 @@
     const note = (label, value) => String(value || "").trim()
       ? `<div class="print-note"><h4>${text(label)}</h4>${paragraphs(value)}</div>` : "";
     const optionalNotes = [
-      ["Design & fit", [note("Objectives & constraints", section.objectives), note("Design decisions", section.design)]],
       ["Printing & assembly", [note("Manufacture / assembly", section.construction), note("CAD & software", section.software)]],
       ["Testing & improvements", [note("Testing", section.testing), note("Revisions", section.iterations), note("Results", section.results), note("Lessons learned", section.lessons)]]
     ].filter(([,notes])=>notes.some(Boolean));
@@ -364,7 +355,6 @@
             ${specs.length ? `<dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join("")}</dl>` : `<p class="print-settings-empty">Printer, material and settings can be added in <code>site-data.js</code>.</p>`}
           </div>
           ${resources.length ? `<div class="print-spec-card" id="print-downloads"><p class="eyebrow">FILES</p><h3>Model &amp; resources</h3><div class="resource-links">${resources.join("")}</div></div>` : ""}
-          ${p.contribution && !/^replace with|identify the components/i.test(p.contribution) ? `<div class="print-spec-card"><p class="eyebrow">CONTRIBUTION</p><p>${text(p.contribution)}</p></div>` : ""}
         </aside>
       </div>
       <div class="next-action"><div><span class="eyebrow">SEE MORE</span><h2>More 3D prints &amp; fabrication</h2></div><a class="button button-outline" href="projects.html?category=fabrication">Browse 3D prints ↗</a></div>
@@ -417,13 +407,13 @@
     document.title = `${p.title} · ${data.owner.name}`;
     const cat = category(p.category);
     const entries = [
-      ["overview", "Overview"], ["objectives", "Objectives"], ["design", "Design"],
-      ["construction", "Construction"], ["software", "Software"], ["testing", "Testing"],
+      ["overview", "Overview"], ["construction", "Construction"],
+      ["software", "Software"], ["testing", "Testing"],
       ["iterations", "Iterations"], ["results", "Results"], ["lessons", "Lessons learned"]
     ];
     const usedDemos = demosForProject(p.id);
     const linkedSoftware = softwareItems.filter(item => (item.robotIds || []).includes(p.id));
-    if (linkedSoftware.length) entries.push(["robot-software", "Software behaviours"]);
+    if (linkedSoftware.length) entries.push(["robot-software", "Software & Algorithms"]);
     if (p.category === "robotics" && usedDemos.length) entries.push(["algorithm-demonstrations", "Video demonstrations"]);
     const resources = [
       linkMarkup(p.links?.github, "Source code / GitHub"),
@@ -447,13 +437,12 @@
             <nav aria-label="Project sections">${entries.map(([key, label]) => `<a href="#${key}">${label}</a>`).join("")}
               ${resources.length ? '<a href="#resources">Resources</a>' : ""}
             </nav>
-            <div class="detail-callout"><strong>Individual contribution</strong><p>${text(p.contribution)}</p></div>
           </aside>
           <div class="detail-main">
-            ${entries.filter(([key]) => !["algorithm-demonstrations", "robot-software"].includes(key)).map(([key, label], i) => `<section class="detail-section" id="${key}"><div class="detail-section__index">${String(i + 1).padStart(2, "0")}</div><div><h2>${label}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
-            ${linkedSoftware.length ? `<section class="detail-section" id="robot-software"><div class="detail-section__index">10</div><div><h2>Software behaviours</h2><p>Software systems documented for this robot. Each entry links to the relevant algorithms without requiring a video.</p><div class="related-list">${linkedSoftware.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}
-            ${usedDemos.length ? `<section class="detail-section" id="algorithm-demonstrations"><div class="detail-section__index">11</div><div><h2>Video demonstrations</h2><div class="demo-grid">${usedDemos.map(item => demoMarkup(item,true)).join("")}</div></div></section>` : ""}
-            ${resources.length ? `<section class="detail-section" id="resources"><div class="detail-section__index">${linkedSoftware.length && usedDemos.length ? "12" : linkedSoftware.length || usedDemos.length ? "11" : "10"}</div><div><h2>Technical resources</h2><div class="resource-links">${resources.join("")}</div></div></section>` : ""}
+            ${entries.filter(([key]) => !["algorithm-demonstrations", "robot-software"].includes(key) && String(p.sections?.[key] || "").trim()).map(([key, label]) => `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${label}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
+            ${linkedSoftware.length ? `<section class="detail-section detail-section--clean" id="robot-software"><div><h2>Software &amp; Algorithms</h2><p>Software systems documented for this robot. Each entry links to the relevant algorithms without requiring a video.</p><div class="related-list">${linkedSoftware.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}
+            ${usedDemos.length ? `<section class="detail-section detail-section--clean" id="algorithm-demonstrations"><div><h2>Video demonstrations</h2><div class="demo-grid">${usedDemos.map(item => demoMarkup(item,true)).join("")}</div></div></section>` : ""}
+            ${resources.length ? `<section class="detail-section detail-section--clean" id="resources"><div><h2>Technical resources</h2><div class="resource-links">${resources.join("")}</div></div></section>` : ""}
           </div>
         </div>
         <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More engineering projects</h2></div><a class="button button-outline" href="projects.html">All projects <span aria-hidden="true">↗</span></a></div>
