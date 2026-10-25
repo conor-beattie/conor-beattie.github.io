@@ -486,7 +486,7 @@
       const list = [linkMarkup(data.owner.githubUrl, "GitHub profile"),linkMarkup(data.owner.youtubeUrl,"Project videos"),linkMarkup(data.owner.linkedinUrl,"LinkedIn")].filter(Boolean);
       const mail = data.owner.email && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.owner.email) ? `<a class="text-link" href="mailto:${text(data.owner.email)}">Email ↗</a>` : "";
       if (mail) list.push(mail);
-      links.innerHTML = list.length ? list.join("") : `<span class="muted-small">External links can be added later in <code>assets/js/site-data.js</code>.</span>`;
+      links.innerHTML = list.length ? list.join("") : ``;
     }
   }
 
