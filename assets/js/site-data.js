@@ -107,7 +107,7 @@ window.PORTFOLIO_DATA = {
       tags: ["Python", "Navigation", "AprilTags", "Recovery"],
       status: "Code documented",
       summary: "Navigate back to the delivery area using a chain of arena tags, with obstacle avoidance, guide recovery and a conditional wall-following approach.",
-      image: "assets/images/return-to-base-cover.svg",
+      image: "assets/diagrams/bobbot-return-to-base.svg",
       flowchart: "assets/diagrams/bobbot-return-to-base.svg",
       imageAlt: "Conventional engineering flowchart of Bobbot's Return-to-Base behaviour",
       objective: "Return from the collection area to a delivery position despite changing visibility and objects obstructing the preferred path. The return behaviour finishes navigation but does not itself release the carried object.",
