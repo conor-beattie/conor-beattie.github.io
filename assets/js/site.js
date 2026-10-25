@@ -406,11 +406,18 @@
     }
     document.title = `${p.title} · ${data.owner.name}`;
     const cat = category(p.category);
-    const entries = [
-      ["overview", "Overview"], ["construction", "Construction"],
+    // Optional sections are displayed only when a project provides their content.
+    // Individual projects may override labels (for example, Firmware & TeleOp).
+    const sectionOptions = [
+      ["overview", "Overview"], ["architecture", "System architecture"],
+      ["hardware", "Electrical interfaces"], ["construction", "Construction"],
       ["software", "Software"], ["testing", "Testing"],
-      ["iterations", "Iterations"], ["results", "Results"], ["lessons", "Lessons learned"]
+      ["iterations", "Iterations"], ["results", "Results"],
+      ["lessons", "Lessons learned"]
     ];
+    const entries = sectionOptions
+      .filter(([key]) => String(p.sections?.[key] || "").trim())
+      .map(([key, fallback]) => [key, p.sectionLabels?.[key] || fallback]);
     const usedDemos = demosForProject(p.id);
     const linkedSoftware = softwareItems.filter(item => (item.robotIds || []).includes(p.id));
     if (linkedSoftware.length) entries.push(["robot-software", "Software & Algorithms"]);
@@ -430,7 +437,7 @@
           <p class="project-lede">${text(p.summary)}</p>
           <div class="tags tags-large">${(p.tags || []).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
         </div>
-        <figure class="project-hero-media"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /><figcaption>${text(p.title)}</figcaption></figure>
+        <figure class="project-hero-media"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /><figcaption>${text(p.imageCaption || p.title)}</figcaption></figure>
         <div class="detail-layout">
           <aside class="detail-aside">
             <p class="eyebrow">ON THIS PAGE</p>
