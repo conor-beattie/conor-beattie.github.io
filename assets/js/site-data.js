@@ -99,7 +99,7 @@ window.PORTFOLIO_DATA = {
   software: [
     {
       id: "return-to-base",
-      featuredOrder: 9,
+      featuredOrder: 4,
       title: "Autonomous Return to Base",
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
@@ -492,7 +492,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mechanical-gripper",
-      featuredOrder: 4,
+      featuredOrder: 5,
       title: "Mechanical Gripper Design",
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
@@ -553,7 +553,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-control-electronics",
-      featuredOrder: 8,
+      featuredOrder: 2,
       relatedProjectIds: ["robot-io-mapping"],
       title: "Modular Robot I/O & TeleOp Controller",
       category: "electronics",
@@ -582,7 +582,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-io-mapping",
-      featuredOrder: 9,
+      featuredOrder: 3,
       title: "Robot I/O Mapping & Hardware Abstraction",
       category: "electronics",
       image: "assets/images/io-interface-contract.svg",
@@ -679,7 +679,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "cad-project-2",
-      featuredOrder: 5,
+      featuredOrder: 6,
       title: "Shooter",
       category: "cad",
       image: "assets/images/Shooter CAD.png",
