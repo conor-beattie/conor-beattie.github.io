@@ -674,7 +674,7 @@ window.PORTFOLIO_DATA = {
       category: "fabrication",
       image: "assets/images/rubber_band_wheel.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
-      summary: "Circumference adjustable with a 8mm hex axle",
+      summary: "The diameter and number of notches are adjustable. Designed for a 8mm hex axle.",
       tags: ["3D Printing", "CAD", "Prototyping"],
       date: "",
       contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
