@@ -690,7 +690,12 @@ window.PORTFOLIO_DATA = {
         lessons: "Summarise what you learned about manufacturing, material choices and print quality."
       },
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
-      printPhotos: [],
+      printPhotos: [
+        {
+          src: "assets/images/rubber_band_intake_bumpers_ramp.jpeg",
+          caption: "3D-printed rubber band intake"
+        }
+      ],
       // Optional print-profile details; blank values are hidden from the public page.
       printDetails: {
         material: "",
