@@ -49,7 +49,9 @@
       else el.removeAttribute('aria-current');
     });
     $$('[data-nav]').forEach(el => {
-      const selected = (page === 'home' && el.dataset.nav === 'home') ||
+      const featured = page === 'home' && location.hash === '#featured';
+      const selected = (page === 'home' && el.dataset.nav === 'home' && !featured) ||
+        (featured && el.dataset.nav === 'selected') ||
         (page === 'about' && el.dataset.nav === 'about');
       if (selected) el.setAttribute('aria-current', 'page');
       else el.removeAttribute('aria-current');
@@ -105,6 +107,7 @@
       }));
     }
     updateNavState();
+    window.addEventListener("hashchange", updateNavState);
   }
 
   function projectCard(p) {
@@ -439,7 +442,7 @@
           <p class="project-lede">${text(p.summary)}</p>
           <div class="tags tags-large">${(p.tags || []).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
         </div>
-        <figure class="project-hero-media"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /><figcaption>${text(p.imageCaption || p.title)}</figcaption></figure>
+        <figure class="project-hero-media ${p.imageFullSize ? "project-hero-media--diagram" : ""}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the I/O interface diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" />`}<figcaption>${text(p.imageCaption || p.title)}</figcaption></figure>
         <div class="detail-layout">
           <aside class="detail-aside">
             <p class="eyebrow">ON THIS PAGE</p>

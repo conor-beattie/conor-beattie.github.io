@@ -1,3 +1,15 @@
+# Project Journal — 25 October 2026 update
+
+The top utility navigation is now **Home · Selected Projects · About** on every page. “Selected Projects” opens the existing gallery at `index.html#featured`; the second row still provides All Projects and the individual engineering disciplines.
+
+Within **Electronics & Embedded Systems**, **Robot I/O Mapping & Hardware Abstraction** is a separate project linked in both directions to the **Modular Robot I/O & TeleOp Controller**. The cover image `assets/images/io-interface-contract.svg` is a simplified table of `io.*` interface calls. It is deliberately independent of physical pins and hardware connections.
+
+The `ioMap` record and technical prose are editable in `assets/js/site-data.js`. The picture is an editable SVG asset, generated for display from the same representative interface examples. Click the image in the project page to view full size.
+
+Upload the contents of the changes-only ZIP to the root of the GitHub Pages repository, preserving the `assets` directory. The complete ZIP is also available.
+
+---
+
 # New Electronics project — I/O mapping (25 October 2026)
 
 This change uses the existing `project.html` layout. No standalone HTML page or new navigation category is required.

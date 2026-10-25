@@ -460,3 +460,8 @@ button { cursor: pointer; }
 .io-map-table code { color:var(--ink); font-size:.81rem; overflow-wrap:anywhere; white-space:normal; }
 .detail-section p.io-map-note { font-size:.84rem; color:var(--ink-soft); margin:5px 0 0; }
 @media (max-width:680px) { .io-map-table { min-width:585px; font-size:.82rem; } .io-map-table td,.io-map-table th { padding:9px 10px; } }
+
+/* Precise I/O table illustration: fit the diagram without cropping. */
+.project-hero-media--diagram img { object-fit:contain; max-height:none; background:#f7f9f8; border:1px solid var(--line); }
+.project-hero-media--diagram a { display:block; cursor:zoom-in; }
+.project-hero-media--diagram a:focus-visible { outline:3px solid var(--accent-deep); outline-offset:3px; }

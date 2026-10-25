@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1640" height="1032" viewBox="0 0 1640 1032" role="img" aria-labelledby="title desc">
+<title id="title">Robot I/O interface contract</title><desc id="desc">A table of eleven io dot star commands and properties used by higher-level robot software to access devices. No physical pin mapping is shown.</desc>
+<rect width="100%" height="100%" fill="#f7f9f8"/>
+<rect x="48" y="39" width="1544" height="95" rx="16" fill="#203b3d"/>
+<text x="82" y="82" font-family="Arial,sans-serif" font-weight="700" font-size="34" fill="#ffffff">Robot I/O interface</text>
+<text x="82" y="116" font-family="Arial,sans-serif" font-size="21" fill="#dbe8e5">The io.* contract between robot software and the hardware backend</text>
+<rect x="48" y="162" width="1544" height="732" rx="12" fill="#ffffff" stroke="#cbd8d3" stroke-width="2"/>
+<path d="M48 174 Q48 162 60 162 H1580 Q1592 162 1592 174 V223 H48 Z" fill="#e1ebe7"/>
+<text x="77" y="201" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#254b48">DEVICE</text>
+<text x="375" y="201" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#254b48">io.* SOFTWARE INTERFACE</text>
+<text x="1238" y="201" font-family="Arial,sans-serif" font-size="22" font-weight="700" fill="#254b48">PURPOSE</text>
+<line x1="48" y1="284" x2="1592" y2="284" stroke="#e2e9e5"/>
+<text x="77" y="262" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Drive motors</text>
+<text x="375" y="262" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.drive[&quot;front&quot;].set_power(left, right)</text>
+<text x="1238" y="262" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Paired motor command</text>
+<rect x="49" y="284" width="1542" height="61" fill="#f5f8f6"/>
+<line x1="48" y1="345" x2="1592" y2="345" stroke="#e2e9e5"/>
+<text x="77" y="323" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Motor</text>
+<text x="375" y="323" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.motor[&quot;collector&quot;].power</text>
+<text x="1238" y="323" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Output power</text>
+<line x1="48" y1="406" x2="1592" y2="406" stroke="#e2e9e5"/>
+<text x="77" y="384" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Encoder</text>
+<text x="375" y="384" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.encoder[&quot;drive_front_left&quot;].count</text>
+<text x="1238" y="384" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Position feedback</text>
+<rect x="49" y="406" width="1542" height="61" fill="#f5f8f6"/>
+<line x1="48" y1="467" x2="1592" y2="467" stroke="#e2e9e5"/>
+<text x="77" y="445" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Encoder status</text>
+<text x="375" y="445" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.encoder[&quot;deadwheel_parallel&quot;].valid</text>
+<text x="1238" y="445" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Data validity</text>
+<line x1="48" y1="528" x2="1592" y2="528" stroke="#e2e9e5"/>
+<text x="77" y="506" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Servo</text>
+<text x="375" y="506" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.servo[&quot;gripper&quot;].position</text>
+<text x="1238" y="506" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Actuator position</text>
+<rect x="49" y="528" width="1542" height="61" fill="#f5f8f6"/>
+<line x1="48" y1="589" x2="1592" y2="589" stroke="#e2e9e5"/>
+<text x="77" y="567" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Camera</text>
+<text x="375" y="567" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.camera[&quot;front&quot;].see(frame=None)</text>
+<text x="1238" y="567" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Visual observations</text>
+<line x1="48" y1="650" x2="1592" y2="650" stroke="#e2e9e5"/>
+<text x="77" y="628" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">IMU</text>
+<text x="375" y="628" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.imu[&quot;main&quot;].heading</text>
+<text x="1238" y="628" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Heading feedback</text>
+<rect x="49" y="650" width="1542" height="61" fill="#f5f8f6"/>
+<line x1="48" y1="711" x2="1592" y2="711" stroke="#e2e9e5"/>
+<text x="77" y="689" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Reflectance</text>
+<text x="375" y="689" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.reflectance[&quot;left&quot;]</text>
+<text x="1238" y="689" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Surface feedback</text>
+<line x1="48" y1="772" x2="1592" y2="772" stroke="#e2e9e5"/>
+<text x="77" y="750" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Battery</text>
+<text x="375" y="750" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.voltage[&quot;battery&quot;].volts</text>
+<text x="1238" y="750" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Voltage feedback</text>
+<rect x="49" y="772" width="1542" height="61" fill="#f5f8f6"/>
+<line x1="48" y1="833" x2="1592" y2="833" stroke="#e2e9e5"/>
+<text x="77" y="811" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Distance</text>
+<text x="375" y="811" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.tof[&quot;front_left&quot;]</text>
+<text x="1238" y="811" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Range feedback</text>
+<line x1="48" y1="894" x2="1592" y2="894" stroke="#e2e9e5"/>
+<text x="77" y="872" font-family="Arial,sans-serif" font-size="24" fill="#243438" font-weight="600">Control mode</text>
+<text x="375" y="872" font-family="DejaVu Sans Mono, monospace" font-size="22" fill="#16605b">io.selector[&quot;pi_arduino&quot;]</text>
+<text x="1238" y="872" font-family="Arial,sans-serif" font-size="22" fill="#52636b">Control selection</text>
+<text x="54" y="997" font-family="Arial,sans-serif" font-size="19" fill="#506660">Backend implementations may differ; the software-facing interface remains the same.</text>
+</svg>
