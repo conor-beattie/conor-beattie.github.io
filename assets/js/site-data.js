@@ -91,9 +91,15 @@ window.PORTFOLIO_DATA = {
     Evidence status should describe actual test evidence, not merely code existence.
     The first entry is written from the October 2026 ReturnToBase source.
   */
+  // OPTIONAL HOMEPAGE SELECTION:
+  // Add featuredOrder: 1, (or 2, 3, ...) to a project or software entry to
+  // display it in Selected Projects. Smaller numbers appear first.
+  // If featuredOrder is missing, the entry is NOT selected; it still appears
+  // on its normal category/software page. Use unique positive whole numbers.
   software: [
     {
       id: "return-to-base",
+      featuredOrder: 1,
       title: "Autonomous Return to Base",
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
@@ -461,7 +467,8 @@ window.PORTFOLIO_DATA = {
   /* Duplicate a project object to add another project. Each id must be unique. */
   projects: [
     {
-      id: "autonomous-mobile-robot",                  // URL: project.html?id=autonomous-mobile-robot
+      id: "autonomous-mobile-robot",
+      featuredOrder: 2,                  // URL: project.html?id=autonomous-mobile-robot
       title: "Bobbot - Autonomous Mobile Robot",
       category: "robotics",                          // robotics | cad | fabrication | electronics
       image: "assets/images/IMG_2627 Bobbot.jpg",
@@ -485,6 +492,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mechanical-gripper",
+      featuredOrder: 4,
       title: "Mechanical Gripper Design",
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
@@ -508,6 +516,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "printed-mechanisms",
+      featuredOrder: 6,
       title: "Pulleys",
       category: "fabrication",
       image: "assets/images/Pulley.png",
@@ -544,6 +553,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-control-electronics",
+      featuredOrder: 8,
       relatedProjectIds: ["robot-io-mapping"],
       title: "Modular Robot I/O & TeleOp Controller",
       category: "electronics",
@@ -572,6 +582,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-io-mapping",
+      featuredOrder: 9,
       title: "Robot I/O Mapping & Hardware Abstraction",
       category: "electronics",
       image: "assets/images/io-interface-contract.svg",
@@ -624,6 +635,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robotics-project-2",
+      featuredOrder: 3,
       title: "Robbot - Autonomous Mobile Robot",
       category: "robotics",
       image: "assets/images/IMG_2756_robbot.jpg",
@@ -668,6 +680,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "cad-project-2",
+      featuredOrder: 5,
       title: "Shooter",
       category: "cad",
       image: "assets/images/Shooter CAD.png",
@@ -691,6 +704,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-2",
+      featuredOrder: 7,
       title: "Rubber Band Intake Wheel",
       category: "fabrication",
       image: "assets/images/rubber_band_wheel.png",

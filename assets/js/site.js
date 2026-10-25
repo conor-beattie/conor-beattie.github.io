@@ -247,12 +247,17 @@
       </a>`).join("");
     const featured = $("#featured-projects");
     if (featured) {
-      // Show up to two projects per discipline on the homepage, in category order.
-      const picks = data.categories.filter(c => !["software", "algorithms"].includes(c.id)).flatMap(cat =>
-        data.projects.filter(project => project.category === cat.id).slice(0, 2)
-      );
-      const returnEntry = softwareItems.find(item => item.id === "return-to-base");
-      featured.innerHTML = (returnEntry ? softwareCard(returnEntry) : "") + picks.map(projectCard).join("");
+      // Only explicitly numbered entries appear here. Normal project listings
+      // are independent of this order; software entries can also be featured.
+      const isFeatured = item => Number.isInteger(item.featuredOrder) && item.featuredOrder > 0;
+      const selected = [
+        ...data.projects.filter(isFeatured).map(item => ({ item, kind: "project" })),
+        ...softwareItems.filter(isFeatured).map(item => ({ item, kind: "software" }))
+      ].sort((a, b) => a.item.featuredOrder - b.item.featuredOrder ||
+        a.item.title.localeCompare(b.item.title));
+      featured.innerHTML = selected.map(({ item, kind }) =>
+        kind === "software" ? softwareCard(item) : projectCard(item)
+      ).join("");
     }
   }
 

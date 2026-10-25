@@ -1,3 +1,37 @@
+# Selected Projects — manual ordering (25 October 2026)
+
+The homepage **Selected Projects** section is now controlled exclusively by
+`featuredOrder` in `assets/js/site-data.js`, and not by category order or by
+project position within the array.
+
+For any entry inside `projects: [...]` **or** `software: [...]`, add:
+
+```javascript
+featuredOrder: 3,
+```
+
+- `featuredOrder: 1` appears first; `2` appears next; and so on.
+- **No `featuredOrder` field** means the entry does **not** appear in Selected Projects.
+- Only positive whole numbers work; use **unique** numbers. Duplicates sort by
+  title as a predictable fallback.
+- The entry still appears in its existing Robotics/CAD/Fabrication/Electronics or
+  Software listing even when not featured.
+- The homepage no longer automatically includes the Return to Base software
+  entry or the first two projects from each category. Software entries only
+  appear when given `featuredOrder`, just like normal projects.
+- Numbers do **not** need to be consecutive; `1`, `5`, `20` is valid.
+
+The currently selected entries have been given numbers `1–9` to preserve the
+previously visible homepage order. To change it, edit those numbers; to hide
+an entry, remove the entire `featuredOrder: N,` line. To add another entry,
+add that property to its record.
+
+**Files edited:** `assets/js/site-data.js`, `assets/js/site.js`, and the HTML
+script version strings (cache refresh). All existing images, descriptions,
+project detail pages, navigation and category listings remain unchanged.
+
+---
+
 # Project Journal — 25 October 2026 update
 
 The top utility navigation is now **Home · Selected Projects · About** on every page. “Selected Projects” opens the existing gallery at `index.html#featured`; the second row still provides All Projects and the individual engineering disciplines.
