@@ -165,7 +165,14 @@
   const detailSection = (id, title, value) => value ? `<section class="detail-section" id="${id}"><div class="detail-section__index" aria-hidden="true">•</div><div><h2>${title}</h2>${paragraphs(value)}</div></section>` : "";
 
   function softwareCard(item) {
+    // Use an existing documented flowchart as the card image when available.
+    // Other software cards retain their original text-only layout.
+    const flowchart = String(item.flowchart || "").trim();
+    const cover = flowchart ? `<a href="${softwareUrl(item)}" class="project-card__image" aria-label="View ${text(item.title)}">
+      <img src="${img(flowchart)}" alt="${text(item.imageAlt || `${item.title} flowchart`)}" loading="lazy" />
+    </a>` : "";
     return `<article class="software-card">
+      ${cover}
       <div class="software-card__body"><div class="eyebrow-row"><span class="eyebrow">${text(item.type || "Software")}</span><span class="maturity-note">${text(item.status || "")}</span></div>
       <h3><a href="${softwareUrl(item)}">${text(item.title)}</a></h3><p>${text(item.summary)}</p>
       <div class="software-card__bottom"><span class="muted-small">${(item.algorithmIds || []).length} linked methods</span><a class="round-arrow" href="${softwareUrl(item)}" aria-label="Open ${text(item.title)}"><span aria-hidden="true">↗</span></a></div></div>
