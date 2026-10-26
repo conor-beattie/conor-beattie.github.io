@@ -1,3 +1,21 @@
+# About page — mechanical engineering direction (26 October 2026)
+
+The About page now explains a mechanical-design-first approach to engineering,
+with software, electronics, embedded systems and robotics providing complementary
+knowledge. The content focuses on professional interests, not scholarship claims.
+
+To edit the text, open `assets/js/site-data.js`:
+- `owner.aboutParagraphs` controls the opening introduction.
+- `engineeringPhilosophy.principles` controls the three approach cards.
+- `engineeringPhilosophy.example` controls the gripper considerations table and related project links.
+- `engineeringPhilosophy.direction` controls the future-direction paragraph.
+
+All project IDs, category listings, project descriptions and selected-project
+ordering are unchanged. The About page's HTML/CSS/JS were revised; its file
+references include a new cache-busting version string.
+
+---
+
 # Selected Projects — manual ordering (25 October 2026)
 
 The homepage **Selected Projects** section is now controlled exclusively by

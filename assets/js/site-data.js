@@ -36,13 +36,49 @@ window.PORTFOLIO_DATA = {
     introduction: "A collection of robotics, mechanical design, electronics and software projects.",
     shortAbout: "I enjoy turning engineering questions into physical prototypes: designing mechanisms, programming controllers, bringing systems together and improving them through testing.",
     aboutParagraphs: [
-      "This portfolio is a record of projects, design decisions and technical experiments. Each entry explains the objective, the approach taken, the challenges encountered and what was learned.",
-      "I'm especially interested in robotics, autonomous systems, mechanical design, 3D printing, electronics and Python programming. The portfolio will grow as new projects are designed, built and tested."
+      "My main interest is mechanical engineering, especially designing mechanisms: how parts move, transmit force and work together. I enjoy exploring different ways to achieve a movement, then using CAD, prototypes and testing to understand what works.",
+      "Robotics brings those mechanisms together with electronics, sensors and software. I study these other disciplines because their requirements affect the mechanical design, not because I want to specialise equally in every area.",
+      "This journal records the projects and experiments that help me develop that understanding, including ideas that needed to be changed after building or testing them."
     ],
     githubUrl: "",       // e.g. https://github.com/your-username
     linkedinUrl: "",     // optional, leave blank until ready
     youtubeUrl: "",      // optional
     email: ""            // optional — public email appears on site if provided
+  },
+
+  // About page: engineering interests, approach and future direction.
+  // Edit the text here without changing the About page HTML.
+  engineeringPhilosophy: {
+    principles: [
+      {
+        title: "Mechanical design in depth",
+        description: "I want to develop a stronger understanding of mechanisms, transmissions, linkages, grippers and lifting systems, including the forces, geometry and materials behind their operation."
+      },
+      {
+        title: "Understanding other disciplines",
+        description: "Electronics, embedded systems, sensing and control introduce real constraints on a mechanical design: power, space, feedback, timing and reliability. Learning about them helps me make better design choices."
+      },
+      {
+        title: "Designing the complete system",
+        description: "An individual mechanism can work well on its own but still be unsuitable for the robot. I want to learn how different engineering disciplines fit together, and how specialists make decisions as a team."
+      }
+    ],
+    example: {
+      heading: "A gripper is more than its jaws",
+      introduction: "A robot gripper is a useful example. Its geometry and gripping force matter, but so do the motor supply, sensor feedback and the way the rest of the robot uses it. These are design considerations, not claims that every option has already been tested.",
+      considerations: [
+        { discipline: "Mechanical", question: "Grip force, leverage, stiffness, friction and clearances" },
+        { discipline: "Electrical", question: "Motor and servo voltage, current demand and available power" },
+        { discipline: "Embedded & control", question: "How to detect contact, command movement and respond to faults" },
+        { discipline: "System integration", question: "Mass, packaging, mounting space and reliable operation on the robot" }
+      ],
+      conclusion: "Considering these interfaces early helps prevent a promising mechanism from becoming difficult to power, control or integrate.",
+      relatedProjectIds: ["mechanical-gripper", "robotics-project-2"]
+    },
+    direction: {
+      heading: "Where I want to go",
+      description: "My long-term goal is to study mechanical engineering and specialise in designing mechanisms for robotics or other mechatronic machines. I also want enough knowledge of electronics, software and control to work effectively alongside engineers in those disciplines."
+    }
   },
 
   categories: [
