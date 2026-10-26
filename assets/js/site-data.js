@@ -698,7 +698,7 @@ window.PORTFOLIO_DATA = {
       image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
       imageAlt: "Photograph of the goBILDA DECODE starter robot during assembly, showing its metal chassis, wheels, motors, wiring and control hardware",
       imageCaption: "goBILDA DECODE Starter Bot — photographed during the build",
-      summary: "An FTC-style starter robot assembled from goBILDA components, providing a practical platform for mechanical assembly, electrical integration and testing robot controls.",
+      summary: "An FTC-style starter robot assembled from the goBILDA StarterBot Assembly Manual and Starter Kit components. Electrical Panel was designed and built to integrate with the robot.",
       tags: ["Robotics", "goBILDA", "FTC", "Robot Assembly"],
       date: "",
       sections: {
