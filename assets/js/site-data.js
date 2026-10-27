@@ -43,9 +43,15 @@ window.PORTFOLIO_DATA = {
     aboutHistoryParagraphs: [
       "My interest in mechanics goes back as far as I can remember. My parents bought me my first LEGO Technic set when I was three, and I was instantly hooked. Each time I finished a set, they would buy me a larger one. By the age of five, I had built the LEGO Technic 42055 Bucket Wheel Excavator, which was the largest Technic set at the time."
     ],
+    // OPTIONAL ABOUT PHOTOS: 0–4 images per section. Empty arrays leave no gallery or blank space.
+    // Upload photographs to assets/images/, then add { src: "assets/images/file.jpg", caption: "Description" }.
+    // Captions are optional; use alt for a more descriptive accessibility label if desired.
+    aboutHistoryPhotos: [],
     outsideEngineeringParagraphs: [
       "Chess became another major interest when I started playing and studying it during the COVID-19 pandemic. I went on to reach approximately tenth in the country for my year group and represented England as part of the Under-13 team at the Glorney Cup tournament."
     ],
+    // Add chess, cycling or bikepacking pictures here when selected.
+    outsideEngineeringPhotos: [],
     githubUrl: "",       // e.g. https://github.com/your-username
     linkedinUrl: "",     // optional, leave blank until ready
     youtubeUrl: "",      // optional

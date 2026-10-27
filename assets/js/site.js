@@ -521,6 +521,81 @@
     if (historyEl) historyEl.innerHTML = (data.owner.aboutHistoryParagraphs || []).map(s => `<p>${text(s)}</p>`).join("");
     const outsideEl = $("#about-outside-engineering");
     if (outsideEl) outsideEl.innerHTML = (data.owner.outsideEngineeringParagraphs || []).map(s => `<p>${text(s)}</p>`).join("");
+
+    // Optional, compact About galleries. With no photos, nothing is rendered at all.
+    // A single viewer is shared by both sections; each section retains its own photo sequence.
+    const groups = [
+      { target: $("#about-history-gallery"), items: data.owner.aboutHistoryPhotos, name: "How It All Began" },
+      { target: $("#about-outside-gallery"), items: data.owner.outsideEngineeringPhotos, name: "Outside Engineering" }
+    ];
+    const prepared = groups.map(group => ({
+      ...group,
+      photos: (Array.isArray(group.items) ? group.items : [])
+        .filter(item => item && localMedia(item.src))
+        .slice(0, 4)
+        .map((item, index) => ({
+          src: localMedia(item.src),
+          caption: String(item.caption || ""),
+          alt: String(item.alt || item.caption || `${group.name} photograph ${index + 1}`)
+        }))
+    }));
+    const hasPhotos = prepared.some(group => group.photos.length > 0);
+    if (hasPhotos) {
+      const modal = document.createElement("dialog");
+      modal.className = "about-photo-dialog";
+      modal.setAttribute("aria-label", "Full-size About photograph");
+      modal.innerHTML = `
+        <div class="about-photo-dialog__top"><button class="about-photo-dialog__close" type="button" aria-label="Close photograph">×</button></div>
+        <div class="about-photo-dialog__stage">
+          <button class="about-photo-dialog__prev" type="button" aria-label="Previous photograph">‹</button>
+          <img alt="" />
+          <button class="about-photo-dialog__next" type="button" aria-label="Next photograph">›</button>
+        </div>
+        <div class="about-photo-dialog__footer"><span class="about-photo-dialog__count"></span><span class="about-photo-dialog__caption"></span></div>`;
+      document.body.appendChild(modal);
+      const viewerImg = $(".about-photo-dialog__stage img", modal);
+      const counter = $(".about-photo-dialog__count", modal);
+      const caption = $(".about-photo-dialog__caption", modal);
+      const prev = $(".about-photo-dialog__prev", modal);
+      const next = $(".about-photo-dialog__next", modal);
+      let activePhotos = [];
+      let current = 0;
+      const showPhoto = index => {
+        current = (index + activePhotos.length) % activePhotos.length;
+        const photo = activePhotos[current];
+        viewerImg.src = photo.src;
+        viewerImg.alt = photo.alt;
+        caption.textContent = photo.caption;
+        counter.textContent = `${current + 1} / ${activePhotos.length}`;
+        prev.hidden = next.hidden = activePhotos.length < 2;
+      };
+      const openPhoto = (photos, index) => {
+        activePhotos = photos;
+        showPhoto(index);
+        modal.showModal();
+      };
+      $(".about-photo-dialog__close", modal).addEventListener("click", () => modal.close());
+      prev.addEventListener("click", () => showPhoto(current - 1));
+      next.addEventListener("click", () => showPhoto(current + 1));
+      modal.addEventListener("keydown", event => {
+        if (event.key === "ArrowLeft" && activePhotos.length > 1) { event.preventDefault(); showPhoto(current - 1); }
+        if (event.key === "ArrowRight" && activePhotos.length > 1) { event.preventDefault(); showPhoto(current + 1); }
+      });
+      modal.addEventListener("click", event => { if (event.target === modal) modal.close(); });
+      prepared.forEach(group => {
+        if (!group.target || !group.photos.length) return;
+        group.target.innerHTML = `<div class="about-photo-grid" aria-label="${text(group.name)} photographs">${group.photos.map((photo, index) => `
+          <figure class="about-photo-tile">
+            <button type="button" class="about-photo-trigger" aria-label="View full-size photograph: ${text(photo.alt)}" data-photo-index="${index}">
+              <img src="${photo.src}" alt="${text(photo.alt)}" loading="lazy" decoding="async" />
+            </button>
+            ${photo.caption ? `<figcaption title="${text(photo.caption)}">${text(photo.caption)}</figcaption>` : ""}
+          </figure>`).join("")}</div>`;
+        $$(".about-photo-trigger", group.target).forEach((button, index) => {
+          button.addEventListener("click", () => openPhoto(group.photos, index));
+        });
+      });
+    }
     const links = $("#about-links");
     if (links) {
       const list = [linkMarkup(data.owner.githubUrl, "GitHub profile"),linkMarkup(data.owner.youtubeUrl,"Project videos"),linkMarkup(data.owner.linkedinUrl,"LinkedIn")].filter(Boolean);

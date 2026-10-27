@@ -1,3 +1,40 @@
+# Optional About-page photo galleries (27 October 2026)
+
+The **How It All Began** and **Outside Engineering** sections can each display
+**up to four photographs**. On wide screens they appear in a compact four-column
+row; on narrow screens, two columns. Photographs are **not cropped** and can be
+clicked for a large view with arrow navigation, Escape to close, and captions.
+
+**No images are necessary.** Both arrays are initially empty, so the page is
+complete and attractive with only text. There are no blank gallery blocks,
+placeholder images or unused gallery spacing.
+
+To add photographs:
+
+1. Copy your own JPEG/PNG/WebP photographs into `assets/images/`.
+2. In `assets/js/site-data.js`, under `owner`, populate `aboutHistoryPhotos`
+   and/or `outsideEngineeringPhotos`. Example:
+
+```javascript
+aboutHistoryPhotos: [
+  { src: "assets/images/lego-42055.jpg", caption: "Building the Bucket Wheel Excavator" },
+  { src: "assets/images/lego-collection.jpg", caption: "My LEGO Technic collection" }
+],
+outsideEngineeringPhotos: [
+  { src: "assets/images/glorney-cup.jpg", caption: "At the Glorney Cup" },
+  { src: "assets/images/bikepacking.jpg", caption: "Bikepacking trip" }
+],
+```
+
+(The filenames above are illustrative, not included files. Use the actual
+uploaded names and precise letter case.) Captions can be omitted, and optional
+`alt` can provide a more detailed image description. More than four entries
+will display only the first four valid image paths in each section.
+
+If photographs show other children, check permission before publishing them.
+
+---
+
 # About page — personal introduction, history and interests (27 October 2026)
 
 The About page now has three main parts: the introduction, **How It All Began**
