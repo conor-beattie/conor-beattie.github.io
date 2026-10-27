@@ -46,7 +46,12 @@ window.PORTFOLIO_DATA = {
     // OPTIONAL ABOUT PHOTOS: 0–4 images per section. Empty arrays leave no gallery or blank space.
     // Upload photographs to assets/images/, then add { src: "assets/images/file.jpg", caption: "Description" }.
     // Captions are optional; use alt for a more descriptive accessibility label if desired.
-    aboutHistoryPhotos: [],
+    aboutHistoryPhotos: [
+      {
+        src: "assets/images/IMG_9305.JPG",
+        caption: ""
+      },
+    ],
     outsideEngineeringParagraphs: [
       "Chess became another major interest when I started playing and studying it during the COVID-19 pandemic. I went on to reach approximately tenth in the country for my year group and represented England as part of the Under-13 team at the Glorney Cup tournament."
     ],
