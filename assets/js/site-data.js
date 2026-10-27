@@ -36,6 +36,7 @@ window.PORTFOLIO_DATA = {
     introduction: "A collection of robotics, mechanical design, electronics and software projects.",
     shortAbout: "I enjoy turning engineering questions into physical prototypes: designing mechanisms, programming controllers, bringing systems together and improving them through testing.",
     aboutParagraphs: [
+      "An early interest in LEGO Technic introduced me to gears, linkages, transmissions and mechanical movement. Exploring how these mechanisms work helped develop my interest in designing and building machines.",
       "My main interest is mechanical engineering, especially designing mechanisms: how parts move, transmit force and work together. I enjoy exploring different ways to achieve a movement, then using CAD, prototypes and testing to understand what works.",
       "Robotics brings those mechanisms together with electronics, sensors and software. I study these other disciplines because their requirements affect the mechanical design, not because I want to specialise equally in every area.",
       "This journal records the projects and experiments that help me develop that understanding, including ideas that needed to be changed after building or testing them."
@@ -73,7 +74,7 @@ window.PORTFOLIO_DATA = {
         { discipline: "System integration", question: "Mass, packaging, mounting space and reliable operation on the robot" }
       ],
       conclusion: "Considering these interfaces early helps prevent a promising mechanism from becoming difficult to power, control or integrate.",
-      relatedProjectIds: ["mechanical-gripper", "robotics-project-2"]
+      relatedProjectIds: ["mechanical-gripper", "robotic-gripper-grasp-detection", "robotics-project-2"]
     },
     direction: {
       heading: "Where I want to go",
@@ -529,16 +530,17 @@ window.PORTFOLIO_DATA = {
     {
       id: "mechanical-gripper",
       featuredOrder: 6,
-      title: "Mechanical Gripper Design",
+      title: "Bobbot Gripper — Original Design",
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
-      imageAlt: "Illustrative CAD model of a mechanical gripper",
-      summary: "Example entry: document a mechanical assembly with CAD models, design calculations and successive improvements.",
+      imageAlt: "CAD model of the original Bobbot gripper",
+      summary: "The original gripper built for Bobbot, using pivoting jaws on a vertical lift to handle a 150 mm cardboard cube. This first design provides the reference for a separate grasp-detection investigation.",
       tags: ["CAD", "Mechanisms", "Design"],
       date: "",
+      relatedProjectIds: ["robotic-gripper-grasp-detection", "autonomous-mobile-robot"],
       contribution: "Replace with the parts and assemblies that you modelled or engineered.",
       sections: {
-        overview: "State the function of the mechanism and how it fits into the wider system.",
+        overview: "This is the first gripper design fitted to Bobbot. The jaws are mounted on a vertical slide and close around a cardboard cube approximately 150 mm across. Their contact faces do not remain parallel throughout the closing movement, which can limit how consistently the cube is engaged at different positions.\n\nThe original gripper remains its own project. A separate investigation examines alternative jaw arrangements and ways to detect grasp engagement mechanically, using this design as a baseline.",
         objectives: "Document required travel, grip force, envelope, mass, material and manufacturing constraints.",
         design: "Include views from the CAD assembly and describe the linkage or transmission principle.",
         construction: "Explain how the components were manufactured and assembled.",
@@ -549,6 +551,167 @@ window.PORTFOLIO_DATA = {
         lessons: "Identify important mechanical lessons and improvements for the next version."
       },
       links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      "id": "robotic-gripper-grasp-detection",
+      "title": "Robotic Gripper — Grasp Detection Investigation",
+      "category": "cad",
+      "image": "assets/images/gripper_bobbot.png",
+      "imageAlt": "CAD model of the original Bobbot gripper used as the investigation baseline",
+      "imageCaption": "Original Bobbot gripper — reference design only. New gripper concepts are not pictured.",
+      "summary": "A separate gripper-design investigation comparing parallel-jaw mechanisms and mechanical grasp detection for a 150 mm cube, using the original Bobbot gripper as a reference.",
+      "tags": [
+        "Mechanism Design",
+        "Grippers",
+        "CAD",
+        "Experimental Design"
+      ],
+      "date": "",
+      "relatedProjectIds": [
+        "mechanical-gripper",
+        "robotics-project-2",
+        "autonomous-mobile-robot"
+      ],
+      "sectionLabels": {
+        "overview": "Existing design and problem",
+        "brief": "Investigation aim",
+        "research": "Engineering research",
+        "construction": "CAD and prototyping",
+        "software": "Sensing and control interface",
+        "testing": "Planned verification",
+        "iterations": "Design decisions and iteration",
+        "results": "Current evidence",
+        "nextSteps": "Next steps"
+      },
+      "sections": {
+        "overview": "Bobbot has an existing gripper mounted on a vertical lift to handle a cardboard cube approximately 150 mm across. This is a separate engineering investigation into designing an additional gripper, not a replacement for the original project page. The current jaws do not maintain parallel opposing faces throughout closure, which limits the range of positions and orientations in which a cube can be gripped. This assembly provides a useful baseline for examining alternative gripping mechanisms.\n\nA second limitation is knowing whether pickup succeeded. Two indirect checks have been considered: reversing and inspecting the cube’s former position, or raising the cube until it obscures part of the camera view. Neither measures gripping engagement at the jaws. A cube can be touched without being securely retained, so the investigation must separate initial contact, an actual grip and successful retention.",
+        "brief": "Investigate mechanical gripper designs that can close around a 150 mm cardboard cube, retain it during movement, and produce a simple, observable indication of engagement or gripping load. The central question is whether grasp detection can be integrated into the mechanism without relying on camera-based verification of pickup.\n\nTwo design decisions will be evaluated separately: how the jaws move, and how contact or load is detected. Keeping these questions separate makes it possible to compare parallel-motion mechanisms while also testing different compliant or spring-loaded detection methods. The final concept must remain practical to manufacture, affordable, compact and compatible with the mobile robot.",
+        "research": "Initial research focuses on jaw kinematics, mechanical advantage, friction at the cube surface, stiffness, compliance, spring selection, actuator loading and the repeatability of mechanical sensing. Force is not determined by servo command or jaw position alone: linkage geometry, friction and the deflection of compliant parts also matter.\n\nCandidate methods for detecting engagement include a spring-loaded contact pad, an articulated or floating jaw, and a compliant element in the transmission. Simple switches, Hall-effect sensors or position measurements could convert mechanical displacement into a signal. Component options and published examples should be recorded with sources as research progresses.",
+        "construction": "The original assembly and its jaw motion will be measured before choosing a new gripper mechanism. The next stage is to produce labelled sketches and CAD models showing pivot locations, motion paths, clearances, spring positions and the force path from actuator to cube.\n\nPrototype parts can be manufactured with available workshop methods and 3D printing, followed by bench tests before integration with the vertical lift. Each version should be identified so that drawings, photographs, materials and measured results can be traced to the same revision.",
+        "software": "The objective is a mechanically meaningful signal that the robot can read with minimal additional electronics and software. The gripper mechanism should indicate contact or load through repeatable motion or deflection; a switch or sensor may then report that state.\n\nSoftware can record detection transitions and compare them with independent observations during testing. The detection signal must not automatically be treated as proof of secure retention: that claim needs a separate physical holding test.",
+        "testing": "The verification plan uses repeated grasps with the same 150 mm cube under recorded conditions. Trials will vary jaw alignment and initial cube position, then record contact detection, whether the cube was actually secured, whether it remained held during lift and movement, and any slips or missed pickups.\n\nA test record should include the concept and revision, cube position, sensor response, independent grasp outcome, retention outcome, and failure notes. False-positive detection (signal without secure grasp) and missed detection (secure grasp without signal) can then be counted. Sample sizes and numerical pass targets should be chosen and documented before comparisons are made.",
+        "iterations": "The investigation will compare a baseline with alternative jaw geometries and sensing arrangements. Results should be used to explain whether revisions improve opening range, parallel motion, retention or reliable detection—and whether they introduce additional friction, backlash, complexity, cost or weight. Only changes that are actually built and evaluated should be described here as completed iterations.",
+        "results": "The current gripper and the indirect camera-based checking methods establish the design problem. The alternative mechanisms, detector arrangements and planned test methods described here are investigation proposals, not completed experimental findings. Measured performance, prototype photographs and a justified final selection will be added as testing takes place.",
+        "nextSteps": "Measure the existing jaw opening and contact geometry; produce annotated sketches of the main detection concepts; compare four-bar and rack-and-pinion parallel-jaw arrangements; choose practical springs or sensing components; establish baseline grasp tests; build initial prototypes; then repeat tests to compare contact detection with genuine secure retention."
+      },
+      "investigation": {
+        "question": "Can a new mechanical gripper detect engagement with a 150 mm cardboard cube at the mechanism, while distinguishing simple contact from a secure grasp?",
+        "status": "Design investigation — candidate mechanisms and test methods are proposed, not validated results.",
+        "criteria": [
+          [
+            "Cube compatibility",
+            "Fit and close around a 150 mm cardboard cube",
+            "150 mm cube; jaw margin to be measured"
+          ],
+          [
+            "Jaw engagement",
+            "Observe surface contact and grip across different cube offsets",
+            "Compare present jaws with parallel-jaw alternatives"
+          ],
+          [
+            "Grasp retention",
+            "Lift, translate and disturb the held cube using a repeatable test",
+            "Define pass conditions before testing"
+          ],
+          [
+            "Contact detection",
+            "Check signal against independently observed jaw contact",
+            "Record detected / actual contact"
+          ],
+          [
+            "Secure-grasp detection",
+            "Check signal against independent retention outcome",
+            "Record false positives and missed detections"
+          ],
+          [
+            "Repeatability",
+            "Repeat the same grasp conditions for each prototype",
+            "Set trial count and target rate in advance"
+          ],
+          [
+            "Robot integration",
+            "Measure mass, available space, actuation and sensor needs",
+            "Record constraints from the existing robot"
+          ],
+          [
+            "Cost and manufacture",
+            "List purchased parts, printed parts and assembly operations",
+            "Set the budget and fabrication limits before selection"
+          ]
+        ],
+        "jawOptions": [
+          {
+            "name": "Existing pivoting jaws",
+            "strength": "Available reference assembly and known mounting arrangement.",
+            "tradeoff": "Contact surfaces are not parallel throughout closure; effective cube engagement depends on position.",
+            "status": "Baseline"
+          },
+          {
+            "name": "Four-bar parallel-jaw linkage",
+            "strength": "Can be designed to maintain approximately parallel jaw faces over a useful travel.",
+            "tradeoff": "Joint tolerances, geometry and linkage travel need checking.",
+            "status": "Candidate"
+          },
+          {
+            "name": "Rack-and-pinion parallel gripper",
+            "strength": "Coupled opposing jaw travel and potentially symmetric closing motion.",
+            "tradeoff": "Guidance, backlash, printed-tooth strength and friction must be evaluated.",
+            "status": "Candidate"
+          }
+        ],
+        "detectionOptions": [
+          {
+            "name": "Spring-loaded gripping pads",
+            "principle": "A pad compresses on contact; the displacement can be measured or switched.",
+            "risk": "Detects contact that may not be a securely retained cube."
+          },
+          {
+            "name": "Floating or articulated jaws",
+            "principle": "A jaw element changes angle or position when load is applied.",
+            "risk": "Motion may depend on where and how the cube touches the jaw."
+          },
+          {
+            "name": "Spring-loaded transmission or linkage",
+            "principle": "A compliant part in the drive path deflects as the gripping load increases.",
+            "risk": "Friction, backlash and actuator loading may affect the threshold."
+          }
+        ],
+        "trialColumns": [
+          "Test observation",
+          "What is recorded",
+          "Why it matters"
+        ],
+        "trialRows": [
+          [
+            "Contact",
+            "Was the cube actually touched? Did the detector respond?",
+            "Separates first engagement from an empty closure."
+          ],
+          [
+            "Secure grasp",
+            "Was the cube held without manual support after closure?",
+            "Avoids treating contact alone as a successful pickup."
+          ],
+          [
+            "Retention",
+            "Did it remain held during the defined lift/motion sequence?",
+            "Measures practical gripping performance."
+          ],
+          [
+            "Repeatability",
+            "Results across repeated centred and offset attempts.",
+            "Reveals missed detections and false-positive indications."
+          ]
+        ],
+        "media": [],
+        "sources": []
+      },
+      "links": {
+        "github": "",
+        "cad": "",
+        "video": "",
+        "downloads": ""
+      }
     },
     {
       id: "printed-mechanisms",

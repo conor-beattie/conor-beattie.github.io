@@ -200,3 +200,12 @@ printDetails: {
 This is **illustrative**, not a statement that the provided designs used these settings.
 
 The existing Pulleys entry uses the real `IMG_2788 3d print pulley.jpg` as its first `printPhotos` item, instead of incorrectly displaying its file path as text under Results. Other 3D prints have empty `printPhotos` arrays until you add photographs.
+
+## Gripper projects (27 October 2026)
+
+Two independent Mechanical Design & CAD project entries are deliberately maintained:
+
+- `project.html?id=mechanical-gripper` — **Bobbot Gripper — Original Design**, the first gripper built for Bobbot. Its project ID and homepage `featuredOrder: 6` are unchanged.
+- `project.html?id=robotic-gripper-grasp-detection` — **Robotic Gripper — Grasp Detection Investigation**, an additional design investigation using the original as a comparison baseline. This has no `featuredOrder` by default, so it is available in Mechanical Design & CAD / All Projects but is not added to Selected Projects automatically.
+
+The new project's `investigation` object in `assets/js/site-data.js` holds design criteria, alternative jaw/detection concepts and a planned trial table. Empty `media` and `sources` arrays can be filled with genuine drawings/photos and references. Do not add results as completed until tested. Its hero image currently shows the **original** gripper as a reference, not the new design.

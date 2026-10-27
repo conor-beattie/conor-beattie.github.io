@@ -407,6 +407,26 @@
     });
   }
 
+  // Optional design-investigation evidence is data-driven and appears only on
+  // projects that provide the investigation object; the other project pages
+  // keep their existing layout.
+  function investigationSection(p, key, label) {
+    const inv = p.investigation || {};
+    const head = `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>`;
+    if (key === "investigation-criteria") {
+      return head + `<p>These are planned criteria and verification methods. Targets without numbers must be defined before comparative trials.</p><div class="investigation-table-wrap"><table class="investigation-table"><thead><tr><th scope="col">Requirement</th><th scope="col">Verification method</th><th scope="col">Target / evidence</th></tr></thead><tbody>${(inv.criteria || []).map(row => `<tr>${row.map(cell => `<td>${text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div></section>`;
+    }
+    if (key === "concept-study") {
+      const rows = (items,descriptionKey,title) => `<h3>${title}</h3><div class="investigation-concepts">${items.map(item => `<article class="investigation-concept"><div class="investigation-concept-head"><h4>${text(item.name)}</h4>${item.status ? `<span>${text(item.status)}</span>` : ""}</div><p>${text(item[descriptionKey] || "")}</p>${item.tradeoff ? `<p><strong>To evaluate:</strong> ${text(item.tradeoff)}</p>` : ""}${item.risk ? `<p><strong>Potential limitation:</strong> ${text(item.risk)}</p>` : ""}</article>`).join("")}</div>`;
+      const gallery = (inv.media || []).filter(m => localMedia(m.src)).slice(0,4).map(m => `<figure class="investigation-media"><a href="${localMedia(m.src)}" target="_blank" rel="noopener noreferrer"><img src="${localMedia(m.src)}" alt="${text(m.caption || "Gripper design study")}" loading="lazy" /></a><figcaption>${text(m.caption || "")}</figcaption></figure>`).join("");
+      return head + `<p>The jaw-motion mechanism and the contact/load sensing mechanism are separate design choices. Each combination must be evaluated rather than assuming one option solves both problems.</p>${rows(inv.jawOptions || [],"strength","Jaw movement")}${rows(inv.detectionOptions || [],"principle","Grasp-detection approaches")}${gallery ? `<h3>Design sketches and prototypes</h3><div class="investigation-media-grid">${gallery}</div>` : ""}</div></section>`;
+    }
+    if (key === "trial-plan") {
+      return head + `<p>The experiment must separate contact, secure grasp and retention rather than reporting a single success/failure value.</p><div class="investigation-table-wrap"><table class="investigation-table"><thead><tr>${(inv.trialColumns || []).map(h=>`<th scope="col">${text(h)}</th>`).join("")}</tr></thead><tbody>${(inv.trialRows || []).map(row=>`<tr>${row.map(cell=>`<td>${text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div></div></section>`;
+    }
+    return "";
+  }
+
   function projectDetail() {
     const id = new URLSearchParams(location.search).get("id");
     const p = data.projects.find(item => item.id === id);
@@ -424,14 +444,20 @@
     // Optional sections are displayed only when a project provides their content.
     // Individual projects may override labels (for example, Firmware & TeleOp).
     const sectionOptions = [
-      ["overview", "Overview"], ["architecture", "System architecture"],
-      ["hardware", "Electrical interfaces"], ["io-map", "Representative I/O map"], ["construction", "Construction"],
-      ["software", "Software"], ["testing", "Testing"],
-      ["iterations", "Iterations"], ["results", "Results"],
-      ["lessons", "Lessons learned"]
+      ["overview", "Overview"], ["brief", "Investigation aim"], ["investigation-criteria", "Engineering criteria"],
+      ["research", "Engineering research"], ["concept-study", "Mechanism concepts"],
+      ["architecture", "System architecture"], ["hardware", "Electrical interfaces"],
+      ["io-map", "Representative I/O map"], ["construction", "Construction"],
+      ["software", "Software"], ["trial-plan", "Experimental test plan"],
+      ["testing", "Testing"], ["iterations", "Iterations"], ["results", "Results"],
+      ["nextSteps", "Next steps"], ["lessons", "Lessons learned"]
     ];
     const entries = sectionOptions
-      .filter(([key]) => key === "io-map" ? Boolean(p.ioMap?.rows?.length) : Boolean(String(p.sections?.[key] || "").trim()))
+      .filter(([key]) => key === "io-map" ? Boolean(p.ioMap?.rows?.length)
+        : key === "investigation-criteria" ? Boolean(p.investigation?.criteria?.length)
+        : key === "concept-study" ? Boolean(p.investigation?.jawOptions?.length || p.investigation?.detectionOptions?.length)
+        : key === "trial-plan" ? Boolean(p.investigation?.trialRows?.length)
+        : Boolean(String(p.sections?.[key] || "").trim()))
       .map(([key, fallback]) => [key, p.sectionLabels?.[key] || fallback]);
     const usedDemos = demosForProject(p.id);
     const linkedSoftware = softwareItems.filter(item => (item.robotIds || []).includes(p.id));
@@ -455,6 +481,7 @@
           <div class="tags tags-large">${(p.tags || []).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
         </div>
         <figure class="project-hero-media ${p.imageFullSize ? "project-hero-media--diagram" : ""}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the I/O interface diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" />`}<figcaption>${text(p.imageCaption || p.title)}</figcaption></figure>
+        ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status ? `<span>${text(p.investigation.status)}</span>` : ""}</div>` : ""}
         <div class="detail-layout">
           <aside class="detail-aside">
             <p class="eyebrow">ON THIS PAGE</p>
@@ -465,6 +492,7 @@
           <div class="detail-main">
             ${entries.filter(([key]) => !["algorithm-demonstrations", "robot-software", "related-projects"].includes(key)).map(([key, label]) => key === "io-map"
               ? `<section class="detail-section detail-section--clean" id="io-map"><div><h2>${text(label)}</h2><p>${text(p.ioMap.intro || "")}</p><div class="io-map-scroll"><table class="io-map-table"><thead><tr>${(p.ioMap.columns || []).map(col => `<th scope="col">${text(col)}</th>`).join("")}</tr></thead><tbody>${(p.ioMap.rows || []).map(row => `<tr>${row.map((cell, i) => `<td>${i === 1 ? `<code>${text(cell)}</code>` : text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>${p.ioMap.note ? `<p class="io-map-note">${text(p.ioMap.note)}</p>` : ""}</div></section>`
+              : ["investigation-criteria", "concept-study", "trial-plan"].includes(key) ? investigationSection(p, key, label)
               : `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
             ${linkedSoftware.length ? `<section class="detail-section detail-section--clean" id="robot-software"><div><h2>Software &amp; Algorithms</h2><p>Software systems documented for this robot. Each entry links to the relevant algorithms without requiring a video.</p><div class="related-list">${linkedSoftware.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}
             ${usedDemos.length ? `<section class="detail-section detail-section--clean" id="algorithm-demonstrations"><div><h2>Video demonstrations</h2><div class="demo-grid">${usedDemos.map(item => demoMarkup(item,true)).join("")}</div></div></section>` : ""}
