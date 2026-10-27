@@ -57,6 +57,16 @@ window.PORTFOLIO_DATA = {
     ],
     // Add chess, cycling or bikepacking pictures here when selected.
     outsideEngineeringPhotos: [],
+    // Optional About-page influences. Add { name, focus, description, url } entries.
+    // Leave the array empty to hide the entire Influences & Inspiration section.
+    influences: [
+      {
+        name: "Madoca1977",
+        focus: "LEGO Technic MOCs",
+        description: "I admire Madoca1977's LEGO Technic creations for their inventive mechanisms and thoughtful mechanical design.",
+        url: "https://rebrickable.com/users/Madoca1977/mocs/"
+      }
+    ],
     githubUrl: "",       // e.g. https://github.com/your-username
     linkedinUrl: "",     // optional, leave blank until ready
     youtubeUrl: "",      // optional

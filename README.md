@@ -1,3 +1,29 @@
+# Optional Influences & Inspiration (27 October 2026)
+
+The bottom of `about.html` now has an optional **Influences & Inspiration** section.
+The data is maintained under `owner.influences` in `assets/js/site-data.js`.
+Each item can contain `name`, `focus` (optional), `description` and `url` (optional):
+
+```javascript
+influences: [
+  {
+    name: "Madoca1977",
+    focus: "LEGO Technic MOCs",
+    description: "I admire Madoca1977's LEGO Technic creations for their inventive mechanisms and thoughtful mechanical design.",
+    url: "https://rebrickable.com/users/Madoca1977/mocs/"
+  }
+],
+```
+
+Copy the object to add further influences, separating entries with commas. The list
+has no fixed maximum. The name links to the referenced website in a new tab.
+If the array is empty (`influences: []`), the entire section, including its
+heading and padding, disappears. No photos are required. All existing About
+copy, images, projects and featured ordering are preserved from the latest
+user-supplied repository `(11).zip`.
+
+---
+
 # Optional About-page photo galleries (27 October 2026)
 
 The **How It All Began** and **Outside Engineering** sections can each display

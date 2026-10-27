@@ -518,6 +518,21 @@ button { cursor: pointer; }
   .about-photo-dialog__stage button { height:28px; font-size:1.3rem; }
 }
 
+/* ABOUT — optional Influences & Inspiration list. Hidden entirely when no entries exist. */
+.about-influences-section { padding:48px 0 70px; border-top:1px solid var(--line); }
+.about-influences-section[hidden] { display:none; }
+.about-influences-list { max-width:790px; }
+.about-influence-item { display:grid; grid-template-columns:minmax(170px,.45fr) minmax(0,1fr); gap:25px; align-items:start; padding:18px 0; border-top:1px solid var(--line); }
+.about-influence-item__heading h3 { margin:0 0 5px; font-size:1.03rem; line-height:1.45; }
+.about-influence-item__heading a { color:var(--ink); text-decoration:none; }
+.about-influence-item__heading a:hover, .about-influence-item__heading a:focus-visible { color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; }
+.about-influence-item__focus { color:var(--muted); font-size:.78rem; margin:0; line-height:1.4; }
+.about-influence-item__description { color:var(--ink-soft); font-size:.93rem; line-height:1.7; margin:0; }
+@media (max-width:560px) {
+  .about-influences-section { padding:39px 0 56px; }
+  .about-influence-item { grid-template-columns:1fr; gap:7px; padding:15px 0; }
+}
+
 /* DESIGN INVESTIGATIONS — optional sections on mechanical research projects. */
 .investigation-question { margin:-34px 0 54px; padding:24px 28px; background:var(--wash); border:1px solid var(--line); border-radius:14px; max-width:100%; }
 .investigation-question strong { display:block; color:var(--accent-deep); font-size:.76rem; letter-spacing:.07em; text-transform:uppercase; margin-bottom:8px; }

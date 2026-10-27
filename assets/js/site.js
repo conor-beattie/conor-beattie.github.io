@@ -596,6 +596,25 @@
         });
       });
     }
+    // Optional engineering influences: a compact linked list at the bottom of About.
+    // The entire section stays hidden if there are no valid entries.
+    const influencesSection = $("#about-influences-section");
+    const influencesList = $("#about-influences-list");
+    if (influencesSection && influencesList) {
+      const influences = (Array.isArray(data.owner.influences) ? data.owner.influences : [])
+        .filter(item => item && String(item.name || "").trim() && String(item.description || "").trim());
+      influencesList.innerHTML = influences.map(item => {
+        const url = href(item.url);
+        const link = url && /^https?:/i.test(url)
+          ? `<a href="${escape(url)}" target="_blank" rel="noopener noreferrer">${text(item.name)} <span aria-hidden="true">↗</span></a>`
+          : text(item.name);
+        return `<div class="about-influence-item">
+          <div class="about-influence-item__heading"><h3>${link}</h3>${item.focus ? `<p class="about-influence-item__focus">${text(item.focus)}</p>` : ""}</div>
+          <p class="about-influence-item__description">${text(item.description)}</p>
+        </div>`;
+      }).join("");
+      influencesSection.hidden = influences.length === 0;
+    }
     const links = $("#about-links");
     if (links) {
       const list = [linkMarkup(data.owner.githubUrl, "GitHub profile"),linkMarkup(data.owner.youtubeUrl,"Project videos"),linkMarkup(data.owner.linkedinUrl,"LinkedIn")].filter(Boolean);
