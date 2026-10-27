@@ -36,50 +36,20 @@ window.PORTFOLIO_DATA = {
     introduction: "A collection of robotics, mechanical design, electronics and software projects.",
     shortAbout: "I enjoy turning engineering questions into physical prototypes: designing mechanisms, programming controllers, bringing systems together and improving them through testing.",
     aboutParagraphs: [
-      "An early interest in LEGO Technic introduced me to gears, linkages, transmissions and mechanical movement. Exploring how these mechanisms work helped develop my interest in designing and building machines.",
-      "My main interest is mechanical engineering, especially designing mechanisms: how parts move, transmit force and work together. I enjoy exploring different ways to achieve a movement, then using CAD, prototypes and testing to understand what works.",
-      "Robotics brings those mechanisms together with electronics, sensors and software. I study these other disciplines because their requirements affect the mechanical design, not because I want to specialise equally in every area.",
-      "This journal records the projects and experiments that help me develop that understanding, including ideas that needed to be changed after building or testing them."
+      "My main interest is mechanical engineering, particularly designing mechanisms and understanding how moving parts work together. I enjoy using CAD, building prototypes and testing different ideas.",
+      "Robotics gives me the opportunity to combine mechanical design with electronics, sensors and software. In the future, I hope to study mechanical engineering and develop mechanisms for robotics or other mechatronic machines."
+    ],
+    // How It All Began — add any favourite LEGO Technic models after student review.
+    aboutHistoryParagraphs: [
+      "My interest in mechanics goes back as far as I can remember. My parents bought me my first LEGO Technic set when I was three, and I was instantly hooked. Each time I finished a set, they would buy me a larger one. By the age of five, I had built the LEGO Technic 42055 Bucket Wheel Excavator, which was the largest Technic set at the time."
+    ],
+    outsideEngineeringParagraphs: [
+      "Chess became another major interest when I started playing and studying it during the COVID-19 pandemic. I went on to reach approximately tenth in the country for my year group and represented England as part of the Under-13 team at the Glorney Cup tournament."
     ],
     githubUrl: "",       // e.g. https://github.com/your-username
     linkedinUrl: "",     // optional, leave blank until ready
     youtubeUrl: "",      // optional
     email: ""            // optional — public email appears on site if provided
-  },
-
-  // About page: engineering interests, approach and future direction.
-  // Edit the text here without changing the About page HTML.
-  engineeringPhilosophy: {
-    principles: [
-      {
-        title: "Mechanical design in depth",
-        description: "I want to develop a stronger understanding of mechanisms, transmissions, linkages, grippers and lifting systems, including the forces, geometry and materials behind their operation."
-      },
-      {
-        title: "Understanding other disciplines",
-        description: "Electronics, embedded systems, sensing and control introduce real constraints on a mechanical design: power, space, feedback, timing and reliability. Learning about them helps me make better design choices."
-      },
-      {
-        title: "Designing the complete system",
-        description: "An individual mechanism can work well on its own but still be unsuitable for the robot. I want to learn how different engineering disciplines fit together, and how specialists make decisions as a team."
-      }
-    ],
-    example: {
-      heading: "A gripper is more than its jaws",
-      introduction: "A robot gripper is a useful example. Its geometry and gripping force matter, but so do the motor supply, sensor feedback and the way the rest of the robot uses it. These are design considerations, not claims that every option has already been tested.",
-      considerations: [
-        { discipline: "Mechanical", question: "Grip force, leverage, stiffness, friction and clearances" },
-        { discipline: "Electrical", question: "Motor and servo voltage, current demand and available power" },
-        { discipline: "Embedded & control", question: "How to detect contact, command movement and respond to faults" },
-        { discipline: "System integration", question: "Mass, packaging, mounting space and reliable operation on the robot" }
-      ],
-      conclusion: "Considering these interfaces early helps prevent a promising mechanism from becoming difficult to power, control or integrate.",
-      relatedProjectIds: ["mechanical-gripper", "robotic-gripper-grasp-detection", "robotics-project-2"]
-    },
-    direction: {
-      heading: "Where I want to go",
-      description: "My long-term goal is to study mechanical engineering and specialise in designing mechanisms for robotics or other mechatronic machines. I also want enough knowledge of electronics, software and control to work effectively alongside engineers in those disciplines."
-    }
   },
 
   categories: [

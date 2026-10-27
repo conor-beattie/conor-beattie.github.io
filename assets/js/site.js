@@ -517,26 +517,10 @@
     setText("#about-headline", data.owner.headline);
     const paragraphsEl = $("#about-paragraphs");
     if (paragraphsEl) paragraphsEl.innerHTML = (data.owner.aboutParagraphs || []).map(s => `<p>${text(s)}</p>`).join("");
-    const philosophy = data.engineeringPhilosophy || {};
-    const principlesEl = $("#about-principles");
-    if (principlesEl) principlesEl.innerHTML = (philosophy.principles || []).map(item =>
-      `<article class="about-principle"><h3>${text(item.title)}</h3><p>${text(item.description)}</p></article>`
-    ).join("");
-    const example = philosophy.example || {};
-    setText("#about-example-heading", example.heading || "");
-    setText("#about-example-intro", example.introduction || "");
-    setText("#about-example-conclusion", example.conclusion || "");
-    const exampleRows = $("#about-example-rows");
-    if (exampleRows) exampleRows.innerHTML = (example.considerations || []).map(item =>
-      `<tr><th scope="row">${text(item.discipline)}</th><td>${text(item.question)}</td></tr>`
-    ).join("");
-    const exampleLinks = $("#about-example-links");
-    if (exampleLinks) exampleLinks.innerHTML = (example.relatedProjectIds || [])
-      .map(id => visibleProjects().find(p => p.id === id)).filter(Boolean)
-      .map(p => `<a class="text-link" href="${projectUrl(p)}">${text(p.title)} <span aria-hidden="true">↗</span></a>`).join("");
-    const direction = philosophy.direction || {};
-    setText("#about-direction-heading", direction.heading || "");
-    setText("#about-direction-description", direction.description || "");
+    const historyEl = $("#about-history");
+    if (historyEl) historyEl.innerHTML = (data.owner.aboutHistoryParagraphs || []).map(s => `<p>${text(s)}</p>`).join("");
+    const outsideEl = $("#about-outside-engineering");
+    if (outsideEl) outsideEl.innerHTML = (data.owner.outsideEngineeringParagraphs || []).map(s => `<p>${text(s)}</p>`).join("");
     const links = $("#about-links");
     if (links) {
       const list = [linkMarkup(data.owner.githubUrl, "GitHub profile"),linkMarkup(data.owner.youtubeUrl,"Project videos"),linkMarkup(data.owner.linkedinUrl,"LinkedIn")].filter(Boolean);

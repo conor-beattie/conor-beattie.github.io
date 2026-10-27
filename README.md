@@ -1,18 +1,17 @@
-# About page — mechanical engineering direction (26 October 2026)
+# About page — personal introduction, history and interests (27 October 2026)
 
-The About page now explains a mechanical-design-first approach to engineering,
-with software, electronics, embedded systems and robotics providing complementary
-knowledge. The content focuses on professional interests, not scholarship claims.
+The About page now has three main parts: the introduction, **How It All Began**
+(LEGO Technic), and **Outside Engineering** (chess). It retains the existing
+Areas of Interest sidebar and the wider site's appearance.
 
-To edit the text, open `assets/js/site-data.js`:
-- `owner.aboutParagraphs` controls the opening introduction.
-- `engineeringPhilosophy.principles` controls the three approach cards.
-- `engineeringPhilosophy.example` controls the gripper considerations table and related project links.
-- `engineeringPhilosophy.direction` controls the future-direction paragraph.
+Edit the text in `assets/js/site-data.js` under `owner`:
+- `aboutParagraphs` — introduction, mechanical engineering interests and ambitions.
+- `aboutHistoryParagraphs` — LEGO Technic history; the student can add his chosen favourite models here.
+- `outsideEngineeringParagraphs` — chess achievement and other personal interests.
 
-All project IDs, category listings, project descriptions and selected-project
-ordering are unchanged. The About page's HTML/CSS/JS were revised; its file
-references include a new cache-busting version string.
+The earlier engineering philosophy, gripper constraints table and separate future
+ambitions sections are no longer displayed on the About page. Those technical
+subjects are better covered by the project pages.
 
 ---
 

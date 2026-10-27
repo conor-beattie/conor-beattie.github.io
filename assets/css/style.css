@@ -477,29 +477,18 @@ button { cursor: pointer; }
 .about-opening .about-copy p:first-child { font-size: 1.12rem; color: var(--ink); }
 .about-side h2 { font-size: 1.08rem; margin: 0 0 15px; }
 .about-side li:last-child { border-bottom: none; }
-.about-philosophy-section { padding-top: 22px; padding-bottom: 60px; }
-.about-section-title { font-size: clamp(1.65rem, 2.6vw, 2.18rem); letter-spacing: -.04em; line-height: 1.22; margin: 0 0 26px; }
-.about-principles { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
-.about-principle { padding: 25px 25px 24px; background: var(--white); border: 1px solid var(--line); border-radius: 13px; }
-.about-principle h3 { margin: 0 0 12px; letter-spacing: -.02em; font-size: 1.07rem; line-height: 1.36; }
-.about-principle p { color: var(--ink-soft); font-size: .92rem; line-height: 1.75; margin: 0; }
-.about-example-section { padding-top: 56px; padding-bottom: 56px; background: var(--wash); border-block: 1px solid var(--line); }
-.about-example { max-width: 920px; }
-.about-example__intro h2, .about-direction h2 { margin: 0 0 15px; font-size: clamp(1.65rem, 2.6vw, 2.18rem); letter-spacing: -.04em; line-height: 1.23; }
-.about-example__intro p, .about-example > p, .about-direction p { color: var(--ink-soft); max-width: 815px; margin: 0 0 22px; font-size: .98rem; line-height: 1.8; }
-.about-example__table-wrap { overflow-x: auto; margin: 23px 0 19px; border-radius: 11px; border: 1px solid var(--line); background: var(--white); }
-.about-example__table { border-collapse: collapse; width: 100%; text-align: left; }
-.about-example__table th, .about-example__table td { text-align: left; padding: 15px 19px; font-size: .91rem; border-bottom: 1px solid var(--line); vertical-align: top; }
-.about-example__table thead th { font-size: .8rem; font-weight: 750; background: #e9f0ed; }
-.about-example__table tbody th { font-weight: 700; width: 28%; }
-.about-example__table tr:last-child th, .about-example__table tr:last-child td { border-bottom: 0; }
-.about-example__links { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 25px; }
-.about-direction-section { padding-top: 55px; padding-bottom: 86px; }
-.about-direction { max-width: 1160px; }
-.about-direction p { max-width: 800px; margin-bottom: 0; }
-@media (max-width: 800px) { .about-principles { grid-template-columns: 1fr; gap: 12px; } .about-principle { padding: 22px; } }
-@media (max-width: 560px) { .about-opening { padding-top: 3px !important; } .about-philosophy-section { padding-top: 8px; } .about-example-section { padding-block: 41px; } .about-example__table th, .about-example__table td { padding: 12px 11px; font-size: .83rem; } .about-direction-section { padding: 43px 0 66px; } }
-
+/* ABOUT — personal history and interests, editable in site-data.js. */
+.about-section-title { font-size: clamp(1.65rem, 2.6vw, 2.18rem); letter-spacing: -.04em; line-height: 1.22; margin: 0 0 24px; }
+.about-story-section { padding: 50px 0 56px; border-top: 1px solid var(--line); }
+.about-outside-section { padding: 52px 0 75px; background: var(--wash); border-top: 1px solid var(--line); }
+.about-personal { max-width: var(--max); }
+.about-personal__copy { max-width: 790px; }
+.about-personal__copy p { color: var(--ink-soft); margin: 0 0 15px; font-size: .99rem; line-height: 1.82; }
+@media (max-width: 560px) {
+  .about-opening { padding-top: 3px !important; }
+  .about-story-section { padding: 39px 0 45px; }
+  .about-outside-section { padding: 40px 0 60px; }
+}
 
 /* DESIGN INVESTIGATIONS — optional sections on mechanical research projects. */
 .investigation-question { margin:-34px 0 54px; padding:24px 28px; background:var(--wash); border:1px solid var(--line); border-radius:14px; max-width:100%; }
