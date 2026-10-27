@@ -85,36 +85,42 @@ window.PORTFOLIO_DATA = {
   categories: [
     {
       id: "robotics",
+      published: true,
       title: "Robotics",
       subtitle: "Complete robot platforms, mechanical integration and control",
       image: "assets/images/IMG_2627 Bobbot.jpg"
     },
     {
       id: "cad",
+      published: true,
       title: "Mechanical Design & CAD",
       subtitle: "Assemblies, mechanisms, design iterations and manufacturing",
       image: "assets/images/gripper_bobbot.png"
     },
     {
       id: "fabrication",
+      published: true,
       title: "3D Printing & Fabrication",
       subtitle: "Custom parts, prototyping, tolerances and material selection",
       image: "assets/images/Pulley.png"
     },
     {
       id: "electronics",
+      published: true,
       title: "Electronics & Embedded Systems",
       subtitle: "Sensors, controllers, wiring and embedded interfaces",
       image: "assets/images/arduino mega.jpg"
     },
     {
       id: "software",
+      published: true,
       title: "Software",
       subtitle: "Behaviours, Python modules, control logic and development notes",
       image: "assets/diagrams/bobbot-return-to-base.svg"
     },
     {
       id: "algorithms",
+      published: true,
       title: "Algorithms",
       subtitle: "The mathematical methods behind navigation, vision and control",
       image: "assets/images/navigation block diagram.jpg"
@@ -136,7 +142,8 @@ window.PORTFOLIO_DATA = {
   software: [
     {
       id: "return-to-base",
-      featuredOrder: 4,
+      published: true,
+      featuredOrder: 5,
       title: "Autonomous Return to Base",
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
@@ -159,6 +166,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "stack-object",
+      published: true,
       title: "Stack Object",
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
@@ -177,6 +185,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "guide-recovery",
+      published: true,
       title: "Arena Guide Search & Recovery",
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
@@ -195,6 +204,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "wall-follow-skill",
+      published: true,
       title: "Follow Wall",
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
@@ -213,6 +223,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "local-avoidance-skill",
+      published: true,
       title: "Local Obstacle Avoidance",
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
@@ -231,6 +242,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "perception-system",
+      published: true,
       title: "Visual Perception Pipeline",
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
@@ -249,6 +261,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "localisation-system",
+      published: true,
       title: "Robot Localisation",
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
@@ -267,6 +280,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "motion-control",
+      published: true,
       title: "Motion & Command Control",
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
@@ -314,6 +328,7 @@ window.PORTFOLIO_DATA = {
   algorithms: [
     {
       id: "ibvs",
+      published: true,
       title: "IBVS — Image-Based Visual Servoing",
       shortName: "IBVS",
       group: "Visual Servoing",
@@ -327,6 +342,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "pbvs",
+      published: true,
       title: "PBVS — Position-Based Visual Servoing",
       shortName: "PBVS",
       group: "Visual Servoing",
@@ -340,6 +356,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "pid",
+      published: true,
       title: "PID — Proportional–Integral–Derivative Control",
       shortName: "PID",
       group: "Control",
@@ -353,6 +370,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "pure-pursuit",
+      published: true,
       title: "Pure Pursuit — Path Following",
       shortName: "Pure Pursuit",
       group: "Navigation",
@@ -365,7 +383,8 @@ window.PORTFOLIO_DATA = {
       demos: []
     },
     {
-      id: "apriltag-routing", title: "AprilTag Route Selection", shortName: "Tag Route Selection", group: "Vision & localisation",
+      id: "apriltag-routing",
+      published: true, title: "AprilTag Route Selection", shortName: "Tag Route Selection", group: "Vision & localisation",
       summary: "Choose from ordered arena guide markers to steer a robot along a return route.",
       overview: "Choose from ordered arena guide markers to steer a robot along a return route.",
       method: "Use marker IDs and a configured route to choose the most advanced eligible visible guide, then advance the route when the next marker is usable.",
@@ -374,7 +393,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "apriltag-pose", title: "AprilTag Pose Estimation", shortName: "AprilTag Pose", group: "Vision & localisation",
+      id: "apriltag-pose",
+      published: true, title: "AprilTag Pose Estimation", shortName: "AprilTag Pose", group: "Vision & localisation",
       summary: "Estimate camera-relative position and orientation from a known square marker.",
       overview: "Estimate camera-relative position and orientation from a known square marker.",
       method: "Detect tag corners, apply camera calibration and solve for a relative pose; transform into the robot frame as needed.",
@@ -383,7 +403,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "distance-angle-control", title: "Distance–Angle Feedback Control", shortName: "Distance–Angle", group: "Feedback control",
+      id: "distance-angle-control",
+      published: true, title: "Distance–Angle Feedback Control", shortName: "Distance–Angle", group: "Feedback control",
       summary: "Turn a distance error and a steering-angle error into commanded motion.",
       overview: "Turn a distance error and a steering-angle error into commanded motion.",
       method: "Measure target range and relative bearing; apply control gains and speed limits to output linear/angular velocity.",
@@ -392,7 +413,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "local-obstacle-avoidance", title: "Local Obstacle Avoidance", shortName: "Obstacle Avoidance", group: "Navigation",
+      id: "local-obstacle-avoidance",
+      published: true, title: "Local Obstacle Avoidance", shortName: "Obstacle Avoidance", group: "Navigation",
       summary: "Change local motion when objects obstruct a preferred direction.",
       overview: "Change local motion when objects obstruct a preferred direction.",
       method: "Represent nearby obstacles and nominal direction, assess free corridors and choose a safe local motion; resume the original route afterward.",
@@ -401,7 +423,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "ftg", title: "FTG — Follow the Gap", shortName: "FTG", group: "Navigation",
+      id: "ftg",
+      published: true, title: "FTG — Follow the Gap", shortName: "FTG", group: "Navigation",
       summary: "Steer through a suitable obstacle-free opening in a local scan or obstacle field.",
       overview: "Steer through a suitable obstacle-free opening in a local scan or obstacle field.",
       method: "Find free-space gaps in angular sectors and choose a feasible heading that balances clearance and progress.",
@@ -410,7 +433,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "dwa", title: "DWA — Dynamic Window Approach", shortName: "DWA", group: "Navigation",
+      id: "dwa",
+      published: true, title: "DWA — Dynamic Window Approach", shortName: "DWA", group: "Navigation",
       summary: "Evaluate short candidate velocity commands against obstacles and motion constraints.",
       overview: "Evaluate short candidate velocity commands against obstacles and motion constraints.",
       method: "Sample feasible velocities, predict short trajectories and score them against clearance, progress and speed.",
@@ -419,7 +443,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "wall-following", title: "Wall Following", shortName: "Wall Follow", group: "Navigation",
+      id: "wall-following",
+      published: true, title: "Wall Following", shortName: "Wall Follow", group: "Navigation",
       summary: "Travel alongside a wall at a preferred side distance and heading.",
       overview: "Travel alongside a wall at a preferred side distance and heading.",
       method: "Estimate wall distance and optionally wall heading; generate steering correction while maintaining forward motion.",
@@ -428,7 +453,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "smooth-control-law", title: "Smooth Control Law", shortName: "Smooth Control", group: "Feedback control",
+      id: "smooth-control-law",
+      published: true, title: "Smooth Control Law", shortName: "Smooth Control", group: "Feedback control",
       summary: "Generate a continuously varying corrective motion toward a target.",
       overview: "Generate a continuously varying corrective motion toward a target.",
       method: "Use bearing and distance errors to calculate smooth speed/turn commands with saturation or slowing regions.",
@@ -437,7 +463,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "odometry", title: "Wheel Odometry", shortName: "Odometry", group: "Localisation",
+      id: "odometry",
+      published: true, title: "Wheel Odometry", shortName: "Odometry", group: "Localisation",
       summary: "Estimate changes in robot pose from wheel motion.",
       overview: "Estimate changes in robot pose from wheel motion.",
       method: "Convert wheel encoder measurements to linear and angular displacement using the robot kinematic model.",
@@ -446,7 +473,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "dead-reckoning", title: "Dead Reckoning & Open-Loop Motion", shortName: "Dead Reckoning", group: "Localisation",
+      id: "dead-reckoning",
+      published: true, title: "Dead Reckoning & Open-Loop Motion", shortName: "Dead Reckoning", group: "Localisation",
       summary: "Estimate or execute movement without absolute visual position corrections.",
       overview: "Estimate or execute movement without absolute visual position corrections.",
       method: "Propagate motion estimates from commanded velocity, time or wheel displacement; compare against feedback-based control.",
@@ -455,7 +483,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "coordinate-transformations", title: "Coordinate Frames & Transformations", shortName: "Frames", group: "Robotics mathematics",
+      id: "coordinate-transformations",
+      published: true, title: "Coordinate Frames & Transformations", shortName: "Frames", group: "Robotics mathematics",
       summary: "Convert target and robot measurements between camera, body and arena coordinate frames.",
       overview: "Convert target and robot measurements between camera, body and arena coordinate frames.",
       method: "Define frame origins and axis directions, then apply rotations and translations consistently.",
@@ -464,7 +493,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "a-star", title: "A* Path Planning", shortName: "A*", group: "Planning",
+      id: "a-star",
+      published: true, title: "A* Path Planning", shortName: "A*", group: "Planning",
       summary: "Find a graph or grid route using cost-so-far plus a heuristic estimate.",
       overview: "Find a graph or grid route using cost-so-far plus a heuristic estimate.",
       method: "Expand low-cost candidate nodes while tracking the predecessor path; reconstruct a route to the goal.",
@@ -473,7 +503,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "slam", title: "SLAM — Simultaneous Localisation and Mapping", shortName: "SLAM", group: "Localisation",
+      id: "slam",
+      published: true, title: "SLAM — Simultaneous Localisation and Mapping", shortName: "SLAM", group: "Localisation",
       summary: "Estimate robot pose while constructing or updating a map.",
       overview: "Estimate robot pose while constructing or updating a map.",
       method: "Combine successive motion estimates with landmark or sensor observations to constrain pose and map error.",
@@ -482,7 +513,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "motion-profiles", title: "Motion Profiles", shortName: "Profiles", group: "Motion control",
+      id: "motion-profiles",
+      published: true, title: "Motion Profiles", shortName: "Profiles", group: "Motion control",
       summary: "Constrain acceleration and speed to make transitions smoother and more repeatable.",
       overview: "Constrain acceleration and speed to make transitions smoother and more repeatable.",
       method: "Plan a velocity or position trajectory with acceleration limits, such as trapezoidal motion.",
@@ -491,7 +523,8 @@ window.PORTFOLIO_DATA = {
       sourceUrl: "", demos: []
     },
     {
-      id: "visual-target-tracking", title: "Visual Target Tracking", shortName: "Tracking", group: "Vision & localisation",
+      id: "visual-target-tracking",
+      published: true, title: "Visual Target Tracking", shortName: "Tracking", group: "Vision & localisation",
       summary: "Maintain correspondence to an object or marker across camera frames.",
       overview: "Maintain correspondence to an object or marker across camera frames.",
       method: "Identify observations by target identity and compare timestamped positions or features as frames arrive.",
@@ -501,11 +534,18 @@ window.PORTFOLIO_DATA = {
     }
   ],
 
+  /* PUBLICATION: published: false hides a project from public listings,
+     direct project links and related-project links. It is still present
+     in this public JavaScript file (not confidential). The local-only
+     development.html page lets you preview drafts.
+     featuredOrder controls only the Selected Projects order; unpublished
+     items never appear there, even when numbered. */
   /* Duplicate a project object to add another project. Each id must be unique. */
   projects: [
     {
       id: "autonomous-mobile-robot",
-      featuredOrder: 1,                  // URL: project.html?id=autonomous-mobile-robot
+      published: true,
+      featuredOrder: 2,                  // URL: project.html?id=autonomous-mobile-robot
       title: "Bobbot - Autonomous Mobile Robot",
       category: "robotics",                          // robotics | cad | fabrication | electronics
       image: "assets/images/IMG_2627 Bobbot.jpg",
@@ -529,7 +569,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mechanical-gripper",
-      featuredOrder: 6,
+      published: true,
+      featuredOrder: 7,
       title: "Bobbot Gripper — Original Design",
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
@@ -554,15 +595,17 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "robotic-gripper-grasp-detection",
-      "title": "Robotic Gripper — Grasp Detection Investigation",
+      published: true,
+      featuredOrder: 1,
+      "title": "Parallel-Jaw Gripper — Secure-Grasp Detection",
       "category": "cad",
       "image": "assets/images/gripper_bobbot.png",
       "imageAlt": "CAD model of the original Bobbot gripper used as the investigation baseline",
       "imageCaption": "Original Bobbot gripper — reference design only. New gripper concepts are not pictured.",
-      "summary": "A separate gripper-design investigation comparing parallel-jaw mechanisms and mechanical grasp detection for a 150 mm cube, using the original Bobbot gripper as a reference.",
+      "summary": "Investigating four-bar and rack-and-pinion parallel grippers that accommodate different box sizes and can indicate whether a grasp is likely to remain secure, using a 150 mm cube as the main test object.",
       "tags": [
         "Mechanism Design",
-        "Grippers",
+        "Parallel Jaws",
         "CAD",
         "Experimental Design"
       ],
@@ -573,107 +616,107 @@ window.PORTFOLIO_DATA = {
         "autonomous-mobile-robot"
       ],
       "sectionLabels": {
-        "overview": "Existing design and problem",
-        "brief": "Investigation aim",
-        "research": "Engineering research",
-        "construction": "CAD and prototyping",
-        "software": "Sensing and control interface",
-        "testing": "Planned verification",
-        "iterations": "Design decisions and iteration",
-        "results": "Current evidence",
-        "nextSteps": "Next steps"
-      },
+  "overview": "The design problem",
+  "brief": "Design objectives",
+  "research": "Mechanisms and sensing research",
+  "construction": "CAD and prototyping",
+  "software": "Interpreting grasp feedback",
+  "testing": "Test and measurement plan",
+  "iterations": "Design decisions and iteration",
+  "results": "Current stage",
+  "nextSteps": "Next steps"
+},
       "sections": {
-        "overview": "Bobbot has an existing gripper mounted on a vertical lift to handle a cardboard cube approximately 150 mm across. This is a separate engineering investigation into designing an additional gripper, not a replacement for the original project page. The current jaws do not maintain parallel opposing faces throughout closure, which limits the range of positions and orientations in which a cube can be gripped. This assembly provides a useful baseline for examining alternative gripping mechanisms.\n\nA second limitation is knowing whether pickup succeeded. Two indirect checks have been considered: reversing and inspecting the cube’s former position, or raising the cube until it obscures part of the camera view. Neither measures gripping engagement at the jaws. A cube can be touched without being securely retained, so the investigation must separate initial contact, an actual grip and successful retention.",
-        "brief": "Investigate mechanical gripper designs that can close around a 150 mm cardboard cube, retain it during movement, and produce a simple, observable indication of engagement or gripping load. The central question is whether grasp detection can be integrated into the mechanism without relying on camera-based verification of pickup.\n\nTwo design decisions will be evaluated separately: how the jaws move, and how contact or load is detected. Keeping these questions separate makes it possible to compare parallel-motion mechanisms while also testing different compliant or spring-loaded detection methods. The final concept must remain practical to manufacture, affordable, compact and compatible with the mobile robot.",
-        "research": "Initial research focuses on jaw kinematics, mechanical advantage, friction at the cube surface, stiffness, compliance, spring selection, actuator loading and the repeatability of mechanical sensing. Force is not determined by servo command or jaw position alone: linkage geometry, friction and the deflection of compliant parts also matter.\n\nCandidate methods for detecting engagement include a spring-loaded contact pad, an articulated or floating jaw, and a compliant element in the transmission. Simple switches, Hall-effect sensors or position measurements could convert mechanical displacement into a signal. Component options and published examples should be recorded with sources as research progresses.",
-        "construction": "The original assembly and its jaw motion will be measured before choosing a new gripper mechanism. The next stage is to produce labelled sketches and CAD models showing pivot locations, motion paths, clearances, spring positions and the force path from actuator to cube.\n\nPrototype parts can be manufactured with available workshop methods and 3D printing, followed by bench tests before integration with the vertical lift. Each version should be identified so that drawings, photographs, materials and measured results can be traced to the same revision.",
-        "software": "The objective is a mechanically meaningful signal that the robot can read with minimal additional electronics and software. The gripper mechanism should indicate contact or load through repeatable motion or deflection; a switch or sensor may then report that state.\n\nSoftware can record detection transitions and compare them with independent observations during testing. The detection signal must not automatically be treated as proof of secure retention: that claim needs a separate physical holding test.",
-        "testing": "The verification plan uses repeated grasps with the same 150 mm cube under recorded conditions. Trials will vary jaw alignment and initial cube position, then record contact detection, whether the cube was actually secured, whether it remained held during lift and movement, and any slips or missed pickups.\n\nA test record should include the concept and revision, cube position, sensor response, independent grasp outcome, retention outcome, and failure notes. False-positive detection (signal without secure grasp) and missed detection (secure grasp without signal) can then be counted. Sample sizes and numerical pass targets should be chosen and documented before comparisons are made.",
-        "iterations": "The investigation will compare a baseline with alternative jaw geometries and sensing arrangements. Results should be used to explain whether revisions improve opening range, parallel motion, retention or reliable detection—and whether they introduce additional friction, backlash, complexity, cost or weight. Only changes that are actually built and evaluated should be described here as completed iterations.",
-        "results": "The current gripper and the indirect camera-based checking methods establish the design problem. The alternative mechanisms, detector arrangements and planned test methods described here are investigation proposals, not completed experimental findings. Measured performance, prototype photographs and a justified final selection will be added as testing takes place.",
-        "nextSteps": "Measure the existing jaw opening and contact geometry; produce annotated sketches of the main detection concepts; compare four-bar and rack-and-pinion parallel-jaw arrangements; choose practical springs or sensing components; establish baseline grasp tests; build initial prototypes; then repeat tests to compare contact detection with genuine secure retention."
-      },
+  "overview": "The first Bobbot gripper is a separate, existing design. Its pivoting jaws do not keep parallel contact faces during closure, reducing the range of box widths and positions that can be gripped consistently. It remains a useful mechanical reference, but the new investigation is an additional gripper intended for the lower-cost Robbot platform—not simply a renamed version of the Bobbot gripper. The initial reference object is a 150 mm cardboard cube.\n\nThe central problem has two parts: produce opposing jaw motion suitable for boxes of different widths, and obtain feedback that a box is being gripped with sufficient engagement to stay held. Indirect camera-based pickup checks have limitations. Jaw contact by itself does not establish a secure grasp, and neither jaw position nor servo command alone proves that the box will be retained.",
+  "brief": "Compare two candidate mechanisms: a four-bar parallel-jaw linkage and a rack-and-pinion parallel gripper. Both should be evaluated for jaw parallelism, useful opening range, load transmission, clearances, friction, backlash, size, cost and ease of fabrication. The designs should be bench-testable before mounting on Robbot.\n\nInvestigate a simple mechanical indicator of gripping load or elastic deflection, for example a spring-loaded pad or compliant drive element read by a switch, Hall-effect sensor or displacement measurement. The objective is not merely to signal that something was touched, but to determine experimentally whether the signal is a useful predictor of secure retention. The 150 mm cube provides a common baseline; support for other box widths is an additional design goal with limits to be established by measurements.",
+  "research": "Research will focus on published examples and technical explanations of four-bar and rack-and-pinion grippers, jaw guidance, spring-loaded pads, compliant gripping mechanisms, and methods for sensing gripping force indirectly through displacement. For each approach, record its source, working principle, force path, likely failure modes, and suitability for low-cost manufacture.\n\nCandidate feedback methods include a spring whose compression is measured by a Hall-effect magnet/sensor pair, a microswitch operating at a defined displacement, a jaw-position sensor, or a force-sensitive element where justified. A spring or Hall reading measures deflection or proximity; it must be calibrated and checked against actual grip performance before it can be interpreted as gripping load. Important questions include how off-centre contact, box deformation, linkage friction, jaw slip and variations in box size alter the reading. Specific literature references and test evidence will be added as research is completed.",
+  "construction": "Develop student-created, annotated drawings and CAD models of both candidate mechanisms, showing the two jaw motion paths, guides, pivots or rack teeth, actuation path, clearances and mounting envelope. Give the proposed sensing element its own detail view showing what moves, which spring deflects and how displacement reaches the sensor.\n\nBuild small bench prototypes before selecting a complete mechanism. Record the dimensions, material, version and manufacturing choices for each candidate, then compare their useful closing range and tolerance to jaw misalignment. The new gripper will have its own drawings and prototype photographs; the current cover image is clearly labelled as the original Bobbot baseline until new images exist.",
+  "software": "Keep the gripping mechanism and its evidence separate from the detection circuit. Low-level software may read a switch or Hall-effect signal and log the timing or magnitude of mechanical deflection, but the signal is only an estimate of engagement. It should be compared with independent observations of box retention.\n\nThe first goal is an understandable mechanical response that could be monitored with minimal sensing hardware. Software thresholds or a digital grasp indication should follow physical calibration and repeatability tests, not substitute for them. No high-level robot navigation or power-supply redesign is part of this investigation.",
+  "testing": "First measure the original gripper's effective jaw range and demonstrate where its non-parallel faces limit box engagement. Test the four-bar and rack-and-pinion candidates with the same 150 mm cube, then with other recorded box widths where practical. Compare parallelism, opening travel, centred and offset grasps, mechanical play and actual retention after closure.\n\nFor grasp feedback, independently record three outcomes: initial contact, a held box immediately after closure, and retention during a defined lift or disturbance. In each trial note the sensor state or deflection, jaw position and any slip. Count false positives (detector predicts a secure grasp but the box is not retained) and missed detections (a secure grasp without a positive signal). Establish sample sizes, performance targets and test loading before claiming that an approach works. No success rates are assumed in advance.",
+  "iterations": "Compare changes to jaw geometry, guides and sensing compliance against repeatable measurements, rather than appearance alone. Four-bar linkages may introduce joint play or changing mechanical advantage; rack-and-pinion designs may introduce friction, backlash or tooth wear. Spring placement or detector thresholds may also make off-centre contact appear secure when it is not.\n\nOnly report iterations as completed when a physical or simulated test has been carried out and the observations recorded. Keep sketches of rejected concepts and explain why a revised design offers a practical improvement.",
+  "results": "Current work consists of identifying the limitations of the original Bobbot jaws, selecting the four-bar linkage and rack-and-pinion parallel gripper as the principal candidates, and outlining possible spring-based grasp indicators. The literature review, revised CAD drawings, sensing prototypes and comparative experiments are still to be completed. No secure-grasp detection reliability or gripping-force result is claimed at this stage.",
+  "nextSteps": "1. Record the original gripper's opening geometry and failure conditions on a 150 mm cube. 2. Read and document existing work on parallel-jaw mechanisms and spring/compliant gripping-force detection. 3. Sketch and model the four-bar and rack-and-pinion candidates. 4. Produce at least two sensor-placement concepts, including a possible spring-plus-Hall-effect arrangement. 5. Bench-test opening range and secure retention using centred and offset boxes. 6. Compare sensor indications against independent grip outcomes before selecting and refining the final design."
+},
       "investigation": {
-        "question": "Can a new mechanical gripper detect engagement with a 150 mm cardboard cube at the mechanism, while distinguishing simple contact from a secure grasp?",
-        "status": "Design investigation — candidate mechanisms and test methods are proposed, not validated results.",
+        "question": "Which parallel-jaw design best handles different box widths, and can measurable spring or mechanism deflection indicate a grasp likely to remain secure?",
+        "status": "Investigation in progress — concepts and proposed tests, not demonstrated performance.",
         "criteria": [
           [
-            "Cube compatibility",
-            "Fit and close around a 150 mm cardboard cube",
-            "150 mm cube; jaw margin to be measured"
+            "Box width and travel",
+            "Hold 150 mm reference cube and evaluate other widths",
+            "Record jaw opening, contact geometry and smallest/largest reliable box"
           ],
           [
-            "Jaw engagement",
-            "Observe surface contact and grip across different cube offsets",
-            "Compare present jaws with parallel-jaw alternatives"
+            "Parallel jaw motion",
+            "Keep opposing contact surfaces approximately parallel in working range",
+            "Measure jaw angle and clearance at repeated openings"
           ],
           [
-            "Grasp retention",
-            "Lift, translate and disturb the held cube using a repeatable test",
-            "Define pass conditions before testing"
+            "Gripping and retention",
+            "Retain cube after closure and defined handling or disturbance",
+            "Independent hold, lift and motion tests with a stated pass criterion"
           ],
           [
-            "Contact detection",
-            "Check signal against independently observed jaw contact",
-            "Record detected / actual contact"
+            "Mechanical response",
+            "Create measurable spring or compliant-element displacement under load",
+            "Measure deflection against independently observed grasp conditions"
           ],
           [
-            "Secure-grasp detection",
-            "Check signal against independent retention outcome",
-            "Record false positives and missed detections"
+            "Secure grasp indication",
+            "Distinguish contact from a grasp that remains held",
+            "Count false positives and missed detections against actual retention"
           ],
           [
-            "Repeatability",
-            "Repeat the same grasp conditions for each prototype",
-            "Set trial count and target rate in advance"
+            "Misaligned engagement",
+            "Evaluate centred, offset and partial jaw contacts",
+            "Repeat tests with recorded offsets and box orientations"
           ],
           [
-            "Robot integration",
-            "Measure mass, available space, actuation and sensor needs",
-            "Record constraints from the existing robot"
+            "Manufacture and robustness",
+            "Practical low-cost assembly with manageable backlash and friction",
+            "Document parts, cost, build accuracy, wear and maintenance"
           ],
           [
-            "Cost and manufacture",
-            "List purchased parts, printed parts and assembly operations",
-            "Set the budget and fabrication limits before selection"
+            "Robot fit",
+            "Independently bench-testable, with later Robbot mounting",
+            "Check mass, envelope and mechanical interface; no lift project required"
           ]
         ],
         "jawOptions": [
           {
-            "name": "Existing pivoting jaws",
-            "strength": "Available reference assembly and known mounting arrangement.",
-            "tradeoff": "Contact surfaces are not parallel throughout closure; effective cube engagement depends on position.",
-            "status": "Baseline"
+            "name": "Original Bobbot pivoting jaws",
+            "strength": "Existing reference for comparing jaw travel and box-width tolerance.",
+            "tradeoff": "Faces do not remain parallel; box engagement depends on closure and position.",
+            "status": "Baseline only"
           },
           {
-            "name": "Four-bar parallel-jaw linkage",
-            "strength": "Can be designed to maintain approximately parallel jaw faces over a useful travel.",
-            "tradeoff": "Joint tolerances, geometry and linkage travel need checking.",
-            "status": "Candidate"
+            "name": "Four-bar parallel-jaw gripper",
+            "strength": "Linkage geometry can maintain approximately parallel contact over a chosen range.",
+            "tradeoff": "Finite travel, changing mechanical advantage and pivot clearance require analysis.",
+            "status": "Main candidate A"
           },
           {
             "name": "Rack-and-pinion parallel gripper",
-            "strength": "Coupled opposing jaw travel and potentially symmetric closing motion.",
-            "tradeoff": "Guidance, backlash, printed-tooth strength and friction must be evaluated.",
-            "status": "Candidate"
+            "strength": "Opposed racks can give symmetric, guided translation and adaptable jaw travel.",
+            "tradeoff": "Guides, backlash, gear tooth strength and sliding resistance need testing.",
+            "status": "Main candidate B"
           }
         ],
         "detectionOptions": [
           {
-            "name": "Spring-loaded gripping pads",
-            "principle": "A pad compresses on contact; the displacement can be measured or switched.",
-            "risk": "Detects contact that may not be a securely retained cube."
+            "name": "Spring-loaded pads with measured displacement",
+            "principle": "Elastic pad displacement under gripping load is observed by a magnet/Hall sensor, switch or position measurement.",
+            "risk": "A displaced pad can show contact without reliable retention; stiffness and thresholds need calibration."
           },
           {
-            "name": "Floating or articulated jaws",
-            "principle": "A jaw element changes angle or position when load is applied.",
-            "risk": "Motion may depend on where and how the cube touches the jaw."
+            "name": "Floating jaw or compliant contact element",
+            "principle": "The movable jaw segment deflects under reaction force, making engagement observable at the mechanism.",
+            "risk": "Deflection depends on contact location, cube compliance and alignment."
           },
           {
-            "name": "Spring-loaded transmission or linkage",
-            "principle": "A compliant part in the drive path deflects as the gripping load increases.",
-            "risk": "Friction, backlash and actuator loading may affect the threshold."
+            "name": "Spring or compliance in the drive transmission",
+            "principle": "A spring in the closing force path compresses under load and creates measurable travel.",
+            "risk": "Friction, backlash and mechanical advantage can confuse the relationship between travel and grip force."
           }
         ],
         "trialColumns": [
@@ -683,24 +726,29 @@ window.PORTFOLIO_DATA = {
         ],
         "trialRows": [
           [
-            "Contact",
-            "Was the cube actually touched? Did the detector respond?",
-            "Separates first engagement from an empty closure."
+            "Jaw range",
+            "Cube width, jaw opening and parallelism",
+            "Checks usable size range beyond the 150 mm reference"
           ],
           [
-            "Secure grasp",
-            "Was the cube held without manual support after closure?",
-            "Avoids treating contact alone as a successful pickup."
+            "Initial contact",
+            "Observed contact versus sensor response",
+            "Contact alone is not proof of retention"
           ],
           [
-            "Retention",
-            "Did it remain held during the defined lift/motion sequence?",
-            "Measures practical gripping performance."
+            "Secure hold",
+            "Independent hold / lift outcome after closing",
+            "Reference outcome for any grasp-success indication"
+          ],
+          [
+            "Disturbance and slip",
+            "Whether the box remains held during defined handling",
+            "Tests whether the claimed grasp is likely to stay grasped"
           ],
           [
             "Repeatability",
-            "Results across repeated centred and offset attempts.",
-            "Reveals missed detections and false-positive indications."
+            "Repeated centre/offset trials and detector errors",
+            "Counts false positives and missed detections"
           ]
         ],
         "media": [],
@@ -715,7 +763,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "printed-mechanisms",
-      featuredOrder: 7,
+      published: true,
+      featuredOrder: 8,
       title: "Pulley",
       category: "fabrication",
       image: "assets/images/Pulley.png",
@@ -752,7 +801,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-control-electronics",
-      featuredOrder: 2,
+      published: true,
+      featuredOrder: 3,
       relatedProjectIds: ["robot-io-mapping", "mobile-robot-power-distribution"],
       title: "Modular Robot I/O & TeleOp Controller",
       category: "electronics",
@@ -781,7 +831,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-io-mapping",
-      featuredOrder: 5,
+      published: true,
+      featuredOrder: 6,
       title: "Robot I/O Mapping & Hardware Abstraction",
       category: "electronics",
       image: "assets/images/io-interface-contract.svg",
@@ -834,7 +885,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mobile-robot-power-distribution",
-      featuredOrder: 3,
+      published: true,
+      featuredOrder: 4,
       title: "Mobile Robot Power Distribution & Electrical Architecture",
       category: "electronics",
       image: "assets/images/one line diagram.jpg",
@@ -869,6 +921,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robotics-project-2",
+      published: true,
       title: "Robbot - Autonomous Mobile Robot",
       category: "robotics",
       image: "assets/images/IMG_2756_robbot.jpg",
@@ -892,6 +945,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "gobilda-decode-starter-bot",
+      published: true,
       title: "goBILDA DECODE Starter Bot",
       category: "robotics",
       image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
@@ -913,7 +967,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "cad-project-2",
-      featuredOrder: 8,
+      published: true,
+      featuredOrder: 9,
       title: "Shooter",
       category: "cad",
       image: "assets/images/Shooter CAD.png",
@@ -937,7 +992,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-2",
-      featuredOrder: 9,
+      published: true,
+      featuredOrder: 10,
       title: "Rubber Band Intake Wheel",
       category: "fabrication",
       image: "assets/images/rubber_band_wheel.png",
@@ -977,6 +1033,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-3",
+      published: true,
       title: "FlySky Receiver Mount",
       category: "fabrication",
       image: "assets/images/FlySky Receiver.png",
@@ -1011,6 +1068,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-4",
+      published: true,
       title: "PiCam3 Mount 8 Degrees",
       category: "fabrication",
       image: "assets/images/PICam3 Mount 8 degree.png",
@@ -1045,6 +1103,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-5",
+      published: true,
       title: "RoboClaw 2x30",
       category: "fabrication",
       image: "assets/images/RoboClaw 2x30.png",

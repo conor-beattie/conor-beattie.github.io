@@ -27,13 +27,21 @@
   const text = (s) => escape(s || "");
   const category = (id) => data.categories.find(c => c.id === id);
   const kindLabel = (p) => p.category === "fabrication" ? "3D PRINT" : (category(p.category)?.title || "Portfolio entry");
+  // A published:false project is absent from every public UI and direct URL.
+  // Drafts can be previewed only from a locally opened copy of this website.
+  const onLocalSite = location.protocol === "file:" || ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
+  const previewDrafts = onLocalSite && new URLSearchParams(location.search).get("preview") === "drafts";
+  const isPublished = item => item && item.published !== false;
+  const canShow = item => Boolean(item && (isPublished(item) || previewDrafts));
+  const visibleProjects = () => data.projects.filter(canShow);
+  const missingProject = '<div class="not-found"><p class="eyebrow">PROJECT NOT AVAILABLE</p><h1>This project is not currently published.</h1><p>Browse the published projects instead.</p><a class="button button-primary" href="projects.html">Browse projects ↗</a></div>';
   const navCategory = () => {
     const page = document.body.dataset.page;
     if (page === "software" || page === "software-detail") return "software";
     if (page === "algorithms" || page === "algorithm") return "algorithms";
     if (page === "project") {
       const id = new URLSearchParams(location.search).get("id");
-      return data.projects.find(p => p.id === id)?.category || "";
+      return visibleProjects().find(p => p.id === id)?.category || "";
     }
     if (page === "projects") {
       const chosen = new URLSearchParams(location.search).get("category") || "";
@@ -141,7 +149,7 @@
 
   function demoMarkup(item, showAlgorithmTitle = false) {
     const d = item.demo, a = item.algorithm;
-    const robot = data.projects.find(p => p.id === d.robotId);
+    const robot = visibleProjects().find(p => p.id === d.robotId);
     const path = localMedia(d.video);
     if (!path || !robot) return ""; // Avoid broken links and unassigned implementations.
     const poster = localMedia(d.poster);
@@ -154,7 +162,7 @@
     </article>`;
   }
 
-  const softwareItems = Array.isArray(data.software) ? data.software : [];
+  const softwareItems = (Array.isArray(data.software) ? data.software : []).filter(canShow);
   const softwareById = (id) => softwareItems.find(s => s.id === id);
   const softwareUrl = (s) => `software-detail.html?id=${encodeURIComponent(s.id)}`;
   const softwareForAlgorithm = (id) => softwareItems.filter(s => (s.algorithmIds || []).includes(id));
@@ -195,7 +203,7 @@
     }
     document.title = `${item.title} · ${data.owner.name}`;
     const related = relatedAlgorithms(item.algorithmIds);
-    const robots = (item.robotIds || []).map(id => data.projects.find(p => p.id === id)).filter(Boolean);
+    const robots = (item.robotIds || []).map(id => visibleProjects().find(p => p.id === id)).filter(Boolean);
     const source = linkMarkup(item.sourceUrl, "View public source code");
     // Display meaningful flowcharts where available; omit decorative cover imagery.
     const media = item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt || `${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>` : "";
@@ -229,7 +237,7 @@
     if (!a) { root.innerHTML = `<div class="container not-found"><p class="eyebrow">ALGORITHM NOT FOUND</p><h1>No algorithm has that ID.</h1><a class="button button-primary" href="algorithms.html">Browse algorithms ↗</a></div>`; return; }
     document.title = `${a.title} · ${data.owner.name}`;
     const implementations = softwareForAlgorithm(a.id);
-    const videos = (a.demos || []).filter(d => d.video && data.projects.some(p => p.id === d.robotId)).map(d => ({algorithm:a,demo:d}));
+    const videos = (a.demos || []).filter(d => d.video && visibleProjects().some(p => p.id === d.robotId)).map(d => ({algorithm:a,demo:d}));
     const source = linkMarkup(a.sourceUrl,"Reference / source link");
     root.innerHTML = `<div class="container"><div class="breadcrumb"><a href="algorithms.html">Algorithms</a><span aria-hidden="true">/</span><span>${text(a.shortName)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(a.group)} · ALGORITHM</p><h1>${text(a.title)}</h1><p class="project-lede">${text(a.summary)}</p></div>
@@ -245,7 +253,7 @@
     setText("#hero-headline", data.owner.homeHeadline || data.owner.headline);
     setText("#hero-intro", data.owner.introduction);
     const imgEl = $("#home-hero-image");
-    if (imgEl) imgEl.src = data.projects[0]?.image || data.categories[0]?.image;
+    if (imgEl) imgEl.src = visibleProjects()[0]?.image || data.categories[0]?.image;
     const catGrid = $("#category-grid");
     if (catGrid) catGrid.innerHTML = data.categories.map((cat) => `
       <a href="${cat.id === "software" ? "software.html" : cat.id === "algorithms" ? "algorithms.html" : `projects.html?category=${encodeURIComponent(cat.id)}`}" class="category-tile">
@@ -258,7 +266,7 @@
       // are independent of this order; software entries can also be featured.
       const isFeatured = item => Number.isInteger(item.featuredOrder) && item.featuredOrder > 0;
       const selected = [
-        ...data.projects.filter(isFeatured).map(item => ({ item, kind: "project" })),
+        ...visibleProjects().filter(isFeatured).map(item => ({ item, kind: "project" })),
         ...softwareItems.filter(isFeatured).map(item => ({ item, kind: "software" }))
       ].sort((a, b) => a.item.featuredOrder - b.item.featuredOrder ||
         a.item.title.localeCompare(b.item.title));
@@ -291,7 +299,7 @@
     if (chosen !== "all" && !category(chosen)) chosen = "all";
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
-      const results = data.projects.filter(p => !["software"].includes(p.category)).filter(p => {
+      const results = visibleProjects().filter(p => !["software"].includes(p.category)).filter(p => {
         const searchable = [p.title, p.summary, ...(p.tags || [])].join(" ").toLocaleLowerCase();
         return (chosen === "all" || p.category === chosen) && searchable.includes(term);
       });
@@ -429,10 +437,10 @@
 
   function projectDetail() {
     const id = new URLSearchParams(location.search).get("id");
-    const p = data.projects.find(item => item.id === id);
+    const p = visibleProjects().find(item => item.id === id);
     const root = $("#project-content");
     if (!p) {
-      root.innerHTML = `<div class="not-found"><p class="eyebrow">PROJECT NOT FOUND</p><h1>That project isn't in this portfolio yet.</h1><p>Check the link or return to the project gallery.</p><a class="button button-primary" href="projects.html">Browse projects <span aria-hidden="true">↗</span></a></div>`;
+      root.innerHTML = missingProject;
       return;
     }
     if (p.category === "fabrication") {
@@ -462,7 +470,7 @@
     const usedDemos = demosForProject(p.id);
     const linkedSoftware = softwareItems.filter(item => (item.robotIds || []).includes(p.id));
     if (linkedSoftware.length) entries.push(["robot-software", "Software & Algorithms"]);
-    const linkedProjects = (p.relatedProjectIds || []).map(id => data.projects.find(item => item.id === id)).filter(item => item && item.id !== p.id);
+    const linkedProjects = (p.relatedProjectIds || []).map(id => visibleProjects().find(item => item.id === id)).filter(item => item && item.id !== p.id);
     if (linkedProjects.length) entries.push(["related-projects", "Related projects"]);
     if (p.category === "robotics" && usedDemos.length) entries.push(["algorithm-demonstrations", "Video demonstrations"]);
     const resources = [
@@ -524,7 +532,7 @@
     ).join("");
     const exampleLinks = $("#about-example-links");
     if (exampleLinks) exampleLinks.innerHTML = (example.relatedProjectIds || [])
-      .map(id => data.projects.find(p => p.id === id)).filter(Boolean)
+      .map(id => visibleProjects().find(p => p.id === id)).filter(Boolean)
       .map(p => `<a class="text-link" href="${projectUrl(p)}">${text(p.title)} <span aria-hidden="true">↗</span></a>`).join("");
     const direction = philosophy.direction || {};
     setText("#about-direction-heading", direction.heading || "");
@@ -538,6 +546,22 @@
     }
   }
 
+  function development() {
+    const root = $("#development-content");
+    if (!root) return;
+    if (!onLocalSite) {
+      root.innerHTML = `<div class="not-found"><h1>Local development only</h1><p>Open this page from a local copy of the website to preview drafts. No draft listing is available on the public site.</p><a href="index.html" class="button button-outline">Home ↗</a></div>`;
+      return;
+    }
+    const devCard = p => `<article class="project-card">
+      <a class="project-card__image" href="${projectUrl(p)}&preview=drafts"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" /></a>
+      <div class="project-card__body"><p class="eyebrow">${isPublished(p) ? "PUBLISHED" : "DRAFT — NOT SHOWN PUBLICLY"}</p>
+      <h3><a href="${projectUrl(p)}&preview=drafts">${text(p.title)}</a></h3>
+      <p>${text(p.summary)}</p><a class="text-link" href="${projectUrl(p)}&preview=drafts">Preview project ↗</a></div>
+    </article>`;
+    root.innerHTML = `<div class="container"><div class="project-intro"><p class="eyebrow">LOCAL PREVIEW ONLY</p><h1>Development Projects</h1><p>Projects marked <code>published: false</code> are hidden from the public pages and direct links. This preview works only on a local copy; the data remains visible in the public repository.</p></div><div class="project-grid">${data.projects.map(devCard).join("")}</div></div>`;
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     siteShell();
     const page = document.body.dataset.page;
@@ -549,5 +573,6 @@
     if (page === "algorithm") algorithmDetail();
     if (page === "project") projectDetail();
     if (page === "about") about();
+    if (page === "development") development();
   });
 })();

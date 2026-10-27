@@ -209,3 +209,12 @@ Two independent Mechanical Design & CAD project entries are deliberately maintai
 - `project.html?id=robotic-gripper-grasp-detection` — **Robotic Gripper — Grasp Detection Investigation**, an additional design investigation using the original as a comparison baseline. This has no `featuredOrder` by default, so it is available in Mechanical Design & CAD / All Projects but is not added to Selected Projects automatically.
 
 The new project's `investigation` object in `assets/js/site-data.js` holds design criteria, alternative jaw/detection concepts and a planned trial table. Empty `media` and `sources` arrays can be filled with genuine drawings/photos and references. Do not add results as completed until tested. Its hero image currently shows the **original** gripper as a reference, not the new design.
+
+
+## Draft and selected-project controls (October 2026)
+
+Every project record has `published: true` by default. Change it to `published: false` to omit it from **all public project lists, the homepage, direct project URLs, and related-project links**. You can keep `featuredOrder` assigned while the item is a draft; when you republish it, its place in Selected Projects returns. `featuredOrder` is a positive integer; entries without it are never featured. The separate grasp-detection gripper is now featured at position **1** and the former numbered selections are shifted by **+1**.
+
+For a local development preview, open `development.html` from a local copy (or serve the site on localhost). It lists both published and draft engineering projects. Click a draft to open `project.html?id=...&preview=drafts`. On the public GitHub Pages host, this query cannot unlock drafts, and `development.html` displays only a local-preview notice. This is **visibility control, not secrecy**: the public repository's `assets/js/site-data.js` and any uploaded draft images remain accessible to someone inspecting the source.
+
+To publish the new gripper when ready, set its `published` field to `true`; to hide it during development, set `published: false` while retaining `featuredOrder: 1`.
