@@ -41,7 +41,7 @@ window.PORTFOLIO_DATA = {
     ],
     // How It All Began — add any favourite LEGO Technic models after student review.
     aboutHistoryParagraphs: [
-      "My interest in mechanics goes back as far as I can remember. My parents bought me my first LEGO Technic set when I was three, and I was instantly hooked. Each time I finished a set, they would buy me a larger one. By the age of five, I had built the LEGO Technic 42055 Bucket Wheel Excavator, which was the largest Technic set at the time."
+      "My interest in mechanics goes back as far as I can remember. My parents bought me my first LEGO Technic set when I was three, and I was instantly hooked. Each time I finished a set, they would buy me a larger one. Just before my sixth birthday, I completed the LEGO Technic 42055 Bucket Wheel Excavator, the flagship model of the 2016 range and the largest Technic set released at the time."
     ],
     // OPTIONAL ABOUT PHOTOS: 0–4 images per section. Empty arrays leave no gallery or blank space.
     // Upload photographs to assets/images/, then add { src: "assets/images/file.jpg", caption: "Description" }.
