@@ -503,7 +503,9 @@ button { cursor: pointer; }
 .about-photo-dialog__top { display:flex; justify-content:flex-end; margin-bottom:5px; }
 .about-photo-dialog__top button { width:36px; height:36px; border:1px solid #ffffff69; border-radius:50%; color:white; background:transparent; font-size:1.5rem; line-height:1; cursor:pointer; }
 .about-photo-dialog__stage { display:grid; grid-template-columns:36px minmax(0,1fr) 36px; align-items:center; gap:10px; }
-.about-photo-dialog__stage img { display:block; width:100%; max-height:70vh; object-fit:contain; }
+.about-photo-dialog__stage > .about-photo-dialog__prev { grid-column:1; grid-row:1; }
+.about-photo-dialog__stage > img { grid-column:2; grid-row:1; display:block; width:100%; min-width:0; height:auto; max-height:70vh; object-fit:contain; }
+.about-photo-dialog__stage > .about-photo-dialog__next { grid-column:3; grid-row:1; }
 .about-photo-dialog__stage button { height:36px; border:1px solid #ffffff55; background:#ffffff18; color:white; font-size:1.7rem; border-radius:100px; cursor:pointer; }
 .about-photo-dialog__stage button[hidden] { visibility:hidden; display:block; }
 .about-photo-dialog__footer { display:flex; justify-content:space-between; gap:14px; font-size:.8rem; color:#e0e7e3; margin-top:12px; }
