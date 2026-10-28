@@ -277,7 +277,9 @@ The new project's `investigation` object in `assets/js/site-data.js` holds desig
 
 Every project record has `published: true` by default. Change it to `published: false` to omit it from **all public project lists, the homepage, direct project URLs, and related-project links**. You can keep `featuredOrder` assigned while the item is a draft; when you republish it, its place in Selected Projects returns. `featuredOrder` is a positive integer; entries without it are never featured. The separate grasp-detection gripper is now featured at position **1** and the former numbered selections are shifted by **+1**.
 
-For a local development preview, open `development.html` from a local copy (or serve the site on localhost). It lists both published and draft engineering projects. Click a draft to open `project.html?id=...&preview=drafts`. On the public GitHub Pages host, this query cannot unlock drafts, and `development.html` displays only a local-preview notice. This is **visibility control, not secrecy**: the public repository's `assets/js/site-data.js` and any uploaded draft images remain accessible to someone inspecting the source.
+For a live development preview, open **`https://conor-beattie.github.io/development.html`** (bookmark this address). The unlisted page includes published and draft projects. While exploring a draft, category, homepage, About, software or other internal pages, the URL carries `preview=drafts` automatically. This preview mode is maintained across navigation and refreshes. Use **All development projects** to return to the listing, or **Exit to public view** to return to the normal public homepage. No local repository is required to review drafts.
+
+The development page is **unlisted, not password-protected**. Anyone with its URL or a `preview=drafts` link can view drafts; the public source and uploaded draft images are also accessible. It should not contain sensitive or confidential material.
 
 To publish the new gripper when ready, set its `published` field to `true`; to hide it during development, set `published: false` while retaining `featuredOrder: 1`.
 
@@ -287,7 +289,7 @@ To publish the new gripper when ready, set its `published` field to `true`; to h
 A separate Mechanical Design & CAD project now has ID `gripper-contact-surfaces`.
 Its research, requirements, material shortlist and test protocol are defined in
 `assets/js/site-data.js` under `surfaceStudy`. It is initially `published: false`,
-so it is absent from public galleries and direct URLs, and can be previewed locally
+so it is absent from public galleries and direct URLs, and can be previewed on the live site
 from `development.html` (or `project.html?id=gripper-contact-surfaces&preview=drafts`).
 Set `published: true` when ready to release. No featured position was added.
 

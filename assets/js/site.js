@@ -27,10 +27,48 @@
   const text = (s) => escape(s || "");
   const category = (id) => data.categories.find(c => c.id === id);
   const kindLabel = (p) => p.category === "fabrication" ? "3D PRINT" : (category(p.category)?.title || "Portfolio entry");
-  // A published:false project is absent from every public UI and direct URL.
-  // Drafts can be previewed only from a locally opened copy of this website.
-  const onLocalSite = location.protocol === "file:" || ["localhost", "127.0.0.1", "[::1]"].includes(location.hostname);
-  const previewDrafts = onLocalSite && new URLSearchParams(location.search).get("preview") === "drafts";
+  // Unlisted development mode can be started on the live site from development.html.
+  // A preview=drafts query parameter carries it across pages and direct project links.
+  // This hides drafts from ordinary visitors; it is not access control or privacy.
+  const previewDrafts = document.body.dataset.page === "development" ||
+    new URLSearchParams(location.search).get("preview") === "drafts";
+  const previewUrl = (url) => {
+    if (!previewDrafts) return url;
+    const parsed = new URL(url, document.baseURI);
+    if (parsed.searchParams.get("preview") === "drafts") return url;
+    const hashIndex = url.indexOf("#");
+    const prefix = hashIndex < 0 ? url : url.slice(0, hashIndex);
+    const fragment = hashIndex < 0 ? "" : url.slice(hashIndex);
+    return prefix + (prefix.includes("?") ? "&" : "?") + "preview=drafts" + fragment;
+  };
+  function previewNavigation() {
+    if (!previewDrafts) return;
+    // Only internal HTML pages receive the flag. External, media and section
+    // anchor links are not rewritten. A public-view link explicitly exits.
+    $$('a[href]').forEach(anchor => {
+      if (anchor.hasAttribute('data-preview-exit')) return;
+      const raw = anchor.getAttribute('href');
+      if (!raw || raw[0] === '#' || /^(?:mailto:|tel:|javascript:)/i.test(raw)) return;
+      let target;
+      try { target = new URL(raw, document.baseURI); } catch (_) { return; }
+      if (target.origin !== location.origin || !/\.html$/i.test(target.pathname)) return;
+      anchor.setAttribute('href', previewUrl(raw));
+    });
+  }
+  function previewBanner() {
+    if (!previewDrafts) return;
+    const bar = document.createElement('div');
+    bar.className = 'development-preview-bar';
+    bar.setAttribute('role', 'status');
+    bar.innerHTML = `<div class="container development-preview-bar__inner"><div><strong>Development preview</strong><span>Draft projects are visible</span></div><div class="development-preview-bar__links"><a href="development.html">All development projects</a><a href="index.html" data-preview-exit>Exit to public view ↗</a></div></div>`;
+    const header = $('.site-header');
+    if (header) header.insertAdjacentElement('afterend', bar);
+    // Ask crawlers not to index a preview URL. It is still openly accessible.
+    const robots = document.createElement('meta');
+    robots.name = 'robots';
+    robots.content = 'noindex,nofollow';
+    document.head.appendChild(robots);
+  }
   const isPublished = item => item && item.published !== false;
   const canShow = item => Boolean(item && (isPublished(item) || previewDrafts));
   const visibleProjects = () => data.projects.filter(canShow);
@@ -67,8 +105,8 @@
   }
   const paragraphs = (s) => String(s || "").split(/\n\s*\n/).filter(Boolean)
     .map(p => `<p>${text(p)}</p>`).join("");
-  const projectUrl = (project) => `project.html?id=${encodeURIComponent(project.id)}`;
-  const algorithmUrl = (algorithm) => `algorithm.html?id=${encodeURIComponent(algorithm.id)}`;
+  const projectUrl = (project) => previewUrl(`project.html?id=${encodeURIComponent(project.id)}`);
+  const algorithmUrl = (algorithm) => previewUrl(`algorithm.html?id=${encodeURIComponent(algorithm.id)}`);
   const algorithms = Array.isArray(data.algorithms) ? data.algorithms : [];
   const algorithm = (id) => algorithms.find(a => a.id === id);
   const demosForProject = (projectId) => algorithms.flatMap(a =>
@@ -124,7 +162,7 @@
         <img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" />
       </a>
       <div class="project-card__body">
-        <div class="eyebrow-row"><span class="eyebrow">${text(kindLabel(p))}</span></div>
+        <div class="eyebrow-row"><span class="eyebrow">${text(kindLabel(p))}</span>${previewDrafts && !isPublished(p) ? '<span class="preview-draft-tag">DRAFT</span>' : ''}</div>
         <h3><a href="${projectUrl(p)}">${text(p.title)}</a></h3>
         <p>${text(p.summary)}</p>
         <div class="project-card__foot">
@@ -164,7 +202,7 @@
 
   const softwareItems = (Array.isArray(data.software) ? data.software : []).filter(canShow);
   const softwareById = (id) => softwareItems.find(s => s.id === id);
-  const softwareUrl = (s) => `software-detail.html?id=${encodeURIComponent(s.id)}`;
+  const softwareUrl = (s) => previewUrl(`software-detail.html?id=${encodeURIComponent(s.id)}`);
   const softwareForAlgorithm = (id) => softwareItems.filter(s => (s.algorithmIds || []).includes(id));
   const relatedAlgorithms = (ids) => (ids || []).map(algorithm).filter(Boolean);
   const chipLinks = (entries, makeUrl) => entries.map(item =>
@@ -294,8 +332,8 @@
     const input = $("#project-search");
     const count = $("#project-count");
     let chosen = new URLSearchParams(location.search).get("category") || "all";
-    if (chosen === "software") { location.replace("software.html"); return; }
-    if (chosen === "algorithms") { location.replace("algorithms.html"); return; }
+    if (chosen === "software") { location.replace(previewUrl("software.html")); return; }
+    if (chosen === "algorithms") { location.replace(previewUrl("algorithms.html")); return; }
     if (chosen !== "all" && !category(chosen)) chosen = "all";
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
@@ -520,7 +558,7 @@
       <div class="container">
         <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
         <div class="project-intro">
-          <p class="eyebrow">${text(kindLabel(p))} ${p.date ? "· " + text(p.date) : ""}</p>
+          <p class="eyebrow">${text(kindLabel(p))} ${p.date ? "· " + text(p.date) : ""} ${previewDrafts && !isPublished(p) ? ' · DRAFT' : ''}</p>
           <h1>${text(p.title)}</h1>
           <p class="project-lede">${text(p.summary)}</p>
           <div class="tags tags-large">${(p.tags || []).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
@@ -665,17 +703,13 @@
   function development() {
     const root = $("#development-content");
     if (!root) return;
-    if (!onLocalSite) {
-      root.innerHTML = `<div class="not-found"><h1>Local development only</h1><p>Open this page from a local copy of the website to preview drafts. No draft listing is available on the public site.</p><a href="index.html" class="button button-outline">Home ↗</a></div>`;
-      return;
-    }
     const devCard = p => `<article class="project-card">
-      <a class="project-card__image" href="${projectUrl(p)}&preview=drafts"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" /></a>
+      <a class="project-card__image" href="${projectUrl(p)}"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" /></a>
       <div class="project-card__body"><p class="eyebrow">${isPublished(p) ? "PUBLISHED" : "DRAFT — NOT SHOWN PUBLICLY"}</p>
-      <h3><a href="${projectUrl(p)}&preview=drafts">${text(p.title)}</a></h3>
-      <p>${text(p.summary)}</p><a class="text-link" href="${projectUrl(p)}&preview=drafts">Preview project ↗</a></div>
+      <h3><a href="${projectUrl(p)}">${text(p.title)}</a></h3>
+      <p>${text(p.summary)}</p><a class="text-link" href="${projectUrl(p)}">Preview project ↗</a></div>
     </article>`;
-    root.innerHTML = `<div class="container"><div class="project-intro"><p class="eyebrow">LOCAL PREVIEW ONLY</p><h1>Development Projects</h1><p>Projects marked <code>published: false</code> are hidden from the public pages and direct links. This preview works only on a local copy; the data remains visible in the public repository.</p></div><div class="project-grid">${data.projects.map(devCard).join("")}</div></div>`;
+    root.innerHTML = `<div class="container"><div class="project-intro"><p class="eyebrow">UNLISTED WORKSPACE</p><h1>Development Projects</h1><p>Preview published and draft projects on the live website. Selecting projects or using site navigation keeps development mode active until you choose <strong>Exit to public view</strong> above. Drafts are unlisted, not private: their content remains accessible in the public repository and to anyone with a preview URL.</p></div><div class="project-grid">${data.projects.map(devCard).join("")}</div></div>`;
   }
 
   document.addEventListener("DOMContentLoaded", () => {
@@ -690,5 +724,7 @@
     if (page === "project") projectDetail();
     if (page === "about") about();
     if (page === "development") development();
+    previewBanner();
+    previewNavigation();
   });
 })();

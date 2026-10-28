@@ -598,3 +598,14 @@ button { cursor: pointer; }
  .surface-test-card__head { align-items:start; }
  .surface-test-priority { white-space:normal; text-align:right; }
 }
+
+/* DEVELOPMENT PREVIEW — visible only when development.html or ?preview=drafts is active. */
+.development-preview-bar { background:#eef2f0; border-bottom:1px solid var(--line); color:var(--ink); }
+.development-preview-bar__inner { display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:10px; padding-bottom:10px; }
+.development-preview-bar__inner > div:first-child { display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+.development-preview-bar strong { font-size:.83rem; }
+.development-preview-bar span { font-size:.8rem; color:var(--ink-soft); }
+.development-preview-bar__links { display:flex; flex-wrap:wrap; gap:18px; }
+.development-preview-bar__links a { color:var(--accent-deep); font-size:.8rem; font-weight:650; text-decoration:underline; text-underline-offset:3px; }
+.preview-draft-tag { display:inline-block; font-size:.65rem; letter-spacing:.055em; border:1px solid var(--line); border-radius:5px; padding:3px 6px; color:var(--ink-soft); background:var(--wash); font-weight:750; }
+@media(max-width:620px) { .development-preview-bar__inner { flex-direction:column; align-items:flex-start; gap:7px; } .development-preview-bar__links { gap:14px; } }
