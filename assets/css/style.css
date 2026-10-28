@@ -565,3 +565,36 @@ button { cursor: pointer; }
 .detail-main, .detail-layout { min-width:0; }
 .investigation-table-wrap { max-width:100%; }
 @media (max-width:800px) { .detail-layout { grid-template-columns:minmax(0,1fr); } }
+
+/* CONTACT-SURFACE RESEARCH — scoped to the independent gripper project. */
+.surface-table-wrap { margin-top:18px; }
+.surface-table { min-width:720px; }
+.surface-benchmark-table { min-width:660px; }
+.surface-materials-table { min-width:1120px; }
+.surface-failure-table { min-width:1080px; }
+.surface-materials-table td:nth-child(3) { font-weight:650; }
+.surface-test-list { display:grid; gap:13px; margin:18px 0 28px; }
+.surface-test-card { border:1px solid var(--line); border-radius:12px; padding:20px 22px; background:var(--white); min-width:0; }
+.surface-test-card__head { display:flex; align-items:start; justify-content:space-between; gap:12px; }
+.surface-test-card__head>div { display:flex; align-items:baseline; gap:10px; }
+.surface-test-card h3 { font-size:1.03rem; margin:0 0 12px; }
+.surface-test-number { font-size:.78rem; color:var(--muted); font-weight:750; }
+.surface-test-priority { font-size:.74rem; font-weight:650; color:var(--accent-deep); border:1px solid var(--line); border-radius:8px; padding:5px 8px; white-space:nowrap; }
+.detail-section .surface-test-card>p { font-size:.9rem; margin:0 0 12px; }
+.surface-test-details { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:13px 19px; margin:10px 0 14px; }
+.surface-test-details div { min-width:0; }
+.surface-test-details dt { font-size:.72rem; font-weight:750; color:var(--ink); margin-bottom:4px; text-transform:uppercase; letter-spacing:.03em; }
+.surface-test-details dd { color:var(--ink-soft); font-size:.86rem; line-height:1.55; margin:0; }
+.detail-section p.surface-test-note { margin:0 0 9px; font-size:.85rem; }
+.surface-test-reference { font-size:.78rem; color:var(--muted); }
+.surface-reference-list { list-style:none; padding:0; margin:17px 0 0; }
+.surface-reference-list li { border-bottom:1px solid var(--line); padding:15px 0; }
+.surface-reference-list li:last-child { border-bottom:0; }
+.surface-reference-list a { color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; }
+.detail-section .surface-reference-list p { margin:6px 0 0; font-size:.87rem; }
+@media(max-width:600px) {
+ .surface-test-card { padding:15px; }
+ .surface-test-details { grid-template-columns:1fr; gap:10px; }
+ .surface-test-card__head { align-items:start; }
+ .surface-test-priority { white-space:normal; text-align:right; }
+}

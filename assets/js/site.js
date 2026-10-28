@@ -435,6 +435,40 @@
     return "";
   }
 
+
+  // Research tables on the independent contact-surface investigation.
+  // Keeps the full evidence record in site-data.js; nothing is shown for other projects.
+  function surfaceStudySection(p, key, label) {
+    const study = p.surfaceStudy || {};
+    const head = `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>`;
+    const table = (headers, rows, className = "") => `<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table ${className}"><thead><tr>${headers.map(h => `<th scope="col">${text(h)}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    if (key === "surface-benchmarks") {
+      return head + `<p>The current rubber-band gripper is the benchmark. Greater retention is the leading objective; cardboard damage and reliable manufacture remain necessary checks. Robot operation is an optional follow-up, not a mandatory pass condition.</p>` + table(["Criterion", "Benchmark", "Proposed pass condition"], study.benchmarks || [], "surface-benchmark-table") + `</div></section>`;
+    }
+    if (key === "surface-materials") {
+      const rows = (study.materials || []).map(m => [String(m.rank), m.name, m.decision, m.printing, m.relevance, m.reason]);
+      return head + `<p>The first three are the planned comparison group. Substitutes are available contingencies, and excluded candidates are deliberately outside the initial scope. Shore hardness alone does not establish friction against cardboard.</p>` + table(["Rank", "Material", "Decision", "P1S printing", "Research relevance", "Why included / excluded"], rows, "surface-materials-table") + `</div></section>`;
+    }
+    if (key === "surface-tests") {
+      const tests = study.tests || [];
+      const card = t => `<article class="surface-test-card"><div class="surface-test-card__head"><div><span class="surface-test-number">${text(String(t.rank))}</span><h3>${text(t.name)}</h3></div><span class="surface-test-priority">${text(t.priority)}</span></div>
+        <p>${text(t.measures)}</p><dl class="surface-test-details">
+        <div><dt>Equipment</dt><dd>${text(t.equipment)}</dd></div><div><dt>Minimum</dt><dd>${text(t.minimum)}</dd></div>
+        <div><dt>Result to record</dt><dd>${text(t.result)}</dd></div><div><dt>Controlled variables</dt><dd>${text(t.controls)}</dd></div>
+        <div><dt>Assessment</dt><dd>${text(t.assess)}</dd></div><div><dt>Extension / fallback</dt><dd>${text(t.extension)}</dd></div>
+        </dl><p class="surface-test-note"><strong>Method note:</strong> ${text(t.notes)}</p><div class="surface-test-reference">Reference: ${text(t.reference)}</div></article>`;
+      return head + `<p>At least five runs per material for the two primary force tests. Inspect cardboard after retention tests; no separate large damage programme is needed. An application-level robot trial is optional.</p><h3>Core and secondary tests</h3><div class="surface-test-list">${tests.filter(t => t.rank <= 4).map(card).join("")}</div><h3>Alternative and follow-on methods</h3><p>These are available if the initial evidence identifies a need. Surface sensing belongs to a different future investigation.</p><div class="surface-test-list">${tests.filter(t => t.rank > 4).map(card).join("")}</div></div></section>`;
+    }
+    if (key === "surface-failures") {
+      return head + `<p>The responses below are hypotheses drawn from relevant research, not guaranteed improvements. Re-test a changed surface against the original flat sample under the same load.</p>` + table(["Potential failure", "Possible cause", "Design response", "Improvement to test", "Literature"],study.failures || [],"surface-failure-table") + `</div></section>`;
+    }
+    if (key === "surface-sources") {
+      const rows = (study.sources || []).map(source => { const url = href(source.url); return `<li><strong>${url ? `<a href="${text(url)}" target="_blank" rel="noopener noreferrer">${text(source.name)} ↗</a>` : text(source.name)}</strong><p>${text(source.use)}</p></li>`; }).join("");
+      return head + `<p>The linked sources inform material choice and methods. Not every study tests this exact pad, printer, cardboard and gripper combination; direct performance must be measured.</p><ul class="surface-reference-list">${rows}</ul></div></section>`;
+    }
+    return "";
+  }
+
   function projectDetail() {
     const id = new URLSearchParams(location.search).get("id");
     const p = visibleProjects().find(item => item.id === id);
@@ -453,15 +487,18 @@
     // Individual projects may override labels (for example, Firmware & TeleOp).
     const sectionOptions = [
       ["overview", "Overview"], ["brief", "Investigation aim"], ["investigation-criteria", "Engineering criteria"],
+      ["surface-benchmarks", "Success criteria"], ["surface-materials", "Materials"], ["surface-tests", "Test programme"],
+      ["surface-failures", "Design responses"],
       ["research", "Engineering research"], ["concept-study", "Mechanism concepts"],
       ["architecture", "System architecture"], ["hardware", "Electrical interfaces"],
       ["io-map", "Representative I/O map"], ["construction", "Construction"],
       ["software", "Software"], ["trial-plan", "Experimental test plan"],
       ["testing", "Testing"], ["iterations", "Iterations"], ["results", "Results"],
-      ["nextSteps", "Next steps"], ["lessons", "Lessons learned"]
+      ["nextSteps", "Next steps"], ["lessons", "Lessons learned"], ["surface-sources", "Research sources"]
     ];
     const entries = sectionOptions
-      .filter(([key]) => key === "io-map" ? Boolean(p.ioMap?.rows?.length)
+      .filter(([key]) => key.startsWith("surface-") ? Boolean(p.surfaceStudy?.[({"surface-benchmarks":"benchmarks","surface-materials":"materials","surface-tests":"tests","surface-failures":"failures","surface-sources":"sources"})[key]]?.length)
+        : key === "io-map" ? Boolean(p.ioMap?.rows?.length)
         : key === "investigation-criteria" ? Boolean(p.investigation?.criteria?.length)
         : key === "concept-study" ? Boolean(p.investigation?.jawOptions?.length || p.investigation?.detectionOptions?.length)
         : key === "trial-plan" ? Boolean(p.investigation?.trialRows?.length)
@@ -500,6 +537,7 @@
           <div class="detail-main">
             ${entries.filter(([key]) => !["algorithm-demonstrations", "robot-software", "related-projects"].includes(key)).map(([key, label]) => key === "io-map"
               ? `<section class="detail-section detail-section--clean" id="io-map"><div><h2>${text(label)}</h2><p>${text(p.ioMap.intro || "")}</p><div class="io-map-scroll"><table class="io-map-table"><thead><tr>${(p.ioMap.columns || []).map(col => `<th scope="col">${text(col)}</th>`).join("")}</tr></thead><tbody>${(p.ioMap.rows || []).map(row => `<tr>${row.map((cell, i) => `<td>${i === 1 ? `<code>${text(cell)}</code>` : text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>${p.ioMap.note ? `<p class="io-map-note">${text(p.ioMap.note)}</p>` : ""}</div></section>`
+              : key.startsWith("surface-") ? surfaceStudySection(p, key, label)
               : ["investigation-criteria", "concept-study", "trial-plan"].includes(key) ? investigationSection(p, key, label)
               : `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
             ${linkedSoftware.length ? `<section class="detail-section detail-section--clean" id="robot-software"><div><h2>Software &amp; Algorithms</h2><p>Software systems documented for this robot. Each entry links to the relevant algorithms without requiring a video.</p><div class="related-list">${linkedSoftware.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}

@@ -280,3 +280,18 @@ Every project record has `published: true` by default. Change it to `published: 
 For a local development preview, open `development.html` from a local copy (or serve the site on localhost). It lists both published and draft engineering projects. Click a draft to open `project.html?id=...&preview=drafts`. On the public GitHub Pages host, this query cannot unlock drafts, and `development.html` displays only a local-preview notice. This is **visibility control, not secrecy**: the public repository's `assets/js/site-data.js` and any uploaded draft images remain accessible to someone inspecting the source.
 
 To publish the new gripper when ready, set its `published` field to `true`; to hide it during development, set `published: false` while retaining `featuredOrder: 1`.
+
+
+### Gripper contact-surface investigation (draft)
+
+A separate Mechanical Design & CAD project now has ID `gripper-contact-surfaces`.
+Its research, requirements, material shortlist and test protocol are defined in
+`assets/js/site-data.js` under `surfaceStudy`. It is initially `published: false`,
+so it is absent from public galleries and direct URLs, and can be previewed locally
+from `development.html` (or `project.html?id=gripper-contact-surfaces&preview=drafts`).
+Set `published: true` when ready to release. No featured position was added.
+
+The image is the original Bobbot gripper as a labelled baseline, not a new pad.
+Test measurements and manufacturing outcomes are intentionally not invented.
+The linked technical sources are background and are not evidence that the selected
+commercial filaments have already passed the cardboard comparison.
