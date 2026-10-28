@@ -682,7 +682,7 @@ window.PORTFOLIO_DATA = {
       relatedProjectIds: ["robotic-gripper-grasp-detection", "gripper-contact-surfaces", "autonomous-mobile-robot"],
       contribution: "",
       sections: {
-        overview: "This is the first gripper design fitted to Bobbot. The jaws are mounted on a vertical slide and close around a cardboard cube approximately 150 mm across. Their contact faces do not remain parallel throughout the closing movement, which can limit how consistently the cube is engaged at different positions.\n\nThe original gripper remains its own project. A separate investigation examines alternative jaw arrangements and ways to detect grasp engagement mechanically, using this design as a baseline.",
+        overview: "This is the first gripper design for the autonomous mobile robot Bobbot. The jaws are mounted on a dual gear rack and close around a cardboard cube approximately 150 mm across.",
         objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
