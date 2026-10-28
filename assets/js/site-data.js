@@ -700,12 +700,12 @@ window.PORTFOLIO_DATA = {
       "id": "robotic-gripper-grasp-detection",
       published: true,
       featuredOrder: 1,
-      "title": "Parallel-Jaw Gripper — Secure-Grasp Detection",
+      "title": "Gripper Design Test",
       "category": "cad",
       "image": "assets/images/gripper_bobbot.png",
       "imageAlt": "CAD model of the original Bobbot gripper used as the investigation baseline",
       "imageCaption": "Original Bobbot gripper — reference design only. New gripper concepts are not pictured.",
-      "summary": "Investigating four-bar and rack-and-pinion parallel grippers that accommodate different box sizes and can indicate whether a grasp is likely to remain secure, using a 150 mm cube as the main test object.",
+      "summary": "Comparing four-bar and rack-and-pinion parallel grippers on their effectiveness in picking up variuos small cardboard boxes using a 150 mm cube as the main test object.",
       "tags": [
         "Mechanism Design",
         "Parallel Jaws",
@@ -882,7 +882,7 @@ window.PORTFOLIO_DATA = {
       "image": "assets/images/gripper_bobbot_orig.jpeg",
       "imageAlt": "CAD of the existing Bobbot gripper used as a baseline for contact-pad tests",
       "imageCaption": "Existing Bobbot gripper — reference design. New contact-pad prototypes and experimental photographs will be added as they are produced.",
-      "summary": "Comparing printable compliant contact pads with the existing rubber-band grip on cardboard, using controlled slip, retention and damage tests before considering texture improvements.",
+      "summary": "Testing a selection of 3D printable gripper pads to determine effectiveness on a 150 mm cardboard box.",
       "tags": [
         "Mechanical Design",
         "Materials",
