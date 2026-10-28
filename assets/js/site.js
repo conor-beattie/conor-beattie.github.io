@@ -481,8 +481,7 @@
       return head + `<p>The responses below are hypotheses drawn from relevant research, not guaranteed improvements. Re-test a changed surface against the original flat sample under the same load.</p>` + table(["Potential failure", "Possible cause", "Design response", "Improvement to test", "Literature"],study.failures || [],"surface-failure-table") + `</div></section>`;
     }
     if (key === "surface-sources") {
-      const rows = (study.sources || []).map(source => { const url = href(source.url); return `<li><strong>${url ? `<a href="${text(url)}" target="_blank" rel="noopener noreferrer">${text(source.name)} ↗</a>` : text(source.name)}</strong><p>${text(source.use)}</p></li>`; }).join("");
-      return `<div class="surface-reference-list">${rows ? `<table class="surface-failure-table"><thead><tr><th>Reference</th><th>Description</th></tr></thead><tbody>${(study.sources || []).map(source => { const url=href(source.url); return `<tr><td>${url ? `<a href="${text(url)}" target="_blank" rel="noopener noreferrer">${text(source.name)} ↗</a>` : text(source.name)}</td><td>${text(source.use)}</td></tr>`; }).join("")}</tbody></table>` : ""}</div>`;
+      return referenceList(study.sources || []);
     }
     return "";
   }
