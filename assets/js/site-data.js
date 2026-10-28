@@ -877,9 +877,9 @@ window.PORTFOLIO_DATA = {
     {
       "id": "gripper-contact-surfaces",
       "published": false,
-      "title": "Gripper Contact Surfaces — Material & Texture Investigation",
+      "title": "Gripper Pad Selection Trial",
       "category": "cad",
-      "image": "assets/images/gripper_bobbot.png",
+      "image": "assets/images/gripper_bobbot_orig.jpeg",
       "imageAlt": "CAD of the existing Bobbot gripper used as a baseline for contact-pad tests",
       "imageCaption": "Existing Bobbot gripper — reference design. New contact-pad prototypes and experimental photographs will be added as they are produced.",
       "summary": "Comparing printable compliant contact pads with the existing rubber-band grip on cardboard, using controlled slip, retention and damage tests before considering texture improvements.",
