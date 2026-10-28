@@ -1,3 +1,66 @@
+# Project Journal — Consistent Project Sections (28 October 2026)
+
+The project pages now use **the same ten headings and order** across normal
+engineering projects, 3D-print projects, and software projects. Every record in
+`assets/js/site-data.js` has **all ten editable fields** under `sections`:
+
+```javascript
+sections: {
+  overview: "",
+  objectivesRequirements: "",
+  backgroundResearch: "",
+  designDevelopment: "",
+  testingValidation: "",
+  resultsEvaluation: "",
+  conclusionsNextSteps: "",
+  lessonsLearned: "",
+  referencesResources: "",
+  relatedProjects: ""
+},
+references: [],
+```
+
+**Write only the sections that apply to a given project.** Empty sections are not
+displayed; the `ON THIS PAGE` menu shows only headings with meaningful content,
+related links or structured evidence. No numbers appear in the menu.
+
+Older technical paragraphs have been preserved word-for-word under the new
+headings. When several former sections belong under one title (e.g. mechanism,
+manufacture, software and revisions under **Design & Development**), the entry
+has a `sectionDetails` list of editable `{heading, text}` subheadings. Do not
+remove these unless you deliberately want to delete that material. Detailed
+growing research arrays (`surfaceStudy`, `investigation`, `ioMap`) remain intact
+and render under the appropriate standard section.
+
+For an **attributed video, designer, paper or external resource**, add an item to
+a project's `references` list, for example:
+
+```javascript
+references: [
+  {
+    name: "Original mechanism inspiration",
+    url: "", // Add the verified creator/video link before publishing
+    description: "A design that informed the initial gripper concept."
+  }
+],
+```
+
+`referencesResources` can hold a normal paragraph as well. Existing `links`
+(GitHub, CAD, videos, downloads) still appear in this section automatically.
+Existing related-project links appear in **Related Projects** automatically.
+
+**Special layouts are preserved:** fabrication CAD/finished-print images and
+photo lightbox; engineering research tables, gripper test cards and IO tables;
+software flowchart, source module lists and algorithm links. The separate
+Algorithms library is a technical reference library, not a project gallery, so
+its educational page format is unchanged.
+
+**Development mode remains available on the live site:**
+`https://conor-beattie.github.io/development.html` (unlisted but not private).
+Draft visibility and navigation with `preview=drafts` are unchanged.
+
+---
+
 # Optional Influences & Inspiration (27 October 2026)
 
 The bottom of `about.html` now has an optional **Influences & Inspiration** section.
@@ -153,11 +216,11 @@ photographs, project records, print galleries, video, algorithms and navigation 
   overlay annotation, Explore buttons, category numbering, process and about sections removed.
 - **All Projects:** the "All Projects" heading remains; category-specific listings rely
   on the active top navigation and do not repeat a large category heading.
-- **Project detail pages:** section numbering, "Individual contribution", Objectives and
-  Design removed from the display; "Software" and linked software sections read
-  "Software & Algorithms". The underlying project fields remain in `assets/js/site-data.js`.
-- **3D-print pages:** the original CAD-plus-1–4-photo gallery, print settings and
-  expandable printing/testing notes are preserved; Objectives and Design are no longer shown.
+- **Project detail pages (historical note):** older project-specific navigation was
+  later replaced by the ten consistent report headings documented at the top of
+  this README. Detailed technical content remains under named subheadings.
+- **3D-print pages:** the CAD and finished-print gallery plus print settings
+  remain. The report text now uses the same optional section headings as other projects.
 - **All pages:** the repeated footer name/tagline block is removed. Compact copyright
   and any configured social links remain.
 
@@ -206,7 +269,7 @@ The gallery no longer repeats category filter buttons: use the main navigation t
 
 Open `assets/js/site-data.js` and duplicate one object under **`software: []`**. Keep the `id` unique, for example `return-to-base`.
 
-Essential fields: `id`, `title`, `type` (`Behaviour`, `Subroutine`, or `System`), `summary`, `image`, `status`, `robotIds` and `algorithmIds`. Add `objective`, `implementation`, `changes`, `lessons`, `testing`, `next`, `codeFiles` and `sourceUrl` for the detail page. Use a `flowchart` path when you have a matching SVG.
+Essential fields: `id`, `title`, `type` (`Behaviour`, `Subroutine`, or `System`), `summary`, `image`, `status`, `robotIds` and `algorithmIds`. Edit the ten shared `sections` fields (and optional `sectionDetails`) for the detail page; add `codeFiles`, `sourceUrl`, and optional `references` as relevant. Use a `flowchart` path when you have a matching SVG.
 
 - `robotIds: ["autonomous-mobile-robot"]` links automatically to the existing Bobbot robot project.
 - `algorithmIds: ["wall-following", "distance-angle-control"]` shows algorithm links automatically. **No video is required for these links.**
@@ -241,7 +304,7 @@ Each 3D-print project now has its own page style, inspired by print-sharing site
 1. **CAD render at the top:** `image: "assets/images/your-CAD.png"` (unchanged).
 2. **Real photographs immediately below:** `printPhotos` accepts **1–4** actual photographs (`.jpg`, `.jpeg`, `.png`, `.webp`). The first is large, additional photos appear beside it. Clicking a photo opens a full-size viewer with arrow navigation. If the list is empty, a neutral placeholder appears instead.
 3. **Print profile:** Optional `printDetails` fields for material, printer, layer height, infill, supports and print time. Blank entries are not shown as fabricated settings.
-4. **Engineering notes:** The original `sections` fields (overview, objectives, design, construction, software, testing, iterations, results, lessons) remain in `site-data.js`. Longer technical notes now appear in expandable groups beneath the gallery.
+4. **Engineering notes:** All ten standard `sections` fields are present in `site-data.js`. Nonempty content appears under the consistent headings below the gallery; multiple former technical notes are retained as editable `sectionDetails`.
 5. **Technical file links:** Existing `links.cad`, `links.downloads`, etc., appear on the 3D-print page if supplied. No downloads are invented.
 
 Example to place **inside any 3D-print project** in `assets/js/site-data.js`:

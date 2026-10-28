@@ -609,3 +609,12 @@ button { cursor: pointer; }
 .development-preview-bar__links a { color:var(--accent-deep); font-size:.8rem; font-weight:650; text-decoration:underline; text-underline-offset:3px; }
 .preview-draft-tag { display:inline-block; font-size:.65rem; letter-spacing:.055em; border:1px solid var(--line); border-radius:5px; padding:3px 6px; color:var(--ink-soft); background:var(--wash); font-weight:750; }
 @media(max-width:620px) { .development-preview-bar__inner { flex-direction:column; align-items:flex-start; gap:7px; } .development-preview-bar__links { gap:14px; } }
+
+/* Shared project-report sections: secondary technical labels stay within the
+   ten consistent headings used in the On This Page navigation. */
+.standard-subsection { margin: 24px 0 0; }
+.standard-subsection:first-child { margin-top: 0; }
+.standard-subsection h3 { margin: 0 0 10px; font-size: 1.07rem; letter-spacing: -.015em; }
+.standard-subsection .investigation-table-wrap,
+.standard-subsection .surface-test-list { margin-top: 12px; }
+.detail-aside > .print-spec-card { margin-top: 25px; }

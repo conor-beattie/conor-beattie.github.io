@@ -14,7 +14,11 @@
   5. The template banner and example badges are now disabled.
   6. Add actual public GitHub / video / CAD links (or leave them blank).
 
-  7. For 3D prints: keep `image` as the CAD render and list 1–4 real print photos
+  7. Every project/software entry has ten consistent `sections` fields.
+     Empty fields are hidden automatically. Use `sectionDetails` for optional
+     subheadings and `references` for credited links and useful sources.
+
+  8. For 3D prints: keep `image` as the CAD render and list 1–4 real print photos
      under `printPhotos`. Optional printer settings belong in `printDetails`.
 
   Do not put private addresses, school schedules or personal contact data here.
@@ -145,12 +149,25 @@ window.PORTFOLIO_DATA = {
       image: "assets/diagrams/bobbot-return-to-base.svg",
       flowchart: "assets/diagrams/bobbot-return-to-base.svg",
       imageAlt: "Conventional engineering flowchart of Bobbot's Return-to-Base behaviour",
-      objective: "Return from the collection area to a delivery position despite changing visibility and objects obstructing the preferred path. The return behaviour finishes navigation but does not itself release the carried object.",
-      implementation: "ReturnToBase supervises the operating mode. ReturnToBaseServo selects the furthest-progressed eligible visible guide on a configured arena-tag route; intermediate tags provide a steering reference, not a stop position. A final guide becomes a point target. The supervisor can transfer control to LocalAvoidance, SearchForReturnGuide or FollowWall depending on perception and approach geometry.",
-      changes: "Development progressed beyond a provisional fixed-distance Stage 1 return. The fallback is described in the flowchart as open-loop / dead-reckoning control (the October source still contains a placeholder 750 mm Drive). Stage 2 adds vision-guided route selection, a bounded guide search, ±10° handoff peek, 500 mm backoff plus realignment, obstacle-aware takeover, and a wall-follow option when the terminal guide is approached too side-on.",
-      lessons: "A visible tag does not always imply a safe route directly towards it. Keeping intermediate guides at an angular offset supports movement along the perimeter, while separating mission supervision from lower-level motion skills makes failures easier to isolate. Recovery needs different policies for temporary lost visibility, blocked handoffs and terminal approach.",
-      testing: "The linked flowchart reflects program logic from the October 2026 Python source. It is not evidence that every branch has completed physical-robot validation. Add dated trials, success rates, logs and observed limitations when they are available.",
-      next: "Review FollowWall's start interface, confirm end-to-end wall-follow and avoidance handoffs, and publish measured tests from simulation and the physical robot.",
+      sections: {
+        overview: "Navigate back to the delivery area using a chain of arena tags, with obstacle avoidance, guide recovery and a conditional wall-following approach.",
+        objectivesRequirements: "Return from the collection area to a delivery position despite changing visibility and objects obstructing the preferred path. The return behaviour finishes navigation but does not itself release the carried object.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "The linked flowchart reflects program logic from the October 2026 Python source. It is not evidence that every branch has completed physical-robot validation. Add dated trials, success rates, logs and observed limitations when they are available.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Review FollowWall's start interface, confirm end-to-end wall-follow and avoidance handoffs, and publish measured tests from simulation and the physical robot.",
+        lessonsLearned: "A visible tag does not always imply a safe route directly towards it. Keeping intermediate guides at an angular offset supports movement along the perimeter, while separating mission supervision from lower-level motion skills makes failures easier to isolate. Recovery needs different policies for temporary lost visibility, blocked handoffs and terminal approach.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "ReturnToBase supervises the operating mode. ReturnToBaseServo selects the furthest-progressed eligible visible guide on a configured arena-tag route; intermediate tags provide a steering reference, not a stop position. A final guide becomes a point target. The supervisor can transfer control to LocalAvoidance, SearchForReturnGuide or FollowWall depending on perception and approach geometry." },
+          { heading: "Development & iterations", text: "Development progressed beyond a provisional fixed-distance Stage 1 return. The fallback is described in the flowchart as open-loop / dead-reckoning control (the October source still contains a placeholder 750 mm Drive). Stage 2 adds vision-guided route selection, a bounded guide search, ±10° handoff peek, 500 mm backoff plus realignment, obstacle-aware takeover, and a wall-follow option when the terminal guide is approached too side-on." }
+        ]
+      },
+      references: [],
       codeFiles: ["autonomous/SR2026/return_to_base.py", "skills/navigation/return_to_base_servo.py", "skills/navigation/local_avoidance.py", "skills/navigation/search_for_return_guide.py", "skills/navigation/follow_wall.py"],
       sourceUrl: "",
       demos: []
@@ -166,12 +183,25 @@ window.PORTFOLIO_DATA = {
       status: "Write-up in progress",
       summary: "Coordinate target selection, approach and stacking while responding to unavailable or obstructed targets.",
       image: "assets/images/stack-object-cover.svg",
-      objective: "Bring perception and movement together to handle a stacking task.",
-      implementation: "The behaviour coordinates target selection and approach skills. An October ReturnToBase branch also selects a previously delivered low target for a terminal stacking approach. The standalone stacking behaviour should be documented from its own source before adding a full sequence here.",
-      changes: "Add the actual sequence of design revisions and the reason for each change.",
-      lessons: "Document target loss, approach reliability and what was learned from unsuccessful trials.",
-      testing: "Add measured simulation and physical-robot evidence; no performance figures are asserted here.",
-      next: "Add a flowchart, source links and recorded trial outcomes.",
+      sections: {
+        overview: "Coordinate target selection, approach and stacking while responding to unavailable or obstructed targets.",
+        objectivesRequirements: "Bring perception and movement together to handle a stacking task.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Add measured simulation and physical-robot evidence; no performance figures are asserted here.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Add a flowchart, source links and recorded trial outcomes.",
+        lessonsLearned: "Document target loss, approach reliability and what was learned from unsuccessful trials.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "The behaviour coordinates target selection and approach skills. An October ReturnToBase branch also selects a previously delivered low target for a terminal stacking approach. The standalone stacking behaviour should be documented from its own source before adding a full sequence here." },
+          { heading: "Development & iterations", text: "Add the actual sequence of design revisions and the reason for each change." }
+        ]
+      },
+      references: [],
       codeFiles: ["autonomous/SR2026/stack_object.py"], sourceUrl: "", demos: []
     },
     {
@@ -185,12 +215,25 @@ window.PORTFOLIO_DATA = {
       status: "Code documented",
       summary: "Search for a missing arena tag and re-establish a viable visual navigation route.",
       image: "assets/images/guide-recovery-cover.svg",
-      objective: "Avoid treating a single missing visual observation as mission failure.",
-      implementation: "SearchForReturnGuide calls a bounded SearchRotate and succeeds when a permitted guide becomes visible. Separate handoff recovery may peek ±10°, reverse 500 mm and realign using the two known tag locations before resuming route selection.",
-      changes: "Distinguishes temporary vision loss, lost current guide and failure to find the next guide at a guarded handoff.",
-      lessons: "Recover using the smallest appropriate manoeuvre before resorting to broad search; route identity should remain explicit during handoffs.",
-      testing: "Describe observed recoveries and exhausted searches when results are recorded.",
-      next: "Verify search limits and timeouts on the physical platform.",
+      sections: {
+        overview: "Search for a missing arena tag and re-establish a viable visual navigation route.",
+        objectivesRequirements: "Avoid treating a single missing visual observation as mission failure.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Describe observed recoveries and exhausted searches when results are recorded.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Verify search limits and timeouts on the physical platform.",
+        lessonsLearned: "Recover using the smallest appropriate manoeuvre before resorting to broad search; route identity should remain explicit during handoffs.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "SearchForReturnGuide calls a bounded SearchRotate and succeeds when a permitted guide becomes visible. Separate handoff recovery may peek ±10°, reverse 500 mm and realign using the two known tag locations before resuming route selection." },
+          { heading: "Development & iterations", text: "Distinguishes temporary vision loss, lost current guide and failure to find the next guide at a guarded handoff." }
+        ]
+      },
+      references: [],
       codeFiles: ["skills/navigation/search_for_return_guide.py", "skills/navigation/search_rotate.py"], sourceUrl: "", demos: []
     },
     {
@@ -204,12 +247,25 @@ window.PORTFOLIO_DATA = {
       status: "Needs integration review",
       summary: "Travel alongside an arena wall using measured wall geometry and lateral correction.",
       image: "assets/images/wall-follow-cover.svg",
-      objective: "Preserve a safe and stable relationship to a wall when an AprilTag approach is too side-on.",
-      implementation: "FollowWall receives estimated wall geometry from its caller. A wall-follow controller produces a velocity command; missing usable geometry causes a stop. ReturnToBase determines when to enter or leave wall following.",
-      changes: "The latest return supervisor latches the initial side distance as the wall-follow setpoint and uses a camera-edge event from the final guide as one terminal signal.",
-      lessons: "Control geometry and mission completion should remain separate responsibilities.",
-      testing: "An available FollowWall source snapshot references localisation and io in start() without listing them as parameters. Reconcile this interface before claiming a successful end-to-end integration.",
-      next: "Fix or reconcile the start interface and log range, heading and terminal-hand-off behaviour.",
+      sections: {
+        overview: "Travel alongside an arena wall using measured wall geometry and lateral correction.",
+        objectivesRequirements: "Preserve a safe and stable relationship to a wall when an AprilTag approach is too side-on.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "An available FollowWall source snapshot references localisation and io in start() without listing them as parameters. Reconcile this interface before claiming a successful end-to-end integration.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Fix or reconcile the start interface and log range, heading and terminal-hand-off behaviour.",
+        lessonsLearned: "Control geometry and mission completion should remain separate responsibilities.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "FollowWall receives estimated wall geometry from its caller. A wall-follow controller produces a velocity command; missing usable geometry causes a stop. ReturnToBase determines when to enter or leave wall following." },
+          { heading: "Development & iterations", text: "The latest return supervisor latches the initial side distance as the wall-follow setpoint and uses a camera-edge event from the final guide as one terminal signal." }
+        ]
+      },
+      references: [],
       codeFiles: ["skills/navigation/follow_wall.py", "navigation/wall_following/wall_follower.py"], sourceUrl: "", demos: []
     },
     {
@@ -223,12 +279,25 @@ window.PORTFOLIO_DATA = {
       status: "Write-up in progress",
       summary: "Temporarily take over motion when detected objects block the nominal route.",
       image: "assets/images/local-avoidance-cover.svg",
-      objective: "Navigate around obstacles without permanently discarding the intended direction of travel.",
-      implementation: "The ReturnToBase supervisor checks a local obstacle corridor, transfers control to LocalAvoidance and then tries to rejoin a visible tag route or realign with the previous route direction.",
-      changes: "Introduced a supervisory takeover rather than forcing the visual guidance controller to solve obstacle clearance itself.",
-      lessons: "Nominal navigation and local safety may require different control objectives; route recovery is as important as bypassing the immediate obstacle.",
-      testing: "The exact FTG or DWA algorithms used internally should be verified from the avoidance source before linking them as implemented methods.",
-      next: "Document the planner implementation, inputs and comparative simulation/physical tests.",
+      sections: {
+        overview: "Temporarily take over motion when detected objects block the nominal route.",
+        objectivesRequirements: "Navigate around obstacles without permanently discarding the intended direction of travel.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "The exact FTG or DWA algorithms used internally should be verified from the avoidance source before linking them as implemented methods.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Document the planner implementation, inputs and comparative simulation/physical tests.",
+        lessonsLearned: "Nominal navigation and local safety may require different control objectives; route recovery is as important as bypassing the immediate obstacle.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "The ReturnToBase supervisor checks a local obstacle corridor, transfers control to LocalAvoidance and then tries to rejoin a visible tag route or realign with the previous route direction." },
+          { heading: "Development & iterations", text: "Introduced a supervisory takeover rather than forcing the visual guidance controller to solve obstacle clearance itself." }
+        ]
+      },
+      references: [],
       codeFiles: ["skills/navigation/local_avoidance.py", "perception/providers/local_obstacle_field.py"], sourceUrl: "", demos: []
     },
     {
@@ -242,12 +311,25 @@ window.PORTFOLIO_DATA = {
       status: "Write-up in progress",
       summary: "Turn camera observations into measurements and identified targets for navigation behaviours.",
       image: "assets/images/perception-cover.svg",
-      objective: "Provide the position and identity of visible arena markers or objects in well-defined coordinates.",
-      implementation: "ReturnToBase receives arena observations, object observations, timestamps and a localised robot pose. The full perception pipeline and camera processing belong in their dedicated source modules.",
-      changes: "Add details of camera and observation-model revisions.",
-      lessons: "Timestamp freshness and the distinction between camera and robot coordinate frames are critical to reliable feedback.",
-      testing: "Add detection accuracy, field-of-view and latency comparisons from dated tests.",
-      next: "Add a perception data-flow diagram and tested video examples.",
+      sections: {
+        overview: "Turn camera observations into measurements and identified targets for navigation behaviours.",
+        objectivesRequirements: "Provide the position and identity of visible arena markers or objects in well-defined coordinates.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Add detection accuracy, field-of-view and latency comparisons from dated tests.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Add a perception data-flow diagram and tested video examples.",
+        lessonsLearned: "Timestamp freshness and the distinction between camera and robot coordinate frames are critical to reliable feedback.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "ReturnToBase receives arena observations, object observations, timestamps and a localised robot pose. The full perception pipeline and camera processing belong in their dedicated source modules." },
+          { heading: "Development & iterations", text: "Add details of camera and observation-model revisions." }
+        ]
+      },
+      references: [],
       codeFiles: ["perception/", "vision/"], sourceUrl: "", demos: []
     },
     {
@@ -261,12 +343,25 @@ window.PORTFOLIO_DATA = {
       status: "Write-up in progress",
       summary: "Represent robot pose and use localisation to support route recovery and home-base decisions.",
       image: "assets/images/localisation-cover.svg",
-      objective: "Maintain a useful estimate of where the robot is and the direction it faces.",
-      implementation: "ReturnToBase consumes localisation.pose and a HomeBase evaluator; robot heading is used to realign with known arena-tag route segments. Specific estimator and odometry details should be added from their implementation.",
-      changes: "Document which observations improved pose accuracy and where confidence was insufficient.",
-      lessons: "Heading validity and position validity may differ; decisions should explicitly check the particular quantity they require.",
-      testing: "Add accuracy, drift and recovery results, with test conditions.",
-      next: "Link the estimator implementation and confidence tests.",
+      sections: {
+        overview: "Represent robot pose and use localisation to support route recovery and home-base decisions.",
+        objectivesRequirements: "Maintain a useful estimate of where the robot is and the direction it faces.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Add accuracy, drift and recovery results, with test conditions.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Link the estimator implementation and confidence tests.",
+        lessonsLearned: "Heading validity and position validity may differ; decisions should explicitly check the particular quantity they require.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "ReturnToBase consumes localisation.pose and a HomeBase evaluator; robot heading is used to realign with known arena-tag route segments. Specific estimator and odometry details should be added from their implementation." },
+          { heading: "Development & iterations", text: "Document which observations improved pose accuracy and where confidence was insufficient." }
+        ]
+      },
+      references: [],
       codeFiles: ["localisation/", "skills/perception/home_base.py"], sourceUrl: "", demos: []
     },
     {
@@ -280,12 +375,25 @@ window.PORTFOLIO_DATA = {
       status: "Write-up in progress",
       summary: "Convert motion objectives from navigation skills into robot velocity and actuator commands.",
       image: "assets/images/motion-control-cover.svg",
-      objective: "Keep control mathematics separate from hardware motor commands and navigation decisions.",
-      implementation: "ReturnToBaseServo uses DistanceAngleController and a velocity backend. FollowWall also emits velocity commands through a backend. The larger motion-command architecture should be described independently from these callers.",
-      changes: "Document the transition from timed commands to reusable controlled-motion interfaces.",
-      lessons: "A shared command interface makes controller comparisons and simulation-to-robot portability easier.",
-      testing: "Add motor and velocity calibration, step-response data and safety checks.",
-      next: "Clarify which motion profiles are actually used before calling them implemented.",
+      sections: {
+        overview: "Convert motion objectives from navigation skills into robot velocity and actuator commands.",
+        objectivesRequirements: "Keep control mathematics separate from hardware motor commands and navigation decisions.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Add motor and velocity calibration, step-response data and safety checks.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "Clarify which motion profiles are actually used before calling them implemented.",
+        lessonsLearned: "A shared command interface makes controller comparisons and simulation-to-robot portability easier.",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Implementation", text: "ReturnToBaseServo uses DistanceAngleController and a velocity backend. FollowWall also emits velocity commands through a backend. The larger motion-command architecture should be described independently from these callers." },
+          { heading: "Development & iterations", text: "Document the transition from timed commands to reusable controlled-motion interfaces." }
+        ]
+      },
+      references: [],
       codeFiles: ["navigation/control/distance_angle_controller.py", "motion_backends/velocity.py"], sourceUrl: "", demos: []
     }
   ],
@@ -527,7 +635,7 @@ window.PORTFOLIO_DATA = {
 
   /* PUBLICATION: published: false hides a project from public listings,
      direct project links and related-project links. It is still present
-     in this public JavaScript file (not confidential). The local-only
+     in this public JavaScript file (not confidential). The unlisted live
      development.html page lets you preview drafts.
      featuredOrder controls only the Selected Projects order; unpublished
      items never appear there, even when numbered. */
@@ -547,15 +655,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Replace with what you personally designed, built, programmed or tested.",
       sections: {
         overview: "Bobbot is an ongoing multi-year project working towards a fuly autonomous robot.  Describe the robot and the problem it was intended to solve. Include the final result in one or two sentences.",
-        objectives: "List the main engineering requirements: movement, accuracy, payload, autonomy, cost, time or physical dimensions.",
-        design: "Explain chassis layout, drivetrain choice, sensor placement and important design trade-offs. Include CAD screenshots where available.",
-        construction: "Record the mechanical assembly, fabrication, wiring and hardware integration, including parts you designed yourself.",
-        software: "Describe the Python control architecture, navigation methods, sensor processing and motor-control strategy.",
-        testing: "Include measurable trials: success rate, distance travelled, positioning accuracy, battery life or repeatability. Add test conditions.",
-        iterations: "Show one or two meaningful problems, the evidence used to diagnose them, and how the design was changed.",
-        results: "Summarise what currently works. Add a 20–60-second demonstration video and a photograph of the finished robot.",
-        lessons: "What would you do differently in a second revision?"
+        objectivesRequirements: "List the main engineering requirements: movement, accuracy, payload, autonomy, cost, time or physical dimensions.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Include measurable trials: success rate, distance travelled, positioning accuracy, battery life or repeatability. Add test conditions.",
+        resultsEvaluation: "Summarise what currently works. Add a 20–60-second demonstration video and a photograph of the finished robot.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "What would you do differently in a second revision?",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Explain chassis layout, drivetrain choice, sensor placement and important design trade-offs. Include CAD screenshots where available." },
+          { heading: "Construction & manufacture", text: "Record the mechanical assembly, fabrication, wiring and hardware integration, including parts you designed yourself." },
+          { heading: "Software & control", text: "Describe the Python control architecture, navigation methods, sensor processing and motor-control strategy." },
+          { heading: "Design iterations", text: "Show one or two meaningful problems, the evidence used to diagnose them, and how the design was changed." }
+        ]
+      },
+      references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -573,15 +691,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Replace with the parts and assemblies that you modelled or engineered.",
       sections: {
         overview: "This is the first gripper design fitted to Bobbot. The jaws are mounted on a vertical slide and close around a cardboard cube approximately 150 mm across. Their contact faces do not remain parallel throughout the closing movement, which can limit how consistently the cube is engaged at different positions.\n\nThe original gripper remains its own project. A separate investigation examines alternative jaw arrangements and ways to detect grasp engagement mechanically, using this design as a baseline.",
-        objectives: "Document required travel, grip force, envelope, mass, material and manufacturing constraints.",
-        design: "Include views from the CAD assembly and describe the linkage or transmission principle.",
-        construction: "Explain how the components were manufactured and assembled.",
-        software: "If motors, sensors or controllers are involved, explain how motion is commanded or measured. Otherwise note that software is not applicable.",
-        testing: "Measure opening range, repeatability, grip performance or fit tolerance if possible.",
-        iterations: "Show how the mechanism evolved, especially any changes needed for reliable operation.",
-        results: "Add a photograph or short clip of the completed mechanism working.",
-        lessons: "Identify important mechanical lessons and improvements for the next version."
+        objectivesRequirements: "Document required travel, grip force, envelope, mass, material and manufacturing constraints.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Measure opening range, repeatability, grip performance or fit tolerance if possible.",
+        resultsEvaluation: "Add a photograph or short clip of the completed mechanism working.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Identify important mechanical lessons and improvements for the next version.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Include views from the CAD assembly and describe the linkage or transmission principle." },
+          { heading: "Construction & manufacture", text: "Explain how the components were manufactured and assembled." },
+          { heading: "Software & control", text: "If motors, sensors or controllers are involved, explain how motion is commanded or measured. Otherwise note that software is not applicable." },
+          { heading: "Design iterations", text: "Show how the mechanism evolved, especially any changes needed for reliable operation." }
+        ]
+      },
+      references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -618,17 +746,26 @@ window.PORTFOLIO_DATA = {
   "results": "Current stage",
   "nextSteps": "Next steps"
 },
-      "sections": {
-  "overview": "The first Bobbot gripper is a separate, existing design. Its pivoting jaws do not keep parallel contact faces during closure, reducing the range of box widths and positions that can be gripped consistently. It remains a useful mechanical reference, but the new investigation is an additional gripper intended for the lower-cost Robbot platform—not simply a renamed version of the Bobbot gripper. The initial reference object is a 150 mm cardboard cube.\n\nThe central problem has two parts: produce opposing jaw motion suitable for boxes of different widths, and obtain feedback that a box is being gripped with sufficient engagement to stay held. Indirect camera-based pickup checks have limitations. Jaw contact by itself does not establish a secure grasp, and neither jaw position nor servo command alone proves that the box will be retained.",
-  "brief": "Compare two candidate mechanisms: a four-bar parallel-jaw linkage and a rack-and-pinion parallel gripper. Both should be evaluated for jaw parallelism, useful opening range, load transmission, clearances, friction, backlash, size, cost and ease of fabrication. The designs should be bench-testable before mounting on Robbot.\n\nInvestigate a simple mechanical indicator of gripping load or elastic deflection, for example a spring-loaded pad or compliant drive element read by a switch, Hall-effect sensor or displacement measurement. The objective is not merely to signal that something was touched, but to determine experimentally whether the signal is a useful predictor of secure retention. The 150 mm cube provides a common baseline; support for other box widths is an additional design goal with limits to be established by measurements.",
-  "research": "Research will focus on published examples and technical explanations of four-bar and rack-and-pinion grippers, jaw guidance, spring-loaded pads, compliant gripping mechanisms, and methods for sensing gripping force indirectly through displacement. For each approach, record its source, working principle, force path, likely failure modes, and suitability for low-cost manufacture.\n\nCandidate feedback methods include a spring whose compression is measured by a Hall-effect magnet/sensor pair, a microswitch operating at a defined displacement, a jaw-position sensor, or a force-sensitive element where justified. A spring or Hall reading measures deflection or proximity; it must be calibrated and checked against actual grip performance before it can be interpreted as gripping load. Important questions include how off-centre contact, box deformation, linkage friction, jaw slip and variations in box size alter the reading. Specific literature references and test evidence will be added as research is completed.",
-  "construction": "Develop student-created, annotated drawings and CAD models of both candidate mechanisms, showing the two jaw motion paths, guides, pivots or rack teeth, actuation path, clearances and mounting envelope. Give the proposed sensing element its own detail view showing what moves, which spring deflects and how displacement reaches the sensor.\n\nBuild small bench prototypes before selecting a complete mechanism. Record the dimensions, material, version and manufacturing choices for each candidate, then compare their useful closing range and tolerance to jaw misalignment. The new gripper will have its own drawings and prototype photographs; the current cover image is clearly labelled as the original Bobbot baseline until new images exist.",
-  "software": "Keep the gripping mechanism and its evidence separate from the detection circuit. Low-level software may read a switch or Hall-effect signal and log the timing or magnitude of mechanical deflection, but the signal is only an estimate of engagement. It should be compared with independent observations of box retention.\n\nThe first goal is an understandable mechanical response that could be monitored with minimal sensing hardware. Software thresholds or a digital grasp indication should follow physical calibration and repeatability tests, not substitute for them. No high-level robot navigation or power-supply redesign is part of this investigation.",
-  "testing": "First measure the original gripper's effective jaw range and demonstrate where its non-parallel faces limit box engagement. Test the four-bar and rack-and-pinion candidates with the same 150 mm cube, then with other recorded box widths where practical. Compare parallelism, opening travel, centred and offset grasps, mechanical play and actual retention after closure.\n\nFor grasp feedback, independently record three outcomes: initial contact, a held box immediately after closure, and retention during a defined lift or disturbance. In each trial note the sensor state or deflection, jaw position and any slip. Count false positives (detector predicts a secure grasp but the box is not retained) and missed detections (a secure grasp without a positive signal). Establish sample sizes, performance targets and test loading before claiming that an approach works. No success rates are assumed in advance.",
-  "iterations": "Compare changes to jaw geometry, guides and sensing compliance against repeatable measurements, rather than appearance alone. Four-bar linkages may introduce joint play or changing mechanical advantage; rack-and-pinion designs may introduce friction, backlash or tooth wear. Spring placement or detector thresholds may also make off-centre contact appear secure when it is not.\n\nOnly report iterations as completed when a physical or simulated test has been carried out and the observations recorded. Keep sketches of rejected concepts and explain why a revised design offers a practical improvement.",
-  "results": "Current work consists of identifying the limitations of the original Bobbot jaws, selecting the four-bar linkage and rack-and-pinion parallel gripper as the principal candidates, and outlining possible spring-based grasp indicators. The literature review, revised CAD drawings, sensing prototypes and comparative experiments are still to be completed. No secure-grasp detection reliability or gripping-force result is claimed at this stage.",
-  "nextSteps": "1. Record the original gripper's opening geometry and failure conditions on a 150 mm cube. 2. Read and document existing work on parallel-jaw mechanisms and spring/compliant gripping-force detection. 3. Sketch and model the four-bar and rack-and-pinion candidates. 4. Produce at least two sensor-placement concepts, including a possible spring-plus-Hall-effect arrangement. 5. Bench-test opening range and secure retention using centred and offset boxes. 6. Compare sensor indications against independent grip outcomes before selecting and refining the final design."
-},
+      sections: {
+        overview: "The first Bobbot gripper is a separate, existing design. Its pivoting jaws do not keep parallel contact faces during closure, reducing the range of box widths and positions that can be gripped consistently. It remains a useful mechanical reference, but the new investigation is an additional gripper intended for the lower-cost Robbot platform—not simply a renamed version of the Bobbot gripper. The initial reference object is a 150 mm cardboard cube.\n\nThe central problem has two parts: produce opposing jaw motion suitable for boxes of different widths, and obtain feedback that a box is being gripped with sufficient engagement to stay held. Indirect camera-based pickup checks have limitations. Jaw contact by itself does not establish a secure grasp, and neither jaw position nor servo command alone proves that the box will be retained.",
+        objectivesRequirements: "Compare two candidate mechanisms: a four-bar parallel-jaw linkage and a rack-and-pinion parallel gripper. Both should be evaluated for jaw parallelism, useful opening range, load transmission, clearances, friction, backlash, size, cost and ease of fabrication. The designs should be bench-testable before mounting on Robbot.\n\nInvestigate a simple mechanical indicator of gripping load or elastic deflection, for example a spring-loaded pad or compliant drive element read by a switch, Hall-effect sensor or displacement measurement. The objective is not merely to signal that something was touched, but to determine experimentally whether the signal is a useful predictor of secure retention. The 150 mm cube provides a common baseline; support for other box widths is an additional design goal with limits to be established by measurements.",
+        backgroundResearch: "Research will focus on published examples and technical explanations of four-bar and rack-and-pinion grippers, jaw guidance, spring-loaded pads, compliant gripping mechanisms, and methods for sensing gripping force indirectly through displacement. For each approach, record its source, working principle, force path, likely failure modes, and suitability for low-cost manufacture.\n\nCandidate feedback methods include a spring whose compression is measured by a Hall-effect magnet/sensor pair, a microswitch operating at a defined displacement, a jaw-position sensor, or a force-sensitive element where justified. A spring or Hall reading measures deflection or proximity; it must be calibrated and checked against actual grip performance before it can be interpreted as gripping load. Important questions include how off-centre contact, box deformation, linkage friction, jaw slip and variations in box size alter the reading. Specific literature references and test evidence will be added as research is completed.",
+        designDevelopment: "",
+        testingValidation: "First measure the original gripper's effective jaw range and demonstrate where its non-parallel faces limit box engagement. Test the four-bar and rack-and-pinion candidates with the same 150 mm cube, then with other recorded box widths where practical. Compare parallelism, opening travel, centred and offset grasps, mechanical play and actual retention after closure.\n\nFor grasp feedback, independently record three outcomes: initial contact, a held box immediately after closure, and retention during a defined lift or disturbance. In each trial note the sensor state or deflection, jaw position and any slip. Count false positives (detector predicts a secure grasp but the box is not retained) and missed detections (a secure grasp without a positive signal). Establish sample sizes, performance targets and test loading before claiming that an approach works. No success rates are assumed in advance.",
+        resultsEvaluation: "Current work consists of identifying the limitations of the original Bobbot jaws, selecting the four-bar linkage and rack-and-pinion parallel gripper as the principal candidates, and outlining possible spring-based grasp indicators. The literature review, revised CAD drawings, sensing prototypes and comparative experiments are still to be completed. No secure-grasp detection reliability or gripping-force result is claimed at this stage.",
+        conclusionsNextSteps: "1. Record the original gripper's opening geometry and failure conditions on a 150 mm cube. 2. Read and document existing work on parallel-jaw mechanisms and spring/compliant gripping-force detection. 3. Sketch and model the four-bar and rack-and-pinion candidates. 4. Produce at least two sensor-placement concepts, including a possible spring-plus-Hall-effect arrangement. 5. Bench-test opening range and secure retention using centred and offset boxes. 6. Compare sensor indications against independent grip outcomes before selecting and refining the final design.",
+        lessonsLearned: "",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "CAD and prototyping", text: "Develop student-created, annotated drawings and CAD models of both candidate mechanisms, showing the two jaw motion paths, guides, pivots or rack teeth, actuation path, clearances and mounting envelope. Give the proposed sensing element its own detail view showing what moves, which spring deflects and how displacement reaches the sensor.\n\nBuild small bench prototypes before selecting a complete mechanism. Record the dimensions, material, version and manufacturing choices for each candidate, then compare their useful closing range and tolerance to jaw misalignment. The new gripper will have its own drawings and prototype photographs; the current cover image is clearly labelled as the original Bobbot baseline until new images exist." },
+          { heading: "Interpreting grasp feedback", text: "Keep the gripping mechanism and its evidence separate from the detection circuit. Low-level software may read a switch or Hall-effect signal and log the timing or magnitude of mechanical deflection, but the signal is only an estimate of engagement. It should be compared with independent observations of box retention.\n\nThe first goal is an understandable mechanical response that could be monitored with minimal sensing hardware. Software thresholds or a digital grasp indication should follow physical calibration and repeatability tests, not substitute for them. No high-level robot navigation or power-supply redesign is part of this investigation." },
+          { heading: "Design decisions and iteration", text: "Compare changes to jaw geometry, guides and sensing compliance against repeatable measurements, rather than appearance alone. Four-bar linkages may introduce joint play or changing mechanical advantage; rack-and-pinion designs may introduce friction, backlash or tooth wear. Spring placement or detector thresholds may also make off-centre contact appear secure when it is not.\n\nOnly report iterations as completed when a physical or simulated test has been carried out and the observations recorded. Keep sketches of rejected concepts and explain why a revised design offers a practical improvement." }
+        ]
+      },
+      references: [],
       "investigation": {
         "question": "Which parallel-jaw design best handles different box widths, and can measurable spring or mechanism deflection indicate a grasp likely to remain secure?",
         "status": "Investigation in progress — concepts and proposed tests, not demonstrated performance.",
@@ -787,13 +924,19 @@ window.PORTFOLIO_DATA = {
         "nextSteps": "Next steps and decisions",
         "surface-sources": "Research and technical sources"
       },
-      "sections": {
-        "overview": "The working gripper uses rubber bands as high-friction contact surfaces against cardboard. This arrangement can work well when the object and jaw position match closely, but performance is sensitive to geometry and the bands can occasionally detach. The existing strong gripper actuator may also mask limitations in the contact material. An improved pad should be judged at equal, controlled loading rather than by simply increasing gripping force.\n\nThis is a separate investigation into the material and geometry of the gripping surface, not a redesign of the full gripper mechanism or a grasp-sensing project. The existing rubber-band arrangement is the reference, and a 150 mm cardboard cube provides the principal test object.",
-        "brief": "Investigate whether a replaceable 3D-printed compliant pad can produce higher cardboard slip resistance and pull-out retention than the existing rubber bands without unacceptable cardboard damage. Start with comparable, flat pads and a controlled load. Test Bambu TPU 90A, Bambu TPU 85A and Recreus Filaflex SEBS 90A, using available eSUN TPU 95A or TPU 54D only if needed.\n\nThe design sequence is baseline measurement → material comparison → failure diagnosis → literature-informed surface modification → repeat testing. Geometry modifications are conditional, not assumed improvements: a textured surface can produce a different friction response without necessarily increasing peak force. Material hardness, polymer formulation and geometry should be treated as separate experimental variables.",
-        "construction": "Create interchangeable pads with controlled nominal contact dimensions and documented printer settings. Use a repeatable mounting arrangement on the existing gripper or a two-jaw test fixture, with pad orientation and contact area recorded. Design the initial pad surfaces to be geometrically comparable across materials.\n\nThe P1S can print Bambu TPU 90A with a 0.4 mm nozzle; TPU 85A requires a recommended 0.6 or 0.8 mm nozzle. Recreus supplies a Filaflex SEBS profile for the P1S, but its suitability still needs a practical print trial. Record extrusion consistency, layer adhesion, dimensional accuracy and whether the finished pad can be produced repeatedly. No manufactured pads or test values are claimed yet.",
-        "results": "Investigation defined; physical trials and measurements are not yet reported. The rubber-band grip is a working reference, but its retention force, slip force, damage and trial variability have not yet been quantified. Literature informs the test plan and design options, not an advance claim that any candidate material will outperform it.\n\nReport each material’s actual test conditions, individual readings, mean forces, spread, cardboard condition and printability once measurements are available. Keep failures and unsuccessful candidates as part of the engineering record.",
-        "nextSteps": "1. Photograph and measure the existing rubber-band contact surfaces and record the jaw-loading method. 2. Construct a repeatable horizontal pull/slip rig and a controlled two-jaw pull-out fixture. 3. Measure the rubber-band baseline, with at least five trials in each primary force test. 4. Print geometrically matched flat samples of the three primary materials, recording settings and manufacturing issues. 5. Repeat the controlled force and cardboard-damage tests for each sample. 6. Compare mean results and variability against the baseline; decide which material, if any, meets the acceptance criteria. 7. If failure analysis identifies a specific limitation, prototype a literature-informed rib, groove or compliant surface and retest. 8. Optionally validate the most promising pad on the robot; leave integrated contact sensing for a separate investigation."
+      sections: {
+        overview: "The working gripper uses rubber bands as high-friction contact surfaces against cardboard. This arrangement can work well when the object and jaw position match closely, but performance is sensitive to geometry and the bands can occasionally detach. The existing strong gripper actuator may also mask limitations in the contact material. An improved pad should be judged at equal, controlled loading rather than by simply increasing gripping force.\n\nThis is a separate investigation into the material and geometry of the gripping surface, not a redesign of the full gripper mechanism or a grasp-sensing project. The existing rubber-band arrangement is the reference, and a 150 mm cardboard cube provides the principal test object.",
+        objectivesRequirements: "Investigate whether a replaceable 3D-printed compliant pad can produce higher cardboard slip resistance and pull-out retention than the existing rubber bands without unacceptable cardboard damage. Start with comparable, flat pads and a controlled load. Test Bambu TPU 90A, Bambu TPU 85A and Recreus Filaflex SEBS 90A, using available eSUN TPU 95A or TPU 54D only if needed.\n\nThe design sequence is baseline measurement → material comparison → failure diagnosis → literature-informed surface modification → repeat testing. Geometry modifications are conditional, not assumed improvements: a textured surface can produce a different friction response without necessarily increasing peak force. Material hardness, polymer formulation and geometry should be treated as separate experimental variables.",
+        backgroundResearch: "",
+        designDevelopment: "Create interchangeable pads with controlled nominal contact dimensions and documented printer settings. Use a repeatable mounting arrangement on the existing gripper or a two-jaw test fixture, with pad orientation and contact area recorded. Design the initial pad surfaces to be geometrically comparable across materials.\n\nThe P1S can print Bambu TPU 90A with a 0.4 mm nozzle; TPU 85A requires a recommended 0.6 or 0.8 mm nozzle. Recreus supplies a Filaflex SEBS profile for the P1S, but its suitability still needs a practical print trial. Record extrusion consistency, layer adhesion, dimensional accuracy and whether the finished pad can be produced repeatedly. No manufactured pads or test values are claimed yet.",
+        testingValidation: "",
+        resultsEvaluation: "Investigation defined; physical trials and measurements are not yet reported. The rubber-band grip is a working reference, but its retention force, slip force, damage and trial variability have not yet been quantified. Literature informs the test plan and design options, not an advance claim that any candidate material will outperform it.\n\nReport each material’s actual test conditions, individual readings, mean forces, spread, cardboard condition and printability once measurements are available. Keep failures and unsuccessful candidates as part of the engineering record.",
+        conclusionsNextSteps: "1. Photograph and measure the existing rubber-band contact surfaces and record the jaw-loading method. 2. Construct a repeatable horizontal pull/slip rig and a controlled two-jaw pull-out fixture. 3. Measure the rubber-band baseline, with at least five trials in each primary force test. 4. Print geometrically matched flat samples of the three primary materials, recording settings and manufacturing issues. 5. Repeat the controlled force and cardboard-damage tests for each sample. 6. Compare mean results and variability against the baseline; decide which material, if any, meets the acceptance criteria. 7. If failure analysis identifies a specific limitation, prototype a literature-informed rib, groove or compliant surface and retest. 8. Optionally validate the most promising pad on the robot; leave integrated contact sensing for a separate investigation.",
+        lessonsLearned: "",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      references: [],
       "surfaceStudy": {
         "benchmarks": [
           [
@@ -1134,15 +1277,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Replace with the components you designed and printed yourself.",
       sections: {
         overview: "Identify the component or family of parts and explain the engineering need.",
-        objectives: "Set out constraints such as fit, load, wear, size and available printer materials.",
-        design: "Show the CAD geometry and any details that make the part printable or assemble correctly.",
-        construction: "Record material selection, print orientation, supports and post-processing.",
-        software: "If applicable, explain parametric CAD or scripts used to generate the part.",
-        testing: "Show fit checks, load tests, endurance trials or measured dimensional accuracy.",
-        iterations: "Compare revisions and explain the effect of dimensional or design changes.",
-        results: "",
-        lessons: "Summarise what worked in manufacturing and what you would change."
+        objectivesRequirements: "Set out constraints such as fit, load, wear, size and available printer materials.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Show fit checks, load tests, endurance trials or measured dimensional accuracy.",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Summarise what worked in manufacturing and what you would change.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Show the CAD geometry and any details that make the part printable or assemble correctly." },
+          { heading: "Construction & manufacture", text: "Record material selection, print orientation, supports and post-processing." },
+          { heading: "Software & control", text: "If applicable, explain parametric CAD or scripts used to generate the part." },
+          { heading: "Design iterations", text: "Compare revisions and explain the effect of dimensional or design changes." }
+        ]
+      },
+      references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
       printPhotos: [
         { src: "assets/images/IMG_2788 3d print pulley.jpg", caption: "Photograph of the printed pulleys in the robot assembly" }
@@ -1175,17 +1328,27 @@ window.PORTFOLIO_DATA = {
       sectionLabels: {"architecture": "System architecture", "hardware": "Electrical interfaces", "software": "Firmware & TeleOp", "testing": "Testing & verification", "iterations": "Design decisions & improvements", "results": "Current outcome"},
       sections: {
         overview: "The Modular Robot I/O & TeleOp Controller is a common electrical and low-level control interface intended for use across different robots. It is built around an Arduino Mega 2560, chosen for its numerous digital, analogue and interrupt-capable connections. Rather than design a different controller for every robot, the aim is to keep a consistent pin map and connect only the motors, servos, encoders and sensors that each platform requires.\n\nThe Mega is deliberately not the robot’s main computer. It handles manual teleoperation (TeleOp), encoder counting and direct hardware interfacing. A Raspberry Pi carries out higher-level work such as perception, navigation and autonomous decision-making. This division keeps the microcontroller focused on practical, time-sensitive I/O rather than computationally demanding algorithms.",
-        architecture: "The system has two levels of control. The Raspberry Pi is responsible for interpreting sensor information, planning behaviour and producing autonomous motion commands. The Arduino Mega provides the low-level connection to the physical robot: it reads relevant inputs, counts encoder pulses and interfaces with motor drivers, servos and other peripherals. Commands and feedback pass between these levels as required by the robot’s operating mode.\n\nManual operation is also handled at the Mega level through the radio-control receiver. This keeps TeleOp separate from the Pi’s higher-level navigation software. The architecture is reusable: robots can share the controller layout without sharing exactly the same set of attached devices.",
-        hardware: "The wiring diagram identifies the Mega’s pin assignments and the connections available at the panel and field interfaces. It includes 5 V and ground distribution, a regulated power input, motor-driver and servo outputs, and connections for quadrature encoders and other feedback devices.\n\nThe drawing also allocates interfaces for switches, range sensors, inertial sensing, the radio receiver and auxiliary devices. These are provisions in the wiring design, not a claim that every peripheral is fitted to every robot. Devices are connected only when that robot needs them. Clear connector names and a shared pin map are intended to make assembly, troubleshooting and later modifications easier.",
-        construction: "The design begins with a complete connection diagram rather than wiring each robot independently. The Arduino Mega forms the centre of the layout, with labelled groups of inputs and outputs and separate panel-to-field connections for external devices. Power and ground distribution are shown alongside the signal wiring so that each subsystem has an identifiable supply and return path.\n\nFor a particular robot, the required connectors and cables are selected from this common arrangement. For example, a robot with wheel encoders can use the assigned encoder inputs, while a robot without that feedback can leave them unused. This approach reduces repeated wiring decisions and makes it easier to transfer a sensor or mechanism between platforms. The diagram documents the electrical layout; physical harness construction and verification can be recorded separately as they are completed.",
-        software: "The Mega firmware has a deliberately limited remit. It reads teleoperation input from the radio receiver, counts encoder transitions and manages the low-level interfaces needed to operate the connected hardware. This includes the pathways for motor-driver commands, servo control and sensor signals shown in the wiring diagram.\n\nMore demanding algorithms belong on the Raspberry Pi. Vision processing, localisation, route selection and autonomous robot behaviour are kept outside the Mega firmware. The Pi can use the low-level inputs and outputs provided by the Mega without duplicating the pin-level hardware logic. Keeping the responsibilities separate also makes it possible to diagnose a wiring or encoder issue independently of a navigation algorithm.",
-        testing: "Verification is best carried out in stages. Start with the power rails and connector pinouts, checking voltage levels, common grounds and correct polarity before connecting motors or sensitive sensors. Then test each used I/O channel individually: switches, servos, motor outputs, sensor readings and the direction and consistency of encoder counts.\n\nTeleOp testing should confirm channel mapping, response to operator inputs and behaviour if the radio signal is lost. With the Raspberry Pi connected, additional checks should cover command handling, feedback timing and transitions between manual and autonomous control. The schematic establishes the interface design; quantitative results such as encoder count reliability or control latency have not yet been recorded on this page.",
-        iterations: "A central design decision was to avoid making the Mega responsible for vision or navigation simply because it is connected to the actuators. Restricting its role to TeleOp, encoder counting and hardware I/O makes the software easier to reuse and keeps high-level development on the Raspberry Pi.\n\nThe other important decision is to standardise connections rather than hard-wire every possible sensor into a robot. Future revisions can improve connector labelling, cable routing, electrical protection and fault handling without changing the overall separation of responsibilities. Any actual wiring or firmware revisions can be documented here as they are tested.",
-        results: "The current documented output is a consolidated Arduino Mega wiring diagram and I/O allocation covering power distribution, external connectors, manual-control input, encoders and multiple kinds of robot peripherals. It provides a repeatable starting point for configuring the electrical interface of more than one robot.\n\nThe defined control split is that the Mega handles TeleOp and encoder counting while the Raspberry Pi performs high-level control. This page describes that architecture and the interfaces available; it does not yet present measured performance, completed qualification tests or a claim that every connection in the diagram has been populated.",
-        lessons: "A modular robot controller is as much about defining responsibilities and connections as it is about choosing the microcontroller. Separating low-level I/O from higher-level autonomy makes the design easier to understand, test and transfer to another platform.\n\nConsistent signal names, connector pinouts and power distribution are particularly valuable when the robot changes but the controller does not. The next useful evidence will be repeatable encoder, TeleOp and power-system tests that show how reliably the reusable design operates on different robots.",
-        objectives: "Provide one reusable set of controller connections for multiple robots, with stable power and signal interfaces, radio TeleOp, encoder counting and selective connection of robot-specific peripherals.",
-        design: "Separate low-level Arduino Mega I/O and manual control from Raspberry Pi autonomy. Document connectors, pin allocation and power distribution in a common wiring diagram."
+        objectivesRequirements: "Provide one reusable set of controller connections for multiple robots, with stable power and signal interfaces, radio TeleOp, encoder counting and selective connection of robot-specific peripherals.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Verification is best carried out in stages. Start with the power rails and connector pinouts, checking voltage levels, common grounds and correct polarity before connecting motors or sensitive sensors. Then test each used I/O channel individually: switches, servos, motor outputs, sensor readings and the direction and consistency of encoder counts.\n\nTeleOp testing should confirm channel mapping, response to operator inputs and behaviour if the radio signal is lost. With the Raspberry Pi connected, additional checks should cover command handling, feedback timing and transitions between manual and autonomous control. The schematic establishes the interface design; quantitative results such as encoder count reliability or control latency have not yet been recorded on this page.",
+        resultsEvaluation: "The current documented output is a consolidated Arduino Mega wiring diagram and I/O allocation covering power distribution, external connectors, manual-control input, encoders and multiple kinds of robot peripherals. It provides a repeatable starting point for configuring the electrical interface of more than one robot.\n\nThe defined control split is that the Mega handles TeleOp and encoder counting while the Raspberry Pi performs high-level control. This page describes that architecture and the interfaces available; it does not yet present measured performance, completed qualification tests or a claim that every connection in the diagram has been populated.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "A modular robot controller is as much about defining responsibilities and connections as it is about choosing the microcontroller. Separating low-level I/O from higher-level autonomy makes the design easier to understand, test and transfer to another platform.\n\nConsistent signal names, connector pinouts and power distribution are particularly valuable when the robot changes but the controller does not. The next useful evidence will be repeatable encoder, TeleOp and power-system tests that show how reliably the reusable design operates on different robots.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "System architecture", text: "The system has two levels of control. The Raspberry Pi is responsible for interpreting sensor information, planning behaviour and producing autonomous motion commands. The Arduino Mega provides the low-level connection to the physical robot: it reads relevant inputs, counts encoder pulses and interfaces with motor drivers, servos and other peripherals. Commands and feedback pass between these levels as required by the robot’s operating mode.\n\nManual operation is also handled at the Mega level through the radio-control receiver. This keeps TeleOp separate from the Pi’s higher-level navigation software. The architecture is reusable: robots can share the controller layout without sharing exactly the same set of attached devices." },
+          { heading: "Electrical interfaces", text: "The wiring diagram identifies the Mega’s pin assignments and the connections available at the panel and field interfaces. It includes 5 V and ground distribution, a regulated power input, motor-driver and servo outputs, and connections for quadrature encoders and other feedback devices.\n\nThe drawing also allocates interfaces for switches, range sensors, inertial sensing, the radio receiver and auxiliary devices. These are provisions in the wiring design, not a claim that every peripheral is fitted to every robot. Devices are connected only when that robot needs them. Clear connector names and a shared pin map are intended to make assembly, troubleshooting and later modifications easier." },
+          { heading: "Design", text: "Separate low-level Arduino Mega I/O and manual control from Raspberry Pi autonomy. Document connectors, pin allocation and power distribution in a common wiring diagram." },
+          { heading: "Construction & manufacture", text: "The design begins with a complete connection diagram rather than wiring each robot independently. The Arduino Mega forms the centre of the layout, with labelled groups of inputs and outputs and separate panel-to-field connections for external devices. Power and ground distribution are shown alongside the signal wiring so that each subsystem has an identifiable supply and return path.\n\nFor a particular robot, the required connectors and cables are selected from this common arrangement. For example, a robot with wheel encoders can use the assigned encoder inputs, while a robot without that feedback can leave them unused. This approach reduces repeated wiring decisions and makes it easier to transfer a sensor or mechanism between platforms. The diagram documents the electrical layout; physical harness construction and verification can be recorded separately as they are completed." },
+          { heading: "Firmware & TeleOp", text: "The Mega firmware has a deliberately limited remit. It reads teleoperation input from the radio receiver, counts encoder transitions and manages the low-level interfaces needed to operate the connected hardware. This includes the pathways for motor-driver commands, servo control and sensor signals shown in the wiring diagram.\n\nMore demanding algorithms belong on the Raspberry Pi. Vision processing, localisation, route selection and autonomous robot behaviour are kept outside the Mega firmware. The Pi can use the low-level inputs and outputs provided by the Mega without duplicating the pin-level hardware logic. Keeping the responsibilities separate also makes it possible to diagnose a wiring or encoder issue independently of a navigation algorithm." },
+          { heading: "Design decisions & improvements", text: "A central design decision was to avoid making the Mega responsible for vision or navigation simply because it is connected to the actuators. Restricting its role to TeleOp, encoder counting and hardware I/O makes the software easier to reuse and keeps high-level development on the Raspberry Pi.\n\nThe other important decision is to standardise connections rather than hard-wire every possible sensor into a robot. Future revisions can improve connector labelling, cable routing, electrical protection and fault handling without changing the overall separation of responsibilities. Any actual wiring or firmware revisions can be documented here as they are tested." }
+        ]
+      },
+      references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -1213,15 +1376,26 @@ window.PORTFOLIO_DATA = {
       },
       sections: {
         overview: "The purpose of this project is to define the final interface between robot software and hardware. Higher-level programs use a single io.* vocabulary to read sensor data and command actuators: for example, io.encoder[\"drive_front_left\"].count or io.motor[\"collector\"].power. The program describes what it wants to do, not which controller, protocol or connection is needed to do it.\n\nThis makes the software more reusable. A robot may use an Arduino Mega, a device connected directly to the Raspberry Pi, another controller or a simulation backend, while the robot behaviours retain the same named I/O operations. The companion Modular Robot I/O & TeleOp Controller project documents one physical implementation of this interface.",
-        architecture: "High-level navigation and control code calls io.* methods and properties. A hardware-specific backend translates those requests into the appropriate device operation and converts the response into the expected data type. The rest of the software does not need to know whether a sensor reading came from the Arduino Mega over serial or was handled directly by the Raspberry Pi.\n\nThe Arduino Mega remains responsible for low-level hardware access, encoder counting and manual TeleOp, while the Pi handles higher-level autonomous processing. The io.* boundary is the software contract between these responsibilities, not a pin-allocation table.",
-        hardware: "The interface groups devices by function, using named collections such as io.motor, io.encoder, io.camera, io.servo and io.imu. Each entry exposes the operations that make sense for that device. A motor has a commanded power value; an encoder returns counts and associated validity information; a camera exposes image-processing operations.\n\nThe table above is a simplified selection from the larger interface specification. It deliberately omits controller pins, wiring, firmware constants and legacy APIs: those are implementation details behind the interface. A defined interface does not by itself mean that every device or backend has been implemented and tested.",
-        construction: "The starting point was a detailed device matrix recording each logical device, its exposed io.* properties and operations, the matching backend method and, where relevant, the Arduino serial request and response. Related properties are grouped under the same logical device instead of being treated as separate items of hardware.\n\nThe public-facing version reduces this to three questions: what device is being accessed, what io.* command does the software use, and what does that operation mean? The complete working matrix remains the detailed engineering reference for implementation and migration.",
-        software: "A navigation program can read io.encoder[\"drive_front_left\"].count without referencing the encoder connection or controller firmware. The backend can translate this into a semantic request such as ENCODER drive_front_left READ and return a count with timestamp and validity information. Similarly, setting io.motor[\"collector\"].power can become MOTOR collector WRITE power=<value> on an Arduino-based robot.\n\nOther interfaces can be handled by different backends. For example, io.camera[\"front\"].see(frame=None) is resolved by the Pi camera backend without going through the Arduino serial protocol. The important invariant is the io.* call used by robot software; the implementation beneath it can change.",
-        testing: "The interface should be verified at the software boundary first: check that an io.* call reaches the intended backend, accepts the expected inputs and returns the promised values or errors. Then test the backend and transport separately, including invalid responses, lost communication and device absence. Finally verify the behaviour on real robot hardware.\n\nA useful portability test is to run the same high-level command against two different supported backends, including simulation where available, and compare the results. This page documents the interface design; it does not claim complete implementation or measured verification of every entry.",
-        iterations: "The central decision is to make io.* a stable boundary rather than expose Arduino pin numbers, library calls or serial message syntax to navigation code. This permits changes to motor drivers, encoders or controllers without rewriting every behaviour that uses them.\n\nThe matrix also distinguishes a physical device from its multiple readings: an encoder may have count, timestamp and validity properties, but remains one logical encoder. Additional platforms can be supported by new backend adapters while preserving the software-facing names and expected behaviour.",
-        results: "The current output is a defined common I/O vocabulary covering motion, sensors, localisation inputs, servo mechanisms and direct Pi devices, with corresponding backend mappings and message contracts in the full engineering matrix. The simplified table displayed as this project's main image communicates the io.* layer rather than any particular wiring design.\n\nThis is an interface specification and reusable design approach. The existence of an entry is not evidence that every associated implementation is complete or performance-tested.",
-        lessons: "The most useful boundary in a reusable robot system is between what the software asks the robot to do and how a particular controller accomplishes it. Device names and operation semantics should remain meaningful when the physical robot changes.\n\nSeparating the io.* contract from backends, communications and electrical wiring makes failures easier to isolate and new platforms easier to integrate."
+        objectivesRequirements: "",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "The interface should be verified at the software boundary first: check that an io.* call reaches the intended backend, accepts the expected inputs and returns the promised values or errors. Then test the backend and transport separately, including invalid responses, lost communication and device absence. Finally verify the behaviour on real robot hardware.\n\nA useful portability test is to run the same high-level command against two different supported backends, including simulation where available, and compare the results. This page documents the interface design; it does not claim complete implementation or measured verification of every entry.",
+        resultsEvaluation: "The current output is a defined common I/O vocabulary covering motion, sensors, localisation inputs, servo mechanisms and direct Pi devices, with corresponding backend mappings and message contracts in the full engineering matrix. The simplified table displayed as this project's main image communicates the io.* layer rather than any particular wiring design.\n\nThis is an interface specification and reusable design approach. The existence of an entry is not evidence that every associated implementation is complete or performance-tested.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "The most useful boundary in a reusable robot system is between what the software asks the robot to do and how a particular controller accomplishes it. Device names and operation semantics should remain meaningful when the physical robot changes.\n\nSeparating the io.* contract from backends, communications and electrical wiring makes failures easier to isolate and new platforms easier to integrate.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Control and I/O architecture", text: "High-level navigation and control code calls io.* methods and properties. A hardware-specific backend translates those requests into the appropriate device operation and converts the response into the expected data type. The rest of the software does not need to know whether a sensor reading came from the Arduino Mega over serial or was handled directly by the Raspberry Pi.\n\nThe Arduino Mega remains responsible for low-level hardware access, encoder counting and manual TeleOp, while the Pi handles higher-level autonomous processing. The io.* boundary is the software contract between these responsibilities, not a pin-allocation table." },
+          { heading: "The io.* interface contract", text: "The interface groups devices by function, using named collections such as io.motor, io.encoder, io.camera, io.servo and io.imu. Each entry exposes the operations that make sense for that device. A motor has a commanded power value; an encoder returns counts and associated validity information; a camera exposes image-processing operations.\n\nThe table above is a simplified selection from the larger interface specification. It deliberately omits controller pins, wiring, firmware constants and legacy APIs: those are implementation details behind the interface. A defined interface does not by itself mean that every device or backend has been implemented and tested." },
+          { heading: "Developing the interface", text: "The starting point was a detailed device matrix recording each logical device, its exposed io.* properties and operations, the matching backend method and, where relevant, the Arduino serial request and response. Related properties are grouped under the same logical device instead of being treated as separate items of hardware.\n\nThe public-facing version reduces this to three questions: what device is being accessed, what io.* command does the software use, and what does that operation mean? The complete working matrix remains the detailed engineering reference for implementation and migration." },
+          { heading: "Backends and command translation", text: "A navigation program can read io.encoder[\"drive_front_left\"].count without referencing the encoder connection or controller firmware. The backend can translate this into a semantic request such as ENCODER drive_front_left READ and return a count with timestamp and validity information. Similarly, setting io.motor[\"collector\"].power can become MOTOR collector WRITE power=<value> on an Arduino-based robot.\n\nOther interfaces can be handled by different backends. For example, io.camera[\"front\"].see(frame=None) is resolved by the Pi camera backend without going through the Arduino serial protocol. The important invariant is the io.* call used by robot software; the implementation beneath it can change." },
+          { heading: "Design decisions and refinements", text: "The central decision is to make io.* a stable boundary rather than expose Arduino pin numbers, library calls or serial message syntax to navigation code. This permits changes to motor drivers, encoders or controllers without rewriting every behaviour that uses them.\n\nThe matrix also distinguishes a physical device from its multiple readings: an encoder may have count, timestamp and validity properties, but remains one logical encoder. Additional platforms can be supported by new backend adapters while preserving the software-facing names and expected behaviour." }
+        ]
+      },
+      references: [],
       ioMap: {
         intro: "Examples of the final software-to-hardware interface. Higher-level programs use these io.* operations; the backend handles the implementation.",
         columns: ["Device / function", "io.* interface", "Software-facing purpose"],
@@ -1267,15 +1441,26 @@ window.PORTFOLIO_DATA = {
       },
       sections: {
         overview: "This project documents the electrical architecture of a mobile robot using a one-line diagram. The aim is to show how the main electrical subsystems fit together: the battery supply, motor drivers, low-voltage control electronics, USB devices and powered actuators. It provides an overall system view alongside the more detailed Arduino Mega wiring diagram and software I/O specification.\n\nThe design is modular. Power paths and functional groups are identified separately, and provisions for future devices are shown without implying that every illustrated component is installed.",
-        architecture: "A nominal 12 V NiMH battery supplies the robot through a main fuse and on/off switch to an eight-channel power distribution board. From there the diagram identifies branches for motor controllers, regulated low-voltage supplies and additional mechanisms.\n\nThe drive system uses a RoboClaw motor controller for the front motors. A second controller and rear motors are shown as possible future additions. Separate supply paths are identified for the Raspberry Pi and other logic devices, and for the servo distribution board. The diagram also shows a USB hub linking supporting devices such as cameras and microcontrollers to the Pi.",
-        hardware: "The drawing identifies a 20 A main fuse and individual protected supply branches. It shows a 5 V regulator for control electronics and a separate 6 V regulator for servo power, alongside common supply and ground buses and labelled connectors. These choices make the intended distribution and electrical loads easier to review before wiring.\n\nThe schematic also identifies a battery-voltage monitor, main connectors and a chassis bond. Fuse values, regulator capacities, return-current paths and conductor ratings still need to be checked against actual device specifications and worst-case loads before final installation; the diagram alone is not evidence of electrical validation.",
-        construction: "The one-line diagram is an early system-level design document. Rather than show every wire and terminal, it records the functional power routes between major components. Each branch can then be developed into the detailed wiring diagram, connector list and physical harness needed for construction.\n\nDashed outlines and labels distinguish planned expansions from the core design, including additional drive motors, collector and shooter motors, an arm and further servos. That allows the electrical architecture to evolve without obscuring the current system.",
-        software: "The Raspberry Pi remains responsible for higher-level tasks such as vision, navigation and autonomous control. The Arduino Mega provides low-level TeleOp, encoder counting and hardware interfacing, while motor drivers deliver power to the motors. The electrical diagram shows how those devices are powered and connected at system level; it does not describe their software protocol or pin-by-pin I/O mapping.\n\nThose details are covered in the related Modular Robot I/O & TeleOp Controller and Robot I/O Mapping & Hardware Abstraction projects.",
-        testing: "The next stage is to verify the drawing against the actual system. Checks should include supply polarity, fuse and wire ratings, expected current draw, regulator output under load, grounding and voltage drops. Power branches should be commissioned independently before connecting the complete robot.\n\nBench checks should also establish that motor starts and servo movements do not disrupt the Pi or microcontroller supplies, and that any separate test-power arrangement cannot accidentally energise an unintended branch. These are planned verification steps; this page does not present measured results.",
-        iterations: "The electrical system is divided into functional branches so that changes to one subsystem need not require a complete redesign. Separate regulated outputs distinguish logic power from servo power, and labelled connections are intended to simplify assembly and troubleshooting.\n\nThe drawing explicitly reserves space for future capabilities, but these additions are not treated as installed equipment. As the robot develops, the diagram can be updated to reflect actual components and revised current requirements.",
-        results: "The present output is a one-line electrical diagram that brings the robot's power and control hardware into one coherent view. It documents the intended distribution architecture, identifies the major subsystems and provides a basis for more detailed wiring and electrical verification.\n\nThe design complements the Arduino Mega wiring plan and the io.* software interface: one describes electrical power flow, one defines the low-level connections and controller responsibilities, and one defines how higher-level software accesses robot hardware.",
-        lessons: "A system-level electrical drawing makes dependencies and supply requirements visible before detailed wiring begins. Separating the power architecture from control wiring and from the software-facing I/O contract keeps each document focused and easier to maintain.\n\nThe design also highlights the importance of distinguishing future provisions from installed hardware and checking protection, power budgets and grounding with measurements rather than assuming a schematic is sufficient."
+        objectivesRequirements: "",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "The next stage is to verify the drawing against the actual system. Checks should include supply polarity, fuse and wire ratings, expected current draw, regulator output under load, grounding and voltage drops. Power branches should be commissioned independently before connecting the complete robot.\n\nBench checks should also establish that motor starts and servo movements do not disrupt the Pi or microcontroller supplies, and that any separate test-power arrangement cannot accidentally energise an unintended branch. These are planned verification steps; this page does not present measured results.",
+        resultsEvaluation: "The present output is a one-line electrical diagram that brings the robot's power and control hardware into one coherent view. It documents the intended distribution architecture, identifies the major subsystems and provides a basis for more detailed wiring and electrical verification.\n\nThe design complements the Arduino Mega wiring plan and the io.* software interface: one describes electrical power flow, one defines the low-level connections and controller responsibilities, and one defines how higher-level software accesses robot hardware.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "A system-level electrical drawing makes dependencies and supply requirements visible before detailed wiring begins. Separating the power architecture from control wiring and from the software-facing I/O contract keeps each document focused and easier to maintain.\n\nThe design also highlights the importance of distinguishing future provisions from installed hardware and checking protection, power budgets and grounding with measurements rather than assuming a schematic is sufficient.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Electrical architecture", text: "A nominal 12 V NiMH battery supplies the robot through a main fuse and on/off switch to an eight-channel power distribution board. From there the diagram identifies branches for motor controllers, regulated low-voltage supplies and additional mechanisms.\n\nThe drive system uses a RoboClaw motor controller for the front motors. A second controller and rear motors are shown as possible future additions. Separate supply paths are identified for the Raspberry Pi and other logic devices, and for the servo distribution board. The diagram also shows a USB hub linking supporting devices such as cameras and microcontrollers to the Pi." },
+          { heading: "Power distribution & protection", text: "The drawing identifies a 20 A main fuse and individual protected supply branches. It shows a 5 V regulator for control electronics and a separate 6 V regulator for servo power, alongside common supply and ground buses and labelled connectors. These choices make the intended distribution and electrical loads easier to review before wiring.\n\nThe schematic also identifies a battery-voltage monitor, main connectors and a chassis bond. Fuse values, regulator capacities, return-current paths and conductor ratings still need to be checked against actual device specifications and worst-case loads before final installation; the diagram alone is not evidence of electrical validation." },
+          { heading: "Design documentation", text: "The one-line diagram is an early system-level design document. Rather than show every wire and terminal, it records the functional power routes between major components. Each branch can then be developed into the detailed wiring diagram, connector list and physical harness needed for construction.\n\nDashed outlines and labels distinguish planned expansions from the core design, including additional drive motors, collector and shooter motors, an arm and further servos. That allows the electrical architecture to evolve without obscuring the current system." },
+          { heading: "Control system integration", text: "The Raspberry Pi remains responsible for higher-level tasks such as vision, navigation and autonomous control. The Arduino Mega provides low-level TeleOp, encoder counting and hardware interfacing, while motor drivers deliver power to the motors. The electrical diagram shows how those devices are powered and connected at system level; it does not describe their software protocol or pin-by-pin I/O mapping.\n\nThose details are covered in the related Modular Robot I/O & TeleOp Controller and Robot I/O Mapping & Hardware Abstraction projects." },
+          { heading: "Design choices & future expansion", text: "The electrical system is divided into functional branches so that changes to one subsystem need not require a complete redesign. Separate regulated outputs distinguish logic power from servo power, and labelled connections are intended to simplify assembly and troubleshooting.\n\nThe drawing explicitly reserves space for future capabilities, but these additions are not treated as installed equipment. As the robot develops, the diagram can be updated to reflect actual components and revised current requirements." }
+        ]
+      },
+      references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -1291,15 +1476,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Add what you personally designed, built, programmed and tested.",
       sections: {
         overview: "Introduce the second robotics project. What does the robot do and why was it built?",
-        objectives: "Describe the requirements, performance targets and mechanical or software constraints.",
-        design: "Add drawings or CAD images of the chassis, drivetrain and mechanisms, with design decisions.",
-        construction: "Explain how the robot was assembled, wired and fabricated. Identify custom parts.",
-        software: "Document how the robot is driven or controlled, including control logic and sensors.",
-        testing: "Show trial conditions and measured performance, such as repeatability, speed or accuracy.",
-        iterations: "Describe a problem discovered during testing and the changes made to resolve it.",
-        results: "Add a photograph or short demonstration video of the robot working.",
-        lessons: "Summarise the most valuable technical lessons and possible next improvements."
+        objectivesRequirements: "Describe the requirements, performance targets and mechanical or software constraints.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Show trial conditions and measured performance, such as repeatability, speed or accuracy.",
+        resultsEvaluation: "Add a photograph or short demonstration video of the robot working.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Summarise the most valuable technical lessons and possible next improvements.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Add drawings or CAD images of the chassis, drivetrain and mechanisms, with design decisions." },
+          { heading: "Construction & manufacture", text: "Explain how the robot was assembled, wired and fabricated. Identify custom parts." },
+          { heading: "Software & control", text: "Document how the robot is driven or controlled, including control logic and sensors." },
+          { heading: "Design iterations", text: "Describe a problem discovered during testing and the changes made to resolve it." }
+        ]
+      },
+      references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -1315,13 +1510,24 @@ window.PORTFOLIO_DATA = {
       date: "",
       sections: {
         overview: "The goBILDA DECODE Starter Bot is a practical starting point for building and understanding an FTC-style robot. Rather than designing every component from scratch, the project uses a starter platform to concentrate on how the drivetrain, mechanical structure, electronics and wiring fit together. It also provides a baseline for evaluating changes and developing additional mechanisms.\n\nThe photograph records the robot during assembly, not a completed or performance-tested final design.",
-        construction: "The chassis is built from modular metal structural components, with motors, wheels, electronic hardware and wiring mounted to the frame. Working with a modular construction system makes it possible to adjust component placement while checking physical clearances, accessibility and cable routing.\n\nThis part of the project focuses on careful mechanical assembly and integration. The starter-kit layout is a foundation; any custom parts or later modifications can be documented separately as they are made.",
-        software: "The initial software task for a starter robot is reliable manual control: mapping driver inputs to movement, confirming motor directions and controlling the mechanisms fitted to the chassis. Establishing these behaviours provides a baseline before attempting more advanced automated functions.\n\nSpecific programmed features and autonomous routines will be described here when they have been implemented and tested.",
-        testing: "Useful baseline tests include straight-line driving, turning response, repeatability of driver commands, mechanism operation and electrical reliability. These tests help distinguish limitations in the mechanical assembly from problems in wiring or software.\n\nNo measured driving or mechanism-performance results are reported on this page yet.",
-        iterations: "Starting with a known kit design makes it easier to change one feature at a time and assess whether an adjustment improves the robot. Potential areas for development include cable organisation, access to components and the positioning of mechanisms. Any actual revisions will be recorded with photographs and test observations.",
-        results: "The current photograph documents the physical starter-bot build. This project page will be expanded as control software, functional trials and any mechanical modifications are completed and recorded.",
-        lessons: "A working robot depends on much more than choosing individual components. Mechanical access, cable routes, mounting positions and compatibility between the control hardware and drivetrain all affect how easily a platform can be built, maintained and developed."
+        objectivesRequirements: "",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Useful baseline tests include straight-line driving, turning response, repeatability of driver commands, mechanism operation and electrical reliability. These tests help distinguish limitations in the mechanical assembly from problems in wiring or software.\n\nNo measured driving or mechanism-performance results are reported on this page yet.",
+        resultsEvaluation: "The current photograph documents the physical starter-bot build. This project page will be expanded as control software, functional trials and any mechanical modifications are completed and recorded.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "A working robot depends on much more than choosing individual components. Mechanical access, cable routes, mounting positions and compatibility between the control hardware and drivetrain all affect how easily a platform can be built, maintained and developed.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Construction & manufacture", text: "The chassis is built from modular metal structural components, with motors, wheels, electronic hardware and wiring mounted to the frame. Working with a modular construction system makes it possible to adjust component placement while checking physical clearances, accessibility and cable routing.\n\nThis part of the project focuses on careful mechanical assembly and integration. The starter-kit layout is a foundation; any custom parts or later modifications can be documented separately as they are made." },
+          { heading: "Software & control", text: "The initial software task for a starter robot is reliable manual control: mapping driver inputs to movement, confirming motor directions and controlling the mechanisms fitted to the chassis. Establishing these behaviours provides a baseline before attempting more advanced automated functions.\n\nSpecific programmed features and autonomous routines will be described here when they have been implemented and tested." },
+          { heading: "Design iterations", text: "Starting with a known kit design makes it easier to change one feature at a time and assess whether an adjustment improves the robot. Potential areas for development include cable organisation, access to components and the positioning of mechanisms. Any actual revisions will be recorded with photographs and test observations." }
+        ]
+      },
+      references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -1338,15 +1544,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Specify which design, calculations, assembly and drawings you produced.",
       sections: {
         overview: "Introduce the second CAD project and explain what the assembly or part is for.",
-        objectives: "List dimensions, fit requirements, operating forces and other design constraints.",
-        design: "Include CAD renders, section views, exploded assemblies and relevant design alternatives.",
-        construction: "Describe any model, prototype or physical assembly produced from the CAD.",
-        software: "Mention parametric modelling, simulation or scripts if used; otherwise state not applicable.",
-        testing: "Document fit checks, interference reviews, movement range or physical testing.",
-        iterations: "Compare initial and revised designs, explaining the reasons for changes.",
-        results: "Show the final design and, where available, the completed manufactured part.",
-        lessons: "Summarise important design lessons and improvements for future revisions."
+        objectivesRequirements: "List dimensions, fit requirements, operating forces and other design constraints.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Document fit checks, interference reviews, movement range or physical testing.",
+        resultsEvaluation: "Show the final design and, where available, the completed manufactured part.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Summarise important design lessons and improvements for future revisions.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Include CAD renders, section views, exploded assemblies and relevant design alternatives." },
+          { heading: "Construction & manufacture", text: "Describe any model, prototype or physical assembly produced from the CAD." },
+          { heading: "Software & control", text: "Mention parametric modelling, simulation or scripts if used; otherwise state not applicable." },
+          { heading: "Design iterations", text: "Compare initial and revised designs, explaining the reasons for changes." }
+        ]
+      },
+      references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
@@ -1363,15 +1579,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
       sections: {
         overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
-        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
-        construction: "Record printer, material, settings and any finishing or assembly processes used.",
-        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
-        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
-        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
-        results: "Include photographs of the printed component installed in its working mechanism.",
-        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
+        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
+          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
+          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
+          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
+        ]
+      },
+      references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
       printPhotos: [
         {
@@ -1403,15 +1629,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
       sections: {
         overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
-        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
-        construction: "Record printer, material, settings and any finishing or assembly processes used.",
-        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
-        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
-        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
-        results: "Include photographs of the printed component installed in its working mechanism.",
-        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
+        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
+          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
+          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
+          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
+        ]
+      },
+      references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
       printPhotos: [],
       // Optional print-profile details; blank values are hidden from the public page.
@@ -1438,15 +1674,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
       sections: {
         overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
-        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
-        construction: "Record printer, material, settings and any finishing or assembly processes used.",
-        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
-        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
-        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
-        results: "Include photographs of the printed component installed in its working mechanism.",
-        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
+        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
+          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
+          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
+          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
+        ]
+      },
+      references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
       printPhotos: [],
       // Optional print-profile details; blank values are hidden from the public page.
@@ -1473,15 +1719,25 @@ window.PORTFOLIO_DATA = {
       contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
       sections: {
         overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectives: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
-        design: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions.",
-        construction: "Record printer, material, settings and any finishing or assembly processes used.",
-        software: "Explain any parametric CAD, CAD automation or printing scripts if applicable.",
-        testing: "Document fit measurements, load testing, print reliability and inspection observations.",
-        iterations: "Compare the first print and later revisions, including how tolerances were corrected.",
-        results: "Include photographs of the printed component installed in its working mechanism.",
-        lessons: "Summarise what you learned about manufacturing, material choices and print quality."
+        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        backgroundResearch: "",
+        designDevelopment: "",
+        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
+        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        conclusionsNextSteps: "",
+        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        referencesResources: "",
+        relatedProjects: ""
       },
+      sectionDetails: {
+        designDevelopment: [
+          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
+          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
+          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
+          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
+        ]
+      },
+      references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
       printPhotos: [],
       // Optional print-profile details; blank values are hidden from the public page.

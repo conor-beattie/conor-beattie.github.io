@@ -233,29 +233,16 @@
       `<div class="software-card-grid">${others.map(softwareCard).join("")}</div>`;
   }
   function softwareDetail() {
-    const id = new URLSearchParams(location.search).get("id");
-    const item = softwareById(id);
-    const root = $("#software-content");
-    if (!item) {
-      root.innerHTML = `<div class="container not-found"><p class="eyebrow">SOFTWARE NOT FOUND</p><h1>No software entry has that ID.</h1><a class="button button-primary" href="software.html">Browse Software ↗</a></div>`; return;
-    }
-    document.title = `${item.title} · ${data.owner.name}`;
-    const related = relatedAlgorithms(item.algorithmIds);
-    const robots = (item.robotIds || []).map(id => visibleProjects().find(p => p.id === id)).filter(Boolean);
-    const source = linkMarkup(item.sourceUrl, "View public source code");
-    // Display meaningful flowcharts where available; omit decorative cover imagery.
-    const media = item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt || `${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>` : "";
-    root.innerHTML = `<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
-      <div class="project-intro"><p class="eyebrow">${text(item.type || "Software")} · ${text(item.status)}</p><h1>${text(item.title)}</h1><p class="project-lede">${text(item.summary)}</p><div class="tags tags-large">${(item.tags || []).map(tag => `<span class="tag">${text(tag)}</span>`).join("")}</div></div>
-      ${media}
-      <div class="detail-layout"><aside class="detail-aside"><p class="eyebrow">ON THIS PAGE</p><nav aria-label="Software sections"><a href="#objective">Objective</a><a href="#implementation">Implementation</a><a href="#development">What changed</a><a href="#lessons">Lessons learned</a><a href="#testing">Testing &amp; evidence</a><a href="#methods">Related algorithms</a><a href="#source-files">Code structure</a></nav>
-      <div class="detail-callout"><strong>Evidence status</strong><p>${text(item.status)} — implementation and test results should be distinguished.</p></div></aside>
-      <div class="detail-main">${detailSection("objective", "Objective", item.objective)}${detailSection("implementation", "How the software works", item.implementation)}${detailSection("development", "Development and iterations", item.changes)}${detailSection("lessons", "What was learned", item.lessons)}${detailSection("testing", "Testing and evidence", item.testing)}
-      ${detailSection("next", "Further work", item.next)}
-      <section class="detail-section" id="methods"><div class="detail-section__index">•</div><div><h2>Algorithms &amp; methods</h2><p>These reference pages explain the techniques behind this behaviour. A link does not imply every separate method has been individually validated.</p><div class="method-chip-row">${chipLinks(related,algorithmUrl) || '<span class="muted-small">Methods not yet linked.</span>'}</div></div></section>
-      <section class="detail-section" id="source-files"><div class="detail-section__index">•</div><div><h2>Code structure</h2><p>Relevant source modules (paths are informational until a public repository URL is added).</p><ul class="code-file-list">${(item.codeFiles || []).map(f => `<li><code>${text(f)}</code></li>`).join("")}</ul>${source ? `<div class="resource-links">${source}</div>` : ""}</div></section>
-      ${robots.length ? `<section class="detail-section"><div class="detail-section__index">•</div><div><h2>Robots using this software</h2><div class="related-list">${robots.map(p => `<a href="${projectUrl(p)}" class="related-item"><strong>${text(p.title)}</strong><span>Robot project ↗</span></a>`).join("")}</div></div></section>` : ""}
-      </div></div><div class="next-action"><div><p class="eyebrow">EXPLORE MORE</p><h2>Other software behaviours</h2></div><a class="button button-outline" href="software.html">Software library ↗</a></div></div>`;
+    const id=new URLSearchParams(location.search).get('id');
+    const item=softwareById(id), root=$('#software-content');
+    if(!item){root.innerHTML=`<div class="container not-found"><p class="eyebrow">SOFTWARE NOT FOUND</p><h1>No software entry has that ID.</h1><a class="button button-primary" href="software.html">Browse Software ↗</a></div>`;return;}
+    document.title=`${item.title} · ${data.owner.name}`;
+    const rows=sectionLayouts(item,softwareExtras(item));
+    const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>`:'';
+    root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
+      <div class="project-intro"><p class="eyebrow">${text(item.type||'Software')} · ${text(item.status)}</p><h1>${text(item.title)}</h1><p class="project-lede">${text(item.summary)}</p><div class="tags tags-large">${(item.tags||[]).map(tag=>`<span class="tag">${text(tag)}</span>`).join('')}</div></div>
+      ${media}<div class="detail-layout">${sectionSidebar(rows,'Software sections',`<div class="detail-callout"><strong>Evidence status</strong><p>${text(item.status)} — implementation and test results should be distinguished.</p></div>`)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
+      <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More software systems</h2></div><a class="button button-outline" href="software.html">Software archive ↗</a></div></div>`;
   }
   function algorithmsPage() {
     const gallery = $("#algorithm-groups");
@@ -387,37 +374,30 @@
       <span class="print-photo-zoom" aria-hidden="true">↗</span>
     </button>`).join("");
     document.title = `${p.title} · 3D Printing · ${data.owner.name}`;
-    root.innerHTML = `<div class="container print-detail-page">
+    const printResources=[
+      linkMarkup(p.links?.cad,'CAD model'), linkMarkup(p.links?.downloads,'Download / print files'),
+      linkMarkup(p.links?.github,'Source / design files'),linkMarkup(p.links?.video,'Demonstration video')
+    ].filter(Boolean);
+    const printExtras=projectExtras(p);
+    // Preserve the previous 3D-print behaviour: generic instructional draft
+    // overviews are kept in source data, but a visitor sees the actual summary.
+    const rawOverview=String(p.sections?.overview||'').trim();
+    const useSummaryInstead=/^(Identify the component or family of parts|Explain the purpose of the second printed component)/i.test(rawOverview);
+    const printEntry=useSummaryInstead ? {...p,sections:{...p.sections,overview:p.summary||p.date||''}} : p;
+    const rows=sectionLayouts(printEntry,printExtras);
+    const printSidebar=`<div class="print-spec-card"><p class="eyebrow">3D PRINT INFORMATION</p><h3>Print profile</h3>
+      ${specs.length ? `<dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join('')}</dl>` : `<p class="print-settings-empty">Printer, material and settings can be added in <code>site-data.js</code>.</p>`}</div>`;
+    root.innerHTML=`<div class="container print-detail-page">
       <div class="breadcrumb"><a href="projects.html?category=fabrication">3D Printing &amp; Fabrication</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
-      <div class="project-intro print-intro"><p class="eyebrow">3D PRINT${p.date ? " · "+text(p.date) : ""}</p><h1>${text(p.title)}</h1>
-        ${p.summary ? `<p class="project-lede">${text(p.summary)}</p>` : ""}
-        <div class="tags tags-large">${(p.tags || []).map(tag=>`<span class="tag">${text(tag)}</span>`).join("")}</div>
-      </div>
-      <figure class="print-cad-figure" id="cad-design"><div class="print-media-label">CAD MODEL</div><img src="${img(p.image)}" alt="${text(p.imageAlt || `${p.title} CAD model`)}" /></figure>
-      <section class="print-gallery-panel" id="finished-photos" aria-labelledby="print-gallery-title">
-        <div class="print-gallery-heading"><div><p class="eyebrow">FROM DIGITAL TO PHYSICAL</p><h2 id="print-gallery-title">The finished print</h2><p>Photographs of the actual manufactured part.</p></div>
-          ${photos.length ? `<span class="print-photo-count">${photos.length} photo${photos.length===1?'':'s'}</span>` : ""}
-        </div>
-        ${photos.length ? `<div class="print-photo-grid" data-count="${photos.length}">${cards}</div>` :
-          `<div class="print-photo-empty"><span class="print-photo-placeholder" aria-hidden="true">▧</span><div><strong>Finished-print photos</strong><p>Add 1–4 actual print photographs in <code>site-data.js</code> to display them here.</p></div></div>`}
+      <div class="project-intro print-intro"><p class="eyebrow">3D PRINT${p.date ? ' · '+text(p.date):''}</p><h1>${text(p.title)}</h1>
+      ${p.summary ? `<p class="project-lede">${text(p.summary)}</p>`:''}
+      <div class="tags tags-large">${(p.tags||[]).map(tag=>`<span class="tag">${text(tag)}</span>`).join('')}</div></div>
+      <figure class="print-cad-figure"><div class="print-media-label">CAD MODEL</div><img src="${img(p.image)}" alt="${text(p.imageAlt||`${p.title} CAD model`)}"/></figure>
+      <section class="print-gallery-panel" aria-labelledby="print-gallery-title"><div class="print-gallery-heading"><div><p class="eyebrow">FROM DIGITAL TO PHYSICAL</p><h2 id="print-gallery-title">The finished print</h2><p>Photographs of the actual manufactured part.</p></div>
+        ${photos.length ? `<span class="print-photo-count">${photos.length} photo${photos.length===1?'':'s'}</span>`:''}</div>
+        ${photos.length ? `<div class="print-photo-grid" data-count="${photos.length}">${cards}</div>` : `<div class="print-photo-empty"><span class="print-photo-placeholder" aria-hidden="true">▧</span><div><strong>Finished-print photos</strong><p>Add 1–4 actual print photographs in <code>site-data.js</code> to display them here.</p></div></div>`}
       </section>
-      <div class="print-content-layout">
-        <div class="print-main-info">
-          <section class="print-about" id="description"><span class="eyebrow">DESIGN NOTES</span><h2>About this print</h2>
-            ${aboutDescription ? paragraphs(aboutDescription) : '<p>Further design details can be added here.</p>'}
-          </section>
-          ${optionalNotes.length ? `<section class="print-more-details" id="engineering-notes"><h2>Design, printing &amp; testing</h2>
-            <p class="print-notes-intro">Expand a section for the engineering decisions and test notes behind this part.</p>
-            ${optionalNotes.map(([title,notes])=>`<details class="print-accordion"><summary>${text(title)}<span aria-hidden="true">+</span></summary><div class="print-accordion-body">${notes.join("")}</div></details>`).join("")}
-          </section>` : ""}
-        </div>
-        <aside class="print-side-info" aria-label="Print information">
-          <div class="print-spec-card"><p class="eyebrow">3D PRINT INFORMATION</p><h3>Print profile</h3>
-            ${specs.length ? `<dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join("")}</dl>` : `<p class="print-settings-empty">Printer, material and settings can be added in <code>site-data.js</code>.</p>`}
-          </div>
-          ${resources.length ? `<div class="print-spec-card" id="print-downloads"><p class="eyebrow">FILES</p><h3>Model &amp; resources</h3><div class="resource-links">${resources.join("")}</div></div>` : ""}
-        </aside>
-      </div>
+      <div class="detail-layout">${sectionSidebar(rows,'Project sections',printSidebar)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
       <div class="next-action"><div><span class="eyebrow">SEE MORE</span><h2>More 3D prints &amp; fabrication</h2></div><a class="button button-outline" href="projects.html?category=fabrication">Browse 3D prints ↗</a></div>
       <dialog class="print-lightbox" id="print-lightbox" aria-label="Full size print photograph"><button type="button" class="print-lightbox-close" aria-label="Close full-size photograph">×</button>
         <div class="print-lightbox-stage"><button type="button" class="print-lightbox-prev" aria-label="Previous photograph">‹</button><img alt=""/><button type="button" class="print-lightbox-next" aria-label="Next photograph">›</button></div>
@@ -507,85 +487,123 @@
     return "";
   }
 
-  function projectDetail() {
-    const id = new URLSearchParams(location.search).get("id");
-    const p = visibleProjects().find(item => item.id === id);
-    const root = $("#project-content");
-    if (!p) {
-      root.innerHTML = missingProject;
-      return;
-    }
-    if (p.category === "fabrication") {
-      printDetail(p);
-      return;
-    }
-    document.title = `${p.title} · ${data.owner.name}`;
-    const cat = category(p.category);
-    // Optional sections are displayed only when a project provides their content.
-    // Individual projects may override labels (for example, Firmware & TeleOp).
-    const sectionOptions = [
-      ["overview", "Overview"], ["brief", "Investigation aim"], ["investigation-criteria", "Engineering criteria"],
-      ["surface-benchmarks", "Success criteria"], ["surface-materials", "Materials"], ["surface-tests", "Test programme"],
-      ["surface-failures", "Design responses"],
-      ["research", "Engineering research"], ["concept-study", "Mechanism concepts"],
-      ["architecture", "System architecture"], ["hardware", "Electrical interfaces"],
-      ["io-map", "Representative I/O map"], ["construction", "Construction"],
-      ["software", "Software"], ["trial-plan", "Experimental test plan"],
-      ["testing", "Testing"], ["iterations", "Iterations"], ["results", "Results"],
-      ["nextSteps", "Next steps"], ["lessons", "Lessons learned"], ["surface-sources", "Research sources"]
-    ];
-    const entries = sectionOptions
-      .filter(([key]) => key.startsWith("surface-") ? Boolean(p.surfaceStudy?.[({"surface-benchmarks":"benchmarks","surface-materials":"materials","surface-tests":"tests","surface-failures":"failures","surface-sources":"sources"})[key]]?.length)
-        : key === "io-map" ? Boolean(p.ioMap?.rows?.length)
-        : key === "investigation-criteria" ? Boolean(p.investigation?.criteria?.length)
-        : key === "concept-study" ? Boolean(p.investigation?.jawOptions?.length || p.investigation?.detectionOptions?.length)
-        : key === "trial-plan" ? Boolean(p.investigation?.trialRows?.length)
-        : Boolean(String(p.sections?.[key] || "").trim()))
-      .map(([key, fallback]) => [key, p.sectionLabels?.[key] || fallback]);
-    const usedDemos = demosForProject(p.id);
-    const linkedSoftware = softwareItems.filter(item => (item.robotIds || []).includes(p.id));
-    if (linkedSoftware.length) entries.push(["robot-software", "Software & Algorithms"]);
-    const linkedProjects = (p.relatedProjectIds || []).map(id => visibleProjects().find(item => item.id === id)).filter(item => item && item.id !== p.id);
-    if (linkedProjects.length) entries.push(["related-projects", "Related projects"]);
-    if (p.category === "robotics" && usedDemos.length) entries.push(["algorithm-demonstrations", "Video demonstrations"]);
-    const resources = [
-      linkMarkup(p.links?.github, "Source code / GitHub"),
-      linkMarkup(p.links?.cad, "CAD / 3D model"),
-      linkMarkup(p.links?.video, "Demonstration video"),
-      linkMarkup(p.links?.downloads, "Technical files")
+
+  // One schema for all project and software entries. Every record contains all
+  // ten keys; a key is displayed only when it has text or structured content.
+  const STANDARD_SECTIONS = [
+    ["overview", "Overview"],
+    ["objectivesRequirements", "Objectives & Requirements"],
+    ["backgroundResearch", "Background & Research"],
+    ["designDevelopment", "Design & Development"],
+    ["testingValidation", "Testing & Validation"],
+    ["resultsEvaluation", "Results & Evaluation"],
+    ["conclusionsNextSteps", "Conclusions & Next Steps"],
+    ["lessonsLearned", "Lessons Learned"],
+    ["referencesResources", "References & Resources"],
+    ["relatedProjects", "Related Projects"]
+  ];
+  const hasText = value => typeof value === "string" && value.trim().length > 0;
+  const subheading = (label, body) => body ? `<div class="standard-subsection"><h3>${text(label)}</h3>${body}</div>` : "";
+  const sectionShell = (key, label, content) => content ?
+    `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>${content}</div></section>` : "";
+  const sectionNavigation = (entries, label="Project sections") =>
+    `<nav aria-label="${text(label)}">${entries.map(([key,title]) => `<a href="#${key}">${text(title)}</a>`).join("")}</nav>`;
+  const sectionLayouts = (entry, extras={}) => STANDARD_SECTIONS.map(([key,label]) => {
+    const base = hasText(entry.sections?.[key]) ? paragraphs(entry.sections[key]) : "";
+    const details = (entry.sectionDetails?.[key] || []).map(item =>
+      subheading(item.heading || "Further details", paragraphs(item.text || ""))).join("");
+    const content = base + details + (extras[key] || "");
+    return {key,label,content};
+  }).filter(row => row.content.trim());
+  const sectionMarkup = rows => rows.map(row => sectionShell(row.key,row.label,row.content)).join("");
+  const sectionSidebar = (rows,label="Project sections", extra="") =>
+    `<aside class="detail-aside"><p class="eyebrow">ON THIS PAGE</p>${sectionNavigation(rows.map(r=>[r.key,r.label]),label)}${extra}</aside>`;
+
+  // The existing detailed investigation tables are reused unmodified, with
+  // their individual labels presented as h3 subheadings inside standard sections.
+  function nestedEvidence(markup, heading) {
+    if (!markup) return "";
+    const inner = markup.replace(/^<section\b[^>]*><div><h2>[^<]*<\/h2>/,"<div class=\"standard-subsection\"><h3>"+text(heading)+"</h3>")
+      .replace(/<\/div><\/section>$/, "</div>");
+    return inner;
+  }
+  function ioMapMarkup(p) {
+    const map = p.ioMap;
+    if (!map?.rows?.length) return "";
+    return subheading(p.sectionLabels?.['io-map'] || 'I/O interface contract',
+      `${map.intro ? paragraphs(map.intro) : ""}<div class="io-map-scroll"><table class="io-map-table"><thead><tr>${(map.columns || []).map(col=>`<th scope="col">${text(col)}</th>`).join("")}</tr></thead><tbody>${map.rows.map(row=>`<tr>${row.map((cell,i)=>`<td>${i===1 ? `<code>${text(cell)}</code>` : text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>${map.note ? `<p class="io-map-note">${text(map.note)}</p>` : ""}`);
+  }
+  function referenceList(items) {
+    const entries = (items || []).map(item => {
+      if (!item) return "";
+      const name = item.name || item.title || item.label || item.url || '';
+      const url = href(item.url);
+      return name ? `<li><strong>${url ? `<a href="${text(url)}" target="_blank" rel="noopener noreferrer">${text(name)} ↗</a>` : text(name)}</strong>${item.use || item.description ? `<p>${text(item.use || item.description)}</p>` : ""}</li>` : "";
+    }).filter(Boolean);
+    return entries.length ? `<ul class="surface-reference-list">${entries.join("")}</ul>` : "";
+  }
+  function projectExtras(p) {
+    const inv=p.investigation||{}, surface=p.surfaceStudy||{};
+    const extra={};
+    const add=(key,content)=>{ if(content) extra[key]=(extra[key]||"")+content; };
+    const structured=(key,label,fn)=>nestedEvidence(fn(p,key,label),label);
+    if(inv.criteria?.length) add('objectivesRequirements',structured('investigation-criteria','Engineering criteria',investigationSection));
+    if(surface.benchmarks?.length) add('objectivesRequirements',structured('surface-benchmarks','Success criteria against rubber bands',surfaceStudySection));
+    if(surface.materials?.length) add('backgroundResearch',structured('surface-materials','Material shortlist and decisions',surfaceStudySection));
+    if(inv.jawOptions?.length || inv.detectionOptions?.length) add('designDevelopment',structured('concept-study','Mechanism concepts',investigationSection));
+    if(p.ioMap?.rows?.length) add('designDevelopment',ioMapMarkup(p));
+    if(surface.failures?.length) add('designDevelopment',structured('surface-failures','Failure analysis and design responses',surfaceStudySection));
+    if(inv.trialRows?.length) add('testingValidation',structured('trial-plan','Experimental test plan',investigationSection));
+    if(surface.tests?.length) add('testingValidation',structured('surface-tests','Experimental test programme',surfaceStudySection));
+    const demos=demosForProject(p.id);
+    if(demos.length) add('testingValidation',subheading('Video demonstrations',`<div class="demo-grid">${demos.map(d=>demoMarkup(d,true)).join("")}</div>`));
+    if(surface.sources?.length) add('referencesResources',structured('surface-sources','Research and technical sources',surfaceStudySection));
+    if(inv.sources?.length) add('referencesResources',subheading('Mechanism research sources',referenceList(inv.sources)));
+    if(p.references?.length) add('referencesResources',subheading('Project references & inspiration',referenceList(p.references)));
+    const resources=[
+      linkMarkup(p.links?.github,'Source code / GitHub'),
+      linkMarkup(p.links?.cad,'CAD / 3D model'),
+      linkMarkup(p.links?.video,'Demonstration video'),
+      linkMarkup(p.links?.downloads,'Technical files')
     ].filter(Boolean);
-    root.innerHTML = `
-      <div class="container">
-        <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
-        <div class="project-intro">
-          <p class="eyebrow">${text(kindLabel(p))} ${p.date ? "· " + text(p.date) : ""} ${previewDrafts && !isPublished(p) ? ' · DRAFT' : ''}</p>
-          <h1>${text(p.title)}</h1>
-          <p class="project-lede">${text(p.summary)}</p>
-          <div class="tags tags-large">${(p.tags || []).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
-        </div>
-        <figure class="project-hero-media ${p.imageFullSize ? "project-hero-media--diagram" : ""}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the I/O interface diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" /></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" />`}<figcaption>${text(p.imageCaption || p.title)}</figcaption></figure>
-        ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status ? `<span>${text(p.investigation.status)}</span>` : ""}</div>` : ""}
-        <div class="detail-layout">
-          <aside class="detail-aside">
-            <p class="eyebrow">ON THIS PAGE</p>
-            <nav aria-label="Project sections">${entries.map(([key, label]) => `<a href="#${key}">${label}</a>`).join("")}
-              ${resources.length ? '<a href="#resources">Resources</a>' : ""}
-            </nav>
-          </aside>
-          <div class="detail-main">
-            ${entries.filter(([key]) => !["algorithm-demonstrations", "robot-software", "related-projects"].includes(key)).map(([key, label]) => key === "io-map"
-              ? `<section class="detail-section detail-section--clean" id="io-map"><div><h2>${text(label)}</h2><p>${text(p.ioMap.intro || "")}</p><div class="io-map-scroll"><table class="io-map-table"><thead><tr>${(p.ioMap.columns || []).map(col => `<th scope="col">${text(col)}</th>`).join("")}</tr></thead><tbody>${(p.ioMap.rows || []).map(row => `<tr>${row.map((cell, i) => `<td>${i === 1 ? `<code>${text(cell)}</code>` : text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>${p.ioMap.note ? `<p class="io-map-note">${text(p.ioMap.note)}</p>` : ""}</div></section>`
-              : key.startsWith("surface-") ? surfaceStudySection(p, key, label)
-              : ["investigation-criteria", "concept-study", "trial-plan"].includes(key) ? investigationSection(p, key, label)
-              : `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>${paragraphs(p.sections?.[key])}</div></section>`).join("")}
-            ${linkedSoftware.length ? `<section class="detail-section detail-section--clean" id="robot-software"><div><h2>Software &amp; Algorithms</h2><p>Software systems documented for this robot. Each entry links to the relevant algorithms without requiring a video.</p><div class="related-list">${linkedSoftware.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}
-            ${usedDemos.length ? `<section class="detail-section detail-section--clean" id="algorithm-demonstrations"><div><h2>Video demonstrations</h2><div class="demo-grid">${usedDemos.map(item => demoMarkup(item,true)).join("")}</div></div></section>` : ""}
-            ${linkedProjects.length ? `<section class="detail-section detail-section--clean" id="related-projects"><div><h2>Related ${linkedProjects.length === 1 ? "project" : "projects"}</h2><div class="related-list">${linkedProjects.map(item => `<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div></div></section>` : ""}
-            ${resources.length ? `<section class="detail-section detail-section--clean" id="resources"><div><h2>Technical resources</h2><div class="resource-links">${resources.join("")}</div></div></section>` : ""}
-          </div>
-        </div>
-        <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More engineering projects</h2></div><a class="button button-outline" href="projects.html">All projects <span aria-hidden="true">↗</span></a></div>
-      </div>`;
+    if(resources.length) add('referencesResources',`<div class="resource-links">${resources.join("")}</div>`);
+    const linked=(p.relatedProjectIds||[]).map(id=>visibleProjects().find(item=>item.id===id)).filter(item=>item&&item.id!==p.id);
+    if(linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`);
+    const linkedSoftware=softwareItems.filter(item=>(item.robotIds||[]).includes(p.id));
+    if(linkedSoftware.length) add('relatedProjects',subheading('Related software and algorithms',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`));
+    return extra;
+  }
+  function softwareExtras(item) {
+    const extras={};
+    const add=(key,content)=>{if(content)extras[key]=(extras[key]||"")+content;};
+    const algos=relatedAlgorithms(item.algorithmIds);
+    if(algos.length) add('relatedProjects',subheading('Algorithms & methods',`<p>Reference pages for the techniques used by this software. Links do not imply separate physical validation of every method.</p><div class="method-chip-row">${chipLinks(algos,algorithmUrl)}</div>`));
+    const robots=(item.robotIds||[]).map(id=>visibleProjects().find(p=>p.id===id)).filter(Boolean);
+    if(robots.length) add('relatedProjects',subheading('Robots using this software',`<div class="related-list">${robots.map(p=>`<a class="related-item" href="${projectUrl(p)}"><strong>${text(p.title)}</strong><span>${text(p.summary)} ↗</span></a>`).join("")}</div>`));
+    if(item.codeFiles?.length) add('referencesResources',subheading('Code structure',`<p>Relevant source modules (paths are informational until a public repository URL is supplied).</p><ul class="code-file-list">${item.codeFiles.map(f=>`<li><code>${text(f)}</code></li>`).join("")}</ul>`));
+    if(item.references?.length) add('referencesResources',subheading('References & inspiration',referenceList(item.references)));
+    const source=linkMarkup(item.sourceUrl,'View public source code');
+    if(source) add('referencesResources',`<div class="resource-links">${source}</div>`);
+    return extras;
+  }
+
+  function projectDetail() {
+    const id=new URLSearchParams(location.search).get('id');
+    const p=visibleProjects().find(item=>item.id===id);
+    const root=$('#project-content');
+    if(!p){root.innerHTML=missingProject;return;}
+    if(p.category==='fabrication'){printDetail(p);return;}
+    document.title=`${p.title} · ${data.owner.name}`;
+    const rows=sectionLayouts(p,projectExtras(p));
+    root.innerHTML=`<div class="container">
+      <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
+      <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
+        <h1>${text(p.title)}</h1><p class="project-lede">${text(p.summary)}</p><div class="tags tags-large">${(p.tags||[]).map(t=>`<span class="tag">${text(t)}</span>`).join('')}</div></div>
+      <figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}<figcaption>${text(p.imageCaption||p.title)}</figcaption></figure>
+      ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status?`<span>${text(p.investigation.status)}</span>`:''}</div>`:''}
+      <div class="detail-layout">${sectionSidebar(rows)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
+      <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More engineering projects</h2></div><a class="button button-outline" href="projects.html">All projects <span aria-hidden="true">↗</span></a></div>
+    </div>`;
   }
 
   function about() {
