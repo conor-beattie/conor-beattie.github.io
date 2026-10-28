@@ -482,7 +482,7 @@
     }
     if (key === "surface-sources") {
       const rows = (study.sources || []).map(source => { const url = href(source.url); return `<li><strong>${url ? `<a href="${text(url)}" target="_blank" rel="noopener noreferrer">${text(source.name)} ↗</a>` : text(source.name)}</strong><p>${text(source.use)}</p></li>`; }).join("");
-      return head + `<p>The linked sources inform material choice and methods. Not every study tests this exact pad, printer, cardboard and gripper combination; direct performance must be measured.</p><ul class="surface-reference-list">${rows}</ul></div></section>`;
+      return `<div class="surface-reference-list">${rows ? `<table class="surface-failure-table"><thead><tr><th>Reference</th><th>Description</th></tr></thead><tbody>${(study.sources || []).map(source => { const url=href(source.url); return `<tr><td>${url ? `<a href="${text(url)}" target="_blank" rel="noopener noreferrer">${text(source.name)} ↗</a>` : text(source.name)}</td><td>${text(source.use)}</td></tr>`; }).join("")}</tbody></table>` : ""}</div>`;
     }
     return "";
   }
@@ -557,7 +557,7 @@
     if(surface.tests?.length) add('testingValidation',structured('surface-tests','Experimental test programme',surfaceStudySection));
     const demos=demosForProject(p.id);
     if(demos.length) add('testingValidation',subheading('Video demonstrations',`<div class="demo-grid">${demos.map(d=>demoMarkup(d,true)).join("")}</div>`));
-    if(surface.sources?.length) add('referencesResources',structured('surface-sources','Research and technical sources',surfaceStudySection));
+    if(surface.sources?.length) add('referencesResources',surfaceStudySection(p,'surface-sources',''));
     if(inv.sources?.length) add('referencesResources',subheading('Mechanism research sources',referenceList(inv.sources)));
     if(p.references?.length) add('referencesResources',subheading('Project references & inspiration',referenceList(p.references)));
     const resources=[

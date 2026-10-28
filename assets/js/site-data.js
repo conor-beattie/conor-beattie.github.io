@@ -652,26 +652,18 @@ window.PORTFOLIO_DATA = {
       summary: "An experimental autonomous robot designed to grow and expand in capability and function.",
       tags: ["Robotics", "Python", "Sensors"],
       date: "",                                       // e.g. 2026; leave blank if not wanted
-      contribution: "Replace with what you personally designed, built, programmed or tested.",
+      contribution: "",
       sections: {
-        overview: "Bobbot is an ongoing multi-year project working towards a fuly autonomous robot.  Describe the robot and the problem it was intended to solve. Include the final result in one or two sentences.",
-        objectivesRequirements: "List the main engineering requirements: movement, accuracy, payload, autonomy, cost, time or physical dimensions.",
+        overview: "Bobbot is an ongoing multi-year project working towards a fully autonomous robot.",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Include measurable trials: success rate, distance travelled, positioning accuracy, battery life or repeatability. Add test conditions.",
-        resultsEvaluation: "Summarise what currently works. Add a 20–60-second demonstration video and a photograph of the finished robot.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "What would you do differently in a second revision?",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Explain chassis layout, drivetrain choice, sensor placement and important design trade-offs. Include CAD screenshots where available." },
-          { heading: "Construction & manufacture", text: "Record the mechanical assembly, fabrication, wiring and hardware integration, including parts you designed yourself." },
-          { heading: "Software & control", text: "Describe the Python control architecture, navigation methods, sensor processing and motor-control strategy." },
-          { heading: "Design iterations", text: "Show one or two meaningful problems, the evidence used to diagnose them, and how the design was changed." }
-        ]
       },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
@@ -688,26 +680,18 @@ window.PORTFOLIO_DATA = {
       tags: ["CAD", "Mechanisms", "Design"],
       date: "",
       relatedProjectIds: ["robotic-gripper-grasp-detection", "gripper-contact-surfaces", "autonomous-mobile-robot"],
-      contribution: "Replace with the parts and assemblies that you modelled or engineered.",
+      contribution: "",
       sections: {
         overview: "This is the first gripper design fitted to Bobbot. The jaws are mounted on a vertical slide and close around a cardboard cube approximately 150 mm across. Their contact faces do not remain parallel throughout the closing movement, which can limit how consistently the cube is engaged at different positions.\n\nThe original gripper remains its own project. A separate investigation examines alternative jaw arrangements and ways to detect grasp engagement mechanically, using this design as a baseline.",
-        objectivesRequirements: "Document required travel, grip force, envelope, mass, material and manufacturing constraints.",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Measure opening range, repeatability, grip performance or fit tolerance if possible.",
-        resultsEvaluation: "Add a photograph or short clip of the completed mechanism working.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Identify important mechanical lessons and improvements for the next version.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Include views from the CAD assembly and describe the linkage or transmission principle." },
-          { heading: "Construction & manufacture", text: "Explain how the components were manufactured and assembled." },
-          { heading: "Software & control", text: "If motors, sensors or controllers are involved, explain how motion is commanded or measured. Otherwise note that software is not applicable." },
-          { heading: "Design iterations", text: "Show how the mechanism evolved, especially any changes needed for reliable operation." }
-        ]
       },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
@@ -922,7 +906,6 @@ window.PORTFOLIO_DATA = {
         "construction": "Prototype design and manufacturing",
         "results": "Current status and evidence",
         "nextSteps": "Next steps and decisions",
-        "surface-sources": "Research and technical sources"
       },
       sections: {
         overview: "The working gripper uses rubber bands as high-friction contact surfaces against cardboard. This arrangement can work well when the object and jaw position match closely, but performance is sensitive to geometry and the bands can occasionally detach. The existing strong gripper actuator may also mask limitations in the contact material. An improved pad should be judged at equal, controlled loading rather than by simply increasing gripping force.\n\nThis is a separate investigation into the material and geometry of the gripping surface, not a redesign of the full gripper mechanism or a grasp-sensing project. The existing rubber-band arrangement is the reference, and a 150 mm cardboard cube provides the principal test object.",
@@ -1221,38 +1204,43 @@ window.PORTFOLIO_DATA = {
         "sources": [
           {
             "name": "Experimental Research on the Tribological Behavior of Plastic Materials with Friction Properties (2025)",
-            "use": "Includes printed TPU 95A / TPU 60A against cardboard packaging in a conveyor/manipulator setting; not a direct two-jaw gripper test.",
+            "use": "Tests how different plastic materials, including 3D-printed TPU, slide against cardboard packaging.",
             "url": "https://doi.org/10.3390/coatings15010084"
           },
           {
             "name": "Białek & Rybarczyk — Comparative Study of Different Fingertips (2023)",
-            "use": "Provides a controlled robotic gripper pull-out test methodology.",
+            "use": "Compares different robotic gripper fingertips by measuring the force needed to pull an object out of the gripper.",
             "url": "https://doi.org/10.3390/app13031247"
           },
           {
             "name": "Kargar & Berselli — Frictional insights into textured soft pads (2025)",
-            "use": "Compares silicone flat and textured pads; shows texture does not universally raise peak friction.",
+            "use": "Tests smooth and patterned silicone gripping surfaces to see how their shapes affect friction.",
             "url": "https://doi.org/10.1007/s00170-025-16625-1"
           },
           {
             "name": "Liu & Hung — Effect of the infill density on a compliant finger (2022)",
-            "use": "Relates infill density to displacement, force and payload of 3D-printed compliant fingers.",
+            "use": "Investigates how the amount of material inside a 3D-printed flexible finger changes its bending and gripping behaviour.",
             "url": "https://doi.org/10.1016/j.matdes.2022.111203"
           },
           {
             "name": "ASTM D1894-24 — Friction of plastic film and sheeting",
-            "use": "Methodological starting point for an adapted horizontal sled test; cardboard samples are outside its formal scope.",
+            "use": "Describes a standard way to measure friction by pulling one surface across another.",
             "url": "https://store.astm.org/d1894-24.html"
           },
           {
             "name": "Bambu Lab — TPU 85A / TPU 90A",
-            "use": "P1S printer compatibility and nozzle restrictions for the two planned filaments.",
+            "use": "Gives material properties and printing requirements for Bambu’s flexible filaments.",
             "url": "https://asia.store.bambulab.com/collections/pc-tpu/products/tpu-85a-tpu-90a"
           },
           {
-            "name": "Recreus — Filaflex SEBS product and P1S profiles",
-            "use": "Manufacturer support for SEBS and the Bambu Studio P1S profile; not proof of cardboard-gripping performance.",
+            "name": "Recreus — Filaflex SEBS",
+            "use": "Describes a flexible filament made from a different type of plastic, with manufacturer printing guidance.",
             "url": "https://recreus.com/en/products/filaflex-sebs"
+          },
+          {
+            "name": "SurgGrip (2022)",
+            "use": "Describes a robotic gripper using soft contact pads to improve how objects are held.",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9618027/"
           }
         ]
       },
@@ -1274,26 +1262,18 @@ window.PORTFOLIO_DATA = {
       summary: "",
       tags: ["3D Printing", "Prototyping", "Materials"],
       date: "3D Printed PETG Pulleys",
-      contribution: "Replace with the components you designed and printed yourself.",
+      contribution: "",
       sections: {
-        overview: "Identify the component or family of parts and explain the engineering need.",
-        objectivesRequirements: "Set out constraints such as fit, load, wear, size and available printer materials.",
+        overview: "",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Show fit checks, load tests, endurance trials or measured dimensional accuracy.",
+        testingValidation: "",
         resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Summarise what worked in manufacturing and what you would change.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Show the CAD geometry and any details that make the part printable or assemble correctly." },
-          { heading: "Construction & manufacture", text: "Record material selection, print orientation, supports and post-processing." },
-          { heading: "Software & control", text: "If applicable, explain parametric CAD or scripts used to generate the part." },
-          { heading: "Design iterations", text: "Compare revisions and explain the effect of dimensional or design changes." }
-        ]
       },
       references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
@@ -1473,26 +1453,18 @@ window.PORTFOLIO_DATA = {
       summary: "Robbot is Bobbot on a budget.  Where Bobbot doesn’t set a specific price on utility Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost",
       tags: ["Robotics", "Mechanical Design", "Control"],
       date: "",
-      contribution: "Add what you personally designed, built, programmed and tested.",
+      contribution: "",
       sections: {
-        overview: "Introduce the second robotics project. What does the robot do and why was it built?",
-        objectivesRequirements: "Describe the requirements, performance targets and mechanical or software constraints.",
+        overview: "",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Show trial conditions and measured performance, such as repeatability, speed or accuracy.",
-        resultsEvaluation: "Add a photograph or short demonstration video of the robot working.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Summarise the most valuable technical lessons and possible next improvements.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Add drawings or CAD images of the chassis, drivetrain and mechanisms, with design decisions." },
-          { heading: "Construction & manufacture", text: "Explain how the robot was assembled, wired and fabricated. Identify custom parts." },
-          { heading: "Software & control", text: "Document how the robot is driven or controlled, including control logic and sensors." },
-          { heading: "Design iterations", text: "Describe a problem discovered during testing and the changes made to resolve it." }
-        ]
       },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
@@ -1541,26 +1513,18 @@ window.PORTFOLIO_DATA = {
       summary: "Shooter design for FTC BioBuzz Pollen.",
       tags: ["CAD", "Engineering Design", "Mechanisms"],
       date: "",
-      contribution: "Specify which design, calculations, assembly and drawings you produced.",
+      contribution: "",
       sections: {
-        overview: "Introduce the second CAD project and explain what the assembly or part is for.",
-        objectivesRequirements: "List dimensions, fit requirements, operating forces and other design constraints.",
+        overview: "",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Document fit checks, interference reviews, movement range or physical testing.",
-        resultsEvaluation: "Show the final design and, where available, the completed manufactured part.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Summarise important design lessons and improvements for future revisions.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Include CAD renders, section views, exploded assemblies and relevant design alternatives." },
-          { heading: "Construction & manufacture", text: "Describe any model, prototype or physical assembly produced from the CAD." },
-          { heading: "Software & control", text: "Mention parametric modelling, simulation or scripts if used; otherwise state not applicable." },
-          { heading: "Design iterations", text: "Compare initial and revised designs, explaining the reasons for changes." }
-        ]
       },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
@@ -1576,26 +1540,18 @@ window.PORTFOLIO_DATA = {
       summary: "The diameter and number of notches are adjustable. Designed for a 8mm hex axle.",
       tags: ["3D Printing", "CAD", "Prototyping"],
       date: "",
-      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      contribution: "",
       sections: {
-        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        overview: "",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
-        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
-          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
-          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
-          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
-        ]
       },
       references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
@@ -1626,26 +1582,18 @@ window.PORTFOLIO_DATA = {
       summary: "FlySky Receiver mount with a slot for the antenna",
       tags: ["3D Printing", "CAD", "Prototyping"],
       date: "",
-      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      contribution: "",
       sections: {
-        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        overview: "",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
-        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
-          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
-          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
-          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
-        ]
       },
       references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
@@ -1671,26 +1619,18 @@ window.PORTFOLIO_DATA = {
       summary: "PiCam3 Mount with an 8 degree downward pitch.",
       tags: ["3D Printing", "CAD", "Prototyping"],
       date: "",
-      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      contribution: "",
       sections: {
-        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        overview: "",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
-        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
-          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
-          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
-          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
-        ]
       },
       references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
@@ -1716,26 +1656,18 @@ window.PORTFOLIO_DATA = {
       summary: "RoboClaw 2x30A motor controller mount",
       tags: ["3D Printing", "CAD", "Prototyping"],
       date: "",
-      contribution: "Identify the components that you modelled, printed, assembled and evaluated.",
+      contribution: "",
       sections: {
-        overview: "Explain the purpose of the second printed component or fabricated mechanism.",
-        objectivesRequirements: "Define required strength, accuracy, mass, tolerances, assembly fit and operating environment.",
+        overview: "",
+        objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "Document fit measurements, load testing, print reliability and inspection observations.",
-        resultsEvaluation: "Include photographs of the printed component installed in its working mechanism.",
+        testingValidation: "",
+        resultsEvaluation: "",
         conclusionsNextSteps: "",
-        lessonsLearned: "Summarise what you learned about manufacturing, material choices and print quality.",
+        lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
-      },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Design", text: "Include CAD geometry, critical dimensions, material choices and print-orientation decisions." },
-          { heading: "Construction & manufacture", text: "Record printer, material, settings and any finishing or assembly processes used." },
-          { heading: "Software & control", text: "Explain any parametric CAD, CAD automation or printing scripts if applicable." },
-          { heading: "Design iterations", text: "Compare the first print and later revisions, including how tolerances were corrected." }
-        ]
       },
       references: [],
       // Finished physical print photos (1–4). Add photos to assets/images/ and list them here.
