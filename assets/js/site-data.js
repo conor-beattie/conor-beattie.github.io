@@ -69,13 +69,13 @@ window.PORTFOLIO_DATA = {
         focus: "Interesting Science",
         description: "Shortest path algorithms, maze solving, game theory...just interesting science",
         url: "https://www.youtube.com/@veritasium"
-      }
+      },
       {
         name: "Madoca1977",
         focus: "LEGO Technic MOCs",
         description: "I admire Madoca1977's LEGO Technic creations for their inventive mechanisms and their unique mechanical designs.",
         url: "https://rebrickable.com/users/Madoca1977/mocs/"
-      }
+      },
       {
         name: "Seths Bike Hacks (Berm Peak)",
         focus: "Unique Bicycle Products and Hacks",
