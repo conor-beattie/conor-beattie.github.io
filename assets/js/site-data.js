@@ -65,10 +65,22 @@ window.PORTFOLIO_DATA = {
     // Leave the array empty to hide the entire Influences & Inspiration section.
     influences: [
       {
+        name: "Veritasium",
+        focus: "Interesting Science",
+        description: "Shortest path algorithms, maze solving, game theory...just interesting science",
+        url: "https://www.youtube.com/@veritasium"
+      }
+      {
         name: "Madoca1977",
         focus: "LEGO Technic MOCs",
-        description: "I admire Madoca1977's LEGO Technic creations for their inventive mechanisms and thoughtful mechanical design.",
+        description: "I admire Madoca1977's LEGO Technic creations for their inventive mechanisms and their unique mechanical designs.",
         url: "https://rebrickable.com/users/Madoca1977/mocs/"
+      }
+      {
+        name: "Seths Bike Hacks (Berm Peak)",
+        focus: "Unique Bicycle Products and Hacks",
+        description: "Seth's channel has a long history of unique product reviews, 3d prints, and creative hacks",
+        url: "https://www.youtube.com/@SethsBikeHacks"
       }
     ],
     githubUrl: "",       // e.g. https://github.com/your-username
