@@ -1504,13 +1504,6 @@ window.PORTFOLIO_DATA = {
         referencesResources: "",
         relatedProjects: ""
       },
-      sectionDetails: {
-        designDevelopment: [
-          { heading: "Construction & manufacture", text: "The chassis is built from modular metal structural components, with motors, wheels, electronic hardware and wiring mounted to the frame. Working with a modular construction system makes it possible to adjust component placement while checking physical clearances, accessibility and cable routing.\n\nThis part of the project focuses on careful mechanical assembly and integration. The starter-kit layout is a foundation; any custom parts or later modifications can be documented separately as they are made." },
-          { heading: "Software & control", text: "The initial software task for a starter robot is reliable manual control: mapping driver inputs to movement, confirming motor directions and controlling the mechanisms fitted to the chassis. Establishing these behaviours provides a baseline before attempting more advanced automated functions.\n\nSpecific programmed features and autonomous routines will be described here when they have been implemented and tested." },
-          { heading: "Design iterations", text: "Starting with a known kit design makes it easier to change one feature at a time and assess whether an adjustment improves the robot. Potential areas for development include cable organisation, access to components and the positioning of mechanisms. Any actual revisions will be recorded with photographs and test observations." }
-        ]
-      },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },
