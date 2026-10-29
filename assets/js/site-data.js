@@ -73,7 +73,7 @@ window.PORTFOLIO_DATA = {
       {
         name: "Madoca1977",
         focus: "LEGO Technic MOCs",
-        description: "I admire Madoca1977's LEGO Technic creations for their inventive mechanisms and their unique mechanical designs.",
+        description: "Inventive LEGO Technic creations with unique mechanical designs.",
         url: "https://rebrickable.com/users/Madoca1977/mocs/"
       },
       {
