@@ -676,7 +676,7 @@ window.PORTFOLIO_DATA = {
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
       imageAlt: "CAD model of the original Bobbot gripper",
-      summary: "The original gripper built for Bobbot, using pivoting jaws on a vertical lift to handle a 150 mm cardboard cube. This first design provides the reference for a separate grasp-detection investigation.",
+      summary: "The original gripper built for Bobbot with an angled grip and over-center linkage ",
       tags: ["CAD", "Mechanisms", "Design"],
       date: "",
       relatedProjectIds: ["robotic-gripper-grasp-detection", "gripper-contact-surfaces", "autonomous-mobile-robot"],
