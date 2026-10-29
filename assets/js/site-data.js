@@ -705,7 +705,7 @@ window.PORTFOLIO_DATA = {
       "image": "assets/images/Watch_This_Space.png",
       "imageAlt": "",
       "imageCaption": "",
-      "summary": "The original Bobbot gripper is due for an upgrade. The study will compare four-bar and rack-and-pinion parallel grippers on their effectiveness in picking up variuos small cardboard boxes using a 150 mm cube as the main test object.",
+      "summary": "The original Bobbot gripper is due for an upgrade. The study will compare four-bar and rack-and-pinion parallel grippers on their effectiveness in picking up various small cardboard boxes using a 150 mm cube as the main test object.",
       "tags": [
         "Mechanism Design",
         "Parallel Jaws",
