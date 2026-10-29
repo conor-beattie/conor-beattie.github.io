@@ -672,7 +672,7 @@ window.PORTFOLIO_DATA = {
       id: "mechanical-gripper",
       published: true,
       featuredOrder: 7,
-      title: "Bobbot Gripper — Original Design",
+      title: "Bobbot Gripper — Original CAD Design",
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
       imageAlt: "CAD model of the original Bobbot gripper",
@@ -700,12 +700,12 @@ window.PORTFOLIO_DATA = {
       "id": "robotic-gripper-grasp-detection",
       published: true,
       featuredOrder: 1,
-      "title": "Gripper Design Test",
+      "title": "Gripper Design Study",
       "category": "cad",
       "image": "assets/images/Watch_This_Space.png",
-      "imageAlt": "CAD model of the original Bobbot gripper used as the investigation baseline",
-      "imageCaption": "Original Bobbot gripper — reference design only. New gripper concepts are not pictured.",
-      "summary": "Comparing four-bar and rack-and-pinion parallel grippers on their effectiveness in picking up variuos small cardboard boxes using a 150 mm cube as the main test object.",
+      "imageAlt": "",
+      "imageCaption": "",
+      "summary": "The original Bobbot gripper is due for an upgrade. The study will compare four-bar and rack-and-pinion parallel grippers on their effectiveness in picking up variuos small cardboard boxes using a 150 mm cube as the main test object.",
       "tags": [
         "Mechanism Design",
         "Parallel Jaws",
@@ -731,13 +731,13 @@ window.PORTFOLIO_DATA = {
   "nextSteps": "Next steps"
 },
       sections: {
-        overview: "The first Bobbot gripper is a separate, existing design. Its pivoting jaws do not keep parallel contact faces during closure, reducing the range of box widths and positions that can be gripped consistently. It remains a useful mechanical reference, but the new investigation is an additional gripper intended for the lower-cost Robbot platform—not simply a renamed version of the Bobbot gripper. The initial reference object is a 150 mm cardboard cube.\n\nThe central problem has two parts: produce opposing jaw motion suitable for boxes of different widths, and obtain feedback that a box is being gripped with sufficient engagement to stay held. Indirect camera-based pickup checks have limitations. Jaw contact by itself does not establish a secure grasp, and neither jaw position nor servo command alone proves that the box will be retained.",
+        overview: "The original Bobbot gripper was a good first pass at getting the autonomous mobile robot up and running.  But it's angled grip and over-center linkage is better designed for other applications (For instance is makes for a good ramen delivery robot as can be seen in the image above). For the future Bobbot a more versatile grip that can reliably grasp various size of small boxes is desired. Ultimately a more versatile gripper, with contact feedback, and at a lower cost.",
         objectivesRequirements: "Compare two candidate mechanisms: a four-bar parallel-jaw linkage and a rack-and-pinion parallel gripper. Both should be evaluated for jaw parallelism, useful opening range, load transmission, clearances, friction, backlash, size, cost and ease of fabrication. The designs should be bench-testable before mounting on Robbot.\n\nInvestigate a simple mechanical indicator of gripping load or elastic deflection, for example a spring-loaded pad or compliant drive element read by a switch, Hall-effect sensor or displacement measurement. The objective is not merely to signal that something was touched, but to determine experimentally whether the signal is a useful predictor of secure retention. The 150 mm cube provides a common baseline; support for other box widths is an additional design goal with limits to be established by measurements.",
-        backgroundResearch: "Research will focus on published examples and technical explanations of four-bar and rack-and-pinion grippers, jaw guidance, spring-loaded pads, compliant gripping mechanisms, and methods for sensing gripping force indirectly through displacement. For each approach, record its source, working principle, force path, likely failure modes, and suitability for low-cost manufacture.\n\nCandidate feedback methods include a spring whose compression is measured by a Hall-effect magnet/sensor pair, a microswitch operating at a defined displacement, a jaw-position sensor, or a force-sensitive element where justified. A spring or Hall reading measures deflection or proximity; it must be calibrated and checked against actual grip performance before it can be interpreted as gripping load. Important questions include how off-centre contact, box deformation, linkage friction, jaw slip and variations in box size alter the reading. Specific literature references and test evidence will be added as research is completed.",
+        backgroundResearch: "",
         designDevelopment: "",
-        testingValidation: "First measure the original gripper's effective jaw range and demonstrate where its non-parallel faces limit box engagement. Test the four-bar and rack-and-pinion candidates with the same 150 mm cube, then with other recorded box widths where practical. Compare parallelism, opening travel, centred and offset grasps, mechanical play and actual retention after closure.\n\nFor grasp feedback, independently record three outcomes: initial contact, a held box immediately after closure, and retention during a defined lift or disturbance. In each trial note the sensor state or deflection, jaw position and any slip. Count false positives (detector predicts a secure grasp but the box is not retained) and missed detections (a secure grasp without a positive signal). Establish sample sizes, performance targets and test loading before claiming that an approach works. No success rates are assumed in advance.",
-        resultsEvaluation: "Current work consists of identifying the limitations of the original Bobbot jaws, selecting the four-bar linkage and rack-and-pinion parallel gripper as the principal candidates, and outlining possible spring-based grasp indicators. The literature review, revised CAD drawings, sensing prototypes and comparative experiments are still to be completed. No secure-grasp detection reliability or gripping-force result is claimed at this stage.",
-        conclusionsNextSteps: "1. Record the original gripper's opening geometry and failure conditions on a 150 mm cube. 2. Read and document existing work on parallel-jaw mechanisms and spring/compliant gripping-force detection. 3. Sketch and model the four-bar and rack-and-pinion candidates. 4. Produce at least two sensor-placement concepts, including a possible spring-plus-Hall-effect arrangement. 5. Bench-test opening range and secure retention using centred and offset boxes. 6. Compare sensor indications against independent grip outcomes before selecting and refining the final design.",
+        testingValidation: "",
+        resultsEvaluation: "",
+        conclusionsNextSteps: "",
         lessonsLearned: "",
         referencesResources: "",
         relatedProjects: ""
@@ -752,7 +752,7 @@ window.PORTFOLIO_DATA = {
       references: [],
       "investigation": {
         "question": "Which parallel-jaw design best handles different box widths, and can measurable spring or mechanism deflection indicate a grasp likely to remain secure?",
-        "status": "Investigation in progress — concepts and proposed tests, not demonstrated performance.",
+        "status": "Future Project",
         "criteria": [
           [
             "Box width and travel",
