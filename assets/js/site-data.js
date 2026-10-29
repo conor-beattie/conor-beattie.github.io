@@ -702,7 +702,7 @@ window.PORTFOLIO_DATA = {
       featuredOrder: 1,
       "title": "Gripper Design Test",
       "category": "cad",
-      "image": "assets/images/gripper_bobbot.png",
+      "image": "assets/images/Watch_This_Space.png",
       "imageAlt": "CAD model of the original Bobbot gripper used as the investigation baseline",
       "imageCaption": "Original Bobbot gripper — reference design only. New gripper concepts are not pictured.",
       "summary": "Comparing four-bar and rack-and-pinion parallel grippers on their effectiveness in picking up variuos small cardboard boxes using a 150 mm cube as the main test object.",
