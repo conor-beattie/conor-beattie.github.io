@@ -1215,24 +1215,44 @@ window.PORTFOLIO_DATA = {
         ],
         "sources": [
           {
-            "name": "Experimental Research on the Tribological Behavior of Plastic Materials with Friction Properties (2025)",
-            "use": "Tests how different plastic materials, including 3D-printed TPU, slide against cardboard packaging.",
+            "name": "Stoica et al. (2025) — Experimental Research on the Tribological Behavior of Plastic Materials with Friction Properties, with Applications to Manipulators in the Pharmaceutical Industry",
+            "use": "Tests how 3D-printed TPU materials of different hardnesses slide and wear against cardboard packaging.",
             "url": "https://doi.org/10.3390/coatings15010084"
           },
           {
-            "name": "Białek & Rybarczyk — Comparative Study of Different Fingertips (2023)",
-            "use": "Compares different robotic gripper fingertips by measuring the force needed to pull an object out of the gripper.",
+            "name": "Su et al. (2026) — 3D printing elastic metamaterials and actuators with high resilience via polyether block amide (PEBA)",
+            "use": "Compares how 3D-printed PEBA and TPU deform and recover when used in flexible structures.",
+            "url": "https://doi.org/10.1016/j.eml.2026.102465"
+          },
+          {
+            "name": "Li et al. (2026) — Effects of gyroid lattice relative density on wear and mechanical performance of 3D printed TPU and flexible nylon for footwear",
+            "use": "Compares the wear and deformation of printed PEBA and TPU structures with different internal lattice densities.",
+            "url": "https://doi.org/10.1016/j.isci.2026.115868"
+          },
+          {
+            "name": "Stoica et al. (2026) — Wear Behavior and Multi-Technique Characterization of 3D Printed TPU Under Simulated Pharmaceutical Operating Conditions",
+            "use": "Investigates how printing conditions affect the mechanical properties and cardboard-contact wear of soft TPU.",
+            "url": "https://doi.org/10.3390/polym18050630"
+          },
+          {
+            "name": "Al-Hadithi, Pastor & Lin (2026) — Design and Experimental Validation of a 3D-Printed Hybrid Soft Robotic Gripper for Delicate Object Manipulation",
+            "use": "Describes a robotic gripper combining flexible TPU 90A fingers with rigid 3D-printed components.",
+            "url": "https://doi.org/10.3390/electronics15040848"
+          },
+          {
+            "name": "Liu & Hung (2022) — Effect of the infill density on the performance of a 3D-printed compliant finger",
+            "use": "Investigates how changing the infill density of flexible 3D-printed fingers affects bending, stiffness and gripping capacity.",
+            "url": "https://doi.org/10.1016/j.matdes.2022.111203"
+          },
+          {
+            "name": "Białek & Rybarczyk (2023) — A Comparative Study of Different Fingertips on the Object Pulling Forces in Robotic Gripper Jaws",
+            "use": "Compares robotic gripper fingertips by measuring the force required to pull an object out of the jaws.",
             "url": "https://doi.org/10.3390/app13031247"
           },
           {
             "name": "Kargar & Berselli — Frictional insights into textured soft pads (2025)",
             "use": "Tests smooth and patterned silicone gripping surfaces to see how their shapes affect friction.",
             "url": "https://doi.org/10.1007/s00170-025-16625-1"
-          },
-          {
-            "name": "Liu & Hung — Effect of the infill density on a compliant finger (2022)",
-            "use": "Investigates how the amount of material inside a 3D-printed flexible finger changes its bending and gripping behaviour.",
-            "url": "https://doi.org/10.1016/j.matdes.2022.111203"
           },
           {
             "name": "ASTM D1894-24 — Friction of plastic film and sheeting",
