@@ -712,7 +712,7 @@ window.PORTFOLIO_DATA = {
       "id": "robotic-gripper-grasp-detection",
       published: true,
       featuredOrder: 1,
-      "title": "Improving Gripper Reliability on an Autonomous Mobile Robot (Part 2: Gripper Jaw Assembly)",
+      "title": "[Future] Improving Gripper Reliability on an Autonomous Mobile Robot (Part 2: Gripper Jaw Assembly)",
       "category": "cad",
       "image": "assets/images/Watch_This_Space.png",
       "imageAlt": "",
@@ -1537,7 +1537,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "gripper-contact-sensing",
       published: true,
-      title: "Improving Gripper Reliability on an Autonomous Mobile Robot (Part 3: Gripper Contact Sensing)",
+      title: "[Future] Improving Gripper Reliability on an Autonomous Mobile Robot (Part 3: Gripper Contact Sensing)",
       category: "cad",
       image: "assets/images/Watch_This_Space.png",
       imageAlt: "",
