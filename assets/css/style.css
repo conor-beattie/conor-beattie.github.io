@@ -96,6 +96,20 @@ button { cursor: pointer; }
 .project-card p { font-size:.89rem; line-height:1.65; color:var(--ink-soft); margin:0 0 23px; }
 .eyebrow-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
 .sample-mark { font-size:.62rem; letter-spacing:.07em; border:1px solid #d8c98d; border-radius:4px; color:#7b671f; background:#faf3d9; padding:2px 5px; font-weight:750; }
+
+/* Consistent optional five-field project information hierarchy.
+   Empty subtitle/status/summary strings render no element and add no gap. */
+.project-card__subtitle, .software-card .project-card__subtitle,
+.algorithm-card .project-card__subtitle { font-size:.96rem; font-weight:650; line-height:1.4; color:var(--ink); margin:0 0 9px; }
+.project-card__status, .software-card .project-card__status,
+.algorithm-card .project-card__status { font-size:.75rem; font-weight:650; color:var(--muted); line-height:1.35; margin:0 0 12px; }
+.project-card h3:has(+ .project-card__subtitle) { margin-bottom:8px; }
+.software-card__body h3:has(+ .project-card__subtitle) { margin-bottom:8px; }
+.algorithm-card__body h3:has(+ .project-card__subtitle) { margin-bottom:8px; }
+.project-intro__subtitle { font-size:1.42rem; font-weight:650; letter-spacing:-.025em; color:var(--ink); line-height:1.4; margin:-5px 0 13px; }
+.project-intro__status { font-size:.86rem; font-weight:650; color:var(--muted); margin:0 0 15px; }
+.project-intro__subtitle + .project-intro__status { margin-top:0; }
+
 .project-card__foot { display:flex; align-items:end; justify-content:space-between; gap:10px; margin-top:auto; }
 .tags { display:flex; gap:6px; flex-wrap:wrap; }
 .tag { border:1px solid #dce5e3; color:var(--ink-soft); background:#f5f8f7; border-radius:5px; padding:4px 8px; font-size:.68rem; font-weight:600; line-height:1.3; }

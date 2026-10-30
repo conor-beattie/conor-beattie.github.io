@@ -21,6 +21,12 @@
   8. For 3D prints: keep `image` as the CAD render and list 1–4 real print photos
      under `printPhotos`. Optional printer settings belong in `printDetails`.
 
+  CARD DISPLAY: category, title, optional subtitle, optional status, summary.
+  For projects/algorithms: subtitle: "", status: ""; for software: subtitle: "", cardStatus: "".
+  Software's existing status field records testing/documentation evidence and is NOT
+  the public project progress status. Any optional field set to "" is not rendered.
+  Use only Future or In Progress for visible progress labels, or "" to hide.
+
   Do not put private addresses, school schedules or personal contact data here.
 */
 window.PORTFOLIO_DATA = {
@@ -152,6 +158,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 5,
       title: "Autonomous Return to Base",
+      subtitle: "",
+      cardStatus: "",
+
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["apriltag-routing", "distance-angle-control", "local-obstacle-avoidance", "wall-following", "dead-reckoning"],
@@ -188,6 +197,9 @@ window.PORTFOLIO_DATA = {
       id: "stack-object",
       published: true,
       title: "Stack Object",
+      subtitle: "",
+      cardStatus: "",
+
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["distance-angle-control", "local-obstacle-avoidance", "coordinate-transformations"],
@@ -220,6 +232,9 @@ window.PORTFOLIO_DATA = {
       id: "guide-recovery",
       published: true,
       title: "Arena Guide Search & Recovery",
+      subtitle: "",
+      cardStatus: "",
+
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["apriltag-routing", "dead-reckoning"],
@@ -252,6 +267,9 @@ window.PORTFOLIO_DATA = {
       id: "wall-follow-skill",
       published: true,
       title: "Follow Wall",
+      subtitle: "",
+      cardStatus: "",
+
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["wall-following", "distance-angle-control"],
@@ -284,6 +302,9 @@ window.PORTFOLIO_DATA = {
       id: "local-avoidance-skill",
       published: true,
       title: "Local Obstacle Avoidance",
+      subtitle: "",
+      cardStatus: "",
+
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["local-obstacle-avoidance", "coordinate-transformations"],
@@ -316,6 +337,9 @@ window.PORTFOLIO_DATA = {
       id: "perception-system",
       published: true,
       title: "Visual Perception Pipeline",
+      subtitle: "",
+      cardStatus: "",
+
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["apriltag-pose", "coordinate-transformations"],
@@ -348,6 +372,9 @@ window.PORTFOLIO_DATA = {
       id: "localisation-system",
       published: true,
       title: "Robot Localisation",
+      subtitle: "",
+      cardStatus: "",
+
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["odometry", "coordinate-transformations", "dead-reckoning"],
@@ -380,6 +407,9 @@ window.PORTFOLIO_DATA = {
       id: "motion-control",
       published: true,
       title: "Motion & Command Control",
+      subtitle: "",
+      cardStatus: "",
+
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: ["pid", "distance-angle-control", "motion-profiles"],
@@ -441,6 +471,9 @@ window.PORTFOLIO_DATA = {
       id: "ibvs",
       published: true,
       title: "IBVS — Image-Based Visual Servoing",
+      subtitle: "",
+      status: "",
+
       shortName: "IBVS",
       group: "Visual Servoing",
       summary: "Control robot motion from errors between observed and desired image features.",
@@ -455,6 +488,9 @@ window.PORTFOLIO_DATA = {
       id: "pbvs",
       published: true,
       title: "PBVS — Position-Based Visual Servoing",
+      subtitle: "",
+      status: "",
+
       shortName: "PBVS",
       group: "Visual Servoing",
       summary: "Control robot motion using an estimated target position and orientation.",
@@ -469,6 +505,9 @@ window.PORTFOLIO_DATA = {
       id: "pid",
       published: true,
       title: "PID — Proportional–Integral–Derivative Control",
+      subtitle: "",
+      status: "",
+
       shortName: "PID",
       group: "Control",
       summary: "Feedback control combining proportional, accumulated and changing error.",
@@ -483,6 +522,9 @@ window.PORTFOLIO_DATA = {
       id: "pure-pursuit",
       published: true,
       title: "Pure Pursuit — Path Following",
+      subtitle: "",
+      status: "",
+
       shortName: "Pure Pursuit",
       group: "Navigation",
       summary: "Follow a planned path by steering toward a lookahead point.",
@@ -495,7 +537,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "apriltag-routing",
-      published: true, title: "AprilTag Route Selection", shortName: "Tag Route Selection", group: "Vision & localisation",
+      published: true, title: "AprilTag Route Selection",
+      subtitle: "",
+      status: "",
+      shortName: "Tag Route Selection", group: "Vision & localisation",
+
       summary: "Choose from ordered arena guide markers to steer a robot along a return route.",
       overview: "Choose from ordered arena guide markers to steer a robot along a return route.",
       method: "Use marker IDs and a configured route to choose the most advanced eligible visible guide, then advance the route when the next marker is usable.",
@@ -505,7 +551,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "apriltag-pose",
-      published: true, title: "AprilTag Pose Estimation", shortName: "AprilTag Pose", group: "Vision & localisation",
+      published: true, title: "AprilTag Pose Estimation",
+      subtitle: "",
+      status: "",
+      shortName: "AprilTag Pose", group: "Vision & localisation",
+
       summary: "Estimate camera-relative position and orientation from a known square marker.",
       overview: "Estimate camera-relative position and orientation from a known square marker.",
       method: "Detect tag corners, apply camera calibration and solve for a relative pose; transform into the robot frame as needed.",
@@ -515,7 +565,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "distance-angle-control",
-      published: true, title: "Distance–Angle Feedback Control", shortName: "Distance–Angle", group: "Feedback control",
+      published: true, title: "Distance–Angle Feedback Control",
+      subtitle: "",
+      status: "",
+      shortName: "Distance–Angle", group: "Feedback control",
+
       summary: "Turn a distance error and a steering-angle error into commanded motion.",
       overview: "Turn a distance error and a steering-angle error into commanded motion.",
       method: "Measure target range and relative bearing; apply control gains and speed limits to output linear/angular velocity.",
@@ -525,7 +579,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "local-obstacle-avoidance",
-      published: true, title: "Local Obstacle Avoidance", shortName: "Obstacle Avoidance", group: "Navigation",
+      published: true, title: "Local Obstacle Avoidance",
+      subtitle: "",
+      status: "",
+      shortName: "Obstacle Avoidance", group: "Navigation",
+
       summary: "Change local motion when objects obstruct a preferred direction.",
       overview: "Change local motion when objects obstruct a preferred direction.",
       method: "Represent nearby obstacles and nominal direction, assess free corridors and choose a safe local motion; resume the original route afterward.",
@@ -535,7 +593,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "ftg",
-      published: true, title: "FTG — Follow the Gap", shortName: "FTG", group: "Navigation",
+      published: true, title: "FTG — Follow the Gap",
+      subtitle: "",
+      status: "",
+      shortName: "FTG", group: "Navigation",
+
       summary: "Steer through a suitable obstacle-free opening in a local scan or obstacle field.",
       overview: "Steer through a suitable obstacle-free opening in a local scan or obstacle field.",
       method: "Find free-space gaps in angular sectors and choose a feasible heading that balances clearance and progress.",
@@ -545,7 +607,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "dwa",
-      published: true, title: "DWA — Dynamic Window Approach", shortName: "DWA", group: "Navigation",
+      published: true, title: "DWA — Dynamic Window Approach",
+      subtitle: "",
+      status: "",
+      shortName: "DWA", group: "Navigation",
+
       summary: "Evaluate short candidate velocity commands against obstacles and motion constraints.",
       overview: "Evaluate short candidate velocity commands against obstacles and motion constraints.",
       method: "Sample feasible velocities, predict short trajectories and score them against clearance, progress and speed.",
@@ -555,7 +621,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "wall-following",
-      published: true, title: "Wall Following", shortName: "Wall Follow", group: "Navigation",
+      published: true, title: "Wall Following",
+      subtitle: "",
+      status: "",
+      shortName: "Wall Follow", group: "Navigation",
+
       summary: "Travel alongside a wall at a preferred side distance and heading.",
       overview: "Travel alongside a wall at a preferred side distance and heading.",
       method: "Estimate wall distance and optionally wall heading; generate steering correction while maintaining forward motion.",
@@ -565,7 +635,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "smooth-control-law",
-      published: true, title: "Smooth Control Law", shortName: "Smooth Control", group: "Feedback control",
+      published: true, title: "Smooth Control Law",
+      subtitle: "",
+      status: "",
+      shortName: "Smooth Control", group: "Feedback control",
+
       summary: "Generate a continuously varying corrective motion toward a target.",
       overview: "Generate a continuously varying corrective motion toward a target.",
       method: "Use bearing and distance errors to calculate smooth speed/turn commands with saturation or slowing regions.",
@@ -575,7 +649,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "odometry",
-      published: true, title: "Wheel Odometry", shortName: "Odometry", group: "Localisation",
+      published: true, title: "Wheel Odometry",
+      subtitle: "",
+      status: "",
+      shortName: "Odometry", group: "Localisation",
+
       summary: "Estimate changes in robot pose from wheel motion.",
       overview: "Estimate changes in robot pose from wheel motion.",
       method: "Convert wheel encoder measurements to linear and angular displacement using the robot kinematic model.",
@@ -585,7 +663,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "dead-reckoning",
-      published: true, title: "Dead Reckoning & Open-Loop Motion", shortName: "Dead Reckoning", group: "Localisation",
+      published: true, title: "Dead Reckoning & Open-Loop Motion",
+      subtitle: "",
+      status: "",
+      shortName: "Dead Reckoning", group: "Localisation",
+
       summary: "Estimate or execute movement without absolute visual position corrections.",
       overview: "Estimate or execute movement without absolute visual position corrections.",
       method: "Propagate motion estimates from commanded velocity, time or wheel displacement; compare against feedback-based control.",
@@ -595,7 +677,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "coordinate-transformations",
-      published: true, title: "Coordinate Frames & Transformations", shortName: "Frames", group: "Robotics mathematics",
+      published: true, title: "Coordinate Frames & Transformations",
+      subtitle: "",
+      status: "",
+      shortName: "Frames", group: "Robotics mathematics",
+
       summary: "Convert target and robot measurements between camera, body and arena coordinate frames.",
       overview: "Convert target and robot measurements between camera, body and arena coordinate frames.",
       method: "Define frame origins and axis directions, then apply rotations and translations consistently.",
@@ -605,7 +691,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "a-star",
-      published: true, title: "A* Path Planning", shortName: "A*", group: "Planning",
+      published: true, title: "A* Path Planning",
+      subtitle: "",
+      status: "",
+      shortName: "A*", group: "Planning",
+
       summary: "Find a graph or grid route using cost-so-far plus a heuristic estimate.",
       overview: "Find a graph or grid route using cost-so-far plus a heuristic estimate.",
       method: "Expand low-cost candidate nodes while tracking the predecessor path; reconstruct a route to the goal.",
@@ -615,7 +705,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "slam",
-      published: true, title: "SLAM — Simultaneous Localisation and Mapping", shortName: "SLAM", group: "Localisation",
+      published: true, title: "SLAM — Simultaneous Localisation and Mapping",
+      subtitle: "",
+      status: "",
+      shortName: "SLAM", group: "Localisation",
+
       summary: "Estimate robot pose while constructing or updating a map.",
       overview: "Estimate robot pose while constructing or updating a map.",
       method: "Combine successive motion estimates with landmark or sensor observations to constrain pose and map error.",
@@ -625,7 +719,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "motion-profiles",
-      published: true, title: "Motion Profiles", shortName: "Profiles", group: "Motion control",
+      published: true, title: "Motion Profiles",
+      subtitle: "",
+      status: "",
+      shortName: "Profiles", group: "Motion control",
+
       summary: "Constrain acceleration and speed to make transitions smoother and more repeatable.",
       overview: "Constrain acceleration and speed to make transitions smoother and more repeatable.",
       method: "Plan a velocity or position trajectory with acceleration limits, such as trapezoidal motion.",
@@ -635,7 +733,11 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "visual-target-tracking",
-      published: true, title: "Visual Target Tracking", shortName: "Tracking", group: "Vision & localisation",
+      published: true, title: "Visual Target Tracking",
+      subtitle: "",
+      status: "",
+      shortName: "Tracking", group: "Vision & localisation",
+
       summary: "Maintain correspondence to an object or marker across camera frames.",
       overview: "Maintain correspondence to an object or marker across camera frames.",
       method: "Identify observations by target identity and compare timestamped positions or features as frames arrive.",
@@ -658,6 +760,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 2,                  // URL: project.html?id=autonomous-mobile-robot
       title: "Bobbot - Autonomous Mobile Robot",
+      subtitle: "",
+      status: "",
+
       category: "robotics",                          // robotics | cad | fabrication | electronics
       image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
@@ -685,6 +790,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 7,
       title: "Bobbot Gripper — Original CAD Design",
+      subtitle: "",
+      status: "",
+
       category: "cad",
       image: "assets/images/gripper_bobbot.png",
       imageAlt: "CAD model of the original Bobbot gripper",
@@ -712,7 +820,10 @@ window.PORTFOLIO_DATA = {
       "id": "robotic-gripper-grasp-detection",
       published: true,
       featuredOrder: 1,
-      "title": "[Future] Improving Gripper Reliability on an Autonomous Mobile Robot (Part 2: Gripper Jaw Assembly)",
+      "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
+      subtitle: "Part 2: Gripper Jaw Assembly",
+      status: "Future",
+
       "category": "cad",
       "image": "assets/images/Watch_This_Space.png",
       "imageAlt": "",
@@ -889,7 +1000,10 @@ window.PORTFOLIO_DATA = {
     {
       "id": "gripper-contact-surfaces",
       "published": false,
-      "title": "Improving Gripper Reliability on an Autonomous Mobile Robot (Part 1: Gripper Contact Pads)",
+      "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
+      subtitle: "Part 1: Gripper Contact Pads",
+      status: "In Progress",
+
       "category": "cad",
       "image": "assets/images/gripper_bobbot_orig.jpeg",
       "imageAlt": "CAD of the existing Bobbot gripper used as a baseline for contact-pad tests",
@@ -1268,6 +1382,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 8,
       title: "Pulley",
+      subtitle: "",
+      status: "",
+
       category: "fabrication",
       image: "assets/images/Pulley.png",
       imageAlt: "Illustrative 3D-printed gears and fabricated components",
@@ -1309,6 +1426,9 @@ window.PORTFOLIO_DATA = {
       featuredOrder: 3,
       relatedProjectIds: ["robot-io-mapping", "mobile-robot-power-distribution"],
       title: "Modular Robot I/O & TeleOp Controller",
+      subtitle: "",
+      status: "",
+
       category: "electronics",
       image: "assets/images/arduino mega.jpg",
       imageAlt: "Arduino Mega 2560 controller wiring diagram showing field and panel connectors, power buses, encoder inputs, servos and sensor interfaces",
@@ -1348,6 +1468,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 6,
       title: "Robot I/O Mapping & Hardware Abstraction",
+      subtitle: "",
+      status: "",
+
       category: "electronics",
       image: "assets/images/io-interface-contract.svg",
       imageAlt: "Simplified table of robot input/output interfaces, showing io.* methods and properties used by higher-level software",
@@ -1413,6 +1536,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 4,
       title: "Mobile Robot Power Distribution & Electrical Architecture",
+      subtitle: "",
+      status: "",
+
       category: "electronics",
       image: "assets/images/one line diagram.jpg",
       imageAlt: "One-line electrical diagram of a mobile robot showing battery protection, power distribution, motor controllers, voltage regulators, servos and control electronics",
@@ -1459,6 +1585,9 @@ window.PORTFOLIO_DATA = {
       id: "robotics-project-2",
       published: true,
       title: "Robbot - Autonomous Mobile Robot",
+      subtitle: "",
+      status: "",
+
       category: "robotics",
       image: "assets/images/IMG_2756_robbot.jpg",
       imageAlt: "Robot project photo — replace or update caption",
@@ -1485,6 +1614,9 @@ window.PORTFOLIO_DATA = {
       id: "gobilda-decode-starter-bot",
       published: true,
       title: "goBILDA DECODE Starter Bot",
+      subtitle: "",
+      status: "",
+
       category: "robotics",
       image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
       imageAlt: "Photograph of the goBILDA DECODE starter robot during assembly, showing its metal chassis, wheels, motors, wiring and control hardware",
@@ -1512,6 +1644,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 9,
       title: "Shooter",
+      subtitle: "",
+      status: "",
+
       category: "cad",
       image: "assets/images/Shooter CAD.png",
       imageAlt: "CAD illustration — replace with the second design project",
@@ -1537,7 +1672,10 @@ window.PORTFOLIO_DATA = {
     {
       id: "gripper-contact-sensing",
       published: true,
-      title: "[Future] Improving Gripper Reliability on an Autonomous Mobile Robot (Part 3: Gripper Contact Sensing)",
+      title: "Improving Gripper Reliability on an Autonomous Mobile Robot",
+      subtitle: "Part 3: Gripper Contact Sensing",
+      status: "Future",
+
       category: "cad",
       image: "assets/images/Watch_This_Space.png",
       imageAlt: "",
@@ -1565,6 +1703,9 @@ window.PORTFOLIO_DATA = {
       published: true,
       featuredOrder: 10,
       title: "Rubber Band Intake Wheel",
+      subtitle: "",
+      status: "",
+
       category: "fabrication",
       image: "assets/images/rubber_band_wheel.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
@@ -1607,6 +1748,9 @@ window.PORTFOLIO_DATA = {
       id: "fabrication-project-3",
       published: true,
       title: "FlySky Receiver Mount",
+      subtitle: "",
+      status: "",
+
       category: "fabrication",
       image: "assets/images/FlySky Receiver.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
@@ -1644,6 +1788,9 @@ window.PORTFOLIO_DATA = {
       id: "fabrication-project-4",
       published: true,
       title: "PiCam3 Mount 8 Degrees",
+      subtitle: "",
+      status: "",
+
       category: "fabrication",
       image: "assets/images/PICam3 Mount 8 degree.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
@@ -1681,6 +1828,9 @@ window.PORTFOLIO_DATA = {
       id: "fabrication-project-5",
       published: true,
       title: "RoboClaw 2x30",
+      subtitle: "",
+      status: "",
+
       category: "fabrication",
       image: "assets/images/RoboClaw 2x30.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",

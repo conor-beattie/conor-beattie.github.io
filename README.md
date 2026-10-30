@@ -1,3 +1,34 @@
+# Five-field project cards (30 October 2026)
+
+Project cards now display **project area → title → optional subtitle → optional
+progress status → short description**, in this order. This applies to the
+Robotics, Mechanical Design & CAD, 3D Printing & Fabrication, Electronics,
+Software and Algorithms listings, plus Selected Projects and development
+preview. Existing cards, tags, links, sections, and publication settings remain.
+
+Edit the corresponding entry in `assets/js/site-data.js`:
+
+```javascript
+category: "cad",                // Project area, from categories[]
+title: "Project title",
+subtitle: "",                   // e.g. "Part 2: Gripper Jaw Assembly"
+status: "",                     // "Future", "In Progress" or "" (hidden)
+summary: "Short description"
+```
+
+**Leave optional values as `""` to hide them completely.** Empty subtitles,
+statuses and summaries produce no placeholder text or blank lines. In software
+entries, `status` already means *evidence maturity* (e.g. Code documented),
+so use `cardStatus: ""` for optional visible progress. Algorithms use `status`
+just like ordinary projects.
+
+The three gripper investigations now share the main title
+“Improving Gripper Reliability on an Autonomous Mobile Robot”; their part
+labels and Future/In Progress statuses are separate editable fields.
+The unpublished Part 1 remains unpublished until explicitly published.
+
+---
+
 # Project Journal — Consistent Project Sections (28 October 2026)
 
 The project pages now use **the same ten headings and order** across normal

@@ -26,7 +26,16 @@
   const img = (path) => escape(path || "assets/images/IMG_2627 Bobbot.jpg");
   const text = (s) => escape(s || "");
   const category = (id) => data.categories.find(c => c.id === id);
-  const kindLabel = (p) => p.category === "fabrication" ? "3D PRINT" : (category(p.category)?.title || "Portfolio entry");
+  const kindLabel = (p) => category(p.category)?.title || "";
+  const nonempty = (value) => typeof value === "string" && value.trim().length > 0;
+  // Optional card fields do not produce markup or spacing when left blank.
+  const optionalCardText = (value, cls, tag = "div") => nonempty(value) ?
+    `<${tag} class="${cls}">${text(value.trim())}</${tag}>` : "";
+  const optionalDetailText = (value, cls, tag = "p") => nonempty(value) ?
+    `<${tag} class="${cls}">${text(value.trim())}</${tag}>` : "";
+  const detailSubStatus = (item, key = "status") =>
+    optionalDetailText(item.subtitle, "project-intro__subtitle") +
+    optionalDetailText(item[key], "project-intro__status");
   // Unlisted development mode can be started on the live site from development.html.
   // A preview=drafts query parameter carries it across pages and direct project links.
   // This hides drafts from ordinary visitors; it is not access control or privacy.
@@ -162,9 +171,11 @@
         <img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" />
       </a>
       <div class="project-card__body">
-        <div class="eyebrow-row"><span class="eyebrow">${text(kindLabel(p))}</span>${previewDrafts && !isPublished(p) ? '<span class="preview-draft-tag">DRAFT</span>' : ''}</div>
-        <h3><a href="${projectUrl(p)}">${text(p.title)}</a></h3>
-        <p>${text(p.summary)}</p>
+        <div class="eyebrow-row">${optionalCardText(kindLabel(p), "eyebrow", "span")}${previewDrafts && !isPublished(p) ? '<span class="preview-draft-tag">DRAFT</span>' : ''}</div>
+        ${nonempty(p.title) ? `<h3 class="project-card__title"><a href="${projectUrl(p)}">${text(p.title)}</a></h3>` : ""}
+        ${optionalCardText(p.subtitle, "project-card__subtitle")}
+        ${optionalCardText(p.status, "project-card__status")}
+        ${optionalCardText(p.summary, "project-card__summary", "p")}
         <div class="project-card__foot">
           <div class="tags">${(p.tags || []).slice(0, 3).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
           <a href="${projectUrl(p)}" class="round-arrow" aria-label="Open ${text(p.title)}"><span aria-hidden="true">↗</span></a>
@@ -178,8 +189,10 @@
     return `<article class="algorithm-card">
       <div class="algorithm-card__top"><span class="eyebrow">${text(a.group)}</span><span class="algorithm-short">${text(a.shortName)}</span></div>
       <div class="algorithm-card__body">
-        <h3><a href="${algorithmUrl(a)}">${text(a.title)}</a></h3>
-        <p>${text(a.summary)}</p>
+        ${nonempty(a.title) ? `<h3><a href="${algorithmUrl(a)}">${text(a.title)}</a></h3>` : ""}
+        ${optionalCardText(a.subtitle, "project-card__subtitle")}
+        ${optionalCardText(a.status, "project-card__status")}
+        ${optionalCardText(a.summary, "algorithm-card__summary", "p")}
         <div class="algorithm-card__bottom"><span>${count ? `${count} linked software entr${count === 1 ? "y" : "ies"}` : "Reference / exploration"}</span><a href="${algorithmUrl(a)}" class="round-arrow" aria-label="View ${text(a.shortName)}"><span aria-hidden="true">↗</span></a></div>
       </div>
     </article>`;
@@ -219,8 +232,11 @@
     </a>` : "";
     return `<article class="software-card">
       ${cover}
-      <div class="software-card__body"><div class="eyebrow-row"><span class="eyebrow">${text(item.type || "Software")}</span><span class="maturity-note">${text(item.status || "")}</span></div>
-      <h3><a href="${softwareUrl(item)}">${text(item.title)}</a></h3><p>${text(item.summary)}</p>
+      <div class="software-card__body"><div class="eyebrow-row"><span class="eyebrow">SOFTWARE${nonempty(item.type) ? " · " + text(item.type) : ""}</span></div>
+      ${nonempty(item.title) ? `<h3><a href="${softwareUrl(item)}">${text(item.title)}</a></h3>` : ""}
+      ${optionalCardText(item.subtitle, "project-card__subtitle")}
+      ${optionalCardText(item.cardStatus, "project-card__status")}
+      ${optionalCardText(item.summary, "software-card__summary", "p")}
       <div class="software-card__bottom"><span class="muted-small">${(item.algorithmIds || []).length} linked methods</span><a class="round-arrow" href="${softwareUrl(item)}" aria-label="Open ${text(item.title)}"><span aria-hidden="true">↗</span></a></div></div>
     </article>`;
   }
@@ -240,7 +256,7 @@
     const rows=sectionLayouts(item,softwareExtras(item));
     const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>`:'';
     root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
-      <div class="project-intro"><p class="eyebrow">${text(item.type||'Software')} · ${text(item.status)}</p><h1>${text(item.title)}</h1><p class="project-lede">${text(item.summary)}</p><div class="tags tags-large">${(item.tags||[]).map(tag=>`<span class="tag">${text(tag)}</span>`).join('')}</div></div>
+      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}${nonempty(item.status) ? ' · '+text(item.status) : ''}</p><h1>${text(item.title)}</h1>${detailSubStatus(item,"cardStatus")}${optionalDetailText(item.summary,"project-lede")}<div class="tags tags-large">${(item.tags||[]).map(tag=>`<span class="tag">${text(tag)}</span>`).join('')}</div></div>
       ${media}<div class="detail-layout">${sectionSidebar(rows,'Software sections',`<div class="detail-callout"><strong>Evidence status</strong><p>${text(item.status)} — implementation and test results should be distinguished.</p></div>`)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
       <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More software systems</h2></div><a class="button button-outline" href="software.html">Software archive ↗</a></div></div>`;
   }
@@ -265,7 +281,7 @@
     const videos = (a.demos || []).filter(d => d.video && visibleProjects().some(p => p.id === d.robotId)).map(d => ({algorithm:a,demo:d}));
     const source = linkMarkup(a.sourceUrl,"Reference / source link");
     root.innerHTML = `<div class="container"><div class="breadcrumb"><a href="algorithms.html">Algorithms</a><span aria-hidden="true">/</span><span>${text(a.shortName)}</span></div>
-      <div class="project-intro"><p class="eyebrow">${text(a.group)} · ALGORITHM</p><h1>${text(a.title)}</h1><p class="project-lede">${text(a.summary)}</p></div>
+      <div class="project-intro"><p class="eyebrow">${text(a.group)} · ALGORITHM</p><h1>${text(a.title)}</h1>${detailSubStatus(a)}${optionalDetailText(a.summary,"project-lede")}</div>
       <div class="algorithm-detail-stack"><section><h2>What it does</h2>${paragraphs(a.overview)}</section><section><h2>How it works</h2>${paragraphs(a.method)}</section><section><h2>Limitations and considerations</h2>${paragraphs(a.considerations)}</section>
       <section><h2>Where it appears in the software</h2>${implementations.length ? `<p>The following software entries explicitly reference this method. See each implementation for its own evidence status and design history.</p><div class="related-list">${implementations.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.status)} · ${text(item.type)} ↗</span></a>`).join("")}</div>` : `<p>No software entry has been linked to this method yet. This is a general engineering reference, not a claim of implementation.</p>`}</section>
       ${a.implementation ? `<section><h2>Implementation notes</h2>${paragraphs(a.implementation)}</section>` : ""}
@@ -325,7 +341,7 @@
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
       const results = visibleProjects().filter(p => !["software"].includes(p.category)).filter(p => {
-        const searchable = [p.title, p.summary, ...(p.tags || [])].join(" ").toLocaleLowerCase();
+        const searchable = [p.title, p.subtitle, p.status, p.summary, ...(p.tags || [])].join(" ").toLocaleLowerCase();
         return (chosen === "all" || p.category === chosen) && searchable.includes(term);
       });
       container.innerHTML = results.length ? results.map(projectCard).join("") : `<div class="empty-state"><h3>No matching projects</h3><p>Try clearing the search or choosing another category.</p></div>`;
@@ -389,8 +405,8 @@
       ${specs.length ? `<dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join('')}</dl>` : `<p class="print-settings-empty">Printer, material and settings can be added in <code>site-data.js</code>.</p>`}</div>`;
     root.innerHTML=`<div class="container print-detail-page">
       <div class="breadcrumb"><a href="projects.html?category=fabrication">3D Printing &amp; Fabrication</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
-      <div class="project-intro print-intro"><p class="eyebrow">3D PRINT${p.date ? ' · '+text(p.date):''}</p><h1>${text(p.title)}</h1>
-      ${p.summary ? `<p class="project-lede">${text(p.summary)}</p>`:''}
+      <div class="project-intro print-intro"><p class="eyebrow">${text(kindLabel(p))}${p.date ? ' · '+text(p.date):''}</p><h1>${text(p.title)}</h1>
+      ${detailSubStatus(p)}${optionalDetailText(p.summary,"project-lede")}
       <div class="tags tags-large">${(p.tags||[]).map(tag=>`<span class="tag">${text(tag)}</span>`).join('')}</div></div>
       <figure class="print-cad-figure"><div class="print-media-label">CAD MODEL</div><img src="${img(p.image)}" alt="${text(p.imageAlt||`${p.title} CAD model`)}"/></figure>
       <section class="print-gallery-panel" aria-labelledby="print-gallery-title"><div class="print-gallery-heading"><div><p class="eyebrow">FROM DIGITAL TO PHYSICAL</p><h2 id="print-gallery-title">The finished print</h2><p>Photographs of the actual manufactured part.</p></div>
@@ -597,7 +613,7 @@
     root.innerHTML=`<div class="container">
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
-        <h1>${text(p.title)}</h1><p class="project-lede">${text(p.summary)}</p><div class="tags tags-large">${(p.tags||[]).map(t=>`<span class="tag">${text(t)}</span>`).join('')}</div></div>
+        <h1>${text(p.title)}</h1>${detailSubStatus(p)}${optionalDetailText(p.summary,"project-lede")}<div class="tags tags-large">${(p.tags||[]).map(t=>`<span class="tag">${text(t)}</span>`).join('')}</div></div>
       <figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}<figcaption>${text(p.imageCaption||p.title)}</figcaption></figure>
       ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status?`<span>${text(p.investigation.status)}</span>`:''}</div>`:''}
       <div class="detail-layout">${sectionSidebar(rows)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
@@ -720,12 +736,7 @@
   function development() {
     const root = $("#development-content");
     if (!root) return;
-    const devCard = p => `<article class="project-card">
-      <a class="project-card__image" href="${projectUrl(p)}"><img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" /></a>
-      <div class="project-card__body"><p class="eyebrow">${isPublished(p) ? "PUBLISHED" : "DRAFT — NOT SHOWN PUBLICLY"}</p>
-      <h3><a href="${projectUrl(p)}">${text(p.title)}</a></h3>
-      <p>${text(p.summary)}</p><a class="text-link" href="${projectUrl(p)}">Preview project ↗</a></div>
-    </article>`;
+    const devCard = p => projectCard(p);
     root.innerHTML = `<div class="container"><div class="project-intro"><p class="eyebrow">UNLISTED WORKSPACE</p><h1>Development Projects</h1><p>Preview published and draft projects on the live website. Selecting projects or using site navigation keeps development mode active until you choose <strong>Exit to public view</strong> above. Drafts are unlisted, not private: their content remains accessible in the public repository and to anyone with a preview URL.</p></div><div class="project-grid">${data.projects.map(devCard).join("")}</div></div>`;
   }
 
