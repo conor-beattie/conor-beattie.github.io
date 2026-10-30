@@ -1253,27 +1253,7 @@ window.PORTFOLIO_DATA = {
             "name": "Kargar & Berselli — Frictional insights into textured soft pads (2025)",
             "use": "Tests smooth and patterned silicone gripping surfaces to see how their shapes affect friction.",
             "url": "https://doi.org/10.1007/s00170-025-16625-1"
-          },
-          {
-            "name": "ASTM D1894-24 — Friction of plastic film and sheeting",
-            "use": "Describes a standard way to measure friction by pulling one surface across another.",
-            "url": "https://store.astm.org/d1894-24.html"
-          },
-          {
-            "name": "Bambu Lab — TPU 85A / TPU 90A",
-            "use": "Gives material properties and printing requirements for Bambu’s flexible filaments.",
-            "url": "https://asia.store.bambulab.com/collections/pc-tpu/products/tpu-85a-tpu-90a"
-          },
-          {
-            "name": "Recreus — Filaflex SEBS",
-            "use": "Describes a flexible filament made from a different type of plastic, with manufacturer printing guidance.",
-            "url": "https://recreus.com/en/products/filaflex-sebs"
-          },
-          {
-            "name": "SurgGrip (2022)",
-            "use": "Describes a robotic gripper using soft contact pads to improve how objects are held.",
-            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC9618027/"
-          }
+          }         
         ]
       },
       "links": {
