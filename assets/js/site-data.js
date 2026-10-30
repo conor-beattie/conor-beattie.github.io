@@ -1493,7 +1493,7 @@ window.PORTFOLIO_DATA = {
       tags: ["Robotics", "goBILDA", "FTC", "Robot Assembly"],
       date: "",
       sections: {
-        overview: "This robot build was my entry point into larger robotics projects. It was built from the goBILDA starter kit and based on their DECODE starter bot build manual. Typically these bots are built for FTC competitions and with REV Robotics electronics.  As my intention wasn't to compete but to use this as an entry point into robotics an easily removeable electrical panel that could be used on other robots was built instead.  Details on that panel are linked in Related Projects below.",
+        overview: "This robot build was my entry point into larger robotics projects. It was built from the goBILDA starter kit and based on their DECODE starter bot build manual. Typically these bots are built for FTC competitions and with REV Robotics electronics.  As my intention wasn't to compete but to use this as an entry point into larger robotic projects an easily removeable electrical panel that could be used on other robots was built instead.  Details on that panel are linked in Related Projects below.",
         objectivesRequirements: "",
         backgroundResearch: "",
         designDevelopment: "",
