@@ -832,8 +832,8 @@ window.PORTFOLIO_DATA = {
       },
       published: true,
       featuredOrder: 2,                  // URL: project.html?id=autonomous-mobile-robot
-      title: "Bobbot - Autonomous Mobile Robot",
-      subtitle: "",
+      title: "Autonomous Mobile Robot",
+      subtitle: "Bobbot",
       status: "",
 
       category: "robotics",                          // robotics | cad | fabrication | electronics
@@ -1721,9 +1721,9 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      title: "Robbot - Autonomous Mobile Robot",
-      subtitle: "",
-      status: "",
+      title: "Autonomous Mobile Robot",
+      subtitle: "Robbot",
+      status: "In Progress",
 
       category: "robotics",
       image: "assets/images/IMG_2756_robbot.jpg",
