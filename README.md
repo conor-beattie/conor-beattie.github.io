@@ -1,3 +1,39 @@
+# Category listing order (1 November 2026)
+
+You can now manually control how projects appear **within their own category**.
+Edit `assets/js/site-data.js` and change the `categoryOrder` number of a project.
+Each category starts at 1 independently:
+
+```javascript
+// Example from projects[] — Robotics
+category: "robotics",
+categoryOrder: 2, // Second item in Robotics
+
+// Example from a different project — Mechanical Design & CAD
+category: "cad",
+categoryOrder: 1, // First item in Mechanical Design & CAD
+```
+
+- Use positive whole numbers (`1`, `2`, `3`, etc.). Numbers need not be consecutive.
+- **Use unique numbers within a category** for predictable ordering. If numbers
+  repeat, entries with the same number stay in their original file order.
+- If `categoryOrder` is omitted, blank or invalid, the entry is listed after
+  numbered entries, retaining its original order relative to other unnumbered entries.
+- The field works for **published and draft projects**. Drafts stay hidden from
+  public listings, but their order applies when viewed in development preview.
+- `categoryOrder` is **independent of `featuredOrder`**. The latter alone controls
+  the homepage's Selected Projects section.
+- This changes the Robotics, Mechanical Design & CAD, 3D Printing & Fabrication,
+  and Electronics category listings. The **All Projects** and **skill-search**
+  listings retain their previous cross-category order.
+- Software entries also have `categoryOrder`. The featured **Autonomous Return
+  to Base** panel remains pinned above the Software cards; other Software cards
+  use their ordering numbers. The Algorithms reference library is unchanged.
+- Every current entry has a categoryOrder value matching the order already shown
+  on the site, so this update does **not** unexpectedly rearrange the projects.
+
+---
+
 # Five-field project cards (30 October 2026)
 
 Project cards now display **project area → title → optional subtitle → optional

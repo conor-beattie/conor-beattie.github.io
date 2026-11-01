@@ -81,6 +81,14 @@
   const isPublished = item => item && item.published !== false;
   const canShow = item => Boolean(item && (isPublished(item) || previewDrafts));
   const visibleProjects = () => data.projects.filter(canShow);
+  // A position is meaningful only within the item's own category. Keep
+  // equal/missing values in their original file order (stable tie-breaker).
+  const sortByCategoryOrder = items => items.map((item, index) => ({ item, index }))
+    .sort((a, b) => {
+      const order = entry => Number.isInteger(entry.categoryOrder) && entry.categoryOrder > 0
+        ? entry.categoryOrder : Number.POSITIVE_INFINITY;
+      return order(a.item) - order(b.item) || a.index - b.index;
+    }).map(entry => entry.item);
   const missingProject = '<div class="not-found"><p class="eyebrow">PROJECT NOT AVAILABLE</p><h1>This project is not currently published.</h1><p>Browse the published projects instead.</p><a class="button button-primary" href="projects.html">Browse projects ↗</a></div>';
   const navCategory = () => {
     const page = document.body.dataset.page;
@@ -270,7 +278,7 @@
     const root = $("#software-grid");
     if (!root) return;
     const featured = softwareItems.find(s => s.id === "return-to-base");
-    const others = softwareItems.filter(s => s.id !== "return-to-base");
+    const others = sortByCategoryOrder(softwareItems.filter(s => s.id !== "return-to-base"));
     root.innerHTML = (featured ? `<div class="software-feature">${softwareCard(featured)}<div class="software-feature__copy"><span class="eyebrow">FEATURED SOFTWARE</span><h2>From a fixed return to adaptive navigation.</h2><p>Explore how the October 2026 Python controller coordinates AprilTag routes, obstacle avoidance, guide recovery and wall following.</p><a class="text-link" href="${softwareUrl(featured)}">Open the annotated flowchart ↗</a></div></div>` : "") +
       `<div class="software-card-grid">${others.map(softwareCard).join("")}</div>`;
   }
@@ -376,7 +384,7 @@
       const term = (input.value || "").toLocaleLowerCase().trim();
       const matchesSearch = item => [item.title,item.subtitle,item.status,item.summary,...(item.skills||[])].join(" ").toLocaleLowerCase().includes(term);
       const projectResults = requestedSkill ? (activeSkill ? visibleProjects().filter(item=>(item.skills||[]).includes(activeSkill)) : []) :
-        visibleProjects().filter(p=>chosen==="all"||p.category===chosen);
+        (chosen === "all" ? visibleProjects() : sortByCategoryOrder(visibleProjects().filter(p => p.category === chosen)));
       const softwareResults = requestedSkill && activeSkill ? softwareItems.filter(item=>(item.skills||[]).includes(activeSkill)) : [];
       const results = [
         ...projectResults.filter(matchesSearch).map(item=>({item,kind:"project"})),

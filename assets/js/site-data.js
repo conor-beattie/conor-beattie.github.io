@@ -21,6 +21,14 @@
   8. For 3D prints: keep `image` as the CAD render and list 1–4 real print photos
      under `printPhotos`. Optional printer settings belong in `printDetails`.
 
+  CATEGORY LISTING ORDER:
+  Use categoryOrder: 1, 2, 3, ... independently in each project category
+  (Robotics, CAD, Fabrication, Electronics) or for software entries.
+  It does not affect homepage featuredOrder, which is separate.
+  If absent/invalid, the entry follows all numbered items in original file order.
+  Prefer unique positive whole numbers per category; gaps are allowed.
+  All Projects and skill-filter results retain their original cross-category order.
+
   CARD DISPLAY: category, title, optional subtitle, optional status, summary.
   For projects/algorithms: subtitle: "", status: ""; for software: subtitle: "", cardStatus: "".
   Software's existing status field records testing/documentation evidence and is NOT
@@ -156,6 +164,7 @@ window.PORTFOLIO_DATA = {
   software: [
     {
       id: "return-to-base",
+      categoryOrder: 1,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Software Development", "Feedback Control"],
       engineeringSummary: {
@@ -204,6 +213,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "stack-object",
+      categoryOrder: 2,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Software Development"],
       engineeringSummary: {
@@ -247,6 +257,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "guide-recovery",
+      categoryOrder: 3,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Software Development"],
       engineeringSummary: {
@@ -290,6 +301,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "wall-follow-skill",
+      categoryOrder: 4,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Feedback Control"],
       engineeringSummary: {
@@ -333,6 +345,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "local-avoidance-skill",
+      categoryOrder: 5,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Software Development"],
       engineeringSummary: {
@@ -376,6 +389,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "perception-system",
+      categoryOrder: 6,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Computer Vision"],
       engineeringSummary: {
@@ -419,6 +433,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "localisation-system",
+      categoryOrder: 7,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Software Development"],
       engineeringSummary: {
@@ -462,6 +477,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "motion-control",
+      categoryOrder: 8,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Motor Control", "Feedback Control"],
       engineeringSummary: {
@@ -837,6 +853,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "robotics",                          // robotics | cad | fabrication | electronics
+      categoryOrder: 1,
       image: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Illustrative wheeled robot photograph",
       summary: "An experimental autonomous robot designed to grow and expand in capability and function.",
@@ -875,6 +892,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "cad",
+      categoryOrder: 1,
       image: "assets/images/gripper_bobbot.png",
       imageAlt: "CAD model of the original Bobbot gripper",
       summary: "The original gripper built for Bobbot with an angled grip and over-center linkage ",
@@ -914,6 +932,7 @@ window.PORTFOLIO_DATA = {
       status: "Future",
 
       "category": "cad",
+      categoryOrder: 2,
       "image": "assets/images/Watch_This_Space.png",
       "imageAlt": "",
       "imageCaption": "",
@@ -1102,6 +1121,7 @@ window.PORTFOLIO_DATA = {
       status: "In Progress",
 
       "category": "cad",
+      categoryOrder: 3,
       "image": "assets/images/gripper_bobbot_orig.jpeg",
       "imageAlt": "CAD of the existing Bobbot gripper used as a baseline for contact-pad tests",
       "imageCaption": "Existing Bobbot gripper — reference design. New contact-pad prototypes and experimental photographs will be added as they are produced.",
@@ -1491,6 +1511,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "fabrication",
+      categoryOrder: 1,
       image: "assets/images/Pulley.png",
       imageAlt: "Illustrative 3D-printed gears and fabricated components",
       summary: "",
@@ -1543,6 +1564,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "electronics",
+      categoryOrder: 1,
       image: "assets/images/arduino mega.jpg",
       imageAlt: "Arduino Mega 2560 controller wiring diagram showing field and panel connectors, power buses, encoder inputs, servos and sensor interfaces",
       imageCaption: "Arduino Mega 2560 — pin allocation, power distribution and field/panel wiring diagram",
@@ -1593,6 +1615,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "electronics",
+      categoryOrder: 2,
       image: "assets/images/io-interface-contract.svg",
       imageAlt: "Simplified table of robot input/output interfaces, showing io.* methods and properties used by higher-level software",
       imageCaption: "The io.* interface: the final software-facing contract for sensors, motors and actuators. Select the image to view it at full size.",
@@ -1669,6 +1692,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "electronics",
+      categoryOrder: 3,
       image: "assets/images/one line diagram.jpg",
       imageAlt: "One-line electrical diagram of a mobile robot showing battery protection, power distribution, motor controllers, voltage regulators, servos and control electronics",
       imageCaption: "Mobile robot one-line electrical diagram — power supplies, distribution, controller hardware and planned expansion.",
@@ -1726,6 +1750,7 @@ window.PORTFOLIO_DATA = {
       status: "In Progress",
 
       category: "robotics",
+      categoryOrder: 2,
       image: "assets/images/IMG_2756_robbot.jpg",
       imageAlt: "Robot project photo — replace or update caption",
       summary: "Robbot is Bobbot on a budget.  Where Bobbot doesn’t set a specific price on utility Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost",
@@ -1763,6 +1788,7 @@ window.PORTFOLIO_DATA = {
       subtitle: "Investigating Open-Loop Drive Accuracy",
       status: "",
       category: "robotics",
+      categoryOrder: 3,
       image: "assets/images/motor-calibration-overview.svg",
       imageAlt: "Illustration of a motor calibration experiment, showing controlled supply voltage, motor command, timing and measured distance",
       imageCaption: "Open-loop motor calibration test sequence (conceptual illustration, not experimental data)",
@@ -1803,6 +1829,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "robotics",
+      categoryOrder: 4,
       image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
       imageAlt: "Photograph of the goBILDA DECODE starter robot during assembly, showing its metal chassis, wheels, motors, wiring and control hardware",
       imageCaption: "goBILDA DECODE Starter Bot with removable electrical panel",
@@ -1841,6 +1868,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "cad",
+      categoryOrder: 4,
       image: "assets/images/Shooter CAD.png",
       imageAlt: "CAD illustration — replace with the second design project",
       summary: "Shooter design for FTC BioBuzz Pollen.",
@@ -1878,6 +1906,7 @@ window.PORTFOLIO_DATA = {
       status: "Future",
 
       category: "cad",
+      categoryOrder: 5,
       image: "assets/images/Watch_This_Space.png",
       imageAlt: "",
       summary: "Using sensor feedback to detect contact and reduce failed pickups.",
@@ -1916,6 +1945,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "fabrication",
+      categoryOrder: 2,
       image: "assets/images/rubber_band_wheel.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
       summary: "The diameter and number of notches are adjustable. Designed for a 8mm hex axle.",
@@ -1969,6 +1999,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "fabrication",
+      categoryOrder: 3,
       image: "assets/images/FlySky Receiver.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
       summary: "FlySky Receiver mount with a slot for the antenna",
@@ -2017,6 +2048,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "fabrication",
+      categoryOrder: 4,
       image: "assets/images/PICam3 Mount 8 degree.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
       summary: "PiCam3 Mount with an 8 degree downward pitch.",
@@ -2065,6 +2097,7 @@ window.PORTFOLIO_DATA = {
       status: "",
 
       category: "fabrication",
+      categoryOrder: 5,
       image: "assets/images/RoboClaw 2x30.png",
       imageAlt: "3D-printing example image — replace with the second fabrication project",
       summary: "RoboClaw 2x30A motor controller mount",
