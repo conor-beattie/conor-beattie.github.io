@@ -1748,6 +1748,46 @@ window.PORTFOLIO_DATA = {
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
+      id: "motor-calibration-voltage-compensation",
+      // Open-loop motor calibration experiment; no featured position unless selected later.
+      // Skills describe work already carried out, rather than proposed methods.
+      skills: ["Experimental Testing", "Data Analysis", "Motor Control", "Python"],
+      engineeringSummary: {
+        challenge: "Timed, open-loop motor commands did not produce consistent movement as supply voltage changed, particularly at low motor power.",
+        contribution: "I tested DFRobot and goBILDA motor configurations at different command powers, pulse durations and supply voltages, recorded movement and investigated calibration and voltage-compensation curves.",
+        outcome: "In the tested configurations, voltage compensation was approximately linear at moderate and higher power settings, but low-power behaviour was nonlinear and fitted better with a quadratic relationship.",
+        lessonsLearned: "Accurate calibration requires controlled voltage and repeatable test conditions. A relationship that works at higher motor power may not be suitable near the low-power operating range."
+      },
+      published: true,
+      title: "Motor Calibration & Voltage Compensation",
+      subtitle: "Investigating Open-Loop Drive Accuracy",
+      status: "",
+      category: "robotics",
+      image: "assets/images/motor-calibration-overview.svg",
+      imageAlt: "Illustration of a motor calibration experiment, showing controlled supply voltage, motor command, timing and measured distance",
+      imageCaption: "Open-loop motor calibration test sequence (conceptual illustration, not experimental data)",
+      summary: "Measuring how motor power, drive duration and supply voltage influence robot movement, and developing calibration curves for more consistent open-loop control.",
+      // Legacy topic tags retained for source compatibility; the website displays skills above.
+      tags: ["Motor Calibration", "Voltage Compensation", "Open-Loop Control", "Experiment"],
+      date: "",
+      contribution: "",
+      relatedProjectIds: ["autonomous-mobile-robot", "robotics-project-2"],
+      sections: {
+        overview: "This investigation began while calibrating timed movement on mobile robots. Rather than assuming that a motor command corresponds to a fixed speed, I measured the movement actually produced at different powers and durations. The experiments compared DFRobot and goBILDA motor configurations and investigated how the available supply voltage affected the results.",
+        objectivesRequirements: "Establish practical calibration relationships between motor commands, movement and elapsed time. Test whether changing battery voltage can be compensated for reliably, and identify the operating regions where a simple correction is insufficient. This is open-loop calibration rather than encoder-based closed-loop positioning.",
+        backgroundResearch: "Timed motor movement is affected by more than the requested power setting. The supply voltage changes the voltage available to the motor, while friction, loading and the low-power starting region can make the response nonlinear. These effects have to be considered when converting a desired movement distance into a timed command.",
+        designDevelopment: "The resulting calibration work informs the robot's timed-drive backend: motion requests are converted into a power setting and duration using measured motor behaviour, with voltage compensation where it is supported by the tests. Calibration remains specific to the motor, drive setup and operating conditions used.",
+        testingValidation: "I compared commanded motor power and pulse duration with measured travel distance, and examined the effect of supply voltage. A regulated, constant-voltage supply was important for collecting comparable calibration results; otherwise variations in voltage were mixed into the apparent motor-performance curve. Further trials deliberately varied voltage to investigate compensation.\n\nRecorded examples from the DFRobot timed-drive tests include approximately 31 mm in 1.0 s and 95 mm in 3.0 s at 0.3 power. At 0.6 power, observations included approximately 37–39 mm in 0.5 s and 77–79 mm in 1.0 s. These are measurements from particular test conditions, not general motor specifications.",
+        resultsEvaluation: "The tests identified supply-voltage variation as a source of inconsistent open-loop movement. At moderate and higher command powers the observed compensation relationship was approximately linear, while low-power measurements showed stronger nonlinearity and were better represented by a quadratic fit in the tested system.\n\nThis does not imply that a quadratic model is universally appropriate for low-power DC motors. The appropriate curve depends on the tested drive configuration and its operating conditions. Complete plots, trial counts and fitted coefficients can be added when the original data are ready for publication.",
+        conclusionsNextSteps: "Use the calibrated relationships in timed drive commands while keeping their limitations explicit. The next documentation step is to add the underlying test tables, fitted curves and comparison plots, including voltage, load and test conditions, so the compensation model and its accuracy can be evaluated independently.",
+        lessonsLearned: "",
+        referencesResources: "",
+        relatedProjects: ""
+      },
+      references: [],
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
       id: "gobilda-decode-starter-bot",
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Mechanical Assembly", "Electrical Design"],

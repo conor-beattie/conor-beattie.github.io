@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="600" viewBox="0 0 1100 600" role="img" aria-labelledby="title desc">
+<title id="title">Motor calibration and voltage compensation</title>
+<desc id="desc">Conceptual diagram showing a regulated power supply, timed motor command, measured robot travel and analysis of the observations. No graph of experimental results is depicted.</desc>
+<rect width="1100" height="600" fill="#E6F0EC"/>
+<rect x="34" y="34" width="1032" height="532" rx="25" fill="#FCFDFC" stroke="#BBD3CC" stroke-width="2"/>
+<g font-family="Arial, Helvetica, sans-serif">
+  <text x="73" y="92" font-size="18" letter-spacing="2" font-weight="bold" fill="#087264">ROBOTICS  /  EXPERIMENTAL TESTING</text>
+  <text x="73" y="150" font-size="43" font-weight="bold" fill="#17383E">MOTOR CALIBRATION</text>
+  <text x="74" y="186" font-size="23" fill="#3E6469">Understanding voltage, drive power and movement</text>
+  <g stroke="#A5C8BF" stroke-width="2">
+    <rect x="73" y="233" width="276" height="192" rx="18" fill="#F3F8F6"/>
+    <rect x="412" y="233" width="276" height="192" rx="18" fill="#F3F8F6"/>
+    <rect x="751" y="233" width="276" height="192" rx="18" fill="#F3F8F6"/>
+  </g>
+  <g fill="#15575A" font-size="18" font-weight="bold" text-anchor="middle">
+    <text x="211" y="396">CONTROL INPUTS</text>
+    <text x="550" y="396">TIMED DRIVE</text>
+    <text x="889" y="396">MEASURE TRAVEL</text>
+  </g>
+  <!-- power supply and voltage control -->
+  <rect x="157" y="263" width="111" height="85" rx="9" fill="#D2E9E1" stroke="#147467" stroke-width="3"/>
+  <rect x="173" y="277" width="79" height="30" rx="4" fill="#FAFFFD" stroke="#8DB6AC"/>
+  <text x="212" y="299" font-size="17" font-weight="bold" fill="#0A766B" text-anchor="middle">V</text>
+  <circle cx="190" cy="327" r="7" fill="#106A5E"/><circle cx="234" cy="327" r="7" fill="#106A5E"/>
+  <text x="211" y="369" font-size="14" fill="#437172" text-anchor="middle">Voltage · Power · Time</text>
+  <!-- robot simplified -->
+  <g stroke="#145A5F" stroke-width="3">
+    <rect x="476" y="276" width="148" height="48" rx="13" fill="#D4EAE2"/>
+    <rect x="488" y="258" width="124" height="30" rx="11" fill="#A8CEC2"/>
+    <circle cx="497" cy="335" r="24" fill="#193F47"/>
+    <circle cx="604" cy="335" r="24" fill="#193F47"/>
+    <circle cx="497" cy="335" r="10" fill="#D6EDE7" stroke="none"/>
+    <circle cx="604" cy="335" r="10" fill="#D6EDE7" stroke="none"/>
+  </g>
+  <g stroke="#0D806C" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M359 329 H399"/><path d="m388 320 11 9 -11 9"/>
+    <path d="M698 329 H738"/><path d="m727 320 11 9 -11 9"/>
+  </g>
+  <!-- ruler measurement -->
+  <rect x="800" y="274" width="181" height="57" rx="7" fill="#D2E9E1" stroke="#147467" stroke-width="2"/>
+  <path d="M819 294v24 M837 303v15 M855 294v24 M873 303v15 M891 294v24 M909 303v15 M927 294v24 M945 303v15 M963 294v24" stroke="#167566" stroke-width="2"/>
+  <path d="M819 345 H965" stroke="#0D806C" stroke-width="3"/>
+  <path d="m819 345 10 -7 v14 z M965 345 l-10 -7 v14 z" fill="#0D806C"/>
+  <text x="891" y="371" text-anchor="middle" fill="#437172" font-size="14">Distance per command</text>
+  <path d="M73 464 H1027" stroke="#B9D1C9" stroke-width="2"/>
+  <text x="73" y="501" font-size="19" font-weight="bold" fill="#0A7065">RECORD  →  COMPARE  →  FIT CALIBRATION CURVES</text>
+  <text x="73" y="533" font-size="15" fill="#5A7778">Method illustration · not a graph of measured results</text>
+</g>
+</svg>
