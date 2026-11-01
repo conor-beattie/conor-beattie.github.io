@@ -114,6 +114,30 @@
   }
   const paragraphs = (s) => String(s || "").split(/\n\s*\n/).filter(Boolean)
     .map(p => `<p>${text(p)}</p>`).join("");
+  // Searchable skills are curated on each entry; historic topic tags are not displayed.
+  const skillSlug = value => String(value || "").normalize("NFKD").toLocaleLowerCase()
+    .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  const skillUrl = name => previewUrl(`projects.html?skill=${encodeURIComponent(skillSlug(name))}`);
+  const skillTags = (item, limit = 0) => {
+    const entries = Array.isArray(item.skills) ? [...new Set(item.skills.filter(nonempty))] : [];
+    const chosen = limit ? entries.slice(0,limit) : entries;
+    return chosen.length ? `<div class="tags${limit ? "" : " tags-large"}" aria-label="Skills demonstrated">${chosen.map(skill =>
+      `<a class="tag skill-tag" href="${skillUrl(skill)}" title="Browse work demonstrating ${text(skill)}">${text(skill)}</a>`).join("")}</div>` : "";
+  };
+  const engineeringFields = [
+    ["challenge", "Engineering Challenge"],
+    ["contribution", "My Contribution"],
+    ["outcome", "Key Outcome"],
+    ["lessonsLearned", "Lessons Learned"]
+  ];
+  const summaryRows = item => engineeringFields.filter(([key])=>nonempty(item.engineeringSummary?.[key]));
+  const engineeringSummary = item => {
+    const rows = summaryRows(item);
+    return rows.length ? `<section class="engineering-summary" aria-label="Engineering summary"><div class="engineering-summary__grid">${rows.map(([key,label])=>
+      `<div class="engineering-summary__item"><h2>${label}</h2>${paragraphs(item.engineeringSummary[key])}</div>`).join("")}</div></section>` : "";
+  };
+  const cardOutcome = item => nonempty(item.engineeringSummary?.outcome) ?
+    `<p class="project-card__outcome"><strong>Key Outcome:</strong> ${text(item.engineeringSummary.outcome.trim())}</p>` : "";
   const projectUrl = (project) => previewUrl(`project.html?id=${encodeURIComponent(project.id)}`);
   const algorithmUrl = (algorithm) => previewUrl(`algorithm.html?id=${encodeURIComponent(algorithm.id)}`);
   const algorithms = Array.isArray(data.algorithms) ? data.algorithms : [];
@@ -176,8 +200,9 @@
         ${optionalCardText(p.subtitle, "project-card__subtitle")}
         ${optionalCardText(p.status, "project-card__status")}
         ${optionalCardText(p.summary, "project-card__summary", "p")}
+        ${cardOutcome(p)}
         <div class="project-card__foot">
-          <div class="tags">${(p.tags || []).slice(0, 3).map(t => `<span class="tag">${text(t)}</span>`).join("")}</div>
+          ${skillTags(p,3)}
           <a href="${projectUrl(p)}" class="round-arrow" aria-label="Open ${text(p.title)}"><span aria-hidden="true">↗</span></a>
         </div>
       </div>
@@ -237,6 +262,7 @@
       ${optionalCardText(item.subtitle, "project-card__subtitle")}
       ${optionalCardText(item.cardStatus, "project-card__status")}
       ${optionalCardText(item.summary, "software-card__summary", "p")}
+      ${cardOutcome(item)}${skillTags(item,3)}
       <div class="software-card__bottom"><span class="muted-small">${(item.algorithmIds || []).length} linked methods</span><a class="round-arrow" href="${softwareUrl(item)}" aria-label="Open ${text(item.title)}"><span aria-hidden="true">↗</span></a></div></div>
     </article>`;
   }
@@ -256,8 +282,8 @@
     const rows=sectionLayouts(item,softwareExtras(item));
     const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>`:'';
     root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
-      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}${nonempty(item.status) ? ' · '+text(item.status) : ''}</p><h1>${text(item.title)}</h1>${detailSubStatus(item,"cardStatus")}${optionalDetailText(item.summary,"project-lede")}<div class="tags tags-large">${(item.tags||[]).map(tag=>`<span class="tag">${text(tag)}</span>`).join('')}</div></div>
-      ${media}<div class="detail-layout">${sectionSidebar(rows,'Software sections',`<div class="detail-callout"><strong>Evidence status</strong><p>${text(item.status)} — implementation and test results should be distinguished.</p></div>`)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
+      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}${nonempty(item.status) ? ' · '+text(item.status) : ''}</p><h1>${text(item.title)}</h1>${detailSubStatus(item,"cardStatus")}${optionalDetailText(item.summary,"project-lede")}${skillTags(item)}</div>
+      ${media}${engineeringSummary(item)}${detailLayout(rows,'Software sections',`<div class="detail-callout"><strong>Evidence status</strong><p>${text(item.status)} — implementation and test results should be distinguished.</p></div>`)}
       <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More software systems</h2></div><a class="button button-outline" href="software.html">Software archive ↗</a></div></div>`;
   }
   function algorithmsPage() {
@@ -317,38 +343,52 @@
     }
   }
 
-  function updateListingIntro(chosen) {
+  function updateListingIntro(chosen,activeSkill="") {
     const title = $("#listing-title");
     const section = $(".page-top");
     const listing = $("#project-list")?.closest("section");
     const cat = category(chosen);
-    if (title) title.textContent = cat ? cat.title : "All Projects";
+    if (title) title.textContent = activeSkill ? `Projects & Software · ${activeSkill}` : (cat ? cat.title : "All Projects");
     // The active navigation already names the discipline. Keep the heading in
     // the document for accessibility without repeating it above each gallery.
-    if (section) section.classList.toggle("page-top--category", Boolean(cat));
-    if (listing) listing.classList.toggle("section--category-list", Boolean(cat));
-    document.title = `${cat ? cat.title : "All Projects"} · ${data.owner.name}`;
+    if (section) section.classList.toggle("page-top--category", Boolean(cat) && !activeSkill);
+    if (listing) listing.classList.toggle("section--category-list", Boolean(cat) && !activeSkill);
+    document.title = `${activeSkill ? `Skill: ${activeSkill}` : (cat ? cat.title : "All Projects")} · ${data.owner.name}`;
   }
 
   function projects() {
     const container = $("#project-list");
     const input = $("#project-search");
     const count = $("#project-count");
-    let chosen = new URLSearchParams(location.search).get("category") || "all";
-    if (chosen === "software") { location.replace(previewUrl("software.html")); return; }
-    if (chosen === "algorithms") { location.replace(previewUrl("algorithms.html")); return; }
+    const params = new URLSearchParams(location.search);
+    const requestedSkill = params.get("skill") || "";
+    const allSkills = [...new Set([...data.projects,...softwareItems].flatMap(item=>item.skills || []))];
+    const activeSkill = allSkills.find(skill=>skillSlug(skill)===requestedSkill) || "";
+    let chosen = params.get("category") || "all";
+    if (!requestedSkill && chosen === "software") { location.replace(previewUrl("software.html")); return; }
+    if (!requestedSkill && chosen === "algorithms") { location.replace(previewUrl("algorithms.html")); return; }
     if (chosen !== "all" && !category(chosen)) chosen = "all";
+    const filterInfo = $("#skill-filter-info");
+    if (filterInfo && requestedSkill) filterInfo.innerHTML = activeSkill ?
+      `Showing work demonstrating <strong>${text(activeSkill)}</strong> across engineering projects and software. <a href="${previewUrl('projects.html')}">Clear skill filter</a>` :
+      `No skill named <strong>${text(requestedSkill)}</strong> is defined. <a href="${previewUrl('projects.html')}">Browse all projects</a>`;
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
-      const results = visibleProjects().filter(p => !["software"].includes(p.category)).filter(p => {
-        const searchable = [p.title, p.subtitle, p.status, p.summary, ...(p.tags || [])].join(" ").toLocaleLowerCase();
-        return (chosen === "all" || p.category === chosen) && searchable.includes(term);
-      });
-      container.innerHTML = results.length ? results.map(projectCard).join("") : `<div class="empty-state"><h3>No matching projects</h3><p>Try clearing the search or choosing another category.</p></div>`;
-      count.textContent = `${results.length} project${results.length === 1 ? "" : "s"}`;
+      const matchesSearch = item => [item.title,item.subtitle,item.status,item.summary,...(item.skills||[])].join(" ").toLocaleLowerCase().includes(term);
+      const projectResults = requestedSkill ? (activeSkill ? visibleProjects().filter(item=>(item.skills||[]).includes(activeSkill)) : []) :
+        visibleProjects().filter(p=>chosen==="all"||p.category===chosen);
+      const softwareResults = requestedSkill && activeSkill ? softwareItems.filter(item=>(item.skills||[]).includes(activeSkill)) : [];
+      const results = [
+        ...projectResults.filter(matchesSearch).map(item=>({item,kind:"project"})),
+        ...softwareResults.filter(matchesSearch).map(item=>({item,kind:"software"}))
+      ];
+      container.innerHTML = results.length ? results.map(({item,kind})=>kind==="software"?softwareCard(item):projectCard(item)).join("") :
+        `<div class="empty-state"><h3>No matching work</h3><p>${requestedSkill ? 'Try clearing the skill filter or search.' : 'Try clearing the search or choosing another category.'}</p></div>`;
+      count.textContent = requestedSkill ? `${results.length} matching entr${results.length===1?'y':'ies'}` :
+        `${results.length} project${results.length === 1 ? "" : "s"}`;
     }
     input.addEventListener("input", refresh);
-    updateListingIntro(chosen);
+    updateListingIntro(chosen,activeSkill || (requestedSkill ? requestedSkill : ""));
     refresh();
   }
 
@@ -395,25 +435,22 @@
       linkMarkup(p.links?.github,'Source / design files'),linkMarkup(p.links?.video,'Demonstration video')
     ].filter(Boolean);
     const printExtras=projectExtras(p);
-    // Preserve the previous 3D-print behaviour: generic instructional draft
-    // overviews are kept in source data, but a visitor sees the actual summary.
-    const rawOverview=String(p.sections?.overview||'').trim();
-    const useSummaryInstead=/^(Identify the component or family of parts|Explain the purpose of the second printed component)/i.test(rawOverview);
-    const printEntry=useSummaryInstead ? {...p,sections:{...p.sections,overview:p.summary||p.date||''}} : p;
-    const rows=sectionLayouts(printEntry,printExtras);
-    const printSidebar=`<div class="print-spec-card"><p class="eyebrow">3D PRINT INFORMATION</p><h3>Print profile</h3>
-      ${specs.length ? `<dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join('')}</dl>` : `<p class="print-settings-empty">Printer, material and settings can be added in <code>site-data.js</code>.</p>`}</div>`;
+    // The project header already contains the description. A blank detailed
+    // Overview stays blank; do not create a redundant section from the summary.
+    const rows=sectionLayouts(p,printExtras);
+    const printSidebar=specs.length ? `<div class="print-spec-card"><p class="eyebrow">3D PRINT INFORMATION</p><h3>Print profile</h3>
+      <dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join('')}</dl></div>` : "";
     root.innerHTML=`<div class="container print-detail-page">
       <div class="breadcrumb"><a href="projects.html?category=fabrication">3D Printing &amp; Fabrication</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro print-intro"><p class="eyebrow">${text(kindLabel(p))}${p.date ? ' · '+text(p.date):''}</p><h1>${text(p.title)}</h1>
       ${detailSubStatus(p)}${optionalDetailText(p.summary,"project-lede")}
-      <div class="tags tags-large">${(p.tags||[]).map(tag=>`<span class="tag">${text(tag)}</span>`).join('')}</div></div>
+      ${skillTags(p)}</div>
       <figure class="print-cad-figure"><div class="print-media-label">CAD MODEL</div><img src="${img(p.image)}" alt="${text(p.imageAlt||`${p.title} CAD model`)}"/></figure>
-      <section class="print-gallery-panel" aria-labelledby="print-gallery-title"><div class="print-gallery-heading"><div><p class="eyebrow">FROM DIGITAL TO PHYSICAL</p><h2 id="print-gallery-title">The finished print</h2><p>Photographs of the actual manufactured part.</p></div>
-        ${photos.length ? `<span class="print-photo-count">${photos.length} photo${photos.length===1?'':'s'}</span>`:''}</div>
-        ${photos.length ? `<div class="print-photo-grid" data-count="${photos.length}">${cards}</div>` : `<div class="print-photo-empty"><span class="print-photo-placeholder" aria-hidden="true">▧</span><div><strong>Finished-print photos</strong><p>Add 1–4 actual print photographs in <code>site-data.js</code> to display them here.</p></div></div>`}
-      </section>
-      <div class="detail-layout">${sectionSidebar(rows,'Project sections',printSidebar)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
+      ${photos.length ? `<section class="print-gallery-panel" aria-labelledby="print-gallery-title"><div class="print-gallery-heading"><div><p class="eyebrow">FROM DIGITAL TO PHYSICAL</p><h2 id="print-gallery-title">The finished print</h2><p>Photographs of the actual manufactured part.</p></div>
+        <span class="print-photo-count">${photos.length} photo${photos.length===1?'':'s'}</span></div>
+        <div class="print-photo-grid" data-count="${photos.length}">${cards}</div>
+      </section>` : ""}
+      ${engineeringSummary(p)}${detailLayout(rows,'Project sections',printSidebar)}
       <div class="next-action"><div><span class="eyebrow">SEE MORE</span><h2>More 3D prints &amp; fabrication</h2></div><a class="button button-outline" href="projects.html?category=fabrication">Browse 3D prints ↗</a></div>
       <dialog class="print-lightbox" id="print-lightbox" aria-label="Full size print photograph"><button type="button" class="print-lightbox-close" aria-label="Close full-size photograph">×</button>
         <div class="print-lightbox-stage"><button type="button" class="print-lightbox-prev" aria-label="Previous photograph">‹</button><img alt=""/><button type="button" class="print-lightbox-next" aria-label="Next photograph">›</button></div>
@@ -531,8 +568,14 @@
     return {key,label,content};
   }).filter(row => row.content.trim());
   const sectionMarkup = rows => rows.map(row => sectionShell(row.key,row.label,row.content)).join("");
-  const sectionSidebar = (rows,label="Project sections", extra="") =>
-    `<aside class="detail-aside"><p class="eyebrow">ON THIS PAGE</p>${sectionNavigation(rows.map(r=>[r.key,r.label]),label)}${extra}</aside>`;
+  const sectionSidebar = (rows,label="Project sections", extra="") => {
+    if (!rows.length && !extra) return "";
+    return `<aside class="detail-aside">${rows.length ? `<p class="eyebrow">ON THIS PAGE</p>${sectionNavigation(rows.map(r=>[r.key,r.label]),label)}` : ""}${extra}</aside>`;
+  };
+  const detailLayout = (rows,label="Project sections", extra="") => {
+    if (!rows.length && !extra) return "";
+    return `<div class="detail-layout${rows.length ? "" : " detail-layout--aside-only"}">${sectionSidebar(rows,label,extra)}${rows.length ? `<div class="detail-main">${sectionMarkup(rows)}</div>` : ""}</div>`;
+  };
 
   // The existing detailed investigation tables are reused unmodified, with
   // their individual labels presented as h3 subheadings inside standard sections.
@@ -613,10 +656,11 @@
     root.innerHTML=`<div class="container">
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
-        <h1>${text(p.title)}</h1>${detailSubStatus(p)}${optionalDetailText(p.summary,"project-lede")}<div class="tags tags-large">${(p.tags||[]).map(t=>`<span class="tag">${text(t)}</span>`).join('')}</div></div>
+        <h1>${text(p.title)}</h1>${detailSubStatus(p)}${optionalDetailText(p.summary,"project-lede")}${skillTags(p)}</div>
       <figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}<figcaption>${text(p.imageCaption||p.title)}</figcaption></figure>
+      ${engineeringSummary(p)}
       ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status?`<span>${text(p.investigation.status)}</span>`:''}</div>`:''}
-      <div class="detail-layout">${sectionSidebar(rows)}<div class="detail-main">${sectionMarkup(rows)}</div></div>
+      ${detailLayout(rows)}
       <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More engineering projects</h2></div><a class="button button-outline" href="projects.html">All projects <span aria-hidden="true">↗</span></a></div>
     </div>`;
   }

@@ -156,6 +156,14 @@ window.PORTFOLIO_DATA = {
   software: [
     {
       id: "return-to-base",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Software Development", "Feedback Control"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 5,
       title: "Autonomous Return to Base",
@@ -196,6 +204,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "stack-object",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Software Development"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Stack Object",
       subtitle: "",
@@ -231,6 +247,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "guide-recovery",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Software Development"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Arena Guide Search & Recovery",
       subtitle: "",
@@ -266,6 +290,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "wall-follow-skill",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Feedback Control"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Follow Wall",
       subtitle: "",
@@ -301,6 +333,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "local-avoidance-skill",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Software Development"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Local Obstacle Avoidance",
       subtitle: "",
@@ -336,6 +376,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "perception-system",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Computer Vision"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Visual Perception Pipeline",
       subtitle: "",
@@ -371,6 +419,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "localisation-system",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Software Development"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Robot Localisation",
       subtitle: "",
@@ -406,6 +462,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "motion-control",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Motor Control", "Feedback Control"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Motion & Command Control",
       subtitle: "",
@@ -758,6 +822,14 @@ window.PORTFOLIO_DATA = {
   projects: [
     {
       id: "autonomous-mobile-robot",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Computer Vision", "Systems Integration", "Mechanical Assembly"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 2,                  // URL: project.html?id=autonomous-mobile-robot
       title: "Bobbot - Autonomous Mobile Robot",
@@ -788,6 +860,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mechanical-gripper",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["CAD", "Mechanism Design"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 7,
       title: "Bobbot Gripper — Original CAD Design",
@@ -819,6 +899,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "robotic-gripper-grasp-detection",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: [],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 1,
       "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
@@ -1000,6 +1088,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "gripper-contact-surfaces",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Engineering Research", "Material Selection"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       "published": false,
       "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 1: Gripper Contact Pads",
@@ -1380,6 +1476,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "printed-mechanisms",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["CAD", "3D Printing"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 8,
       title: "Pulley",
@@ -1423,6 +1527,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-control-electronics",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Arduino", "Electrical Design", "Embedded Systems", "Technical Documentation"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 3,
       relatedProjectIds: ["robot-io-mapping", "mobile-robot-power-distribution"],
@@ -1466,6 +1578,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robot-io-mapping",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Python", "Software Architecture", "Systems Integration"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 6,
       title: "Robot I/O Mapping & Hardware Abstraction",
@@ -1534,6 +1654,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "mobile-robot-power-distribution",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Electrical Design", "Technical Documentation"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 4,
       title: "Mobile Robot Power Distribution & Electrical Architecture",
@@ -1584,6 +1712,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "robotics-project-2",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Mechanical Assembly", "Systems Integration"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Robbot - Autonomous Mobile Robot",
       subtitle: "",
@@ -1613,6 +1749,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "gobilda-decode-starter-bot",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["Mechanical Assembly", "Electrical Design"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "goBILDA DECODE Starter Bot",
       subtitle: "",
@@ -1642,6 +1786,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "cad-project-2",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["CAD", "Mechanical Design"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 9,
       title: "Shooter",
@@ -1672,6 +1824,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "gripper-contact-sensing",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: [],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 3: Gripper Contact Sensing",
@@ -1701,6 +1861,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-2",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["CAD", "3D Printing"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       featuredOrder: 10,
       title: "Rubber Band Intake Wheel",
@@ -1747,6 +1915,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-3",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["CAD", "3D Printing"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "FlySky Receiver Mount",
       subtitle: "",
@@ -1787,6 +1963,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-4",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["CAD", "3D Printing"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "PiCam3 Mount 8 Degrees",
       subtitle: "",
@@ -1827,6 +2011,14 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "fabrication-project-5",
+      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
+      skills: ["CAD", "3D Printing"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
       published: true,
       title: "RoboClaw 2x30",
       subtitle: "",

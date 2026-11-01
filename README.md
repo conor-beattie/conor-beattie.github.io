@@ -391,3 +391,15 @@ The image is the original Bobbot gripper as a labelled baseline, not a new pad.
 Test measurements and manufacturing outcomes are intentionally not invented.
 The linked technical sources are background and are not evidence that the selected
 commercial filaments have already passed the cardboard comparison.
+
+
+### Project skills and optional engineering summary (November 2026)
+
+All engineering projects and software entries have two new data fields in `assets/js/site-data.js`:
+
+- `skills: ["CAD", "3D Printing"]` — use the **same exact skill name** everywhere, and list only abilities actually demonstrated by the work. Clicking a skill opens `projects.html?skill=cad` (or similar), showing matching published projects **and software** across categories; development preview persists. Earlier `tags` are retained as archival data but no longer shown or used for filtering.
+- `engineeringSummary: { challenge: "", contribution: "", outcome: "", lessonsLearned: "" }` — these four *optional* short descriptions appear beneath a project image/flowchart **only if populated**. None are prefilled. They are distinct from the optional ten long-form `sections` fields.
+
+All 14 fields can remain blank for short projects, such as a straightforward 3D-printed mount. No empty heading or empty ON THIS PAGE panel should appear.
+
+The short `outcome` is additionally shown on listing cards when present. Only the new `skills` field controls clickable skill badges; the older `tags` values are retained in source for reference.

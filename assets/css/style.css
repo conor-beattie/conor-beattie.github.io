@@ -633,3 +633,21 @@ button { cursor: pointer; }
 .standard-subsection .investigation-table-wrap,
 .standard-subsection .surface-test-list { margin-top: 12px; }
 .detail-aside > .print-spec-card { margin-top: 25px; }
+
+/* Optional concise engineering evidence. Hidden entirely when all four fields are blank. */
+.engineering-summary { margin:0 0 50px; max-width:1080px; padding:25px 28px 13px; border:1px solid var(--line); border-radius:var(--radius); background:#fbfcfb; }
+.engineering-summary__grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:38px; row-gap:20px; }
+.engineering-summary__item { min-width:0; }
+.engineering-summary__item h2 { margin:0 0 8px; color:var(--ink); font-size:.83rem; letter-spacing:.015em; font-weight:750; }
+.engineering-summary__item p { margin:0 0 14px; font-size:.9rem; line-height:1.62; color:var(--ink-soft); overflow-wrap:anywhere; }
+.skill-tag { text-decoration:none; display:inline-flex; align-items:center; transition:background .15s,border-color .15s,color .15s; }
+.skill-tag:hover, .skill-tag:focus-visible { color:var(--accent-deep); background:var(--accent-light); border-color:var(--accent); outline-offset:2px; }
+.skill-filter-info { font-size:.87rem; color:var(--ink-soft); margin:0 0 14px; }
+.skill-filter-info:empty { display:none; }
+.skill-filter-info a { color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; margin-left:8px; }
+.project-card__outcome,.software-card .project-card__outcome { font-size:.8rem; line-height:1.5; color:var(--ink-soft); margin:0 0 15px; display:-webkit-box; -webkit-box-orient:vertical; -webkit-line-clamp:3; overflow:hidden; }
+.project-card__outcome strong { color:var(--ink); }
+.software-card .tags { margin:8px 0 16px; }
+.detail-layout--aside-only { display:block; }
+.detail-layout--aside-only .detail-aside { position:static; max-width:320px; }
+@media(max-width:650px) { .engineering-summary { padding:19px 19px 8px; margin-bottom:32px; } .engineering-summary__grid { grid-template-columns:1fr; row-gap:8px; } }
