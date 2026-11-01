@@ -176,7 +176,8 @@ button { cursor: pointer; }
 .not-found { padding:120px 0; max-width:750px; }
 .not-found h1 { font-size:3rem; letter-spacing:-.055em; line-height:1.12; }
 .not-found p { color:var(--ink-soft); }
-.about-grid { display:grid; grid-template-columns:1.3fr .7fr; gap:80px; padding-bottom:80px; }
+.about-grid { display:grid; grid-template-columns:1fr; gap:0; padding-bottom:80px; }
+.about-copy { max-width:790px; }
 .about-copy h2 { font-size:1.6rem; letter-spacing:-.04em; margin:0 0 20px; }
 .about-copy p { color:var(--ink-soft); font-size:1rem; max-width:740px; }
 .about-side { background:var(--wash); border:1px solid var(--line); border-radius:13px; padding:26px; }
@@ -485,7 +486,7 @@ button { cursor: pointer; }
 .project-hero-media figcaption { padding:0 6px 4px; }
 
 /* ABOUT — MECHANICAL DESIGN FOCUS (2026-10-26) */
-.about-opening { padding-top: 8px !important; }
+.about-opening { padding-top: clamp(36px, 5vw, 64px) !important; }
 .about-opening .about-grid { align-items: start; padding-bottom: 8px; }
 .about-opening .about-copy p { margin: 0 0 18px; line-height: 1.82; }
 .about-opening .about-copy p:first-child { font-size: 1.12rem; color: var(--ink); }
@@ -499,7 +500,7 @@ button { cursor: pointer; }
 .about-personal__copy { max-width: 790px; }
 .about-personal__copy p { color: var(--ink-soft); margin: 0 0 15px; font-size: .99rem; line-height: 1.82; }
 @media (max-width: 560px) {
-  .about-opening { padding-top: 3px !important; }
+  .about-opening { padding-top: 30px !important; }
   .about-story-section { padding: 39px 0 45px; }
   .about-outside-section { padding: 40px 0 60px; }
 }

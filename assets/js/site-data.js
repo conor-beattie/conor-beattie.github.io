@@ -46,8 +46,9 @@ window.PORTFOLIO_DATA = {
     introduction: "A collection of robotics, mechanical design, electronics and software projects.",
     shortAbout: "I enjoy turning engineering questions into physical prototypes: designing mechanisms, programming controllers, bringing systems together and improving them through testing.",
     aboutParagraphs: [
-      "My main interest is mechanical engineering, particularly designing mechanisms and understanding how moving parts work together. I enjoy using CAD, building prototypes and testing different ideas.",
-      "Robotics gives me the opportunity to combine mechanical design with electronics, sensors and software. In the future, I hope to study mechanical engineering and develop mechanisms for robotics or other mechatronic machines."
+      "I am a GCSE student interested in all things mechanical. I enjoy using CAD, building prototypes, testing different ideas, designing mechanisms, understanding how moving parts work together and integrating this with software and sensors.",
+      "I plan to study A levels in Maths/Further Maths, Physics and Electronics and go on to study mechanical engineering at university.",
+      "This site showcases my personal projects, future ambitions and what I have learned along the way."
     ],
     // How It All Began — add any favourite LEGO Technic models after student review.
     aboutHistoryParagraphs: [
@@ -63,7 +64,7 @@ window.PORTFOLIO_DATA = {
       },
     ],
     outsideEngineeringParagraphs: [
-      "Chess became another major interest when I started playing and studying it during the COVID-19 pandemic. I went on to reach approximately tenth in the country for my year group and represented England as part of the Under-13 team at the Glorney Cup tournament."
+      "Chess became another major interest when I started playing and studying it during the COVID-19 pandemic. Within 4 years, I was ranked as one of England's top 10 players for my year group and represented England in the Under-13 team at the Glorney Cup tournament."
     ],
     // Add chess, cycling or bikepacking pictures here when selected.
     outsideEngineeringPhotos: [],
