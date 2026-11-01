@@ -178,7 +178,7 @@ button { cursor: pointer; }
 .not-found p { color:var(--ink-soft); }
 .about-grid { display:grid; grid-template-columns:1fr; gap:0; padding-bottom:80px; }
 .about-copy { max-width:790px; }
-.about-copy h2 { font-size:1.6rem; letter-spacing:-.04em; margin:0 0 20px; }
+.about-copy h2 { font-size:clamp(1.65rem, 2.6vw, 2.18rem); letter-spacing:-.04em; line-height:1.22; margin:0 0 24px; }
 .about-copy p { color:var(--ink-soft); font-size:1rem; max-width:740px; }
 .about-side { background:var(--wash); border:1px solid var(--line); border-radius:13px; padding:26px; }
 .about-side h3 { margin:0 0 16px; font-size:1.09rem; }
@@ -486,10 +486,10 @@ button { cursor: pointer; }
 .project-hero-media figcaption { padding:0 6px 4px; }
 
 /* ABOUT — MECHANICAL DESIGN FOCUS (2026-10-26) */
+body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 .about-opening { padding-top: clamp(36px, 5vw, 64px) !important; }
 .about-opening .about-grid { align-items: start; padding-bottom: 8px; }
 .about-opening .about-copy p { margin: 0 0 18px; line-height: 1.82; }
-.about-opening .about-copy p:first-child { font-size: 1.12rem; color: var(--ink); }
 .about-side h2 { font-size: 1.08rem; margin: 0 0 15px; }
 .about-side li:last-child { border-bottom: none; }
 /* ABOUT — personal history and interests, editable in site-data.js. */
@@ -498,7 +498,7 @@ button { cursor: pointer; }
 .about-outside-section { padding: 52px 0 75px; background: var(--wash); border-top: 1px solid var(--line); }
 .about-personal { max-width: var(--max); }
 .about-personal__copy { max-width: 790px; }
-.about-personal__copy p { color: var(--ink-soft); margin: 0 0 15px; font-size: .99rem; line-height: 1.82; }
+.about-personal__copy p { color: var(--ink-soft); margin: 0 0 15px; font-size: 1rem; line-height: 1.82; }
 @media (max-width: 560px) {
   .about-opening { padding-top: 30px !important; }
   .about-story-section { padding: 39px 0 45px; }
@@ -542,7 +542,7 @@ button { cursor: pointer; }
 .about-influence-item__heading a { color:var(--ink); text-decoration:none; }
 .about-influence-item__heading a:hover, .about-influence-item__heading a:focus-visible { color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; }
 .about-influence-item__focus { color:var(--muted); font-size:.78rem; margin:0; line-height:1.4; }
-.about-influence-item__description { color:var(--ink-soft); font-size:.93rem; line-height:1.7; margin:0; }
+.about-influence-item__description { color:var(--ink-soft); font-size:1rem; line-height:1.82; margin:0; }
 @media (max-width:560px) {
   .about-influences-section { padding:39px 0 56px; }
   .about-influence-item { grid-template-columns:1fr; gap:7px; padding:15px 0; }

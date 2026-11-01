@@ -42,13 +42,13 @@ window.PORTFOLIO_DATA = {
     location: "United Kingdom",
     eyebrow: "ENGINEERING · ROBOTICS · DESIGN",
     headline: "From an idea to a working system.",
-    homeHeadline: "Project Journal",
-    introduction: "A collection of robotics, mechanical design, electronics and software projects.",
+    homeHeadline: "Project Portfolio",
+    introduction: "",
     shortAbout: "I enjoy turning engineering questions into physical prototypes: designing mechanisms, programming controllers, bringing systems together and improving them through testing.",
     aboutParagraphs: [
       "I am a GCSE student interested in all things mechanical. I enjoy using CAD, building prototypes, testing different ideas, designing mechanisms, understanding how moving parts work together and integrating this with software and sensors.",
-      "I plan to study A levels in Maths/Further Maths, Physics and Electronics and go on to study mechanical engineering at university.",
-      "This site showcases my personal projects, future ambitions and what I have learned along the way."
+      "I plan to study A-level Maths, Further Maths, Physics and Electronics and would like to study mechanical engineering at university.",
+      "This site showcases my personal projects, future ambitions and what I have learned along the way"
     ],
     // How It All Began — add any favourite LEGO Technic models after student review.
     aboutHistoryParagraphs: [
