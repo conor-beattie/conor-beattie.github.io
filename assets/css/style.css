@@ -16,7 +16,7 @@
   --accent-deep: #005c52;
   --shadow: 0 16px 45px rgba(24,43,52,.08);
   --radius: 16px;
-  --max: 1160px;
+  --max: 1320px;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -157,7 +157,7 @@ button { cursor: pointer; }
 .project-hero-media { margin:0 0 68px; }
 .project-hero-media img { display:block; width:auto; max-width:100%; height:auto; max-height:min(80vh, 850px); object-fit:contain; margin-inline:auto; border-radius:var(--radius); background:var(--wash); }
 .project-hero-media figcaption { color:var(--muted); font-size:.75rem; margin-top:9px; }
-.detail-layout { display:grid; grid-template-columns:220px minmax(0,1fr); gap:84px; align-items:start; }
+.detail-layout { display:grid; grid-template-columns:170px minmax(0,1fr); gap:24px; align-items:start; }
 .detail-aside { position:sticky; top:105px; }
 .detail-aside nav { display:flex; flex-direction:column; align-items:stretch; margin:14px 0 28px; }
 .detail-aside nav a { padding:8px 0; border-bottom:1px solid var(--line); font-size:.85rem; color:var(--ink-soft); }
@@ -165,7 +165,11 @@ button { cursor: pointer; }
 .detail-callout { background:var(--wash); border-radius:10px; padding:18px; border:1px solid var(--line); }
 .detail-callout strong { font-size:.78rem; text-transform:uppercase; letter-spacing:.055em; }
 .detail-callout p { font-size:.81rem; color:var(--ink-soft); margin:7px 0 0; }
-.detail-main { max-width:810px; }
+/* Full-width report column gives technical tables and figures the available space.
+   Prose stays narrower for readability; tables retain responsive scrolling. */
+.detail-main { min-width:0; width:100%; max-width:none; }
+.detail-section > div > p,
+.detail-section .standard-subsection > p { max-width:820px; }
 .detail-section { display:grid; grid-template-columns:52px minmax(0,1fr); gap:16px; border-top:1px solid var(--line); padding:32px 0 35px; scroll-margin-top:110px; }
 .detail-section__index { color:var(--accent); font-size:.82rem; font-weight:750; padding-top:7px; }
 .detail-section h2 { margin:0 0 14px; font-size:1.55rem; letter-spacing:-.035em; }
