@@ -1,3 +1,41 @@
+# Planned projects and category sections (2 November 2026)
+
+Each engineering category now displays **Projects** (completed/in-progress work)
+followed by **Future Projects**, only if any published planned entries exist.
+The Software catalogue supports the same split; Algorithms remains a reference
+library and is unchanged. All Projects uses the same two groups. Skill filters
+show **demonstrated work only**, not planned activities. Homepage Selected
+Projects also excludes planned work, even if `featuredOrder` is assigned.
+
+Edit a project in `assets/js/site-data.js`:
+
+```javascript
+category: "cad",        // Keep the existing internal category ID.
+categoryOrder: 4,       // Ordering within each section; gaps allowed.
+status: "planned",     // planned | in-progress | completed | ""
+targetStart: "",        // Optional: "Summer 2027" or "Year 12"; blank hides line.
+skills: [],             // ALWAYS empty on planned projects.
+```
+
+`status: "planned"` moves the project to **Future Projects**;
+`status: "in-progress"`, `"completed"` or `""` leaves it in **Projects**.
+The position is still governed by the existing `categoryOrder` within each
+group. The `targetStart` line appears below the project title/status rather
+than over its photo, and only for planned projects. A missing date creates no
+placeholder. Published/unpublished draft visibility remains unchanged.
+
+For Software, use `projectStatus: "planned"` instead of changing the existing
+`status` field, because software `status` records code/test evidence maturity.
+All existing software records have a blank `projectStatus` and `targetStart`.
+
+The gripper **Part 1: Contact Pads** remains *in progress* and unpublished;
+**Part 2: Gripper Jaw Assembly** and **Part 3: Contact Sensing** are planned.
+No unconfirmed starting dates were assigned. The existing internal
+`electronics` category ID is unchanged, but the public title is now
+**Embedded Control & Integration**, with the supplied description.
+
+---
+
 # Category listing order (1 November 2026)
 
 You can now manually control how projects appear **within their own category**.
@@ -246,7 +284,7 @@ project detail pages, navigation and category listings remain unchanged.
 
 The top utility navigation is now **Home · Selected Projects · About** on every page. “Selected Projects” opens the existing gallery at `index.html#featured`; the second row still provides All Projects and the individual engineering disciplines.
 
-Within **Electronics & Embedded Systems**, **Robot I/O Mapping & Hardware Abstraction** is a separate project linked in both directions to the **Modular Robot I/O & TeleOp Controller**. The cover image `assets/images/io-interface-contract.svg` is a simplified table of `io.*` interface calls. It is deliberately independent of physical pins and hardware connections.
+Within **Embedded Control & Integration**, **Robot I/O Mapping & Hardware Abstraction** is a separate project linked in both directions to the **Modular Robot I/O & TeleOp Controller**. The cover image `assets/images/io-interface-contract.svg` is a simplified table of `io.*` interface calls. It is deliberately independent of physical pins and hardware connections.
 
 The `ioMap` record and technical prose are editable in `assets/js/site-data.js`. The picture is an editable SVG asset, generated for display from the same representative interface examples. Click the image in the project page to view full size.
 
@@ -259,7 +297,7 @@ Upload the contents of the changes-only ZIP to the root of the GitHub Pages repo
 This change uses the existing `project.html` layout. No standalone HTML page or new navigation category is required.
 
 **New project**: `project.html?id=robot-io-mapping` — Robot I/O Mapping & Hardware Abstraction.
-It appears under Electronics & Embedded Systems and in All Projects.
+It appears under Embedded Control & Integration and in All Projects.
 
 The existing Arduino Mega project (`project.html?id=robot-control-electronics`) and the new project link to each other automatically via `relatedProjectIds`.
 
@@ -313,7 +351,7 @@ Do not upload only `index.html`: the new Software pages depend on the updated JS
 
 ## Navigation (revised)
 
-The top utility navigation contains **Home** and **About**. The main category navigation contains **All Projects**, Robotics, Mechanical Design & CAD, 3D Printing & Fabrication, **Electronics & Embedded Systems**, Software and Algorithms.
+The top utility navigation contains **Home** and **About**. The main category navigation contains **All Projects**, Robotics, Mechanical Design & CAD, 3D Printing & Fabrication, **Embedded Control & Integration**, Software and Algorithms.
 
 The gallery no longer repeats category filter buttons: use the main navigation to choose a category. Search and result counts remain available. All Projects shows the physical projects; Software and Algorithms retain dedicated catalogues.
 

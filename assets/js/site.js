@@ -81,6 +81,22 @@
   const isPublished = item => item && item.published !== false;
   const canShow = item => Boolean(item && (isPublished(item) || previewDrafts));
   const visibleProjects = () => data.projects.filter(canShow);
+  // Status is a presentation/routing field, not proof of completed engineering.
+  // Historical "Future" and "In Progress" records are accepted for compatibility.
+  const isPlannedProject = item => ["planned", "future", "future-project"].includes(
+    String(item?.projectStatus || item?.status || "").trim().toLowerCase().replace(/\s+/g, "-"));
+  const activeProjects = () => visibleProjects().filter(p => !isPlannedProject(p));
+  const displayProgress = item => {
+    const raw = String(item?.projectStatus || item?.status || "").trim();
+    if (isPlannedProject(item)) return "Future Project";
+    if (raw === "in-progress") return "In Progress";
+    if (raw === "completed") return ""; // Completed needn't be labelled on every card.
+    return raw;
+  };
+  const targetStartMarkup = (item, detail = false) =>
+    isPlannedProject(item) && nonempty(item.targetStart) ?
+    `<p class="${detail ? "project-intro__target" : "project-card__target"}">Planned start: ${text(item.targetStart.trim())}</p>` : "";
+
   // A position is meaningful only within the item's own category. Keep
   // equal/missing values in their original file order (stable tie-breaker).
   const sortByCategoryOrder = items => items.map((item, index) => ({ item, index }))
@@ -127,6 +143,7 @@
     .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const skillUrl = name => previewUrl(`projects.html?skill=${encodeURIComponent(skillSlug(name))}`);
   const skillTags = (item, limit = 0) => {
+    if (isPlannedProject(item)) return "";
     const entries = Array.isArray(item.skills) ? [...new Set(item.skills.filter(nonempty))] : [];
     const chosen = limit ? entries.slice(0,limit) : entries;
     return chosen.length ? `<div class="tags${limit ? "" : " tags-large"}" aria-label="Skills demonstrated">${chosen.map(skill =>
@@ -206,7 +223,8 @@
         <div class="eyebrow-row">${optionalCardText(kindLabel(p), "eyebrow", "span")}${previewDrafts && !isPublished(p) ? '<span class="preview-draft-tag">DRAFT</span>' : ''}</div>
         ${nonempty(p.title) ? `<h3 class="project-card__title"><a href="${projectUrl(p)}">${text(p.title)}</a></h3>` : ""}
         ${optionalCardText(p.subtitle, "project-card__subtitle")}
-        ${optionalCardText(p.status, "project-card__status")}
+        ${optionalCardText(displayProgress(p), "project-card__status")}
+        ${targetStartMarkup(p)}
         ${optionalCardText(p.summary, "project-card__summary", "p")}
         ${cardOutcome(p)}
         <div class="project-card__foot">
@@ -268,7 +286,7 @@
       <div class="software-card__body"><div class="eyebrow-row"><span class="eyebrow">SOFTWARE${nonempty(item.type) ? " · " + text(item.type) : ""}</span></div>
       ${nonempty(item.title) ? `<h3><a href="${softwareUrl(item)}">${text(item.title)}</a></h3>` : ""}
       ${optionalCardText(item.subtitle, "project-card__subtitle")}
-      ${optionalCardText(item.cardStatus, "project-card__status")}
+      ${optionalCardText(isPlannedProject(item) ? "Future Project" : item.cardStatus, "project-card__status")}${targetStartMarkup(item)}
       ${optionalCardText(item.summary, "software-card__summary", "p")}
       ${cardOutcome(item)}${skillTags(item,3)}
       <div class="software-card__bottom"><span class="muted-small">${(item.algorithmIds || []).length} linked methods</span><a class="round-arrow" href="${softwareUrl(item)}" aria-label="Open ${text(item.title)}"><span aria-hidden="true">↗</span></a></div></div>
@@ -277,10 +295,14 @@
   function software() {
     const root = $("#software-grid");
     if (!root) return;
-    const featured = softwareItems.find(s => s.id === "return-to-base");
-    const others = sortByCategoryOrder(softwareItems.filter(s => s.id !== "return-to-base"));
-    root.innerHTML = (featured ? `<div class="software-feature">${softwareCard(featured)}<div class="software-feature__copy"><span class="eyebrow">FEATURED SOFTWARE</span><h2>From a fixed return to adaptive navigation.</h2><p>Explore how the October 2026 Python controller coordinates AprilTag routes, obstacle avoidance, guide recovery and wall following.</p><a class="text-link" href="${softwareUrl(featured)}">Open the annotated flowchart ↗</a></div></div>` : "") +
-      `<div class="software-card-grid">${others.map(softwareCard).join("")}</div>`;
+    const current = softwareItems.filter(item=>!isPlannedProject(item));
+    const future = sortByCategoryOrder(softwareItems.filter(isPlannedProject));
+    const featured = current.find(s => s.id === "return-to-base");
+    const others = sortByCategoryOrder(current.filter(s => s.id !== "return-to-base"));
+    const activeMarkup = (featured ? `<div class="software-feature">${softwareCard(featured)}<div class="software-feature__copy"><span class="eyebrow">FEATURED SOFTWARE</span><h2>From a fixed return to adaptive navigation.</h2><p>Explore how the October 2026 Python controller coordinates AprilTag routes, obstacle avoidance, guide recovery and wall following.</p><a class="text-link" href="${softwareUrl(featured)}">Open the annotated flowchart ↗</a></div></div>` : "") +
+      (others.length ? `<div class="software-card-grid">${others.map(softwareCard).join("")}</div>` : "");
+    root.innerHTML = `<section class="project-list-group"><h2 class="project-list-group__title">Projects</h2>${activeMarkup}</section>` +
+      (future.length ? `<section class="project-list-group"><h2 class="project-list-group__title">Future Projects</h2><div class="software-card-grid">${future.map(softwareCard).join("")}</div></section>` : "");
   }
   function softwareDetail() {
     const id=new URLSearchParams(location.search).get('id');
@@ -290,7 +312,7 @@
     const rows=sectionLayouts(item,softwareExtras(item));
     const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>`:'';
     root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
-      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}${nonempty(item.status) ? ' · '+text(item.status) : ''}</p><h1>${text(item.title)}</h1>${detailSubStatus(item,"cardStatus")}${optionalDetailText(item.summary,"project-lede")}${skillTags(item)}</div>
+      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}${nonempty(item.status) ? ' · '+text(item.status) : ''}</p><h1>${text(item.title)}</h1>${optionalDetailText(item.subtitle,"project-intro__subtitle")}${optionalDetailText(isPlannedProject(item)?"Future Project":item.cardStatus,"project-intro__status")}${targetStartMarkup(item,true)}${optionalDetailText(item.summary,"project-lede")}${skillTags(item)}</div>
       ${media}${engineeringSummary(item)}${detailLayout(rows,'Software sections',`<div class="detail-callout"><strong>Evidence status</strong><p>${text(item.status)} — implementation and test results should be distinguished.</p></div>`)}
       <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More software systems</h2></div><a class="button button-outline" href="software.html">Software archive ↗</a></div></div>`;
   }
@@ -328,12 +350,12 @@
     setText("#hero-headline", data.owner.homeHeadline || data.owner.headline);
     setText("#hero-intro", data.owner.introduction);
     const imgEl = $("#home-hero-image");
-    if (imgEl) imgEl.src = visibleProjects()[0]?.image || data.categories[0]?.image;
+    if (imgEl) imgEl.src = activeProjects()[0]?.image || data.categories[0]?.image;
     const catGrid = $("#category-grid");
     if (catGrid) catGrid.innerHTML = data.categories.map((cat) => `
       <a href="${cat.id === "software" ? "software.html" : cat.id === "algorithms" ? "algorithms.html" : `projects.html?category=${encodeURIComponent(cat.id)}`}" class="category-tile">
         <div class="category-tile__image"><img src="${img(cat.image)}" alt="${text(cat.title)}" loading="lazy" /></div>
-        <div class="category-tile__info"><h3>${text(cat.title)}</h3><p>${text(cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
+        <div class="category-tile__info"><h3>${text(cat.title)}</h3><p>${text(cat.cardSubtitle || cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
       </a>`).join("");
     const featured = $("#featured-projects");
     if (featured) {
@@ -341,8 +363,8 @@
       // are independent of this order; software entries can also be featured.
       const isFeatured = item => Number.isInteger(item.featuredOrder) && item.featuredOrder > 0;
       const selected = [
-        ...visibleProjects().filter(isFeatured).map(item => ({ item, kind: "project" })),
-        ...softwareItems.filter(isFeatured).map(item => ({ item, kind: "software" }))
+        ...activeProjects().filter(isFeatured).map(item => ({ item, kind: "project" })),
+        ...softwareItems.filter(item => !isPlannedProject(item) && isFeatured(item)).map(item => ({ item, kind: "software" }))
       ].sort((a, b) => a.item.featuredOrder - b.item.featuredOrder ||
         a.item.title.localeCompare(b.item.title));
       featured.innerHTML = selected.map(({ item, kind }) =>
@@ -357,6 +379,11 @@
     const listing = $("#project-list")?.closest("section");
     const cat = category(chosen);
     if (title) title.textContent = activeSkill ? `Projects & Software · ${activeSkill}` : (cat ? cat.title : "All Projects");
+    const description = $("#category-description");
+    if (description) {
+      description.textContent = !activeSkill && cat?.id === "electronics" ? cat.subtitle : "";
+      description.hidden = !description.textContent;
+    }
     // The active navigation already names the discipline. Keep the heading in
     // the document for accessibility without repeating it above each gallery.
     if (section) section.classList.toggle("page-top--category", Boolean(cat) && !activeSkill);
@@ -370,7 +397,7 @@
     const count = $("#project-count");
     const params = new URLSearchParams(location.search);
     const requestedSkill = params.get("skill") || "";
-    const allSkills = [...new Set([...data.projects,...softwareItems].flatMap(item=>item.skills || []))];
+    const allSkills = [...new Set([...data.projects,...softwareItems].filter(item=>!isPlannedProject(item)).flatMap(item=>item.skills || []))];
     const activeSkill = allSkills.find(skill=>skillSlug(skill)===requestedSkill) || "";
     let chosen = params.get("category") || "all";
     if (!requestedSkill && chosen === "software") { location.replace(previewUrl("software.html")); return; }
@@ -382,18 +409,28 @@
       `No skill named <strong>${text(requestedSkill)}</strong> is defined. <a href="${previewUrl('projects.html')}">Browse all projects</a>`;
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
-      const matchesSearch = item => [item.title,item.subtitle,item.status,item.summary,...(item.skills||[])].join(" ").toLocaleLowerCase().includes(term);
-      const projectResults = requestedSkill ? (activeSkill ? visibleProjects().filter(item=>(item.skills||[]).includes(activeSkill)) : []) :
-        (chosen === "all" ? visibleProjects() : sortByCategoryOrder(visibleProjects().filter(p => p.category === chosen)));
-      const softwareResults = requestedSkill && activeSkill ? softwareItems.filter(item=>(item.skills||[]).includes(activeSkill)) : [];
-      const results = [
-        ...projectResults.filter(matchesSearch).map(item=>({item,kind:"project"})),
+      const matchesSearch = item => [item.title,item.subtitle,displayProgress(item),item.summary,...(isPlannedProject(item)?[]:(item.skills||[]))]
+        .join(" ").toLocaleLowerCase().includes(term);
+      const inScope = chosen === "all" ? visibleProjects() : visibleProjects().filter(p=>p.category === chosen);
+      const ordered = chosen === "all" ? inScope : sortByCategoryOrder(inScope);
+      const present = requestedSkill ? (activeSkill ? activeProjects().filter(item=>(item.skills||[]).includes(activeSkill)) : []) :
+        ordered.filter(item=>!isPlannedProject(item));
+      const future = requestedSkill ? [] : ordered.filter(isPlannedProject);
+      const softwareResults = requestedSkill && activeSkill ? softwareItems.filter(item=>!isPlannedProject(item) && (item.skills||[]).includes(activeSkill)) : [];
+      const currentCards = [
+        ...present.filter(matchesSearch).map(item=>({item,kind:"project"})),
         ...softwareResults.filter(matchesSearch).map(item=>({item,kind:"software"}))
       ];
-      container.innerHTML = results.length ? results.map(({item,kind})=>kind==="software"?softwareCard(item):projectCard(item)).join("") :
+      const plannedCards = future.filter(matchesSearch);
+      const renderCard = ({item,kind}) => kind === "software" ? softwareCard(item) : projectCard(item);
+      const renderGroup = (heading,cards) => cards.length ?
+        `<section class="project-list-group"><h2 class="project-list-group__title">${heading}</h2><div class="project-grid">${cards.map(renderCard).join("")}</div></section>` : "";
+      container.innerHTML = currentCards.length || plannedCards.length ?
+        renderGroup("Projects",currentCards) + renderGroup("Future Projects",plannedCards.map(item=>({item,kind:"project"}))) :
         `<div class="empty-state"><h3>No matching work</h3><p>${requestedSkill ? 'Try clearing the skill filter or search.' : 'Try clearing the search or choosing another category.'}</p></div>`;
-      count.textContent = requestedSkill ? `${results.length} matching entr${results.length===1?'y':'ies'}` :
-        `${results.length} project${results.length === 1 ? "" : "s"}`;
+      const total = currentCards.length + plannedCards.length;
+      count.textContent = requestedSkill ? `${total} matching entr${total===1?'y':'ies'}` :
+        `${total} project${total===1?'':'s'}${plannedCards.length ? ` · ${plannedCards.length} planned` : ''}`;
     }
     input.addEventListener("input", refresh);
     updateListingIntro(chosen,activeSkill || (requestedSkill ? requestedSkill : ""));
@@ -451,7 +488,7 @@
     root.innerHTML=`<div class="container print-detail-page">
       <div class="breadcrumb"><a href="projects.html?category=fabrication">3D Printing &amp; Fabrication</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro print-intro"><p class="eyebrow">${text(kindLabel(p))}${p.date ? ' · '+text(p.date):''}</p><h1>${text(p.title)}</h1>
-      ${detailSubStatus(p)}${optionalDetailText(p.summary,"project-lede")}
+      ${optionalDetailText(p.subtitle,"project-intro__subtitle")}${optionalDetailText(displayProgress(p),"project-intro__status")}${targetStartMarkup(p,true)}${optionalDetailText(p.summary,"project-lede")}
       ${skillTags(p)}</div>
       <figure class="print-cad-figure"><div class="print-media-label">CAD MODEL</div><img src="${img(p.image)}" alt="${text(p.imageAlt||`${p.title} CAD model`)}"/></figure>
       ${photos.length ? `<section class="print-gallery-panel" aria-labelledby="print-gallery-title"><div class="print-gallery-heading"><div><p class="eyebrow">FROM DIGITAL TO PHYSICAL</p><h2 id="print-gallery-title">The finished print</h2><p>Photographs of the actual manufactured part.</p></div>
@@ -664,7 +701,7 @@
     root.innerHTML=`<div class="container">
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
-        <h1>${text(p.title)}</h1>${detailSubStatus(p)}${optionalDetailText(p.summary,"project-lede")}${skillTags(p)}</div>
+        <h1>${text(p.title)}</h1>${optionalDetailText(p.subtitle,"project-intro__subtitle")}${optionalDetailText(displayProgress(p),"project-intro__status")}${targetStartMarkup(p,true)}${optionalDetailText(p.summary,"project-lede")}${skillTags(p)}</div>
       <figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}<figcaption>${text(p.imageCaption||p.title)}</figcaption></figure>
       ${engineeringSummary(p)}
       ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status?`<span>${text(p.investigation.status)}</span>`:''}</div>`:''}

@@ -651,3 +651,14 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 .detail-layout--aside-only { display:block; }
 .detail-layout--aside-only .detail-aside { position:static; max-width:320px; }
 @media(max-width:650px) { .engineering-summary { padding:19px 19px 8px; margin-bottom:32px; } .engineering-summary__grid { grid-template-columns:1fr; row-gap:8px; } }
+
+/* Project groups: only render the Future Projects group when entries exist. */
+.project-results { display: flex; flex-direction: column; gap: 55px; }
+.project-list-group { min-width: 0; }
+.project-list-group__title { font-size: clamp(1.45rem, 2.3vw, 1.9rem); letter-spacing: -.04em; line-height:1.2; margin:0 0 22px; }
+.project-card__target { font-size: .79rem !important; color: var(--muted); margin: -5px 0 13px !important; }
+.project-intro__target { color: var(--muted); font-size: .88rem; margin: -7px 0 16px; }
+#software-grid > .project-list-group + .project-list-group { margin-top: 56px; }
+
+.category-description { max-width: 860px; color: var(--ink-soft); font-size: .97rem; line-height: 1.65; margin: 0 0 28px; }
+.category-description[hidden] { display: none; }

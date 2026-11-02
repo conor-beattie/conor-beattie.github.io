@@ -27,7 +27,14 @@
   It does not affect homepage featuredOrder, which is separate.
   If absent/invalid, the entry follows all numbered items in original file order.
   Prefer unique positive whole numbers per category; gaps are allowed.
-  All Projects and skill-filter results retain their original cross-category order.
+  Each category displays Projects followed by Future Projects (only if any).
+  Planned work is hidden from demonstrated-skill filters and Selected Projects.
+  All Projects retains its original order within the two groups.
+
+  PROJECT PROGRESS: status: "planned" / "in-progress" / "completed" / "".
+  "planned" appears in Future Projects; all others in Projects.
+  targetStart: "" is optional and displayed only for planned work.
+  Planned entries must have no demonstrated skill tags.
 
   CARD DISPLAY: category, title, optional subtitle, optional status, summary.
   For projects/algorithms: subtitle: "", status: ""; for software: subtitle: "", cardStatus: "".
@@ -129,8 +136,9 @@ window.PORTFOLIO_DATA = {
     {
       id: "electronics",
       published: true,
-      title: "Electronics & Embedded Systems",
-      subtitle: "Sensors, controllers, wiring and embedded interfaces",
+      title: "Embedded Control & Integration",
+      subtitle: "Integrating and programming microcontrollers, sensors, motor drivers and other electronic modules to develop reliable robotic control systems, including electrical architecture, power distribution, wiring and hardware interfaces.",
+      cardSubtitle: "Microcontrollers, motor drivers, wiring and robotic control integration",
       image: "assets/images/arduino mega.jpg"
     },
     {
@@ -178,6 +186,8 @@ window.PORTFOLIO_DATA = {
       title: "Autonomous Return to Base",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
@@ -226,6 +236,8 @@ window.PORTFOLIO_DATA = {
       title: "Stack Object",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
@@ -270,6 +282,8 @@ window.PORTFOLIO_DATA = {
       title: "Arena Guide Search & Recovery",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
@@ -314,6 +328,8 @@ window.PORTFOLIO_DATA = {
       title: "Follow Wall",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
@@ -358,6 +374,8 @@ window.PORTFOLIO_DATA = {
       title: "Local Obstacle Avoidance",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
@@ -402,6 +420,8 @@ window.PORTFOLIO_DATA = {
       title: "Visual Perception Pipeline",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
@@ -446,6 +466,8 @@ window.PORTFOLIO_DATA = {
       title: "Robot Localisation",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
@@ -490,6 +512,8 @@ window.PORTFOLIO_DATA = {
       title: "Motion & Command Control",
       subtitle: "",
       cardStatus: "",
+      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      targetStart: "", // Optional provisional start period.
 
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
@@ -851,7 +875,7 @@ window.PORTFOLIO_DATA = {
       title: "Autonomous Mobile Robot",
       subtitle: "Bobbot",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "robotics",                          // robotics | cad | fabrication | electronics
       categoryOrder: 1,
       image: "assets/images/IMG_2627 Bobbot.jpg",
@@ -890,7 +914,7 @@ window.PORTFOLIO_DATA = {
       title: "Bobbot Gripper — Original CAD Design",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "cad",
       categoryOrder: 1,
       image: "assets/images/gripper_bobbot.png",
@@ -929,8 +953,8 @@ window.PORTFOLIO_DATA = {
       featuredOrder: 1,
       "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 2: Gripper Jaw Assembly",
-      status: "Future",
-
+      status: "planned",
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       "category": "cad",
       categoryOrder: 4,
       "image": "assets/images/Watch_This_Space.png",
@@ -1118,8 +1142,8 @@ window.PORTFOLIO_DATA = {
       "published": false,
       "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 1: Gripper Contact Pads",
-      status: "In Progress",
-
+      status: "in-progress",
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       "category": "cad",
       categoryOrder: 3,
       "image": "assets/images/gripper_bobbot_orig.jpeg",
@@ -1509,7 +1533,7 @@ window.PORTFOLIO_DATA = {
       title: "Pulley",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "fabrication",
       categoryOrder: 1,
       image: "assets/images/Pulley.png",
@@ -1562,7 +1586,7 @@ window.PORTFOLIO_DATA = {
       title: "Modular Robot I/O & TeleOp Controller",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "electronics",
       categoryOrder: 1,
       image: "assets/images/arduino mega.jpg",
@@ -1613,7 +1637,7 @@ window.PORTFOLIO_DATA = {
       title: "Robot I/O Mapping & Hardware Abstraction",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "electronics",
       categoryOrder: 3,
       image: "assets/images/io-interface-contract.svg",
@@ -1690,7 +1714,7 @@ window.PORTFOLIO_DATA = {
       title: "Mobile Robot Power Distribution & Electrical Architecture",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "electronics",
       categoryOrder: 2,
       image: "assets/images/one line diagram.jpg",
@@ -1748,7 +1772,7 @@ window.PORTFOLIO_DATA = {
       title: "Autonomous Mobile Robot",
       subtitle: "Robbot",
       status: "In Progress",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "robotics",
       categoryOrder: 2,
       image: "assets/images/IMG_2756_robbot.jpg",
@@ -1787,6 +1811,7 @@ window.PORTFOLIO_DATA = {
       title: "Motor Calibration & Voltage Compensation",
       subtitle: "Investigating Open-Loop Drive Accuracy",
       status: "",
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "robotics",
       categoryOrder: 4,
       image: "assets/images/motor-calibration-overview.svg",
@@ -1827,7 +1852,7 @@ window.PORTFOLIO_DATA = {
       title: "goBILDA DECODE Starter Bot",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "robotics",
       categoryOrder: 3,
       image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
@@ -1866,7 +1891,7 @@ window.PORTFOLIO_DATA = {
       title: "Shooter",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "cad",
       categoryOrder: 6,
       image: "assets/images/Shooter CAD.png",
@@ -1903,8 +1928,8 @@ window.PORTFOLIO_DATA = {
       published: true,
       title: "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 3: Gripper Contact Sensing",
-      status: "Future",
-
+      status: "planned",
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "cad",
       categoryOrder: 5,
       image: "assets/images/Watch_This_Space.png",
@@ -1943,7 +1968,7 @@ window.PORTFOLIO_DATA = {
       title: "Rubber Band Intake Wheel",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "fabrication",
       categoryOrder: 2,
       image: "assets/images/rubber_band_wheel.png",
@@ -1997,7 +2022,7 @@ window.PORTFOLIO_DATA = {
       title: "FlySky Receiver Mount",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "fabrication",
       categoryOrder: 3,
       image: "assets/images/FlySky Receiver.png",
@@ -2046,7 +2071,7 @@ window.PORTFOLIO_DATA = {
       title: "PiCam3 Mount 8 Degrees",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "fabrication",
       categoryOrder: 4,
       image: "assets/images/PICam3 Mount 8 degree.png",
@@ -2095,7 +2120,7 @@ window.PORTFOLIO_DATA = {
       title: "RoboClaw 2x30",
       subtitle: "",
       status: "",
-
+      targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "fabrication",
       categoryOrder: 5,
       image: "assets/images/RoboClaw 2x30.png",
