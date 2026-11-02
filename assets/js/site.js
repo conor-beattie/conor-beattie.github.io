@@ -722,10 +722,32 @@
     // Compact material-choice table for the contact-pad study. Textual research
     // citations use the same numbered bibliography as the report prose.
     if(p.materialSelection?.length) {
-      const headers=['Decision','Material','Filament material','P1S compatible','Reasoning','Research source'];
+      const headers=['Status','Product Description','Filament Material','P1S Compatible','Reasoning','Reference'];
       const heading=headers.map(h=>`<th scope="col">${text(h)}</th>`).join('');
       const rows=p.materialSelection.map(row=>`<tr>${row.map(cell=>`<td>${cites.inline(cell)}</td>`).join('')}</tr>`).join('');
-      add('materialsMethods',`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table surface-materials-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`);
+      const table=`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table surface-materials-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`;
+      add('materialsMethods',subheading('Materials',cites.paragraphs(p.materialsIntro || '')+table));
+    }
+    if(p.testMethods?.length) {
+      // Inline HTML formulas use subscripts/fractions, with no external math dependency.
+      const fraction=(numerator,denominator)=>`<span class="test-method-fraction"><span>${numerator}</span><span>${denominator}</span></span>`;
+      const formulas={
+        slip: {label:'Coefficient of static friction equals force at the start of slip divided by normal force',html:`μ<sub>s</sub> = ${fraction('F<sub>slip</sub>','N')}`},
+        retention: {label:'Retention force equals maximum force before pull-out slip',html:'F<sub>ret</sub> = F<sub>pull,max</sub>'},
+        success: {label:'Successful operations divided by attempted operations, times 100 percent',html:`S = ${fraction('n<sub>successful</sub>','n<sub>attempted</sub>')} × 100%`},
+        damage: {label:'Permanent thickness reduction percentage equals initial minus final thickness, divided by initial thickness, times 100 percent',html:`D = ${fraction('t<sub>0</sub> − t<sub>f</sub>','t<sub>0</sub>')} × 100%`}
+      };
+      const headers=['Test method','Sketch','What it measures','Formula / metric'];
+      const heading=headers.map(h=>`<th scope="col">${text(h)}</th>`).join('');
+      const rows=p.testMethods.map(t=>{
+        const file=localMedia(t.image);
+        const sketch=file?`<img class="test-method-sketch" src="${file}" alt="${text(t.name)} test sketch" loading="lazy"/>`:'';
+        const formula=formulas[t.formula];
+        const equation=formula?`<span class="test-method-equation" role="math" aria-label="${text(formula.label)}">${formula.html}</span>`:'';
+        return `<tr><td>${text(t.name)}</td><td class="test-method-sketch-cell">${sketch}</td><td>${text(t.measures)}</td><td>${equation}</td></tr>`;
+      }).join('');
+      const table=`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table test-methods-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`;
+      add('materialsMethods',subheading('Tests',cites.paragraphs(p.testsIntro || '')+table));
     }
 
     if(inv.jawOptions?.length || inv.detectionOptions?.length) add('materialsMethods',structured('concept-study','Mechanism concepts',investigationSection));

@@ -1164,6 +1164,8 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
+      materialsIntro: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers.",
+      testsIntro: "Four test methods are proposed to compare the new pads with the existing rubber-band grip. The first two measure resistance to slipping and pull-out force. The third tests the complete pickup, carry and dropoff operation, while the fourth checks for damage to the cardboard. Test conditions will be kept consistent between materials.",
       "materialSelection": [
         [
                 "Benchmark",
@@ -1246,6 +1248,32 @@ window.PORTFOLIO_DATA = {
                 "3D-printed elastomeric-foam robotic-gripper study"
         ]
 ],
+      testMethods: [
+        {
+          name: "Horizontal pull / slip",
+          image: "assets/images/gripper-test-horizontal.png",
+          measures: "Static friction and resistance to sliding against cardboard",
+          formula: "slip"
+        },
+        {
+          name: "Gripper retention / pull-out",
+          image: "assets/images/gripper-test-retention.png",
+          measures: "Force required to pull the cardboard object from the jaws at a specified jaw force",
+          formula: "retention"
+        },
+        {
+          name: "Pickup, carry, dropoff",
+          image: "assets/images/gripper-test-cycle.png",
+          measures: "Reliability of the complete gripping operation, including pickup, transport and release",
+          formula: "success"
+        },
+        {
+          name: "Cardboard compression / damage",
+          image: "assets/images/gripper-test-damage.png",
+          measures: "Permanent indentation, creasing, crushing or other structural damage to the cardboard",
+          formula: "damage"
+        }
+      ],
       references: [
         {
                 "id": "wikipedia-robot-end-effector",

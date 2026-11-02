@@ -591,7 +591,24 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 .surface-benchmark-table { min-width:660px; }
 .surface-materials-table { min-width:1120px; }
 .surface-failure-table { min-width:1080px; }
-.surface-materials-table td:nth-child(3) { font-weight:650; }
+/* Material decision is the first column; keep product descriptions readable. */
+.surface-materials-table th:nth-child(2) { min-width:160px; }
+/* Compact diagrams and accessible, styled equations for Part 1 test methods. */
+.test-methods-table { width:100%; min-width:840px; table-layout:fixed; }
+.test-methods-table th:nth-child(1) { width:20%; }
+.test-methods-table th:nth-child(2) { width:23%; }
+.test-methods-table th:nth-child(3) { width:34%; }
+.test-methods-table th:nth-child(4) { width:23%; }
+.test-methods-table td { vertical-align:middle; }
+.test-method-sketch-cell { text-align:center !important; padding:8px !important; }
+.test-method-sketch { display:block; width:100%; max-width:205px; height:auto; margin:0 auto; object-fit:contain; }
+.test-method-equation { display:inline-flex; align-items:center; justify-content:flex-start; gap:5px; font-size:1rem; font-weight:500; line-height:1.5; white-space:nowrap; color:var(--ink); }
+.test-method-equation sub { font-size:.7em; line-height:0; }
+.test-method-fraction { display:inline-flex; flex-direction:column; vertical-align:middle; align-items:center; justify-content:center; line-height:1.15; font-size:.93em; }
+.test-method-fraction > span:first-child { border-bottom:1px solid currentColor; padding:0 4px 3px; }
+.test-method-fraction > span:last-child { padding:3px 4px 0; }
+@media(max-width:720px) { .test-methods-table { min-width:820px; } }
+
 .surface-test-list { display:grid; gap:13px; margin:18px 0 28px; }
 .surface-test-card { border:1px solid var(--line); border-radius:12px; padding:20px 22px; background:var(--white); min-width:0; }
 .surface-test-card__head { display:flex; align-items:start; justify-content:space-between; gap:12px; }
