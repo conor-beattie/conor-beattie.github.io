@@ -309,7 +309,8 @@
     const item=softwareById(id), root=$('#software-content');
     if(!item){root.innerHTML=`<div class="container not-found"><p class="eyebrow">SOFTWARE NOT FOUND</p><h1>No software entry has that ID.</h1><a class="button button-primary" href="software.html">Browse Software ↗</a></div>`;return;}
     document.title=`${item.title} · ${data.owner.name}`;
-    const rows=sectionLayouts(item,softwareExtras(item));
+    const citations=citationContext(item);
+    const rows=sectionLayouts(item,softwareExtras(item,citations),citations);
     const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>`:'';
     root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}${nonempty(item.status) ? ' · '+text(item.status) : ''}</p><h1>${text(item.title)}</h1>${optionalDetailText(item.subtitle,"project-intro__subtitle")}${optionalDetailText(isPlannedProject(item)?"Future Project":item.cardStatus,"project-intro__status")}${targetStartMarkup(item,true)}${optionalDetailText(item.summary,"project-lede")}${skillTags(item)}</div>
@@ -479,10 +480,11 @@
       linkMarkup(p.links?.cad,'CAD model'), linkMarkup(p.links?.downloads,'Download / print files'),
       linkMarkup(p.links?.github,'Source / design files'),linkMarkup(p.links?.video,'Demonstration video')
     ].filter(Boolean);
-    const printExtras=projectExtras(p);
+    const citations=citationContext(p);
+    const printExtras=projectExtras(p,citations);
     // The project header already contains the description. A blank detailed
     // Overview stays blank; do not create a redundant section from the summary.
-    const rows=sectionLayouts(p,printExtras);
+    const rows=sectionLayouts(p,printExtras,citations);
     const printSidebar=specs.length ? `<div class="print-spec-card"><p class="eyebrow">3D PRINT INFORMATION</p><h3>Print profile</h3>
       <dl class="print-spec-list">${specs.map(([key,label])=>`<div><dt>${text(label)}</dt><dd>${text(details[key])}</dd></div>`).join('')}</dl></div>` : "";
     root.innerHTML=`<div class="container print-detail-page">
@@ -554,10 +556,11 @@
 
   // Research tables on the independent contact-surface investigation.
   // Keeps the full evidence record in site-data.js; nothing is shown for other projects.
-  function surfaceStudySection(p, key, label) {
+  function surfaceStudySection(p, key, label, cites) {
     const study = p.surfaceStudy || {};
+    const inline = cites?.inline || text;
     const head = `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>`;
-    const table = (headers, rows, className = "") => `<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table ${className}"><thead><tr>${headers.map(h => `<th scope="col">${text(h)}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${text(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+    const table = (headers, rows, className = "") => `<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table ${className}"><thead><tr>${headers.map(h => `<th scope="col">${text(h)}</th>`).join("")}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${inline(cell)}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
     if (key === "surface-benchmarks") {
       return head + `<p>The current rubber-band gripper is the benchmark. Greater retention is the leading objective; cardboard damage and reliable manufacture remain necessary checks. Robot operation is an optional follow-up, not a mandatory pass condition.</p>` + table(["Criterion", "Benchmark", "Proposed pass condition"], study.benchmarks || [], "surface-benchmark-table") + `</div></section>`;
     }
@@ -572,7 +575,7 @@
         <div><dt>Equipment</dt><dd>${text(t.equipment)}</dd></div><div><dt>Minimum</dt><dd>${text(t.minimum)}</dd></div>
         <div><dt>Result to record</dt><dd>${text(t.result)}</dd></div><div><dt>Controlled variables</dt><dd>${text(t.controls)}</dd></div>
         <div><dt>Assessment</dt><dd>${text(t.assess)}</dd></div><div><dt>Extension / fallback</dt><dd>${text(t.extension)}</dd></div>
-        </dl><p class="surface-test-note"><strong>Method note:</strong> ${text(t.notes)}</p><div class="surface-test-reference">Reference: ${text(t.reference)}</div></article>`;
+        </dl><p class="surface-test-note"><strong>Method note:</strong> ${text(t.notes)}</p><div class="surface-test-reference">Reference: ${inline(t.reference)}</div></article>`;
       return head + `<p>At least five runs per material for the two primary force tests. Inspect cardboard after retention tests; no separate large damage programme is needed. An application-level robot trial is optional.</p><h3>Core and secondary tests</h3><div class="surface-test-list">${tests.filter(t => t.rank <= 4).map(card).join("")}</div><h3>Alternative and follow-on methods</h3><p>These are available if the initial evidence identifies a need. Surface sensing belongs to a different future investigation.</p><div class="surface-test-list">${tests.filter(t => t.rank > 4).map(card).join("")}</div></div></section>`;
     }
     if (key === "surface-failures") {
@@ -585,19 +588,18 @@
   }
 
 
-  // One schema for all project and software entries. Every record contains all
-  // ten keys; a key is displayed only when it has text or structured content.
+  // Journal-style detail sections. Leave Abstract blank until results and conclusions
+  // exist; the four optional engineering-summary fields remain independent.
   const STANDARD_SECTIONS = [
-    ["overview", "Overview"],
-    ["objectivesRequirements", "Objectives & Requirements"],
-    ["backgroundResearch", "Background & Research"],
-    ["designDevelopment", "Design & Development"],
-    ["testingValidation", "Testing & Validation"],
-    ["resultsEvaluation", "Results & Evaluation"],
-    ["conclusionsNextSteps", "Conclusions & Next Steps"],
+    ["abstract", "Abstract"],
+    ["introduction", "Introduction"],
+    ["materialsMethods", "Materials & Methods"],
+    ["results", "Results"],
+    ["discussion", "Discussion"],
+    ["conclusions", "Conclusions"],
     ["lessonsLearned", "Lessons Learned"],
-    ["referencesResources", "References & Resources"],
-    ["relatedProjects", "Related Projects"]
+    ["relatedProjects", "Related Projects"],
+    ["references", "References"]
   ];
   const hasText = value => typeof value === "string" && value.trim().length > 0;
   const subheading = (label, body) => body ? `<div class="standard-subsection"><h3>${text(label)}</h3>${body}</div>` : "";
@@ -605,11 +607,74 @@
     `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>${content}</div></section>` : "";
   const sectionNavigation = (entries, label="Project sections") =>
     `<nav aria-label="${text(label)}">${entries.map(([key,title]) => `<a href="#${key}">${text(title)}</a>`).join("")}</nav>`;
-  const sectionLayouts = (entry, extras={}) => STANDARD_SECTIONS.map(([key,label]) => {
-    const base = hasText(entry.sections?.[key]) ? paragraphs(entry.sections[key]) : "";
+
+  // Citations are written as [@reference-id] in the section text or research
+  // tables. The bibliography is numbered by first citation, followed by any
+  // uncited reading. The URL/title/description come from the data, not markup.
+  function citationContext(entry) {
+    const sourceArrays = [entry.surfaceStudy?.sources, entry.investigation?.sources, entry.references];
+    const all = [], byId = new Map(), byUrl = new Set();
+    sourceArrays.forEach(arr => (Array.isArray(arr) ? arr : []).forEach(source => {
+      if (!source) return;
+      const title = source.name || source.title || source.label || source.url;
+      if (!title) return;
+      const url = String(source.url || "").trim();
+      if (url && byUrl.has(url.toLowerCase())) return;
+      const baseId = String(source.id || skillSlug(url || title) || 'source').toLowerCase().replace(/[^a-z0-9-]/g,'-');
+      let id = baseId, n = 2;
+      while (byId.has(id)) id = `${baseId}-${n++}`;
+      const record = {...source, title, id};
+      byId.set(id,record);
+      if (url) byUrl.add(url.toLowerCase());
+      all.push(record);
+    }));
+    const marker = /\[@([a-z0-9-]+)\]/gi;
+    const first = [], observed = new Set();
+    const scan = value => {
+      if (typeof value !== "string") return;
+      let match;
+      marker.lastIndex = 0;
+      while ((match = marker.exec(value))) {
+        const id=match[1].toLowerCase();
+        if (byId.has(id) && !observed.has(id)) {first.push(id);observed.add(id);}
+      }
+    };
+    STANDARD_SECTIONS.forEach(([key]) => {
+      if (key === 'references') return;
+      scan(entry.sections?.[key]);
+      (entry.sectionDetails?.[key] || []).forEach(d => scan(d.text));
+    });
+    // In the contact-pad investigation, material and test tables can also
+    // cite specific journal papers without adding prose just to force a cite.
+    (entry.surfaceStudy?.materials || []).forEach(row => Object.values(row).forEach(scan));
+    (entry.surfaceStudy?.tests || []).forEach(row => Object.values(row).forEach(scan));
+    const ordered = [...first.map(id=>byId.get(id)),...all.filter(r=>!observed.has(r.id))];
+    const numbers = new Map(ordered.map((r,i)=>[r.id,i+1]));
+    const inline = value => text(value).replace(marker, (token,rawId) => {
+      const id=rawId.toLowerCase(), n=numbers.get(id);
+      return n ? `<a class="inline-citation" href="#ref-${id}" aria-label="Reference ${n}">[${n}]</a>` : token;
+    });
+    const citedCount = first.length;
+    const itemHtml = (ref,n) => {
+      const url=href(ref.url);
+      const title=url ? `<a href="${text(url)}" target="_blank" rel="noopener noreferrer">${text(ref.title)} ↗</a>` : text(ref.title);
+      const note=ref.use || ref.description || "";
+      return `<li id="ref-${ref.id}" value="${n}"><strong>${title}</strong>${note ? `<p>${text(note)}</p>` : ""}</li>`;
+    };
+    const bibliography = () => {
+      if (!ordered.length) return "";
+      const cited=ordered.slice(0,citedCount), further=ordered.slice(citedCount);
+      return (cited.length ? subheading('Cited sources',`<ol class="portfolio-references">${cited.map((r,i)=>itemHtml(r,i+1)).join('')}</ol>`) : '') +
+        (further.length ? subheading('Further reading & resources',`<ol class="portfolio-references" start="${citedCount+1}">${further.map((r,i)=>itemHtml(r,citedCount+i+1)).join('')}</ol>`) : '');
+    };
+    return {inline, bibliography, paragraphs:value=>String(value || "").split(/\n\s*\n/).filter(Boolean)
+      .map(par=>`<p>${inline(par)}</p>`).join("")};
+  }
+  const sectionLayouts = (entry, extras={}, cites=citationContext(entry)) => STANDARD_SECTIONS.map(([key,label]) => {
+    const base = hasText(entry.sections?.[key]) ? cites.paragraphs(entry.sections[key]) : "";
     const details = (entry.sectionDetails?.[key] || []).map(item =>
-      subheading(item.heading || "Further details", paragraphs(item.text || ""))).join("");
-    const content = base + details + (extras[key] || "");
+      subheading(item.heading || "Further details", cites.paragraphs(item.text || ""))).join("");
+    const content = base + details + (extras[key] || "") + (key==='references' ? cites.bibliography() : '');
     return {key,label,content};
   }).filter(row => row.content.trim());
   const sectionMarkup = rows => rows.map(row => sectionShell(row.key,row.label,row.content)).join("");
@@ -645,48 +710,44 @@
     }).filter(Boolean);
     return entries.length ? `<ul class="surface-reference-list">${entries.join("")}</ul>` : "";
   }
-  function projectExtras(p) {
+  function projectExtras(p, cites) {
     const inv=p.investigation||{}, surface=p.surfaceStudy||{};
     const extra={};
     const add=(key,content)=>{ if(content) extra[key]=(extra[key]||"")+content; };
-    const structured=(key,label,fn)=>nestedEvidence(fn(p,key,label),label);
-    if(inv.criteria?.length) add('objectivesRequirements',structured('investigation-criteria','Engineering criteria',investigationSection));
-    if(surface.benchmarks?.length) add('objectivesRequirements',structured('surface-benchmarks','Success criteria against rubber bands',surfaceStudySection));
-    if(surface.materials?.length) add('backgroundResearch',structured('surface-materials','Material shortlist and decisions',surfaceStudySection));
-    if(inv.jawOptions?.length || inv.detectionOptions?.length) add('designDevelopment',structured('concept-study','Mechanism concepts',investigationSection));
-    if(p.ioMap?.rows?.length) add('designDevelopment',ioMapMarkup(p));
-    if(surface.failures?.length) add('designDevelopment',structured('surface-failures','Failure analysis and design responses',surfaceStudySection));
-    if(inv.trialRows?.length) add('testingValidation',structured('trial-plan','Experimental test plan',investigationSection));
-    if(surface.tests?.length) add('testingValidation',structured('surface-tests','Experimental test programme',surfaceStudySection));
+    const structured=(key,label,fn)=>nestedEvidence(fn(p,key,label,cites),label);
+    if(inv.criteria?.length) add('introduction',structured('investigation-criteria','Engineering criteria',investigationSection));
+    if(surface.benchmarks?.length) add('introduction',structured('surface-benchmarks','Success criteria against rubber bands',surfaceStudySection));
+    if(surface.materials?.length) add('materialsMethods',structured('surface-materials','Material shortlist and decisions',surfaceStudySection));
+    if(inv.jawOptions?.length || inv.detectionOptions?.length) add('materialsMethods',structured('concept-study','Mechanism concepts',investigationSection));
+    if(p.ioMap?.rows?.length) add('materialsMethods',ioMapMarkup(p));
+    if(surface.failures?.length) add('materialsMethods',structured('surface-failures','Failure analysis and design responses',surfaceStudySection));
+    if(inv.trialRows?.length) add('materialsMethods',structured('trial-plan','Experimental test plan',investigationSection));
+    if(surface.tests?.length) add('materialsMethods',structured('surface-tests','Experimental test programme',surfaceStudySection));
     const demos=demosForProject(p.id);
-    if(demos.length) add('testingValidation',subheading('Video demonstrations',`<div class="demo-grid">${demos.map(d=>demoMarkup(d,true)).join("")}</div>`));
-    if(surface.sources?.length) add('referencesResources',surfaceStudySection(p,'surface-sources',''));
-    if(inv.sources?.length) add('referencesResources',subheading('Mechanism research sources',referenceList(inv.sources)));
-    if(p.references?.length) add('referencesResources',subheading('Project references & inspiration',referenceList(p.references)));
+    if(demos.length) add('materialsMethods',subheading('Video demonstrations',`<div class="demo-grid">${demos.map(d=>demoMarkup(d,true)).join("")}</div>`));
     const resources=[
       linkMarkup(p.links?.github,'Source code / GitHub'),
       linkMarkup(p.links?.cad,'CAD / 3D model'),
       linkMarkup(p.links?.video,'Demonstration video'),
       linkMarkup(p.links?.downloads,'Technical files')
     ].filter(Boolean);
-    if(resources.length) add('referencesResources',`<div class="resource-links">${resources.join("")}</div>`);
+    if(resources.length) add('materialsMethods',subheading('Project files & media',`<div class="resource-links">${resources.join("")}</div>`));
     const linked=(p.relatedProjectIds||[]).map(id=>visibleProjects().find(item=>item.id===id)).filter(item=>item&&item.id!==p.id);
     if(linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`);
     const linkedSoftware=softwareItems.filter(item=>(item.robotIds||[]).includes(p.id));
     if(linkedSoftware.length) add('relatedProjects',subheading('Related software and algorithms',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`));
     return extra;
   }
-  function softwareExtras(item) {
+  function softwareExtras(item, cites) {
     const extras={};
     const add=(key,content)=>{if(content)extras[key]=(extras[key]||"")+content;};
     const algos=relatedAlgorithms(item.algorithmIds);
     if(algos.length) add('relatedProjects',subheading('Algorithms & methods',`<p>Reference pages for the techniques used by this software. Links do not imply separate physical validation of every method.</p><div class="method-chip-row">${chipLinks(algos,algorithmUrl)}</div>`));
     const robots=(item.robotIds||[]).map(id=>visibleProjects().find(p=>p.id===id)).filter(Boolean);
     if(robots.length) add('relatedProjects',subheading('Robots using this software',`<div class="related-list">${robots.map(p=>`<a class="related-item" href="${projectUrl(p)}"><strong>${text(p.title)}</strong><span>${text(p.summary)} ↗</span></a>`).join("")}</div>`));
-    if(item.codeFiles?.length) add('referencesResources',subheading('Code structure',`<p>Relevant source modules (paths are informational until a public repository URL is supplied).</p><ul class="code-file-list">${item.codeFiles.map(f=>`<li><code>${text(f)}</code></li>`).join("")}</ul>`));
-    if(item.references?.length) add('referencesResources',subheading('References & inspiration',referenceList(item.references)));
+    if(item.codeFiles?.length) add('materialsMethods',subheading('Code structure',`<p>Relevant source modules (paths are informational until a public repository URL is supplied).</p><ul class="code-file-list">${item.codeFiles.map(f=>`<li><code>${text(f)}</code></li>`).join("")}</ul>`));
     const source=linkMarkup(item.sourceUrl,'View public source code');
-    if(source) add('referencesResources',`<div class="resource-links">${source}</div>`);
+    if(source) add('materialsMethods',subheading('Source code',`<div class="resource-links">${source}</div>`));
     return extras;
   }
 
@@ -697,7 +758,8 @@
     if(!p){root.innerHTML=missingProject;return;}
     if(p.category==='fabrication'){printDetail(p);return;}
     document.title=`${p.title} · ${data.owner.name}`;
-    const rows=sectionLayouts(p,projectExtras(p));
+    const citations=citationContext(p);
+    const rows=sectionLayouts(p,projectExtras(p,citations),citations);
     root.innerHTML=`<div class="container">
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>

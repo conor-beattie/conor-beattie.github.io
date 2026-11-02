@@ -103,66 +103,86 @@ The unpublished Part 1 remains unpublished until explicitly published.
 
 ---
 
-# Project Journal — Consistent Project Sections (28 October 2026)
+# Project Portfolio — Journal-Style Reporting (2 November 2026)
 
-The project pages now use **the same ten headings and order** across normal
-engineering projects, 3D-print projects, and software projects. Every record in
-`assets/js/site-data.js` has **all ten editable fields** under `sections`:
+Substantial investigations now follow the familiar **IMRaD** research-report
+structure, extended with engineering development and portfolio links:
 
 ```javascript
 sections: {
-  overview: "",
-  objectivesRequirements: "",
-  backgroundResearch: "",
-  designDevelopment: "",
-  testingValidation: "",
-  resultsEvaluation: "",
-  conclusionsNextSteps: "",
-  lessonsLearned: "",
-  referencesResources: "",
-  relatedProjects: ""
+  abstract: "",           // Write last: only after findings and conclusions are known
+  introduction: "",       // Problem, aims, context and relevant background sources
+  materialsMethods: "",   // Design decisions, materials, apparatus and repeatable procedures
+  results: "",            // Measurements and observations; no invented outcomes
+  discussion: "",         // Interpretation, limitations and comparison with expectations
+  conclusions: "",        // Main finding and next steps based on evidence
+  lessonsLearned: "",     // Personal engineering learning, distinct from Discussion
+  relatedProjects: "",   // Optional prose; linked projects are generated automatically
+  references: ""         // Optional notes, followed by numbered bibliography
 },
-references: [],
+engineeringSummary: {
+  challenge: "", contribution: "", outcome: "", lessonsLearned: ""
+},
+references: []
 ```
 
-**Write only the sections that apply to a given project.** Empty sections are not
-displayed; the `ON THIS PAGE` menu shows only headings with meaningful content,
-related links or structured evidence. No numbers appear in the menu.
+All **nine report fields and four engineering-summary fields are optional** and
+are hidden when empty. The four summary fields remain above the detailed report
+and can capture progress without being labelled as a scientific Abstract. **Do
+not write the Abstract until work is complete.** Simple 3D-print pages may use
+neither the summary nor the detailed report. The site navigation lists only
+sections that actually contain content.
 
-Older technical paragraphs have been preserved word-for-word under the new
-headings. When several former sections belong under one title (e.g. mechanism,
-manufacture, software and revisions under **Design & Development**), the entry
-has a `sectionDetails` list of editable `{heading, text}` subheadings. Do not
-remove these unless you deliberately want to delete that material. Detailed
-growing research arrays (`surfaceStudy`, `investigation`, `ioMap`) remain intact
-and render under the appropriate standard section.
+The previous report content has been transferred into the closest journal
+sections. Background and objectives now follow the former overview within
+**Introduction**; design, manufacture and testing methods fall under
+**Materials & Methods**; existing Results & Evaluation paragraphs were divided
+between **Results** and **Discussion** where the source already separated
+reported findings from interpretation. Existing detailed tables and software
+subheadings have been preserved. Review scientific claims against original
+records before publishing additional results.
 
-For an **attributed video, designer, paper or external resource**, add an item to
-a project's `references` list, for example:
+## Numbered inline citations and bibliography
+
+Keep complete references **at the end** of the project page. Add an `id` to a
+source in `references`, `surfaceStudy.sources`, or `investigation.sources`:
 
 ```javascript
 references: [
   {
-    name: "Original mechanism inspiration",
-    url: "", // Add the verified creator/video link before publishing
-    description: "A design that informed the initial gripper concept."
+    id: "example-paper",
+    name: "Example Author (2025) — Title of study",
+    url: "https://doi.org/your-verified-doi",
+    description: "Why the source is relevant."
   }
 ],
+sections: {
+  introduction: "Earlier research examines this method [@example-paper].",
+  // ... other section keys as above
+}
 ```
 
-`referencesResources` can hold a normal paragraph as well. Existing `links`
-(GitHub, CAD, videos, downloads) still appear in this section automatically.
-Existing related-project links appear in **Related Projects** automatically.
+The text marker `[@example-paper]` appears on the site as a clickable **[1]**
+link to the full reference. Citations are numbered by their first appearance
+in the report, and the same source keeps its number wherever it is cited.
+References already collected but not cited directly remain below under
+**Further reading & resources**. The gripper study's existing sources now have
+stable IDs, so inline citations can be added without manually renumbering them.
+If there are no sources, the References section remains hidden unless you enter
+other content there. `references` is always the final report section.
 
-**Special layouts are preserved:** fabrication CAD/finished-print images and
-photo lightbox; engineering research tables, gripper test cards and IO tables;
-software flowchart, source module lists and algorithm links. The separate
-Algorithms library is a technical reference library, not a project gallery, so
-its educational page format is unchanged.
+The `references: []` list is separate from the string field
+`sections.references`. Existing links for source code, videos, CAD and
+technical files appear within Materials & Methods under Project files & media,
+rather than becoming invented academic citations.
 
-**Development mode remains available on the live site:**
-`https://conor-beattie.github.io/development.html` (unlisted but not private).
-Draft visibility and navigation with `preview=drafts` are unchanged.
+**Special layouts are preserved:** fabrication CAD and photograph galleries,
+research tables, gripper test cards, I/O tables, software flowcharts and
+algorithms. All old project IDs, draft visibility, skills filters, ordering,
+progress statuses and links retain their original behaviour.
+
+**Development mode:** `https://conor-beattie.github.io/development.html`
+(unlisted but not private); the `preview=drafts` flag is retained across pages.
 
 ---
 

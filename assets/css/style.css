@@ -626,7 +626,7 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 @media(max-width:620px) { .development-preview-bar__inner { flex-direction:column; align-items:flex-start; gap:7px; } .development-preview-bar__links { gap:14px; } }
 
 /* Shared project-report sections: secondary technical labels stay within the
-   ten consistent headings used in the On This Page navigation. */
+   optional journal-style headings used in the On This Page navigation. */
 .standard-subsection { margin: 24px 0 0; }
 .standard-subsection:first-child { margin-top: 0; }
 .standard-subsection h3 { margin: 0 0 10px; font-size: 1.07rem; letter-spacing: -.015em; }
@@ -662,3 +662,14 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 
 .category-description { max-width: 860px; color: var(--ink-soft); font-size: .97rem; line-height: 1.65; margin: 0 0 28px; }
 .category-description[hidden] { display: none; }
+
+/* Journal-style references: inline [n] citations link to full entries at the end. */
+.inline-citation { color:var(--accent-deep); font-weight:650; text-decoration:underline; text-underline-offset:3px; white-space:nowrap; }
+.inline-citation:hover,.inline-citation:focus-visible { color:var(--ink); }
+.portfolio-references { margin:12px 0 0; padding-left:2.1rem; list-style-type:decimal; }
+.portfolio-references li { padding:0 0 15px 4px; margin:0 0 13px; border-bottom:1px solid var(--line); line-height:1.6; scroll-margin-top:125px; overflow-wrap:anywhere; }
+.portfolio-references li:last-child { border-bottom:0; }
+.portfolio-references a { color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; }
+.portfolio-references strong { font-weight:650; }
+.detail-section .portfolio-references p { font-size:.88rem; margin:5px 0 0; }
+.portfolio-references li:target { background:var(--wash); border-radius:4px; }
