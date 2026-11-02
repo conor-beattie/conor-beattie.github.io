@@ -1146,27 +1146,17 @@ window.PORTFOLIO_DATA = {
         "3D Printing"
       ],
       "date": "",
+      showRelatedProjects: false,
       "relatedProjectIds": [
         "mechanical-gripper",
         "robotic-gripper-grasp-detection",
         "autonomous-mobile-robot"
       ],
       "contribution": "Planned independent work: design interchangeable contact pads, manufacture samples and measure grip, friction, damage and repeatability.",
-      "sectionLabels": {
-        "overview": "The problem & existing baseline",
-        "brief": "Investigation aim and approach",
-        "surface-benchmarks": "Success criteria against rubber bands",
-        "surface-materials": "Material shortlist and decisions",
-        "surface-tests": "Experimental test programme",
-        "surface-failures": "Failure analysis and design responses",
-        "construction": "Prototype design and manufacturing",
-        "results": "Current status and evidence",
-        "nextSteps": "Next steps and decisions",
-      },
-      sections: {
+            sections: {
         abstract: "",
-        introduction: "The working gripper uses rubber bands as high-friction contact surfaces against cardboard. This arrangement can work well when the object and jaw position match closely, but performance is sensitive to geometry and the bands can occasionally detach. The existing strong gripper actuator may also mask limitations in the contact material. An improved pad should be judged at equal, controlled loading rather than by simply increasing gripping force.\n\nThis is a separate investigation into the material and geometry of the gripping surface, not a redesign of the full gripper mechanism or a grasp-sensing project. The existing rubber-band arrangement is the reference, and a 150 mm cardboard cube provides the principal test object.\n\nInvestigate whether a replaceable 3D-printed compliant pad can produce higher cardboard slip resistance and pull-out retention than the existing rubber bands without unacceptable cardboard damage. Start with comparable, flat pads and a controlled load. Test Bambu TPU 90A, Bambu TPU 85A and Recreus Filaflex SEBS 90A, using available eSUN TPU 95A or TPU 54D only if needed.\n\nThe design sequence is baseline measurement → material comparison → failure diagnosis → literature-informed surface modification → repeat testing. Geometry modifications are conditional, not assumed improvements: a textured surface can produce a different friction response without necessarily increasing peak force. Material hardness, polymer formulation and geometry should be treated as separate experimental variables.",
-        materialsMethods: "Create interchangeable pads with controlled nominal contact dimensions and documented printer settings. Use a repeatable mounting arrangement on the existing gripper or a two-jaw test fixture, with pad orientation and contact area recorded. Design the initial pad surfaces to be geometrically comparable across materials.\n\nThe P1S can print Bambu TPU 90A with a 0.4 mm nozzle; TPU 85A requires a recommended 0.6 or 0.8 mm nozzle. Recreus supplies a Filaflex SEBS profile for the P1S, but its suitability still needs a practical print trial. Record extrusion consistency, layer adhesion, dimensional accuracy and whether the finished pad can be produced repeatedly. No manufactured pads or test values are claimed yet.",
+        introduction: "The original Bobbot gripper was a good first pass, but its angled grip and over-centre linkage were better suited to other applications (for instance, it does a great job picking up and delivering Pot Noodle containers). For small cardboard boxes, some immediate modifications were required. As a quick fix, the grip was widened and rubber bands were added to improve frictional contact. Now it is time to make a more permanent change, undertaken in three phases. The first phase, and the purpose of this project, is to find a more suitable gripper material.\n\nGripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. This project will focus on flexible materials that can be 3D printed using the available Bambu Lab P1S.\n\nThis project will investigate whether 3D-printable gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance.",
+        materialsMethods: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1174,340 +1164,121 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
-      references: [],
-      "surfaceStudy": {
-        "benchmarks": [
-          [
-            "Gripper retention",
-            "Existing rubber bands",
-            "Higher mean pull-out force at identical controlled jaw loading"
-          ],
-          [
-            "Surface friction",
-            "Existing rubber bands",
-            "Higher mean onset-of-slip force at identical applied normal loading"
-          ],
-          [
-            "Cardboard damage",
-            "Existing rubber bands",
-            "No unacceptable increase in permanent deformation or damage"
-          ],
-          [
-            "Printability",
-            "Rubber bands not printed",
-            "Repeatably manufacture a usable contact pad"
-          ],
-          [
-            "Robot operation",
-            "Existing working gripper",
-            "Optional validation; not mandatory for initial material screening"
-          ]
+      "materialSelection": [
+        [
+                "Benchmark",
+                "Rubber bands",
+                "n/a",
+                "n/a",
+                "Establish existing performance",
+                ""
         ],
-        "materials": [
-          {
-            "rank": 1,
-            "name": "Bambu TPU 90A",
-            "relevance": "Compliant printed robotic-gripper materials; verify the exact formulation in any cited study.",
-            "printing": "P1S compatible; 0.4 mm nozzle recommended.",
-            "decision": "Primary 1",
-            "reason": "Intermediate hardness and practical starting point."
-          },
-          {
-            "rank": 2,
-            "name": "Bambu TPU 85A",
-            "relevance": "Softer compliant gripper and sensing research provides a design rationale, not a product-specific cardboard result.",
-            "printing": "P1S compatible; 0.6 mm or 0.8 mm nozzle recommended.",
-            "decision": "Primary 2",
-            "reason": "Tests whether greater softness improves contact with cardboard."
-          },
-          {
-            "rank": 3,
-            "name": "Recreus Filaflex SEBS 90A",
-            "relevance": "SEBS-type flexible anti-slip material; direct evidence for this exact grade against cardboard is not established.",
-            "printing": "Manufacturer provides P1S Filaflex SEBS profile; check product grade and settings.",
-            "decision": "Primary 3",
-            "reason": "Different polymer chemistry at similar nominal Shore A hardness."
-          },
-          {
-            "rank": 4,
-            "name": "eSUN TPU 95A",
-            "relevance": "2025 published research includes printed TPU 95A and cardboard packaging friction. [@stoica-2025]",
-            "printing": "Already owned; P1S printable with 0.4 mm.",
-            "decision": "Substitute 1",
-            "reason": "Available, reliable alternative if a primary material cannot be tested."
-          },
-          {
-            "rank": 5,
-            "name": "TPU 54D",
-            "relevance": "Harder TPU can inform printed structural/compliant designs, but is not a leading soft-contact candidate.",
-            "printing": "Already owned and printable.",
-            "decision": "Substitute 2",
-            "reason": "Fallback rather than a preferred soft gripping surface."
-          },
-          {
-            "rank": 6,
-            "name": "TPU 60A–70A",
-            "relevance": "Research on very soft printed grippers, but manufacturing adds uncertainty.",
-            "printing": "Outside the initially selected, manufacturer-supported P1S route.",
-            "decision": "Excluded",
-            "reason": "Printing uncertainty outweighs benefit to initial comparison."
-          },
-          {
-            "rank": 7,
-            "name": "BotFeeder Filastic TPE",
-            "relevance": "Material used in Liu and Hung (2022) compliant-finger research.",
-            "printing": "Specific material and P1S profile not established.",
-            "decision": "Excluded",
-            "reason": "Material sourcing and manufacturing evidence insufficient."
-          },
-          {
-            "rank": 8,
-            "name": "Other TPS/TPC formulations",
-            "relevance": "Research on flexible printed structures varies by formulation.",
-            "printing": "Product-specific P1S compatibility unverified.",
-            "decision": "Excluded",
-            "reason": "No strong case to add more initial variables."
-          },
-          {
-            "rank": 9,
-            "name": "Foaming TPU",
-            "relevance": "Potentially tunable compliance; not yet justified for cardboard retention.",
-            "printing": "Requires additional calibration and process controls.",
-            "decision": "Excluded",
-            "reason": "Introduces extra manufacturing variables."
-          }
+        [
+                "Selected",
+                "TPU 90A",
+                "TPU",
+                "Yes",
+                "Baseline TPU",
+                "Robotic-gripper study using TPU 90A [@al-hadithi-2026]; Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]"
         ],
-        "failures": [
-          [
-            "Insufficient grip",
-            "Low friction against cardboard",
-            "Compare shallow ribs, grooves or directional texture with a flat reference.",
-            "Possibly greater resistance to sliding; verify experimentally.",
-            "TPU–cardboard tribology (2025); textured silicone pads (2025)"
-          ],
-          [
-            "Poor surface conformity",
-            "Pad too stiff to follow cardboard irregularities",
-            "Explore flexible ribs, grooves or compliant geometry.",
-            "Greater local deformation without relying only on lower filament hardness.",
-            "Liu & Hung (2022)"
-          ],
-          [
-            "Uneven contact",
-            "Pivoting jaws create nonuniform contact pressure",
-            "Explore rounded, segmented or locally compliant pad features.",
-            "More even contact and usable contact area.",
-            "Białek & Rybarczyk (2023); Liu & Hung (2022)"
-          ],
-          [
-            "Cardboard damage",
-            "Excessive local pressure creates crushing or creasing",
-            "Use wider, rounded or compliant contact features and reassess pressure.",
-            "Lower local pressure and reduced permanent deformation.",
-            "Kargar & Berselli (2025); Białek & Rybarczyk (2023)"
-          ],
-          [
-            "Poor print quality",
-            "Under-extrusion, weak layer bonding or deformation",
-            "Adjust nozzle, feed rate, temperature, orientation and drying.",
-            "More consistent, repeatable and durable pads.",
-            "Bambu Lab guidance; Liu & Hung (2022)"
-          ]
+        [
+                "Selected",
+                "Recreus Filaflex SEBS 90A",
+                "TPE",
+                "Yes",
+                "Compare TPE vs TPU (both 90A)",
+                ""
         ],
-        "tests": [
-          {
-            "rank": 1,
-            "name": "Horizontal pull / slip",
-            "priority": "Primary",
-            "measures": "Static friction and resistance to initial sliding against cardboard.",
-            "equipment": "Weighted sled, force gauge, slow pulley or motorised lead screw.",
-            "minimum": "5 trials per material.",
-            "result": "Mean peak force before sustained slip (N); estimated coefficient F/N when loading is controlled.",
-            "controls": "Normal load, pad area, cardboard type, pull speed, surface direction, print orientation.",
-            "assess": "Onset-of-slip force and trial variability.",
-            "extension": "More trials or normal loads; inclined-plane test if sled is impractical.",
-            "notes": "Adapted from ASTM D1894; not an ASTM-compliant cardboard standard. Smooth motorised pulling is preferable.",
-            "reference": "ASTM D1894-24 (adapted)"
-          },
-          {
-            "rank": 2,
-            "name": "Gripper retention / pull-out",
-            "priority": "Primary",
-            "measures": "Force needed to extract the box from closed jaws under a controlled normal force.",
-            "equipment": "Two-jaw fixture, force gauge and calibrated clamp or controlled spring.",
-            "minimum": "5 trials per material.",
-            "result": "Mean pull-out force (N) and trial-to-trial spread.",
-            "controls": "Actual jaw normal force, pad location, area, box orientation, pull direction/speed.",
-            "assess": "First sustained slip and any box damage.",
-            "extension": "Additional jaw-force settings.",
-            "notes": "A fixed servo position or motor current cannot by itself establish equal jaw force between materials.",
-            "reference": "Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]"
-          },
-          {
-            "rank": 3,
-            "name": "Pickup–carry–drop-off",
-            "priority": "Secondary",
-            "measures": "Reliability of complete pickup, transport and release.",
-            "equipment": "Existing robot, boxes and interchangeable pads.",
-            "minimum": "1–3 exploratory cycles per material, if feasible.",
-            "result": "Count successful operations and identify the failure stage.",
-            "controls": "Starting position, box type, jaw settings, route, speed and release.",
-            "assess": "Pickup failure, slipping/drop during travel or release failure.",
-            "extension": "10 full cycles per material (30 total).",
-            "notes": "Optional application-level validation, not a requirement for passing the material screen.",
-            "reference": "Application-level validation (no matching standard identified)"
-          },
-          {
-            "rank": 4,
-            "name": "Cardboard compression / damage",
-            "priority": "Primary — simple",
-            "measures": "Permanent indentation, creasing, crushing or structural damage.",
-            "equipment": "Existing fixture, camera and calipers.",
-            "minimum": "Inspect the box after retention tests.",
-            "result": "Damage score 1–5; thickness reduction (%) if measurable.",
-            "controls": "Same cardboard, marked location, jaw force, duration, recovery time and caliper pressure.",
-            "assess": "1 = none; 5 = structural failure. Compare with baseline.",
-            "extension": "More detailed compression measurement.",
-            "notes": "Use consistent photographs and the same recovery time; no separate large test programme.",
-            "reference": "Adapted practical damage assessment"
-          },
-          {
-            "rank": 5,
-            "name": "Inclined-plane sliding",
-            "priority": "Alternative",
-            "measures": "Approximate friction coefficient from initial slip angle.",
-            "equipment": "Adjustable ramp and inclinometer.",
-            "minimum": "Optional fallback only.",
-            "result": "Slip angle and estimated coefficient tan(angle).",
-            "controls": "Normal loading via weight, cardboard type and ramp raising rate.",
-            "assess": "Angle at first sliding.",
-            "extension": "Substitute for horizontal slip rig.",
-            "notes": "Simpler to build, but loading may be less representative of a real gripper.",
-            "reference": "Inclined-plane friction method"
-          },
-          {
-            "rank": 6,
-            "name": "Compression / force–displacement",
-            "priority": "Extension",
-            "measures": "Pad stiffness, elastic recovery and hysteresis.",
-            "equipment": "Force gauge and repeatable displacement fixture.",
-            "minimum": "Not part of initial screening.",
-            "result": "Load–displacement curve and residual deformation.",
-            "controls": "Pad dimensions, compression rate, cycles and loading history.",
-            "assess": "Permanent set and recovery.",
-            "extension": "Potential future sensing study.",
-            "notes": "Useful for understanding compliance, not a prerequisite to selecting materials.",
-            "reference": "Compliant-finger and integrated sensing literature"
-          },
-          {
-            "rank": 7,
-            "name": "Repeated gripping / wear",
-            "priority": "Extension",
-            "measures": "Reduction of grip performance after repeated contact.",
-            "equipment": "Fixture or robot and force gauge.",
-            "minimum": "Not part of initial screening.",
-            "result": "Change in retention force and visible wear.",
-            "controls": "Cycle count, jaw force and cardboard condition.",
-            "assess": "Force loss and physical damage.",
-            "extension": "Combine with longer robot-cycle programme.",
-            "notes": "Follow-up durability investigation after a successful material is identified.",
-            "reference": "TPU/cardboard tribology (2025)"
-          },
-          {
-            "rank": 8,
-            "name": "Surface texture comparison",
-            "priority": "Extension",
-            "measures": "Effect of ribs, grooves or textured pads on grip.",
-            "equipment": "Alternative printed contact pads.",
-            "minimum": "Only after baseline results justify a design change.",
-            "result": "Change in slip and pull-out force compared with a flat pad.",
-            "controls": "Material, pad size, normal force, printing method and texture orientation.",
-            "assess": "Measured improvement without increased box damage.",
-            "extension": "Optimise the selected material.",
-            "notes": "Texture adds a second experimental variable; do not mix into initial material comparison.",
-            "reference": "Kargar & Berselli (2025) [@kargar-berselli-2025]"
-          },
-          {
-            "rank": 9,
-            "name": "Infill-density comparison",
-            "priority": "Extension",
-            "measures": "Influence of internal printed geometry on compliance and grip.",
-            "equipment": "Pads with controlled different infill densities.",
-            "minimum": "Only if pad thickness makes infill meaningful.",
-            "result": "Compliance, slip force and retention by infill design.",
-            "controls": "Material, shape, shells, infill pattern, jaw load.",
-            "assess": "Measured improvement versus solid/standard pad.",
-            "extension": "Optimise thicker compliant geometry.",
-            "notes": "More pertinent for thick compliant structures than thin contact layers.",
-            "reference": "Liu & Hung (2022)"
-          },
-          {
-            "rank": 10,
-            "name": "Integrated contact detection",
-            "priority": "Separate future study",
-            "measures": "Whether deformation can indicate initial contact.",
-            "equipment": "Sensor and associated electronics/fixture.",
-            "minimum": "Outside the contact-material study.",
-            "result": "Detection accuracy and consistency.",
-            "controls": "Contact load, pad geometry and sensor position.",
-            "assess": "False triggers and missed detections.",
-            "extension": "Future grasp-feedback project.",
-            "notes": "Do not conflate sensing performance with contact-surface friction.",
-            "reference": "Integrated sensing gripper literature"
-          }
+        [
+                "Selected",
+                "PEBA 90A",
+                "PEBA",
+                "Yes",
+                "Compare PEBA vs TPU (both 90A)",
+                "[@perspektive3d-peba]"
         ],
-        "sources": [
-          {
-            "id": "stoica-2025",
-            "name": "Stoica et al. (2025) — Experimental Research on the Tribological Behavior of Plastic Materials with Friction Properties, with Applications to Manipulators in the Pharmaceutical Industry",
-            "use": "Tests how 3D-printed TPU materials of different hardnesses slide and wear against cardboard packaging.",
-            "url": "https://doi.org/10.3390/coatings15010084"
-          },
-          {
-            "id": "su-2026",
-            "name": "Su et al. (2026) — 3D printing elastic metamaterials and actuators with high resilience via polyether block amide (PEBA)",
-            "use": "Compares how 3D-printed PEBA and TPU deform and recover when used in flexible structures.",
-            "url": "https://doi.org/10.1016/j.eml.2026.102465"
-          },
-          {
-            "id": "li-2026",
-            "name": "Li et al. (2026) — Effects of gyroid lattice relative density on wear and mechanical performance of 3D printed TPU and flexible nylon for footwear",
-            "use": "Compares the wear and deformation of printed PEBA and TPU structures with different internal lattice densities.",
-            "url": "https://doi.org/10.1016/j.isci.2026.115868"
-          },
-          {
-            "id": "stoica-2026",
-            "name": "Stoica et al. (2026) — Wear Behavior and Multi-Technique Characterization of 3D Printed TPU Under Simulated Pharmaceutical Operating Conditions",
-            "use": "Investigates how printing conditions affect the mechanical properties and cardboard-contact wear of soft TPU.",
-            "url": "https://doi.org/10.3390/polym18050630"
-          },
-          {
-            "id": "al-hadithi-2026",
-            "name": "Al-Hadithi, Pastor & Lin (2026) — Design and Experimental Validation of a 3D-Printed Hybrid Soft Robotic Gripper for Delicate Object Manipulation",
-            "use": "Describes a robotic gripper combining flexible TPU 90A fingers with rigid 3D-printed components.",
-            "url": "https://doi.org/10.3390/electronics15040848"
-          },
-          {
-            "id": "liu-hung-2022",
-            "name": "Liu & Hung (2022) — Effect of the infill density on the performance of a 3D-printed compliant finger",
-            "use": "Investigates how changing the infill density of flexible 3D-printed fingers affects bending, stiffness and gripping capacity.",
-            "url": "https://doi.org/10.1016/j.matdes.2022.111203"
-          },
-          {
-            "id": "bialek-rybarczyk-2023",
-            "name": "Białek & Rybarczyk (2023) — A Comparative Study of Different Fingertips on the Object Pulling Forces in Robotic Gripper Jaws",
-            "use": "Compares robotic gripper fingertips by measuring the force required to pull an object out of the jaws.",
-            "url": "https://doi.org/10.3390/app13031247"
-          },
-          {
-            "id": "kargar-berselli-2025",
-            "name": "Kargar & Berselli — Frictional insights into textured soft pads (2025)",
-            "use": "Tests smooth and patterned silicone gripping surfaces to see how their shapes affect friction.",
-            "url": "https://doi.org/10.1007/s00170-025-16625-1"
-          }         
+        [
+                "Selected (if outsourced)",
+                "TPU 60A–70A (Filaflex)",
+                "TPU",
+                "Not reliably",
+                "Compare TPU 60–70A vs TPU 90A",
+                "Stoica et al. (2025) [@stoica-2025]"
+        ],
+        [
+                "Alternative",
+                "TPU 85A",
+                "TPU",
+                "Yes",
+                "Lower-durometer TPU if 60A–70A cannot be outsourced",
+                "Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]; Liu & Hung (2022) [@liu-hung-2022]"
+        ],
+        [
+                "Alternative",
+                "eSUN TPU 95A",
+                "TPU",
+                "Yes",
+                "Already owned; alternative TPU durometer if required",
+                ""
+        ],
+        [
+                "Alternative",
+                "Siraya Tech Flex TPU 64D",
+                "TPU",
+                "Yes",
+                "Already owned; alternative TPU durometer if required",
+                ""
+        ],
+        [
+                "Not Selected",
+                "BotFeeder Filastic TPE",
+                "TPE",
+                "Not researched",
+                "Not available to purchase in the UK",
+                "Liu & Hung (2022) [@liu-hung-2022]"
+        ],
+        [
+                "Alternative",
+                "colorFabb varioShore TPU",
+                "Foaming TPU",
+                "Yes",
+                "",
+                "3D-printed elastomeric-foam robotic-gripper study"
         ]
-      },
-      "links": {
+],
+      references: [
+        {
+                "id": "wikipedia-robot-end-effector",
+                "name": "Wikipedia — Robot end effector, 'Levels of force'",
+                "url": "https://en.wikipedia.org/wiki/Robot_end_effector#Levels_of_force"
+        },
+        {
+                "id": "al-hadithi-2026",
+                "name": "Al-Hadithi, Pastor & Lin (2026) — Design and Experimental Validation of a 3D-Printed Hybrid Soft Robotic Gripper for Delicate Object Manipulation",
+                "url": "https://doi.org/10.3390/electronics15040848"
+        },
+        {
+                "id": "bialek-rybarczyk-2023",
+                "name": "Białek & Rybarczyk (2023) — A Comparative Study of Different Fingertips on the Object Pulling Forces in Robotic Gripper Jaws",
+                "url": "https://doi.org/10.3390/app13031247"
+        },
+        {
+                "id": "perspektive3d-peba",
+                "name": "perspektive3d — PEBA 90A filament demonstration (YouTube video; title not independently verified)",
+                "url": "https://www.youtube.com/watch?v=pVdkjnWaO64&t=365s"
+        },
+        {
+                "id": "stoica-2025",
+                "name": "Stoica et al. (2025) — Experimental Research on the Tribological Behavior of Plastic Materials with Friction Properties, with Applications to Manipulators in the Pharmaceutical Industry",
+                "url": "https://doi.org/10.3390/coatings15010084"
+        },
+        {
+                "id": "liu-hung-2022",
+                "name": "Liu & Hung (2022) — Effect of the infill density on the performance of a 3D-printed compliant finger",
+                "url": "https://doi.org/10.1016/j.matdes.2022.111203"
+        }
+],
+            "links": {
         "github": "",
         "cad": "",
         "video": "",

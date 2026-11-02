@@ -647,6 +647,7 @@
     // In the contact-pad investigation, material and test tables can also
     // cite specific journal papers without adding prose just to force a cite.
     (entry.surfaceStudy?.materials || []).forEach(row => Object.values(row).forEach(scan));
+    (entry.materialSelection || []).forEach(row => row.forEach(scan));
     (entry.surfaceStudy?.tests || []).forEach(row => Object.values(row).forEach(scan));
     const ordered = [...first.map(id=>byId.get(id)),...all.filter(r=>!observed.has(r.id))];
     const numbers = new Map(ordered.map((r,i)=>[r.id,i+1]));
@@ -718,6 +719,15 @@
     if(inv.criteria?.length) add('introduction',structured('investigation-criteria','Engineering criteria',investigationSection));
     if(surface.benchmarks?.length) add('introduction',structured('surface-benchmarks','Success criteria against rubber bands',surfaceStudySection));
     if(surface.materials?.length) add('materialsMethods',structured('surface-materials','Material shortlist and decisions',surfaceStudySection));
+    // Compact material-choice table for the contact-pad study. Textual research
+    // citations use the same numbered bibliography as the report prose.
+    if(p.materialSelection?.length) {
+      const headers=['Decision','Material','Filament material','P1S compatible','Reasoning','Research source'];
+      const heading=headers.map(h=>`<th scope="col">${text(h)}</th>`).join('');
+      const rows=p.materialSelection.map(row=>`<tr>${row.map(cell=>`<td>${cites.inline(cell)}</td>`).join('')}</tr>`).join('');
+      add('materialsMethods',`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table surface-materials-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`);
+    }
+
     if(inv.jawOptions?.length || inv.detectionOptions?.length) add('materialsMethods',structured('concept-study','Mechanism concepts',investigationSection));
     if(p.ioMap?.rows?.length) add('materialsMethods',ioMapMarkup(p));
     if(surface.failures?.length) add('materialsMethods',structured('surface-failures','Failure analysis and design responses',surfaceStudySection));
@@ -733,9 +743,9 @@
     ].filter(Boolean);
     if(resources.length) add('materialsMethods',subheading('Project files & media',`<div class="resource-links">${resources.join("")}</div>`));
     const linked=(p.relatedProjectIds||[]).map(id=>visibleProjects().find(item=>item.id===id)).filter(item=>item&&item.id!==p.id);
-    if(linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`);
+    if(p.showRelatedProjects !== false && linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`);
     const linkedSoftware=softwareItems.filter(item=>(item.robotIds||[]).includes(p.id));
-    if(linkedSoftware.length) add('relatedProjects',subheading('Related software and algorithms',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`));
+    if(p.showRelatedProjects !== false && linkedSoftware.length) add('relatedProjects',subheading('Related software and algorithms',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`));
     return extra;
   }
   function softwareExtras(item, cites) {
