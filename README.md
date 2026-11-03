@@ -113,8 +113,8 @@ sections: {
   abstract: "",           // Write last: only after findings and conclusions are known
   introduction: "",       // Problem, aims, context and relevant background sources
   materialsMethods: "",   // Design decisions, materials, apparatus and repeatable procedures
-  results: "",            // Measurements and observations; no invented outcomes
-  discussion: "",         // Interpretation, limitations and comparison with expectations
+  results: "",            // Rendered within the shared Results and Discussion section
+  discussion: "",         // Rendered below Results in that same section
   conclusions: "",        // Main finding and next steps based on evidence
   lessonsLearned: "",     // Personal engineering learning, distinct from Discussion
   relatedProjects: "",   // Optional prose; linked projects are generated automatically
@@ -136,10 +136,12 @@ sections that actually contain content.
 The previous report content has been transferred into the closest journal
 sections. Background and objectives now follow the former overview within
 **Introduction**; design, manufacture and testing methods fall under
-**Materials & Methods**; existing Results & Evaluation paragraphs were divided
-between **Results** and **Discussion** where the source already separated
-reported findings from interpretation. Existing detailed tables and software
-subheadings have been preserved. Review scientific claims against original
+**Materials & Methods**; existing Results & Evaluation paragraphs remain in the separate `results` and
+`discussion` source fields but now appear under **one Results and Discussion**
+heading on the website, with labelled subsections to preserve the distinction
+between findings and interpretation. Existing detailed tables, citations,
+software subheadings, and the old `#results` and `#discussion` anchors have
+been preserved. Review scientific claims against original
 records before publishing additional results.
 
 ## Numbered inline citations and bibliography
@@ -170,6 +172,22 @@ References already collected but not cited directly remain below under
 stable IDs, so inline citations can be added without manually renumbering them.
 If there are no sources, the References section remains hidden unless you enter
 other content there. `references` is always the final report section.
+
+## Gripper Part 1 numbered working outline (3 November 2026)
+
+The unpublished contact-pad investigation (`id: "gripper-contact-surfaces"`)
+now defines its Introduction subsections **2.1–2.4** and Materials & Methods
+subsections **3.1–3.6** in `sectionDetails`. Its existing introduction text
+has been moved into 2.1–2.3; the existing material selection table sits inside
+3.1, and the four illustrated test methods and equations sit inside 3.5.
+The existing controlled-conditions sentence is under 3.6. Empty future
+subsections currently display their headings only, in development preview.
+
+To fill a subsection, edit its `text` field. The `id` of the **3.1** and **3.5**
+items is used to position their original material/test tables immediately below
+the matching text; preserve those IDs. The material rows, test images,
+calculations and citations remain editable in their original data arrays.
+This change does not publish the draft or create experimental results.
 
 The `references: []` list is separate from the string field
 `sections.references`. Existing links for source code, videos, CAD and

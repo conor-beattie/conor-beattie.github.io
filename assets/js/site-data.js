@@ -1153,9 +1153,9 @@ window.PORTFOLIO_DATA = {
         "autonomous-mobile-robot"
       ],
       "contribution": "Planned independent work: design interchangeable contact pads, manufacture samples and measure grip, friction, damage and repeatability.",
-            sections: {
+      sections: {
         abstract: "",
-        introduction: "The original Bobbot gripper was a good first pass, but its angled grip and over-centre linkage were better suited to other applications (for instance, it does a great job picking up and delivering Pot Noodle containers). For small cardboard boxes, some immediate modifications were required. As a quick fix, the grip was widened and rubber bands were added to improve frictional contact. Now it is time to make a more permanent change, undertaken in three phases. The first phase, and the purpose of this project, is to find a more suitable gripper material.\n\nGripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. This project will focus on flexible materials that can be 3D printed using the available Bambu Lab P1S.\n\nThis project will investigate whether 3D-printable gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance.",
+        introduction: "",
         materialsMethods: "",
         results: "",
         discussion: "",
@@ -1164,8 +1164,68 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
-      materialsIntro: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers.",
-      testsIntro: "Four test methods are proposed to compare the new pads with the existing rubber-band grip. The first two measure resistance to slipping and pull-out force. The third tests the complete pickup, carry and dropoff operation, while the fourth checks for damage to the cardboard. Test conditions will be kept consistent between materials.",
+      // Working study outline: headings remain visible in development preview
+      // while the technical content, CAD and measured evidence are prepared.
+      sectionDetails: {
+        introduction: [
+          {
+            id: "background",
+            heading: "2.1 Background and Problem Statement",
+            text: "The original Bobbot gripper was a good first pass, but its angled grip and over-centre linkage were better suited to other applications (for instance, it does a great job picking up and delivering Pot Noodle containers). For small cardboard boxes, some immediate modifications were required. As a quick fix, the grip was widened and rubber bands were added to improve frictional contact. Now it is time to make a more permanent change, undertaken in three phases. The first phase, and the purpose of this project, is to find a more suitable gripper material."
+          },
+          {
+            id: "literature",
+            heading: "2.2 Literature Review",
+            text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. This project will focus on flexible materials that can be 3D printed using the available Bambu Lab P1S."
+          },
+          {
+            id: "aim",
+            heading: "2.3 Aim and Research Questions",
+            text: "This project will investigate whether 3D-printable gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance."
+          },
+          {
+            id: "requirements",
+            heading: "2.4 Engineering Requirements and Evaluation Criteria",
+            text: "",
+            showEmpty: true
+          }
+        ],
+        materialsMethods: [
+          {
+            id: "material-selection",
+            heading: "3.1 Material Selection and Benchmark",
+            text: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers."
+          },
+          {
+            id: "pad-design",
+            heading: "3.2 Contact-Pad Design",
+            text: "",
+            showEmpty: true
+          },
+          {
+            id: "manufacturing",
+            heading: "3.3 Specimen Manufacturing and Preparation",
+            text: "",
+            showEmpty: true
+          },
+          {
+            id: "apparatus",
+            heading: "3.4 Experimental Apparatus",
+            text: "",
+            showEmpty: true
+          },
+          {
+            id: "test-methods",
+            heading: "3.5 Test Methods and Calculations",
+            text: "Four test methods are proposed to compare the new pads with the existing rubber-band grip. The first two measure resistance to slipping and pull-out force. The third tests the complete pickup, carry and dropoff operation, while the fourth checks for damage to the cardboard."
+          },
+          {
+            id: "experimental-controls",
+            heading: "3.6 Experimental Controls and Planning",
+            text: "Test conditions will be kept consistent between materials."
+          }
+        ]
+      },
       "materialSelection": [
         [
                 "Benchmark",

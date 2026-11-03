@@ -594,15 +594,15 @@
     ["abstract", "Abstract"],
     ["introduction", "Introduction"],
     ["materialsMethods", "Materials & Methods"],
-    ["results", "Results"],
-    ["discussion", "Discussion"],
+    ["resultsDiscussion", "Results and Discussion"],
     ["conclusions", "Conclusions"],
     ["lessonsLearned", "Lessons Learned"],
     ["relatedProjects", "Related Projects"],
     ["references", "References"]
   ];
   const hasText = value => typeof value === "string" && value.trim().length > 0;
-  const subheading = (label, body) => body ? `<div class="standard-subsection"><h3>${text(label)}</h3>${body}</div>` : "";
+  const subheading = (label, body, showEmpty=false) => (body || showEmpty) ?
+    `<div class="standard-subsection"><h3>${text(label)}</h3>${body}</div>` : "";
   const sectionShell = (key, label, content) => content ?
     `<section class="detail-section detail-section--clean" id="${key}"><div><h2>${text(label)}</h2>${content}</div></section>` : "";
   const sectionNavigation = (entries, label="Project sections") =>
@@ -641,8 +641,14 @@
     };
     STANDARD_SECTIONS.forEach(([key]) => {
       if (key === 'references') return;
-      scan(entry.sections?.[key]);
-      (entry.sectionDetails?.[key] || []).forEach(d => scan(d.text));
+      // Results and Discussion retain independent source fields and citations,
+      // but are presented together under one visible report heading.
+      const sourceKeys = key === 'resultsDiscussion'
+        ? ['resultsDiscussion', 'results', 'discussion'] : [key];
+      sourceKeys.forEach(sourceKey => {
+        scan(entry.sections?.[sourceKey]);
+        (entry.sectionDetails?.[sourceKey] || []).forEach(d => scan(d.text));
+      });
     });
     // In the contact-pad investigation, material and test tables can also
     // cite specific journal papers without adding prose just to force a cite.
@@ -672,9 +678,29 @@
       .map(par=>`<p>${inline(par)}</p>`).join("")};
   }
   const sectionLayouts = (entry, extras={}, cites=citationContext(entry)) => STANDARD_SECTIONS.map(([key,label]) => {
+    if (key === 'resultsDiscussion') {
+      // Keep all previous results, commentary and nested details intact, as
+      // distinguishable subsections of one report section on every project.
+      // Legacy #results and #discussion deep links also remain valid.
+      const combined = ['resultsDiscussion', 'results', 'discussion'].map(sourceKey => {
+        const body = hasText(entry.sections?.[sourceKey]) ? cites.paragraphs(entry.sections[sourceKey]) : '';
+        const nested = (entry.sectionDetails?.[sourceKey] || []).map(item =>
+          subheading(item.heading || 'Further details', cites.paragraphs(item.text || ''))).join('');
+        const extra = extras[sourceKey] || '';
+        if (!body && !nested && !extra) return '';
+        if (sourceKey === 'resultsDiscussion') return body + nested + extra;
+        const label = sourceKey === 'results' ? 'Results' : 'Discussion';
+        return `<div class="standard-subsection" id="${sourceKey}"><h3>${label}</h3>${body}${nested}${extra}</div>`;
+      }).join('');
+      return {key,label,content:combined + (extras.resultsDiscussion || '')};
+    }
     const base = hasText(entry.sections?.[key]) ? cites.paragraphs(entry.sections[key]) : "";
-    const details = (entry.sectionDetails?.[key] || []).map(item =>
-      subheading(item.heading || "Further details", cites.paragraphs(item.text || ""))).join("");
+    const details = (entry.sectionDetails?.[key] || []).map(item => {
+      // A subsection-specific evidence table is appended directly below its
+      // matching heading, not below all headings in the parent report section.
+      const content = cites.paragraphs(item.text || '') + (extras[`${key}:${item.id}`] || '');
+      return subheading(item.heading || "Further details", content, item.showEmpty === true);
+    }).join("");
     const content = base + details + (extras[key] || "") + (key==='references' ? cites.bibliography() : '');
     return {key,label,content};
   }).filter(row => row.content.trim());
@@ -726,7 +752,8 @@
       const heading=headers.map(h=>`<th scope="col">${text(h)}</th>`).join('');
       const rows=p.materialSelection.map(row=>`<tr>${row.map(cell=>`<td>${cites.inline(cell)}</td>`).join('')}</tr>`).join('');
       const table=`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table surface-materials-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`;
-      add('materialsMethods',subheading('Materials',cites.paragraphs(p.materialsIntro || '')+table));
+      if (p.id === 'gripper-contact-surfaces') add('materialsMethods:material-selection',table);
+      else add('materialsMethods',subheading('Materials',cites.paragraphs(p.materialsIntro || '')+table));
     }
     if(p.testMethods?.length) {
       // Inline HTML formulas use subscripts/fractions, with no external math dependency.
@@ -747,7 +774,8 @@
         return `<tr><td>${text(t.name)}</td><td class="test-method-sketch-cell">${sketch}</td><td>${text(t.measures)}</td><td>${equation}</td></tr>`;
       }).join('');
       const table=`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table test-methods-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`;
-      add('materialsMethods',subheading('Tests',cites.paragraphs(p.testsIntro || '')+table));
+      if (p.id === 'gripper-contact-surfaces') add('materialsMethods:test-methods',table);
+      else add('materialsMethods',subheading('Tests',cites.paragraphs(p.testsIntro || '')+table));
     }
 
     if(inv.jawOptions?.length || inv.detectionOptions?.length) add('materialsMethods',structured('concept-study','Mechanism concepts',investigationSection));
