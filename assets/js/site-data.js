@@ -1211,10 +1211,8 @@ window.PORTFOLIO_DATA = {
         { activity: "Final Testing of All Materials", stage: 6 },
       ],
       projectContingencies: [
-        { risk: "TPU 60A–70A cannot be printed reliably on the P1S", response: "Outsource printing or substitute TPU 85A." },
-        { risk: "A selected filament is unavailable", response: "Use another candidate from the material shortlist." },
-        { risk: "Printed specimens have inconsistent quality", response: "Adjust material-specific printing settings and repeat specimen preparation." },
-        { risk: "A test fixture produces inconsistent measurements", response: "Review the fixture or measurement procedure before comparing materials." },
+        { risk: "TPU 60A–70A cannot be outsourced cost effectively", response: "Use an alternative filament from the material list." },
+        { risk: "A selected filament is unavailable", response: "Use an alternative filament from the material list." },
       ],
       "materialSelection": [
         [
