@@ -1148,7 +1148,7 @@ window.PORTFOLIO_DATA = {
       categoryOrder: 3,
       "image": "assets/images/gripper_bobbot_orig.jpeg",
       "imageAlt": "CAD of the existing Bobbot gripper used as a baseline for contact-pad tests",
-      "imageCaption": "Existing Bobbot gripper — reference design. New contact-pad prototypes and experimental photographs will be added as they are produced.",
+      "imageCaption": "Existing Bobbot gripper",
       "summary": "Testing a selection of 3D printable gripper pads to determine their reliabilty in grasping small cardboard boxes.",
       "tags": [
         "Mechanical Design",
