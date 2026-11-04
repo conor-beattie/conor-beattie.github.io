@@ -142,12 +142,15 @@
   const skillSlug = value => String(value || "").normalize("NFKD").toLocaleLowerCase()
     .replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
   const skillUrl = name => previewUrl(`projects.html?skill=${encodeURIComponent(skillSlug(name))}`);
-  const skillTags = (item, limit = 0) => {
-    if (isPlannedProject(item)) return "";
+  // Planned engineering projects do not claim demonstrated skills. Algorithm
+  // cards may still show topic tags, with future methods clearly separated.
+  const skillTags = (item, limit = 0, allowPlanned = false) => {
+    if (isPlannedProject(item) && !allowPlanned) return "";
     const entries = Array.isArray(item.skills) ? [...new Set(item.skills.filter(nonempty))] : [];
     const chosen = limit ? entries.slice(0,limit) : entries;
-    return chosen.length ? `<div class="tags${limit ? "" : " tags-large"}" aria-label="Skills demonstrated">${chosen.map(skill =>
-      `<a class="tag skill-tag" href="${skillUrl(skill)}" title="Browse work demonstrating ${text(skill)}">${text(skill)}</a>`).join("")}</div>` : "";
+    const tagLabel = isPlannedProject(item) ? "Browse future topics tagged" : "Browse work tagged";
+    return chosen.length ? `<div class="tags${limit ? "" : " tags-large"}" aria-label="Skills and topics">${chosen.map(skill =>
+      `<a class="tag skill-tag" href="${skillUrl(skill)}" title="${tagLabel} ${text(skill)}">${text(skill)}</a>`).join("")}</div>` : "";
   };
   const engineeringFields = [
     ["challenge", "Engineering Challenge"],
@@ -236,15 +239,14 @@
   }
 
   function algorithmCard(a) {
-    const count = softwareForAlgorithm(a.id).length;
+    // The title and summary remain; skill tags replace classification banners
+    // and redundant reference/link-count footers.
     return `<article class="algorithm-card">
-      <div class="algorithm-card__top"><span class="eyebrow">${text(a.group)}</span><span class="algorithm-short">${text(a.shortName)}</span></div>
       <div class="algorithm-card__body">
         ${nonempty(a.title) ? `<h3><a href="${algorithmUrl(a)}">${text(a.title)}</a></h3>` : ""}
         ${optionalCardText(a.subtitle, "project-card__subtitle")}
-        ${optionalCardText(a.status, "project-card__status")}
         ${optionalCardText(a.summary, "algorithm-card__summary", "p")}
-        <div class="algorithm-card__bottom"><span>${count ? `${count} linked software entr${count === 1 ? "y" : "ies"}` : "Reference / exploration"}</span><a href="${algorithmUrl(a)}" class="round-arrow" aria-label="View ${text(a.shortName)}"><span aria-hidden="true">↗</span></a></div>
+        ${skillTags(a,0,true)}
       </div>
     </article>`;
   }
@@ -275,23 +277,20 @@
   const detailSection = (id, title, value) => value ? `<section class="detail-section" id="${id}"><div class="detail-section__index" aria-hidden="true">•</div><div><h2>${title}</h2>${paragraphs(value)}</div></section>` : "";
 
   function softwareCard(item) {
-    // Use an existing documented flowchart as the card image when available.
-    // Other software cards retain their original text-only layout.
-    const flowchart = String(item.flowchart || "").trim();
-    const cover = flowchart ? `<a href="${softwareUrl(item)}" class="project-card__image" aria-label="View ${text(item.title)}">
-      <img src="${img(flowchart)}" alt="${text(item.imageAlt || `${item.title} flowchart`)}" loading="lazy" />
-    </a>` : "";
+    // Keep the complete routine diagram on its detail page. At card size it is
+    // too small to read, so the title, summary and tags are more useful here.
     return `<article class="software-card">
-      ${cover}
-      <div class="software-card__body"><div class="eyebrow-row"><span class="eyebrow">SOFTWARE${nonempty(item.type) ? " · " + text(item.type) : ""}</span></div>
+      <div class="software-card__body">
+      <div class="eyebrow-row"><span class="eyebrow">SOFTWARE${nonempty(item.type) ? " · " + text(item.type) : ""}</span></div>
       ${nonempty(item.title) ? `<h3><a href="${softwareUrl(item)}">${text(item.title)}</a></h3>` : ""}
       ${optionalCardText(item.subtitle, "project-card__subtitle")}
       ${optionalCardText(isPlannedProject(item) ? "Future Project" : item.cardStatus, "project-card__status")}${targetStartMarkup(item)}
       ${optionalCardText(item.summary, "software-card__summary", "p")}
       ${cardOutcome(item)}${skillTags(item,3)}
-      <div class="software-card__bottom"><span class="muted-small">${(item.algorithmIds || []).length} linked methods</span><a class="round-arrow" href="${softwareUrl(item)}" aria-label="Open ${text(item.title)}"><span aria-hidden="true">↗</span></a></div></div>
+      </div>
     </article>`;
   }
+
   function software() {
     const root = $("#software-grid");
     if (!root) return;
@@ -318,8 +317,11 @@
     const gallery = $("#algorithm-groups");
     if (!gallery) return;
     const visible = algorithms.filter(canShow);
-    const current = sortByCategoryOrder(visible.filter(a => !isPlannedProject(a)));
-    const future = sortByCategoryOrder(visible.filter(isPlannedProject));
+    // Alphabetical sorting within the two status groups is simpler to scan.
+    const alphabetic = items => [...items].sort((a,b) =>
+      a.title.localeCompare(b.title, "en", {sensitivity:"base", numeric:true}));
+    const current = alphabetic(visible.filter(a => !isPlannedProject(a)));
+    const future = alphabetic(visible.filter(isPlannedProject));
     const renderGroup = (title, items) => items.length ?
       `<section class="project-list-group"><h2 class="project-list-group__title">${title}</h2><div class="algorithm-grid">${items.map(algorithmCard).join("")}</div></section>` : "";
     gallery.innerHTML = renderGroup("Algorithms", current) + renderGroup("Future Algorithms", future);
@@ -378,7 +380,7 @@
     const section = $(".page-top");
     const listing = $("#project-list")?.closest("section");
     const cat = category(chosen);
-    if (title) title.textContent = activeSkill ? `Projects & Software · ${activeSkill}` : (cat ? cat.title : "All Projects");
+    if (title) title.textContent = activeSkill ? `Projects, Software & Algorithms · ${activeSkill}` : (cat ? cat.title : "All Projects");
     const description = $("#category-description");
     if (description) {
       description.textContent = !activeSkill && cat?.id === "electronics" ? cat.subtitle : "";
@@ -397,7 +399,13 @@
     const count = $("#project-count");
     const params = new URLSearchParams(location.search);
     const requestedSkill = params.get("skill") || "";
-    const allSkills = [...new Set([...data.projects,...softwareItems].filter(item=>!isPlannedProject(item)).flatMap(item=>item.skills || []))];
+    // Skill search includes algorithm topics as well as engineering and
+    // software, while still excluding planned engineering/software work.
+    const availableAlgorithms = algorithms.filter(canShow);
+    const allSkills = [...new Set([
+      ...[...visibleProjects(),...softwareItems].filter(item=>!isPlannedProject(item)),
+      ...availableAlgorithms
+    ].flatMap(item=>item.skills || []))];
     const activeSkill = allSkills.find(skill=>skillSlug(skill)===requestedSkill) || "";
     let chosen = params.get("category") || "all";
     if (!requestedSkill && chosen === "software") { location.replace(previewUrl("software.html")); return; }
@@ -405,7 +413,7 @@
     if (chosen !== "all" && !category(chosen)) chosen = "all";
     const filterInfo = $("#skill-filter-info");
     if (filterInfo && requestedSkill) filterInfo.innerHTML = activeSkill ?
-      `Showing work demonstrating <strong>${text(activeSkill)}</strong> across engineering projects and software. <a href="${previewUrl('projects.html')}">Clear skill filter</a>` :
+      `Showing engineering projects, software and algorithms tagged <strong>${text(activeSkill)}</strong>. Future algorithms are listed separately. <a href="${previewUrl('projects.html')}">Clear skill filter</a>` :
       `No skill named <strong>${text(requestedSkill)}</strong> is defined. <a href="${previewUrl('projects.html')}">Browse all projects</a>`;
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
@@ -417,6 +425,11 @@
         ordered.filter(item=>!isPlannedProject(item));
       const future = requestedSkill ? [] : ordered.filter(isPlannedProject);
       const softwareResults = requestedSkill && activeSkill ? softwareItems.filter(item=>!isPlannedProject(item) && (item.skills||[]).includes(activeSkill)) : [];
+      const algorithmResults = requestedSkill && activeSkill ? availableAlgorithms.filter(item=>(item.skills||[]).includes(activeSkill) && matchesSearch(item)) : [];
+      const activeAlgorithmResults = algorithmResults.filter(item=>!isPlannedProject(item))
+        .sort((a,b)=>a.title.localeCompare(b.title,"en",{sensitivity:"base",numeric:true}));
+      const futureAlgorithmResults = algorithmResults.filter(isPlannedProject)
+        .sort((a,b)=>a.title.localeCompare(b.title,"en",{sensitivity:"base",numeric:true}));
       const currentCards = [
         ...present.filter(matchesSearch).map(item=>({item,kind:"project"})),
         ...softwareResults.filter(matchesSearch).map(item=>({item,kind:"software"}))
@@ -425,10 +438,13 @@
       const renderCard = ({item,kind}) => kind === "software" ? softwareCard(item) : projectCard(item);
       const renderGroup = (heading,cards) => cards.length ?
         `<section class="project-list-group"><h2 class="project-list-group__title">${heading}</h2><div class="project-grid">${cards.map(renderCard).join("")}</div></section>` : "";
-      container.innerHTML = currentCards.length || plannedCards.length ?
-        renderGroup("Projects",currentCards) + renderGroup("Future Projects",plannedCards.map(item=>({item,kind:"project"}))) :
+      const renderAlgorithmGroup = (heading,items) => items.length ?
+        `<section class="project-list-group"><h2 class="project-list-group__title">${heading}</h2><div class="algorithm-grid">${items.map(algorithmCard).join("")}</div></section>` : "";
+      const total = currentCards.length + plannedCards.length + algorithmResults.length;
+      container.innerHTML = total ?
+        renderGroup("Projects",currentCards) + renderGroup("Future Projects",plannedCards.map(item=>({item,kind:"project"}))) +
+        renderAlgorithmGroup("Algorithms",activeAlgorithmResults) + renderAlgorithmGroup("Future Algorithms",futureAlgorithmResults) :
         `<div class="empty-state"><h3>No matching work</h3><p>${requestedSkill ? 'Try clearing the skill filter or search.' : 'Try clearing the search or choosing another category.'}</p></div>`;
-      const total = currentCards.length + plannedCards.length;
       count.textContent = requestedSkill ? `${total} matching entr${total===1?'y':'ies'}` :
         `${total} project${total===1?'':'s'}${plannedCards.length ? ` · ${plannedCards.length} planned` : ''}`;
     }

@@ -726,3 +726,15 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 .algorithm-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 @media (max-width: 1000px) { .algorithm-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 560px) { .algorithm-grid { grid-template-columns: 1fr; } }
+
+/* Cleaner software and algorithm cards (2026-11-04). Card diagrams belong on
+   the detail page; library cards use their title, summary and skill tags. */
+.algorithm-card__body { gap:0; }
+.algorithm-card h3 { margin:0 0 12px; }
+.algorithm-card__summary { margin:0 0 18px !important; }
+.algorithm-card .tags { margin-top:auto; padding-top:6px; }
+.software-card__body .tags { margin-top:auto; }
+.software-card__body h3 { margin-top:8px; }
+#project-list .algorithm-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
+@media(max-width:950px) { #project-list .algorithm-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:650px) { #project-list .algorithm-grid { grid-template-columns:1fr; } }

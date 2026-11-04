@@ -26,6 +26,7 @@
   (Robotics, CAD, Fabrication, Electronics) or for software entries.
   It does not affect homepage featuredOrder, which is separate.
   If absent/invalid, the entry follows all numbered items in original file order.
+  Algorithm listings are sorted alphabetically, regardless of categoryOrder.
   Prefer unique positive whole numbers per category; gaps are allowed.
   Each category displays Projects followed by Future Projects (only if any).
   Planned work is hidden from demonstrated-skill filters and Selected Projects.
@@ -34,7 +35,8 @@
   PROJECT PROGRESS: status: "planned" / "in-progress" / "completed" / "".
   "planned" appears in Future Projects; all others in Projects.
   targetStart: "" is optional and displayed only for planned work.
-  Planned entries must have no demonstrated skill tags.
+  Planned engineering/software entries must have no demonstrated skill tags.
+  Algorithm skill tags describe topics, including future learning goals.
 
   CARD DISPLAY: category, title, optional subtitle, optional status, summary.
   For projects/algorithms: subtitle: "", status: ""; for software: subtitle: "", cardStatus: "".
@@ -176,7 +178,7 @@ window.PORTFOLIO_DATA = {
       id: "return-to-base",
       categoryOrder: 1,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
-      skills: ["Python", "Software Development", "Feedback Control"],
+      skills: ["Python", "Feedback Control"],
       engineeringSummary: {
         challenge: "",
         contribution: "",
@@ -221,7 +223,7 @@ window.PORTFOLIO_DATA = {
       id: "stack-object",
       categoryOrder: 2,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
-      skills: ["Python", "Software Development"],
+      skills: ["Python"],
       engineeringSummary: {
         challenge: "",
         contribution: "",
@@ -261,7 +263,7 @@ window.PORTFOLIO_DATA = {
       id: "guide-recovery",
       categoryOrder: 3,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
-      skills: ["Python", "Software Development"],
+      skills: ["Python"],
       engineeringSummary: {
         challenge: "",
         contribution: "",
@@ -341,7 +343,7 @@ window.PORTFOLIO_DATA = {
       id: "local-avoidance-skill",
       categoryOrder: 5,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
-      skills: ["Python", "Software Development"],
+      skills: ["Python"],
       engineeringSummary: {
         challenge: "",
         contribution: "",
@@ -421,7 +423,7 @@ window.PORTFOLIO_DATA = {
       id: "localisation-system",
       categoryOrder: 7,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
-      skills: ["Python", "Software Development"],
+      skills: ["Python"],
       engineeringSummary: {
         challenge: "",
         contribution: "",
@@ -532,6 +534,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "ibvs",
       published: true,
+      skills: ["Python", "Visual Servoing", "Vision", "Feedback Control"],
       title: "IBVS — Image-Based Visual Servoing",
       subtitle: "",
       status: "",
@@ -552,6 +555,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "pbvs",
       published: true,
+      skills: ["Python", "Visual Servoing", "Vision", "Feedback Control"],
       title: "PBVS — Position-Based Visual Servoing",
       subtitle: "",
       status: "",
@@ -572,6 +576,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "pid",
       published: true,
+      skills: ["Python", "Control", "Feedback Control"],
       title: "PID — Proportional–Integral–Derivative Control",
       subtitle: "",
       status: "",
@@ -592,6 +597,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "pure-pursuit",
       published: true,
+      skills: ["Python", "Navigation", "Path Following"],
       title: "Pure Pursuit — Path Following",
       subtitle: "",
       status: "",
@@ -611,7 +617,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "apriltag-routing",
-      published: true, title: "AprilTag Route Selection",
+      published: true,
+      skills: ["Python", "Vision", "Localisation", "Navigation"], title: "AprilTag Route Selection",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -628,7 +635,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "apriltag-pose",
-      published: true, title: "AprilTag Pose Estimation",
+      published: true,
+      skills: ["Python", "Vision", "Localisation"], title: "AprilTag Pose Estimation",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -645,7 +653,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "distance-angle-control",
-      published: true, title: "Distance–Angle Feedback Control",
+      published: true,
+      skills: ["Python", "Control", "Feedback Control"], title: "Distance–Angle Feedback Control",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -662,7 +671,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "local-obstacle-avoidance",
-      published: true, title: "Local Obstacle Avoidance",
+      published: true,
+      skills: ["Python", "Navigation", "Obstacle Avoidance"], title: "Local Obstacle Avoidance",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -679,7 +689,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "ftg",
-      published: true, title: "FTG — Follow the Gap",
+      published: true,
+      skills: ["Python", "Navigation", "Obstacle Avoidance"], title: "FTG — Follow the Gap",
       subtitle: "",
       status: "",
       projectStatus: "planned",
@@ -696,7 +707,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "dwa",
-      published: true, title: "DWA — Dynamic Window Approach",
+      published: true,
+      skills: ["Python", "Navigation", "Obstacle Avoidance", "Motion Control"], title: "DWA — Dynamic Window Approach",
       subtitle: "",
       status: "",
       projectStatus: "planned",
@@ -713,7 +725,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "wall-following",
-      published: true, title: "Wall Following",
+      published: true,
+      skills: ["Python", "Navigation", "Feedback Control"], title: "Wall Following",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -730,7 +743,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "smooth-control-law",
-      published: true, title: "Smooth Control Law",
+      published: true,
+      skills: ["Python", "Control", "Feedback Control", "Motion Control"], title: "Smooth Control Law",
       subtitle: "",
       status: "",
       projectStatus: "planned",
@@ -747,7 +761,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "odometry",
-      published: true, title: "Wheel Odometry",
+      published: true,
+      skills: ["Python", "Localisation"], title: "Wheel Odometry",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -764,7 +779,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "dead-reckoning",
-      published: true, title: "Dead Reckoning & Open-Loop Motion",
+      published: true,
+      skills: ["Python", "Localisation"], title: "Dead Reckoning & Open-Loop Motion",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -781,7 +797,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "coordinate-transformations",
-      published: true, title: "Coordinate Frames & Transformations",
+      published: true,
+      skills: ["Python", "Localisation", "Coordinate Transformations"], title: "Coordinate Frames & Transformations",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -798,7 +815,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "a-star",
-      published: true, title: "A* Path Planning",
+      published: true,
+      skills: ["Python", "Navigation", "Path Planning"], title: "A* Path Planning",
       subtitle: "",
       status: "",
       projectStatus: "planned",
@@ -815,7 +833,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "slam",
-      published: true, title: "SLAM — Simultaneous Localisation and Mapping",
+      published: true,
+      skills: ["Python", "Localisation", "Mapping"], title: "SLAM — Simultaneous Localisation and Mapping",
       subtitle: "",
       status: "",
       projectStatus: "planned",
@@ -832,7 +851,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "motion-profiles",
-      published: true, title: "Motion Profiles",
+      published: true,
+      skills: ["Python", "Motion Control"], title: "Motion Profiles",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
@@ -849,7 +869,8 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "visual-target-tracking",
-      published: true, title: "Visual Target Tracking",
+      published: true,
+      skills: ["Python", "Vision", "Visual Servoing"], title: "Visual Target Tracking",
       subtitle: "",
       status: "",
       projectStatus: "in-progress",
