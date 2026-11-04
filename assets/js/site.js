@@ -593,12 +593,13 @@
   const STANDARD_SECTIONS = [
     ["abstract", "Abstract"],
     ["introduction", "Introduction"],
-    ["materialsMethods", "Materials & Methods"],
+    ["materialsMethods", "Materials and Methods"],
+    ["projectPlan", "Project Plan"],
     ["resultsDiscussion", "Results and Discussion"],
     ["conclusions", "Conclusions"],
     ["lessonsLearned", "Lessons Learned"],
     ["relatedProjects", "Related Projects"],
-    ["references", "References"]
+    ["references", "References & Resources"]
   ];
   const hasText = value => typeof value === "string" && value.trim().length > 0;
   const subheading = (label, body, showEmpty=false) => (body || showEmpty) ?
@@ -766,16 +767,28 @@
       };
       const headers=['Test method','Sketch','What it measures','Formula / metric'];
       const heading=headers.map(h=>`<th scope="col">${text(h)}</th>`).join('');
-      const rows=p.testMethods.map(t=>{
+      const renderTestRow = t=>{
         const file=localMedia(t.image);
         const sketch=file?`<img class="test-method-sketch" src="${file}" alt="${text(t.name)} test sketch" loading="lazy"/>`:'';
         const formula=formulas[t.formula];
         const equation=formula?`<span class="test-method-equation" role="math" aria-label="${text(formula.label)}">${formula.html}</span>`:'';
         return `<tr><td>${text(t.name)}</td><td class="test-method-sketch-cell">${sketch}</td><td>${text(t.measures)}</td><td>${equation}</td></tr>`;
-      }).join('');
-      const table=`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table test-methods-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`;
-      if (p.id === 'gripper-contact-surfaces') add('materialsMethods:test-methods',table);
-      else add('materialsMethods',subheading('Tests',cites.paragraphs(p.testsIntro || '')+table));
+      };
+      const renderTestTable = items=>`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table test-methods-table"><thead><tr>${heading}</tr></thead><tbody>${items.map(renderTestRow).join('')}</tbody></table></div>`;
+      if (p.id === 'gripper-contact-surfaces') {
+        // Proposal stage: one existing sketch, explanation and formula beneath each test heading.
+        // Keep the additional cardboard-damage test in source data for possible study-stage use.
+        const proposalTests = [
+          ['slip', 'sliding-friction'],
+          ['retention', 'gripper-pull-out'],
+          ['success', 'robot-pickup']
+        ];
+        proposalTests.forEach(([formula,id])=>{
+          const test=p.testMethods.find(t=>t.formula===formula);
+          if(test) add(`materialsMethods:${id}`,renderTestTable([test]));
+        });
+      } else add('materialsMethods',subheading('Tests',cites.paragraphs(p.testsIntro || '')+renderTestTable(p.testMethods)));
+
     }
 
     if(inv.jawOptions?.length || inv.detectionOptions?.length) add('materialsMethods',structured('concept-study','Mechanism concepts',investigationSection));
@@ -828,7 +841,6 @@
       ${engineeringSummary(p)}
       ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status?`<span>${text(p.investigation.status)}</span>`:''}</div>`:''}
       ${detailLayout(rows)}
-      <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More engineering projects</h2></div><a class="button button-outline" href="projects.html">All projects <span aria-hidden="true">↗</span></a></div>
     </div>`;
   }
 

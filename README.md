@@ -515,3 +515,27 @@ All engineering projects and software entries have two new data fields in `asset
 All 14 fields can remain blank for short projects, such as a straightforward 3D-printed mount. No empty heading or empty ON THIS PAGE panel should appear.
 
 The short `outcome` is additionally shown on listing cards when present. Only the new `skills` field controls clickable skill badges; the older `tags` values are retained in source for reference.
+
+
+## Proposal-stage project planning (4 November 2026)
+
+`projectPlan: ""` is available on every engineering project and software entry.
+When populated, **Project Plan** displays after Materials & Methods and before
+Results and Discussion. All sections remain optional and hidden when empty.
+
+For Gripper Contact Pads (Part 1), the proposal currently displays:
+- Introduction: Background, Literature Review, Study Aim, Objectives.
+- Materials & Methods: Material Selection (existing 10-row table), Contact-Pad
+  Design, 3D Printed Specimens, Sliding Friction Test, Gripper Pull-Out Test,
+  Robot Pickup Test (each test includes its existing diagram and formula).
+- Project Plan: Schedule, Budget, Contingencies.
+- Related Projects and References, with source links and citations retained.
+
+Abstract remains empty until results and conclusions can be summarised. Study-
+stage Results and Discussion, Conclusions and Lessons Learned also remain blank.
+Short provisional subsection text should be replaced with project-specific plans
+and then actual methodology as work progresses. The previously proposed cardboard
+damage test is still retained in `testMethods` data but not displayed in the
+current three-test proposal outline. The standard engineering project detail
+page no longer has the bottom Explore More / More engineering projects / All
+projects promotional panel; normal navigation is unchanged.

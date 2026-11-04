@@ -202,6 +202,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Navigate back to the delivery area using a chain of arena tags, with obstacle avoidance, guide recovery and a conditional wall-following approach.\n\nReturn from the collection area to a delivery position despite changing visibility and objects obstructing the preferred path. The return behaviour finishes navigation but does not itself release the carried object.",
         materialsMethods: "The linked flowchart reflects program logic from the October 2026 Python source. It is not evidence that every branch has completed physical-robot validation. Add dated trials, success rates, logs and observed limitations when they are available.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Review FollowWall's start interface, confirm end-to-end wall-follow and avoidance handoffs, and publish measured tests from simulation and the physical robot.",
@@ -249,6 +250,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Coordinate target selection, approach and stacking while responding to unavailable or obstructed targets.\n\nBring perception and movement together to handle a stacking task.",
         materialsMethods: "Add measured simulation and physical-robot evidence; no performance figures are asserted here.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Add a flowchart, source links and recorded trial outcomes.",
@@ -294,6 +296,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Search for a missing arena tag and re-establish a viable visual navigation route.\n\nAvoid treating a single missing visual observation as mission failure.",
         materialsMethods: "Describe observed recoveries and exhausted searches when results are recorded.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Verify search limits and timeouts on the physical platform.",
@@ -339,6 +342,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Travel alongside an arena wall using measured wall geometry and lateral correction.\n\nPreserve a safe and stable relationship to a wall when an AprilTag approach is too side-on.",
         materialsMethods: "An available FollowWall source snapshot references localisation and io in start() without listing them as parameters. Reconcile this interface before claiming a successful end-to-end integration.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Fix or reconcile the start interface and log range, heading and terminal-hand-off behaviour.",
@@ -384,6 +388,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Temporarily take over motion when detected objects block the nominal route.\n\nNavigate around obstacles without permanently discarding the intended direction of travel.",
         materialsMethods: "The exact FTG or DWA algorithms used internally should be verified from the avoidance source before linking them as implemented methods.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Document the planner implementation, inputs and comparative simulation/physical tests.",
@@ -429,6 +434,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Turn camera observations into measurements and identified targets for navigation behaviours.\n\nProvide the position and identity of visible arena markers or objects in well-defined coordinates.",
         materialsMethods: "Add detection accuracy, field-of-view and latency comparisons from dated tests.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Add a perception data-flow diagram and tested video examples.",
@@ -474,6 +480,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Represent robot pose and use localisation to support route recovery and home-base decisions.\n\nMaintain a useful estimate of where the robot is and the direction it faces.",
         materialsMethods: "Add accuracy, drift and recovery results, with test conditions.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Link the estimator implementation and confidence tests.",
@@ -519,6 +526,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Convert motion objectives from navigation skills into robot velocity and actuator commands.\n\nKeep control mathematics separate from hardware motor commands and navigation decisions.",
         materialsMethods: "Add motor and velocity calibration, step-response data and safety checks.",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "Clarify which motion profiles are actually used before calling them implemented.",
@@ -880,6 +888,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Bobbot is an ongoing multi-year project working towards a fully autonomous robot.",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -919,6 +928,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "This is the first gripper design for the autonomous mobile robot Bobbot. The jaws are mounted on a dual gear rack and close around a cardboard cube approximately 150 mm across.",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -979,6 +989,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "The original Bobbot gripper was a good first pass at getting the autonomous mobile robot up and running.  But it's angled grip and over-center linkage is better designed for other applications (For instance is makes for a good ramen delivery robot as can be seen in the image above). For the future Bobbot a more versatile grip that can reliably grasp various size of small boxes is desired. Ultimately a more versatile gripper, with contact feedback, and at a lower cost.\n\nCompare two candidate mechanisms: a four-bar parallel-jaw linkage and a rack-and-pinion parallel gripper. Both should be evaluated for jaw parallelism, useful opening range, load transmission, clearances, friction, backlash, size, cost and ease of fabrication. The designs should be bench-testable before mounting on Robbot.\n\nInvestigate a simple mechanical indicator of gripping load or elastic deflection, for example a spring-loaded pad or compliant drive element read by a switch, Hall-effect sensor or displacement measurement. The objective is not merely to signal that something was touched, but to determine experimentally whether the signal is a useful predictor of secure retention. The 150 mm cube provides a common baseline; support for other box widths is an additional design goal with limits to be established by measurements.",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1146,10 +1157,11 @@ window.PORTFOLIO_DATA = {
         "3D Printing"
       ],
       "date": "",
-      showRelatedProjects: false,
+      showRelatedProjects: true,
       "relatedProjectIds": [
         "mechanical-gripper",
         "robotic-gripper-grasp-detection",
+        "gripper-contact-sensing",
         "autonomous-mobile-robot"
       ],
       "contribution": "Planned independent work: design interchangeable contact pads, manufacture samples and measure grip, friction, damage and repeatability.",
@@ -1157,6 +1169,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1164,67 +1177,27 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
-      // Working study outline: headings remain visible in development preview
-      // while the technical content, CAD and measured evidence are prepared.
+      // Proposal-stage outline. Short provisional text is replaced by actual evidence as work progresses.
       sectionDetails: {
         introduction: [
-          {
-            id: "background",
-            heading: "2.1 Background and Problem Statement",
-            text: "The original Bobbot gripper was a good first pass, but its angled grip and over-centre linkage were better suited to other applications (for instance, it does a great job picking up and delivering Pot Noodle containers). For small cardboard boxes, some immediate modifications were required. As a quick fix, the grip was widened and rubber bands were added to improve frictional contact. Now it is time to make a more permanent change, undertaken in three phases. The first phase, and the purpose of this project, is to find a more suitable gripper material."
-          },
-          {
-            id: "literature",
-            heading: "2.2 Literature Review",
-            text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. This project will focus on flexible materials that can be 3D printed using the available Bambu Lab P1S."
-          },
-          {
-            id: "aim",
-            heading: "2.3 Aim and Research Questions",
-            text: "This project will investigate whether 3D-printable gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance."
-          },
-          {
-            id: "requirements",
-            heading: "2.4 Engineering Requirements and Evaluation Criteria",
-            text: "",
-            showEmpty: true
-          }
+          { id: "background", heading: "Background", text: "The original Bobbot gripper was a good first pass, but its angled grip and over-centre linkage were better suited to other applications (for instance, it does a great job picking up and delivering Pot Noodle containers). For small cardboard boxes, some immediate modifications were required. As a quick fix, the grip was widened and rubber bands were added to improve frictional contact. Now it is time to make a more permanent change, undertaken in three phases. The first phase, and the purpose of this project, is to find a more suitable gripper material." },
+          { id: "literature", heading: "Literature Review", text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. This project will focus on flexible materials that can be 3D printed using the available Bambu Lab P1S." },
+          { id: "aim", heading: "Study Aim", text: "This project will investigate whether 3D-printable gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance." },
+          { id: "requirements", heading: "Objectives", text: "Compare candidate printed materials against the existing rubber-band arrangement for resistance to slipping, object retention and reliability during pickup, transport and release. Establish consistent test conditions before collecting results." },
         ],
         materialsMethods: [
-          {
-            id: "material-selection",
-            heading: "3.1 Material Selection and Benchmark",
-            text: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers."
-          },
-          {
-            id: "pad-design",
-            heading: "3.2 Contact-Pad Design",
-            text: "",
-            showEmpty: true
-          },
-          {
-            id: "manufacturing",
-            heading: "3.3 Specimen Manufacturing and Preparation",
-            text: "",
-            showEmpty: true
-          },
-          {
-            id: "apparatus",
-            heading: "3.4 Experimental Apparatus",
-            text: "",
-            showEmpty: true
-          },
-          {
-            id: "test-methods",
-            heading: "3.5 Test Methods and Calculations",
-            text: "Four test methods are proposed to compare the new pads with the existing rubber-band grip. The first two measure resistance to slipping and pull-out force. The third tests the complete pickup, carry and dropoff operation, while the fourth checks for damage to the cardboard."
-          },
-          {
-            id: "experimental-controls",
-            heading: "3.6 Experimental Controls and Planning",
-            text: "Test conditions will be kept consistent between materials."
-          }
-        ]
+          { id: "material-selection", heading: "Material Selection", text: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers." },
+          { id: "pad-design", heading: "Contact-Pad Design", text: "The pad geometry and attachment method will be documented when the initial CAD design is finalised." },
+          { id: "manufacturing", heading: "3D Printed Specimens", text: "Specimen dimensions, print orientation and material-specific printing settings will be recorded when the samples are manufactured." },
+          { id: "sliding-friction", heading: "Sliding Friction Test", text: "A horizontal pull test will measure sliding resistance between each candidate material and cardboard. The normal load and the method of applying the pull will be defined before testing." },
+          { id: "gripper-pull-out", heading: "Gripper Pull-Out Test", text: "Each pad will be fitted to the existing gripper, and the force required to pull the cardboard object from the jaws will be measured under controlled gripping conditions." },
+          { id: "robot-pickup", heading: "Robot Pickup Test", text: "Repeated pickup, carry and dropoff trials will assess the reliability of the complete gripping operation. The number of attempts and criteria for success will be set before testing." },
+        ],
+        projectPlan: [
+          { id: "schedule", heading: "Schedule", text: "The intended sequence is to finalise pad design, print specimens, prepare test fixtures, conduct measurements and evaluate the results. Dates and milestones will be added when confirmed." },
+          { id: "budget", heading: "Budget", text: "Costs for filament, test materials and any outsourced printing will be recorded as they are established." },
+          { id: "contingencies", heading: "Contingencies", text: "If very soft TPU cannot be printed reliably on the Bambu P1S, outsourced specimens or compatible alternative TPU grades will be considered." },
+        ],
       },
       "materialSelection": [
         [
@@ -1401,6 +1374,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1455,6 +1429,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "The Modular Robot I/O & TeleOp Controller is a common electrical and low-level control interface intended for use across different robots. It is built around an Arduino Mega 2560, chosen for its numerous digital, analogue and interrupt-capable connections. Rather than design a different controller for every robot, the aim is to keep a consistent pin map and connect only the motors, servos, encoders and sensors that each platform requires.\n\nThe Mega is deliberately not the robot’s main computer. It handles manual teleoperation (TeleOp), encoder counting and direct hardware interfacing. A Raspberry Pi carries out higher-level work such as perception, navigation and autonomous decision-making. This division keeps the microcontroller focused on practical, time-sensitive I/O rather than computationally demanding algorithms.\n\nProvide one reusable set of controller connections for multiple robots, with stable power and signal interfaces, radio TeleOp, encoder counting and selective connection of robot-specific peripherals.",
         materialsMethods: "Verification is best carried out in stages. Start with the power rails and connector pinouts, checking voltage levels, common grounds and correct polarity before connecting motors or sensitive sensors. Then test each used I/O channel individually: switches, servos, motor outputs, sensor readings and the direction and consistency of encoder counts.\n\nTeleOp testing should confirm channel mapping, response to operator inputs and behaviour if the radio signal is lost. With the Raspberry Pi connected, additional checks should cover command handling, feedback timing and transitions between manual and autonomous control. The schematic establishes the interface design; quantitative results such as encoder count reliability or control latency have not yet been recorded on this page.",
+        projectPlan: "",
         results: "The current documented output is a consolidated Arduino Mega wiring diagram and I/O allocation covering power distribution, external connectors, manual-control input, encoders and multiple kinds of robot peripherals. It provides a repeatable starting point for configuring the electrical interface of more than one robot.",
         discussion: "The defined control split is that the Mega handles TeleOp and encoder counting while the Raspberry Pi performs high-level control. This page describes that architecture and the interfaces available; it does not yet present measured performance, completed qualification tests or a claim that every connection in the diagram has been populated.",
         conclusions: "",
@@ -1514,6 +1489,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "The purpose of this project is to define the final interface between robot software and hardware. Higher-level programs use a single io.* vocabulary to read sensor data and command actuators: for example, io.encoder[\"drive_front_left\"].count or io.motor[\"collector\"].power. The program describes what it wants to do, not which controller, protocol or connection is needed to do it.\n\nThis makes the software more reusable. A robot may use an Arduino Mega, a device connected directly to the Raspberry Pi, another controller or a simulation backend, while the robot behaviours retain the same named I/O operations. The companion Modular Robot I/O & TeleOp Controller project documents one physical implementation of this interface.",
         materialsMethods: "The interface should be verified at the software boundary first: check that an io.* call reaches the intended backend, accepts the expected inputs and returns the promised values or errors. Then test the backend and transport separately, including invalid responses, lost communication and device absence. Finally verify the behaviour on real robot hardware.\n\nA useful portability test is to run the same high-level command against two different supported backends, including simulation where available, and compare the results. This page documents the interface design; it does not claim complete implementation or measured verification of every entry.",
+        projectPlan: "",
         results: "The current output is a defined common I/O vocabulary covering motion, sensors, localisation inputs, servo mechanisms and direct Pi devices, with corresponding backend mappings and message contracts in the full engineering matrix. The simplified table displayed as this project's main image communicates the io.* layer rather than any particular wiring design.",
         discussion: "This is an interface specification and reusable design approach. The existence of an entry is not evidence that every associated implementation is complete or performance-tested.",
         conclusions: "",
@@ -1590,6 +1566,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "This project documents the electrical architecture of a mobile robot using a one-line diagram. The aim is to show how the main electrical subsystems fit together: the battery supply, motor drivers, low-voltage control electronics, USB devices and powered actuators. It provides an overall system view alongside the more detailed Arduino Mega wiring diagram and software I/O specification.\n\nThe design is modular. Power paths and functional groups are identified separately, and provisions for future devices are shown without implying that every illustrated component is installed.",
         materialsMethods: "The next stage is to verify the drawing against the actual system. Checks should include supply polarity, fuse and wire ratings, expected current draw, regulator output under load, grounding and voltage drops. Power branches should be commissioned independently before connecting the complete robot.\n\nBench checks should also establish that motor starts and servo movements do not disrupt the Pi or microcontroller supplies, and that any separate test-power arrangement cannot accidentally energise an unintended branch. These are planned verification steps; this page does not present measured results.",
+        projectPlan: "",
         results: "The present output is a one-line electrical diagram that brings the robot's power and control hardware into one coherent view. It documents the intended distribution architecture, identifies the major subsystems and provides a basis for more detailed wiring and electrical verification.",
         discussion: "The design complements the Arduino Mega wiring plan and the io.* software interface: one describes electrical power flow, one defines the low-level connections and controller responsibilities, and one defines how higher-level software accesses robot hardware.",
         conclusions: "",
@@ -1636,6 +1613,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1677,6 +1655,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "This investigation began while calibrating timed movement on mobile robots. Rather than assuming that a motor command corresponds to a fixed speed, I measured the movement actually produced at different powers and durations. The experiments compared DFRobot and goBILDA motor configurations and investigated how the available supply voltage affected the results.\n\nTimed motor movement is affected by more than the requested power setting. The supply voltage changes the voltage available to the motor, while friction, loading and the low-power starting region can make the response nonlinear. These effects have to be considered when converting a desired movement distance into a timed command.\n\nEstablish practical calibration relationships between motor commands, movement and elapsed time. Test whether changing battery voltage can be compensated for reliably, and identify the operating regions where a simple correction is insufficient. This is open-loop calibration rather than encoder-based closed-loop positioning.",
         materialsMethods: "The resulting calibration work informs the robot's timed-drive backend: motion requests are converted into a power setting and duration using measured motor behaviour, with voltage compensation where it is supported by the tests. Calibration remains specific to the motor, drive setup and operating conditions used.\n\nI compared commanded motor power and pulse duration with measured travel distance, and examined the effect of supply voltage. A regulated, constant-voltage supply was important for collecting comparable calibration results; otherwise variations in voltage were mixed into the apparent motor-performance curve. Further trials deliberately varied voltage to investigate compensation.\n\nRecorded examples from the DFRobot timed-drive tests include approximately 31 mm in 1.0 s and 95 mm in 3.0 s at 0.3 power. At 0.6 power, observations included approximately 37–39 mm in 0.5 s and 77–79 mm in 1.0 s. These are measurements from particular test conditions, not general motor specifications.",
+        projectPlan: "",
         results: "The tests identified supply-voltage variation as a source of inconsistent open-loop movement. At moderate and higher command powers the observed compensation relationship was approximately linear, while low-power measurements showed stronger nonlinearity and were better represented by a quadratic fit in the tested system.",
         discussion: "This does not imply that a quadratic model is universally appropriate for low-power DC motors. The appropriate curve depends on the tested drive configuration and its operating conditions. Complete plots, trial counts and fitted coefficients can be added when the original data are ready for publication.",
         conclusions: "Use the calibrated relationships in timed drive commands while keeping their limitations explicit. The next documentation step is to add the underlying test tables, fitted curves and comparison plots, including voltage, load and test conditions, so the compensation model and its accuracy can be evaluated independently.",
@@ -1714,6 +1693,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "This robot build was my entry point into larger robotics projects. It was built from the goBILDA starter kit and based on their DECODE starter bot build manual. Typically these bots are built for FTC competitions and with REV Robotics electronics.  As my intention wasn't to compete but to use this as an entry point into larger robotic projects an easily removeable electrical panel that could be used on other robots was built instead.  Details on that panel are linked in Related Projects below.",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1752,6 +1732,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1789,6 +1770,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "Robots using the current gripper have limited capability to determine whether a cardboard box was picked up. The current softward solution is to reverse the robot such that the cardboard box (if not picked up) would come into view.  This leads to some false positives and increases cycle time. Placing a sensor to determine contact and retention will be tested to see if this can provide a more reliable or quick indication of the pickup status.",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1827,6 +1809,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1880,6 +1863,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1928,6 +1912,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
@@ -1976,6 +1961,7 @@ window.PORTFOLIO_DATA = {
         abstract: "",
         introduction: "",
         materialsMethods: "",
+        projectPlan: "",
         results: "",
         discussion: "",
         conclusions: "",
