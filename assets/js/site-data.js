@@ -1166,7 +1166,7 @@ window.PORTFOLIO_DATA = {
       ],
       "contribution": "Planned independent work: design interchangeable contact pads, manufacture samples and measure grip, friction, damage and repeatability.",
       sections: {
-        abstract: "",
+        abstract: "This study will investigate the use of flexible 3D-printed filaments as contact-pad materials for a robotic gripper. Candidate materials will be selected based on their expected softness, flexibility and frictional properties. Proposed materials include TPU 90A, TPU 60A–70A, TPE 90A and PEBA 90A. Their frictional performance will be compared through controlled tests and evaluated during gripping operations on an autonomous mobile robot.",
         introduction: "",
         materialsMethods: "",
         projectPlan: "",
@@ -1181,9 +1181,9 @@ window.PORTFOLIO_DATA = {
       sectionDetails: {
         introduction: [
           { id: "background", heading: "Background", text: "The original Bobbot gripper was a good first pass, but its angled grip and over-centre linkage were better suited to other applications (for instance, it does a great job picking up and delivering Pot Noodle containers). For small cardboard boxes, some immediate modifications were required. As a quick fix, the grip was widened and rubber bands were added to improve frictional contact. Now it is time to make a more permanent change, undertaken in three phases. The first phase, and the purpose of this project, is to find a more suitable gripper material." },
-          { id: "literature", heading: "Literature Review", text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. This project will focus on flexible materials that can be 3D printed using the available Bambu Lab P1S." },
+          { id: "literature", heading: "Literature Review", text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. Published studies were reviewed to identify 3D-printable filaments that have shown promising results in gripping research. These studies are cited in the References & Resources section." },
           { id: "aim", heading: "Study Aim", text: "This project will investigate whether 3D-printable gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance." },
-          { id: "requirements", heading: "Objectives", text: "Compare candidate printed materials against the existing rubber-band arrangement for resistance to slipping, object retention and reliability during pickup, transport and release. Establish consistent test conditions before collecting results." },
+          { id: "requirements", heading: "Objectives", text: "The objectives are to identify suitable flexible 3D-printable materials, compare their frictional and gripping performance against the existing rubber bands, and investigate how material type and durometer affect the results.\n\nMaterial selection will focus on filaments compatible with the available Bambu Lab P1S printer, with outsourcing considered for softer materials that cannot be printed reliably." },
         ],
         materialsMethods: [
           { id: "material-selection", heading: "Material Selection", text: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers." },
@@ -1194,11 +1194,28 @@ window.PORTFOLIO_DATA = {
           { id: "robot-pickup", heading: "Robot Pickup Test", text: "Repeated pickup, carry and dropoff trials will assess the reliability of the complete gripping operation. The number of attempts and criteria for success will be set before testing." },
         ],
         projectPlan: [
-          { id: "schedule", heading: "Schedule", text: "The intended sequence is to finalise pad design, print specimens, prepare test fixtures, conduct measurements and evaluate the results. Dates and milestones will be added when confirmed." },
+          { id: "schedule", heading: "Schedule", text: "" },
           { id: "budget", heading: "Budget", text: "Costs for filament, test materials and any outsourced printing will be recorded as they are established." },
-          { id: "contingencies", heading: "Contingencies", text: "If very soft TPU cannot be printed reliably on the Bambu P1S, outsourced specimens or compatible alternative TPU grades will be considered." },
+          { id: "contingencies", heading: "Contingencies", text: "" },
         ],
       },
+      // Proposal schedule: stage numbers are sequential work stages, not calendar dates.
+      projectSchedule: [
+        { activity: "Initial CAD Design", stage: 1 },
+        { activity: "Procure Filament", stage: 1 },
+        { activity: "Build Test Equipment & Print First Filament", stage: 2 },
+        { activity: "Preliminary Test of First Filament", stage: 3 },
+        { activity: "CAD - Design Iteration (if required)", stage: 4 },
+        { activity: "Print Remaining Filaments", stage: 5 },
+        { activity: "Outsource TPU 60–70A", stage: 5 },
+        { activity: "Final Testing of All Materials", stage: 6 },
+      ],
+      projectContingencies: [
+        { risk: "TPU 60A–70A cannot be printed reliably on the P1S", response: "Outsource printing or substitute TPU 85A." },
+        { risk: "A selected filament is unavailable", response: "Use another candidate from the material shortlist." },
+        { risk: "Printed specimens have inconsistent quality", response: "Adjust material-specific printing settings and repeat specimen preparation." },
+        { risk: "A test fixture produces inconsistent measurements", response: "Review the fixture or measurement procedure before comparing materials." },
+      ],
       "materialSelection": [
         [
                 "Benchmark",

@@ -791,6 +791,26 @@
 
     }
 
+    // Proposal-stage schedule and risk planning live alongside other journal sections.
+    // Table contents are editable project data; the bars represent STAGES, not dates.
+    if (Array.isArray(p.projectSchedule) && p.projectSchedule.length) {
+      const scheduleRows = p.projectSchedule.map(task => {
+        const activity=text(task.activity);
+        const stage=Number(task.stage);
+        const cells=Array.from({length:6},(_,i)=> {
+          const active=i+1 === stage;
+          return `<td class="project-schedule__cell${active ? ' project-schedule__cell--active' : ''}">${active ? `<span class="project-schedule__bar" aria-label="Stage ${i+1}"><span class="visually-hidden">Stage ${i+1}</span></span>` : ''}</td>`;
+        }).join('');
+        return `<tr><th scope="row">${activity}</th>${cells}</tr>`;
+      }).join('');
+      const schedule = `<div class="project-schedule-wrap" role="region" aria-label="Project schedule" tabindex="0"><table class="project-schedule"><thead><tr><th scope="col" rowspan="2">Activity</th><th scope="colgroup" colspan="6" class="project-schedule__stage-heading">Stage</th></tr><tr>${Array.from({length:6},(_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${scheduleRows}</tbody></table></div>`;
+      add('projectPlan:schedule', schedule);
+    }
+    if (Array.isArray(p.projectContingencies) && p.projectContingencies.length) {
+      const rows=p.projectContingencies.map(item=>`<tr><th scope="row">${text(item.risk)}</th><td>${text(item.response)}</td></tr>`).join('');
+      add('projectPlan:contingencies',`<div class="investigation-table-wrap"><table class="investigation-table project-contingencies"><thead><tr><th scope="col">Risk or constraint</th><th scope="col">Proposed contingency</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+    }
+
     if(inv.jawOptions?.length || inv.detectionOptions?.length) add('materialsMethods',structured('concept-study','Mechanism concepts',investigationSection));
     if(p.ioMap?.rows?.length) add('materialsMethods',ioMapMarkup(p));
     if(surface.failures?.length) add('materialsMethods',structured('surface-failures','Failure analysis and design responses',surfaceStudySection));
@@ -806,9 +826,9 @@
     ].filter(Boolean);
     if(resources.length) add('materialsMethods',subheading('Project files & media',`<div class="resource-links">${resources.join("")}</div>`));
     const linked=(p.relatedProjectIds||[]).map(id=>visibleProjects().find(item=>item.id===id)).filter(item=>item&&item.id!==p.id);
-    if(p.showRelatedProjects !== false && linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`);
+    if(p.showRelatedProjects !== false && linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}</div>`);
     const linkedSoftware=softwareItems.filter(item=>(item.robotIds||[]).includes(p.id));
-    if(p.showRelatedProjects !== false && linkedSoftware.length) add('relatedProjects',subheading('Related software and algorithms',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.summary)} ↗</span></a>`).join("")}</div>`));
+    if(p.showRelatedProjects !== false && linkedSoftware.length) add('relatedProjects',subheading('Related software and algorithms',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}</div>`));
     return extra;
   }
   function softwareExtras(item, cites) {
@@ -817,7 +837,7 @@
     const algos=relatedAlgorithms(item.algorithmIds);
     if(algos.length) add('relatedProjects',subheading('Algorithms & methods',`<p>Reference pages for the techniques used by this software. Links do not imply separate physical validation of every method.</p><div class="method-chip-row">${chipLinks(algos,algorithmUrl)}</div>`));
     const robots=(item.robotIds||[]).map(id=>visibleProjects().find(p=>p.id===id)).filter(Boolean);
-    if(robots.length) add('relatedProjects',subheading('Robots using this software',`<div class="related-list">${robots.map(p=>`<a class="related-item" href="${projectUrl(p)}"><strong>${text(p.title)}</strong><span>${text(p.summary)} ↗</span></a>`).join("")}</div>`));
+    if(robots.length) add('relatedProjects',subheading('Robots using this software',`<div class="related-list">${robots.map(p=>`<a class="related-item" href="${projectUrl(p)}"><strong>${text(p.title)}</strong>${optionalCardText(p.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(p.summary)} ↗</span></a>`).join("")}</div>`));
     if(item.codeFiles?.length) add('materialsMethods',subheading('Code structure',`<p>Relevant source modules (paths are informational until a public repository URL is supplied).</p><ul class="code-file-list">${item.codeFiles.map(f=>`<li><code>${text(f)}</code></li>`).join("")}</ul>`));
     const source=linkMarkup(item.sourceUrl,'View public source code');
     if(source) add('materialsMethods',subheading('Source code',`<div class="resource-links">${source}</div>`));
