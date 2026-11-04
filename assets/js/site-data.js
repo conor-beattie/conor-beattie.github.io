@@ -137,7 +137,7 @@ window.PORTFOLIO_DATA = {
       id: "electronics",
       published: true,
       title: "Embedded Control & Integration",
-      subtitle: "Integrating and programming microcontrollers, sensors, motor drivers and other electronic modules to develop reliable robotic control systems, including electrical architecture, power distribution, wiring and hardware interfaces.",
+      subtitle: "",
       cardSubtitle: "Microcontrollers, motor drivers, wiring and robotic control integration",
       image: "assets/images/arduino mega.jpg"
     },
@@ -961,6 +961,9 @@ window.PORTFOLIO_DATA = {
       "imageAlt": "",
       "imageCaption": "",
       "summary": "Comparing four-bar and rack-and-pinion parallel grippers on their effectiveness in picking up various small cardboard boxes.",
+      hideDetailSummary: true,
+      hideDetailStatus: true,
+      hideImageCaption: true,
       "tags": [
         "Mechanism Design",
         "Parallel Jaws",
@@ -968,26 +971,11 @@ window.PORTFOLIO_DATA = {
         "Experimental Design"
       ],
       "date": "",
-      "relatedProjectIds": [
-        "mechanical-gripper",
-        "gripper-contact-surfaces",
-        "robotics-project-2",
-        "autonomous-mobile-robot"
-      ],
-      "sectionLabels": {
-  "overview": "The design problem",
-  "brief": "Design objectives",
-  "research": "Mechanisms and sensing research",
-  "construction": "CAD and prototyping",
-  "software": "Interpreting grasp feedback",
-  "testing": "Test and measurement plan",
-  "iterations": "Design decisions and iteration",
-  "results": "Current stage",
-  "nextSteps": "Next steps"
-},
+      "relatedProjectIds": [],
+      showRelatedProjects: false,
       sections: {
         abstract: "",
-        introduction: "The original Bobbot gripper was a good first pass at getting the autonomous mobile robot up and running.  But it's angled grip and over-center linkage is better designed for other applications (For instance is makes for a good ramen delivery robot as can be seen in the image above). For the future Bobbot a more versatile grip that can reliably grasp various size of small boxes is desired. Ultimately a more versatile gripper, with contact feedback, and at a lower cost.\n\nCompare two candidate mechanisms: a four-bar parallel-jaw linkage and a rack-and-pinion parallel gripper. Both should be evaluated for jaw parallelism, useful opening range, load transmission, clearances, friction, backlash, size, cost and ease of fabrication. The designs should be bench-testable before mounting on Robbot.\n\nInvestigate a simple mechanical indicator of gripping load or elastic deflection, for example a spring-loaded pad or compliant drive element read by a switch, Hall-effect sensor or displacement measurement. The objective is not merely to signal that something was touched, but to determine experimentally whether the signal is a useful predictor of secure retention. The 150 mm cube provides a common baseline; support for other box widths is an additional design goal with limits to be established by measurements.",
+        introduction: "The original Bobbot gripper was a good first pass at getting the autonomous mobile robot up and running.  But it's angled grip and over-center linkage is better designed for other applications (For instance is makes for a good ramen delivery robot as can be seen in the image above). For the future Bobbot a more versatile grip that can reliably grasp various size of small boxes is desired. Ultimately a more versatile gripper, with contact feedback, and at a lower cost.",
         materialsMethods: "",
         projectPlan: "",
         results: "",
@@ -997,131 +985,7 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
-      sectionDetails: {
-        materialsMethods: [
-          { heading: "CAD and prototyping", text: "Develop student-created, annotated drawings and CAD models of both candidate mechanisms, showing the two jaw motion paths, guides, pivots or rack teeth, actuation path, clearances and mounting envelope. Give the proposed sensing element its own detail view showing what moves, which spring deflects and how displacement reaches the sensor.\n\nBuild small bench prototypes before selecting a complete mechanism. Record the dimensions, material, version and manufacturing choices for each candidate, then compare their useful closing range and tolerance to jaw misalignment. The new gripper will have its own drawings and prototype photographs; the current cover image is clearly labelled as the original Bobbot baseline until new images exist." },
-          { heading: "Interpreting grasp feedback", text: "Keep the gripping mechanism and its evidence separate from the detection circuit. Low-level software may read a switch or Hall-effect signal and log the timing or magnitude of mechanical deflection, but the signal is only an estimate of engagement. It should be compared with independent observations of box retention.\n\nThe first goal is an understandable mechanical response that could be monitored with minimal sensing hardware. Software thresholds or a digital grasp indication should follow physical calibration and repeatability tests, not substitute for them. No high-level robot navigation or power-supply redesign is part of this investigation." },
-          { heading: "Design decisions and iteration", text: "Compare changes to jaw geometry, guides and sensing compliance against repeatable measurements, rather than appearance alone. Four-bar linkages may introduce joint play or changing mechanical advantage; rack-and-pinion designs may introduce friction, backlash or tooth wear. Spring placement or detector thresholds may also make off-centre contact appear secure when it is not.\n\nOnly report iterations as completed when a physical or simulated test has been carried out and the observations recorded. Keep sketches of rejected concepts and explain why a revised design offers a practical improvement." }
-        ]
-      },
       references: [],
-      "investigation": {
-        "question": "Which parallel-jaw design best handles different box widths, and can measurable spring or mechanism deflection indicate a grasp likely to remain secure?",
-        "status": "Future Project",
-        "criteria": [
-          [
-            "Box width and travel",
-            "Hold 150 mm reference cube and evaluate other widths",
-            "Record jaw opening, contact geometry and smallest/largest reliable box"
-          ],
-          [
-            "Parallel jaw motion",
-            "Keep opposing contact surfaces approximately parallel in working range",
-            "Measure jaw angle and clearance at repeated openings"
-          ],
-          [
-            "Gripping and retention",
-            "Retain cube after closure and defined handling or disturbance",
-            "Independent hold, lift and motion tests with a stated pass criterion"
-          ],
-          [
-            "Mechanical response",
-            "Create measurable spring or compliant-element displacement under load",
-            "Measure deflection against independently observed grasp conditions"
-          ],
-          [
-            "Secure grasp indication",
-            "Distinguish contact from a grasp that remains held",
-            "Count false positives and missed detections against actual retention"
-          ],
-          [
-            "Misaligned engagement",
-            "Evaluate centred, offset and partial jaw contacts",
-            "Repeat tests with recorded offsets and box orientations"
-          ],
-          [
-            "Manufacture and robustness",
-            "Practical low-cost assembly with manageable backlash and friction",
-            "Document parts, cost, build accuracy, wear and maintenance"
-          ],
-          [
-            "Robot fit",
-            "Independently bench-testable, with later Robbot mounting",
-            "Check mass, envelope and mechanical interface; no lift project required"
-          ]
-        ],
-        "jawOptions": [
-          {
-            "name": "Original Bobbot pivoting jaws",
-            "strength": "Existing reference for comparing jaw travel and box-width tolerance.",
-            "tradeoff": "Faces do not remain parallel; box engagement depends on closure and position.",
-            "status": "Baseline only"
-          },
-          {
-            "name": "Four-bar parallel-jaw gripper",
-            "strength": "Linkage geometry can maintain approximately parallel contact over a chosen range.",
-            "tradeoff": "Finite travel, changing mechanical advantage and pivot clearance require analysis.",
-            "status": "Main candidate A"
-          },
-          {
-            "name": "Rack-and-pinion parallel gripper",
-            "strength": "Opposed racks can give symmetric, guided translation and adaptable jaw travel.",
-            "tradeoff": "Guides, backlash, gear tooth strength and sliding resistance need testing.",
-            "status": "Main candidate B"
-          }
-        ],
-        "detectionOptions": [
-          {
-            "name": "Spring-loaded pads with measured displacement",
-            "principle": "Elastic pad displacement under gripping load is observed by a magnet/Hall sensor, switch or position measurement.",
-            "risk": "A displaced pad can show contact without reliable retention; stiffness and thresholds need calibration."
-          },
-          {
-            "name": "Floating jaw or compliant contact element",
-            "principle": "The movable jaw segment deflects under reaction force, making engagement observable at the mechanism.",
-            "risk": "Deflection depends on contact location, cube compliance and alignment."
-          },
-          {
-            "name": "Spring or compliance in the drive transmission",
-            "principle": "A spring in the closing force path compresses under load and creates measurable travel.",
-            "risk": "Friction, backlash and mechanical advantage can confuse the relationship between travel and grip force."
-          }
-        ],
-        "trialColumns": [
-          "Test observation",
-          "What is recorded",
-          "Why it matters"
-        ],
-        "trialRows": [
-          [
-            "Jaw range",
-            "Cube width, jaw opening and parallelism",
-            "Checks usable size range beyond the 150 mm reference"
-          ],
-          [
-            "Initial contact",
-            "Observed contact versus sensor response",
-            "Contact alone is not proof of retention"
-          ],
-          [
-            "Secure hold",
-            "Independent hold / lift outcome after closing",
-            "Reference outcome for any grasp-success indication"
-          ],
-          [
-            "Disturbance and slip",
-            "Whether the box remains held during defined handling",
-            "Tests whether the claimed grasp is likely to stay grasped"
-          ],
-          [
-            "Repeatability",
-            "Repeated centre/offset trials and detector errors",
-            "Counts false positives and missed detections"
-          ]
-        ],
-        "media": [],
-        "sources": []
-      },
       "links": {
         "github": "",
         "cad": "",
@@ -1139,7 +1003,7 @@ window.PORTFOLIO_DATA = {
         outcome: "",
         lessonsLearned: ""
       },
-      "published": false,
+      "published": true,
       "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 1: Gripper Contact Pads",
       status: "in-progress",
@@ -1703,6 +1567,7 @@ window.PORTFOLIO_DATA = {
       imageCaption: "goBILDA DECODE Starter Bot with removable electrical panel",
       summary: "An FTC-style starter robot assembled from the goBILDA StarterBot Assembly Manual and Starter Kit components. It's Electrical Panel was built separately and was built to be removable and integrate with other robots.",
       tags: ["Robotics", "goBILDA", "FTC", "Robot Assembly"],
+      relatedProjectIds: ["mobile-robot-power-distribution", "robot-control-electronics"],
       date: "",
       sections: {
         abstract: "",

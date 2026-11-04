@@ -498,7 +498,6 @@
         <div class="print-photo-grid" data-count="${photos.length}">${cards}</div>
       </section>` : ""}
       ${engineeringSummary(p)}${detailLayout(rows,'Project sections',printSidebar)}
-      <div class="next-action"><div><span class="eyebrow">SEE MORE</span><h2>More 3D prints &amp; fabrication</h2></div><a class="button button-outline" href="projects.html?category=fabrication">Browse 3D prints ↗</a></div>
       <dialog class="print-lightbox" id="print-lightbox" aria-label="Full size print photograph"><button type="button" class="print-lightbox-close" aria-label="Close full-size photograph">×</button>
         <div class="print-lightbox-stage"><button type="button" class="print-lightbox-prev" aria-label="Previous photograph">‹</button><img alt=""/><button type="button" class="print-lightbox-next" aria-label="Next photograph">›</button></div>
         <div class="print-lightbox-footer"><span class="print-lightbox-count"></span><span class="print-lightbox-caption"></span></div>
@@ -856,10 +855,9 @@
     root.innerHTML=`<div class="container">
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
-        <h1>${text(p.title)}</h1>${optionalDetailText(p.subtitle,"project-intro__subtitle")}${optionalDetailText(displayProgress(p),"project-intro__status")}${targetStartMarkup(p,true)}${optionalDetailText(p.summary,"project-lede")}${skillTags(p)}</div>
-      <figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}<figcaption>${text(p.imageCaption||p.title)}</figcaption></figure>
+        <h1>${text(p.title)}</h1>${optionalDetailText(p.subtitle,"project-intro__subtitle")}${optionalDetailText(p.hideDetailStatus ? "" : displayProgress(p),"project-intro__status")}${targetStartMarkup(p,true)}${optionalDetailText(p.hideDetailSummary ? "" : p.summary,"project-lede")}${skillTags(p)}</div>
+      <figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}${p.hideImageCaption ? "" : `<figcaption>${text(p.imageCaption||p.title)}</figcaption>`}</figure>
       ${engineeringSummary(p)}
-      ${p.investigation?.question ? `<div class="investigation-question"><strong>Engineering question</strong><p>${text(p.investigation.question)}</p>${p.investigation.status?`<span>${text(p.investigation.status)}</span>`:''}</div>`:''}
       ${detailLayout(rows)}
     </div>`;
   }
