@@ -808,7 +808,7 @@
     }
     if (Array.isArray(p.projectContingencies) && p.projectContingencies.length) {
       const rows=p.projectContingencies.map(item=>`<tr><th scope="row">${text(item.risk)}</th><td>${text(item.response)}</td></tr>`).join('');
-      add('projectPlan:contingencies',`<div class="investigation-table-wrap"><table class="investigation-table project-contingencies"><thead><tr><th scope="col">Risk or constraint</th><th scope="col">Proposed contingency</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+      add('projectPlan:contingencies',`<div class="investigation-table-wrap"><table class="investigation-table project-contingencies"><thead><tr><th scope="col">Risk</th><th scope="col">Contingency</th></tr></thead><tbody>${rows}</tbody></table></div>`);
     }
 
     if(inv.jawOptions?.length || inv.detectionOptions?.length) add('materialsMethods',structured('concept-study','Mechanism concepts',investigationSection));
