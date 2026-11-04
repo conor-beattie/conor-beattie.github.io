@@ -2,8 +2,9 @@
 
 Each engineering category now displays **Projects** (completed/in-progress work)
 followed by **Future Projects**, only if any published planned entries exist.
-The Software catalogue supports the same split; Algorithms remains a reference
-library and is unchanged. All Projects uses the same two groups. Skill filters
+Software now uses **Software** and optional **Future Software** sections; Algorithms
+uses **Algorithms** and **Future Algorithms**, with no category subheadings.
+All Projects uses the same two groups. Skill filters
 show **demonstrated work only**, not planned activities. Homepage Selected
 Projects also excludes planned work, even if `featuredOrder` is assigned.
 
@@ -26,9 +27,15 @@ placeholder. Published/unpublished draft visibility remains unchanged.
 
 For Software, use `projectStatus: "planned"` instead of changing the existing
 `status` field, because software `status` records code/test evidence maturity.
-All existing software records have a blank `projectStatus` and `targetStart`.
+All eight current software records have `projectStatus: "in-progress"`. The
+Future Software section remains hidden until an entry is marked `"planned"`.
+Algorithms also use `projectStatus` for grouping, leaving `status` free for
+optional evidence notes. Six unlinked methods are marked `"planned"` for
+future implementation: Pure Pursuit, Follow the Gap, DWA, Smooth Control,
+A* and SLAM. This status does not claim any algorithm is fully validated.
+Both catalogues use `categoryOrder` independently within their two sections.
 
-The gripper **Part 1: Contact Pads** remains *in progress* and unpublished;
+The gripper **Part 1: Contact Pads** remains *in progress* and is published;
 **Part 2: Gripper Jaw Assembly** and **Part 3: Contact Sensing** are planned.
 No unconfirmed starting dates were assigned. The existing internal
 `electronics` category ID is unchanged, but the public title is now
@@ -64,9 +71,9 @@ categoryOrder: 1, // First item in Mechanical Design & CAD
 - This changes the Robotics, Mechanical Design & CAD, 3D Printing & Fabrication,
   and Electronics category listings. The **All Projects** and **skill-search**
   listings retain their previous cross-category order.
-- Software entries also have `categoryOrder`. The featured **Autonomous Return
-  to Base** panel remains pinned above the Software cards; other Software cards
-  use their ordering numbers. The Algorithms reference library is unchanged.
+- Software entries also have `categoryOrder`. Software cards now all use their ordering numbers; there is no special
+  Featured Software panel. Algorithms also use `categoryOrder` and separate
+  current methods from planned future implementation topics.
 - Every current entry has a categoryOrder value matching the order already shown
   on the site, so this update does **not** unexpectedly rearrange the projects.
 
@@ -99,7 +106,7 @@ just like ordinary projects.
 The three gripper investigations now share the main title
 “Improving Gripper Reliability on an Autonomous Mobile Robot”; their part
 labels and Future/In Progress statuses are separate editable fields.
-The unpublished Part 1 remains unpublished until explicitly published.
+Part 1 is published while its investigation is in progress.
 
 ---
 

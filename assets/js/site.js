@@ -295,14 +295,11 @@
   function software() {
     const root = $("#software-grid");
     if (!root) return;
-    const current = softwareItems.filter(item=>!isPlannedProject(item));
+    const current = sortByCategoryOrder(softwareItems.filter(item => !isPlannedProject(item)));
     const future = sortByCategoryOrder(softwareItems.filter(isPlannedProject));
-    const featured = current.find(s => s.id === "return-to-base");
-    const others = sortByCategoryOrder(current.filter(s => s.id !== "return-to-base"));
-    const activeMarkup = (featured ? `<div class="software-feature">${softwareCard(featured)}<div class="software-feature__copy"><span class="eyebrow">FEATURED SOFTWARE</span><h2>From a fixed return to adaptive navigation.</h2><p>Explore how the October 2026 Python controller coordinates AprilTag routes, obstacle avoidance, guide recovery and wall following.</p><a class="text-link" href="${softwareUrl(featured)}">Open the annotated flowchart ↗</a></div></div>` : "") +
-      (others.length ? `<div class="software-card-grid">${others.map(softwareCard).join("")}</div>` : "");
-    root.innerHTML = `<section class="project-list-group"><h2 class="project-list-group__title">Projects</h2>${activeMarkup}</section>` +
-      (future.length ? `<section class="project-list-group"><h2 class="project-list-group__title">Future Projects</h2><div class="software-card-grid">${future.map(softwareCard).join("")}</div></section>` : "");
+    const renderGroup = (title, items) => items.length ?
+      `<section class="project-list-group"><h2 class="project-list-group__title">${title}</h2><div class="software-card-grid">${items.map(softwareCard).join("")}</div></section>` : "";
+    root.innerHTML = renderGroup("Software", current) + renderGroup("Future Software", future);
   }
   function softwareDetail() {
     const id=new URLSearchParams(location.search).get('id');
@@ -320,17 +317,17 @@
   function algorithmsPage() {
     const gallery = $("#algorithm-groups");
     if (!gallery) return;
-    const groups = [...new Set(algorithms.map(a => a.group || "Other"))];
-    gallery.innerHTML = groups.map(group => {
-      const subset = algorithms.filter(a => (a.group || "Other") === group);
-      return `<section class="algorithm-group"><div class="algorithm-group__head"><h2>${text(group)}</h2><span>${subset.length} method${subset.length === 1 ? "" : "s"}</span></div><div class="algorithm-grid">${subset.map(algorithmCard).join("")}</div></section>`;
-    }).join("");
-    const count = $("#algorithm-count");
-    if (count) count.textContent = `${algorithms.length} methods · ${groups.length} areas`;
+    const visible = algorithms.filter(canShow);
+    const current = sortByCategoryOrder(visible.filter(a => !isPlannedProject(a)));
+    const future = sortByCategoryOrder(visible.filter(isPlannedProject));
+    const renderGroup = (title, items) => items.length ?
+      `<section class="project-list-group"><h2 class="project-list-group__title">${title}</h2><div class="algorithm-grid">${items.map(algorithmCard).join("")}</div></section>` : "";
+    gallery.innerHTML = renderGroup("Algorithms", current) + renderGroup("Future Algorithms", future);
   }
   function algorithmDetail() {
     const id = new URLSearchParams(location.search).get("id");
-    const a = algorithm(id);
+    const selected = algorithm(id);
+    const a = canShow(selected) ? selected : null;
     const root = $("#algorithm-content");
     if (!a) { root.innerHTML = `<div class="container not-found"><p class="eyebrow">ALGORITHM NOT FOUND</p><h1>No algorithm has that ID.</h1><a class="button button-primary" href="algorithms.html">Browse algorithms ↗</a></div>`; return; }
     document.title = `${a.title} · ${data.owner.name}`;
@@ -356,7 +353,7 @@
     if (catGrid) catGrid.innerHTML = data.categories.map((cat) => `
       <a href="${cat.id === "software" ? "software.html" : cat.id === "algorithms" ? "algorithms.html" : `projects.html?category=${encodeURIComponent(cat.id)}`}" class="category-tile">
         <div class="category-tile__image"><img src="${img(cat.image)}" alt="${text(cat.title)}" loading="lazy" /></div>
-        <div class="category-tile__info"><h3>${text(cat.title)}</h3><p>${text(cat.cardSubtitle || cat.subtitle)}</p><span class="tile-arrow" aria-hidden="true">↗</span></div>
+        <div class="category-tile__info"><h3>${text(cat.title)}</h3><span class="tile-arrow" aria-hidden="true">↗</span></div>
       </a>`).join("");
     const featured = $("#featured-projects");
     if (featured) {

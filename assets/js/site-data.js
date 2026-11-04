@@ -186,7 +186,7 @@ window.PORTFOLIO_DATA = {
       title: "Autonomous Return to Base",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "Behaviour",
@@ -236,7 +236,7 @@ window.PORTFOLIO_DATA = {
       title: "Stack Object",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "Behaviour",
@@ -282,7 +282,7 @@ window.PORTFOLIO_DATA = {
       title: "Arena Guide Search & Recovery",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
@@ -328,7 +328,7 @@ window.PORTFOLIO_DATA = {
       title: "Follow Wall",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
@@ -374,7 +374,7 @@ window.PORTFOLIO_DATA = {
       title: "Local Obstacle Avoidance",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
@@ -420,7 +420,7 @@ window.PORTFOLIO_DATA = {
       title: "Visual Perception Pipeline",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "System",
@@ -466,7 +466,7 @@ window.PORTFOLIO_DATA = {
       title: "Robot Localisation",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "System",
@@ -512,7 +512,7 @@ window.PORTFOLIO_DATA = {
       title: "Motion & Command Control",
       subtitle: "",
       cardStatus: "",
-      projectStatus: "", // Optional: "planned"; existing status records evidence maturity.
+      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
       targetStart: "", // Optional provisional start period.
 
       type: "System",
@@ -578,6 +578,8 @@ window.PORTFOLIO_DATA = {
       title: "IBVS — Image-Based Visual Servoing",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 1,
 
       shortName: "IBVS",
       group: "Visual Servoing",
@@ -595,6 +597,8 @@ window.PORTFOLIO_DATA = {
       title: "PBVS — Position-Based Visual Servoing",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 2,
 
       shortName: "PBVS",
       group: "Visual Servoing",
@@ -612,6 +616,8 @@ window.PORTFOLIO_DATA = {
       title: "PID — Proportional–Integral–Derivative Control",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 3,
 
       shortName: "PID",
       group: "Control",
@@ -629,6 +635,8 @@ window.PORTFOLIO_DATA = {
       title: "Pure Pursuit — Path Following",
       subtitle: "",
       status: "",
+      projectStatus: "planned",
+      categoryOrder: 1,
 
       shortName: "Pure Pursuit",
       group: "Navigation",
@@ -645,6 +653,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "AprilTag Route Selection",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 4,
       shortName: "Tag Route Selection", group: "Vision & localisation",
 
       summary: "Choose from ordered arena guide markers to steer a robot along a return route.",
@@ -659,6 +669,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "AprilTag Pose Estimation",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 5,
       shortName: "AprilTag Pose", group: "Vision & localisation",
 
       summary: "Estimate camera-relative position and orientation from a known square marker.",
@@ -673,6 +685,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Distance–Angle Feedback Control",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 6,
       shortName: "Distance–Angle", group: "Feedback control",
 
       summary: "Turn a distance error and a steering-angle error into commanded motion.",
@@ -687,6 +701,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Local Obstacle Avoidance",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 7,
       shortName: "Obstacle Avoidance", group: "Navigation",
 
       summary: "Change local motion when objects obstruct a preferred direction.",
@@ -701,6 +717,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "FTG — Follow the Gap",
       subtitle: "",
       status: "",
+      projectStatus: "planned",
+      categoryOrder: 2,
       shortName: "FTG", group: "Navigation",
 
       summary: "Steer through a suitable obstacle-free opening in a local scan or obstacle field.",
@@ -715,6 +733,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "DWA — Dynamic Window Approach",
       subtitle: "",
       status: "",
+      projectStatus: "planned",
+      categoryOrder: 3,
       shortName: "DWA", group: "Navigation",
 
       summary: "Evaluate short candidate velocity commands against obstacles and motion constraints.",
@@ -729,6 +749,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Wall Following",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 8,
       shortName: "Wall Follow", group: "Navigation",
 
       summary: "Travel alongside a wall at a preferred side distance and heading.",
@@ -743,6 +765,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Smooth Control Law",
       subtitle: "",
       status: "",
+      projectStatus: "planned",
+      categoryOrder: 4,
       shortName: "Smooth Control", group: "Feedback control",
 
       summary: "Generate a continuously varying corrective motion toward a target.",
@@ -757,6 +781,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Wheel Odometry",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 9,
       shortName: "Odometry", group: "Localisation",
 
       summary: "Estimate changes in robot pose from wheel motion.",
@@ -771,6 +797,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Dead Reckoning & Open-Loop Motion",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 10,
       shortName: "Dead Reckoning", group: "Localisation",
 
       summary: "Estimate or execute movement without absolute visual position corrections.",
@@ -785,6 +813,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Coordinate Frames & Transformations",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 11,
       shortName: "Frames", group: "Robotics mathematics",
 
       summary: "Convert target and robot measurements between camera, body and arena coordinate frames.",
@@ -799,6 +829,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "A* Path Planning",
       subtitle: "",
       status: "",
+      projectStatus: "planned",
+      categoryOrder: 5,
       shortName: "A*", group: "Planning",
 
       summary: "Find a graph or grid route using cost-so-far plus a heuristic estimate.",
@@ -813,6 +845,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "SLAM — Simultaneous Localisation and Mapping",
       subtitle: "",
       status: "",
+      projectStatus: "planned",
+      categoryOrder: 6,
       shortName: "SLAM", group: "Localisation",
 
       summary: "Estimate robot pose while constructing or updating a map.",
@@ -827,6 +861,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Motion Profiles",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 12,
       shortName: "Profiles", group: "Motion control",
 
       summary: "Constrain acceleration and speed to make transitions smoother and more repeatable.",
@@ -841,6 +877,8 @@ window.PORTFOLIO_DATA = {
       published: true, title: "Visual Target Tracking",
       subtitle: "",
       status: "",
+      projectStatus: "in-progress",
+      categoryOrder: 13,
       shortName: "Tracking", group: "Vision & localisation",
 
       summary: "Maintain correspondence to an object or marker across camera frames.",
@@ -1299,7 +1337,7 @@ window.PORTFOLIO_DATA = {
       image: "assets/images/arduino mega.jpg",
       imageAlt: "Arduino Mega 2560 controller wiring diagram showing field and panel connectors, power buses, encoder inputs, servos and sensor interfaces",
       imageCaption: "Arduino Mega 2560 — pin allocation, power distribution and field/panel wiring diagram",
-      summary: "A reusable Arduino Mega-based low-level controller for robot TeleOp, encoder counting and hardware I/O, with a Raspberry Pi responsible for higher-level vision, navigation and autonomous control.",
+      summary: "A reusable Arduino Mega-based low-level controller for hardware I/O and encoder counting. Can be used as a standalone for TeleOp or connected to a Raspberry Pi for higher-level vision, navigation and autonomous control.",
       tags: ["Arduino Mega", "Embedded Systems", "TeleOp", "Robot I/O"],
       date: "",
       contribution: "Design of a reusable wiring and I/O arrangement for robot platforms, separating the Mega’s low-level functions from Raspberry Pi autonomy.",
