@@ -306,13 +306,13 @@
     const item=softwareById(id), root=$('#software-content');
     if(!item){root.innerHTML=`<div class="container not-found"><p class="eyebrow">SOFTWARE NOT FOUND</p><h1>No software entry has that ID.</h1><a class="button button-primary" href="software.html">Browse Software ↗</a></div>`;return;}
     document.title=`${item.title} · ${data.owner.name}`;
-    const citations=citationContext(item);
-    const rows=sectionLayouts(item,softwareExtras(item,citations),citations);
-    const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a><figcaption>Code-derived control flowchart, simplified for presentation. Select it to view the full-size SVG.</figcaption></figure>`:'';
+    // The detailed report is intentionally student-authored. Do not repopulate
+    // empty sections from card summaries, code-file lists or linked methods.
+    const rows=sectionLayouts(item);
+    const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a></figure>` : '';
     root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
-      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}${nonempty(item.status) ? ' · '+text(item.status) : ''}</p><h1>${text(item.title)}</h1>${optionalDetailText(item.subtitle,"project-intro__subtitle")}${optionalDetailText(isPlannedProject(item)?"Future Project":item.cardStatus,"project-intro__status")}${targetStartMarkup(item,true)}${optionalDetailText(item.summary,"project-lede")}${skillTags(item)}</div>
-      ${media}${engineeringSummary(item)}${detailLayout(rows,'Software sections',`<div class="detail-callout"><strong>Evidence status</strong><p>${text(item.status)} — implementation and test results should be distinguished.</p></div>`)}
-      <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More software systems</h2></div><a class="button button-outline" href="software.html">Software archive ↗</a></div></div>`;
+      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}</p><h1>${text(item.title)}</h1>${optionalDetailText(item.subtitle,"project-intro__subtitle")}</div>
+      ${media}${engineeringSummary(item)}${detailLayout(rows,'Software sections')}</div>`;
   }
   function algorithmsPage() {
     const gallery = $("#algorithm-groups");
@@ -331,17 +331,19 @@
     const root = $("#algorithm-content");
     if (!a) { root.innerHTML = `<div class="container not-found"><p class="eyebrow">ALGORITHM NOT FOUND</p><h1>No algorithm has that ID.</h1><a class="button button-primary" href="algorithms.html">Browse algorithms ↗</a></div>`; return; }
     document.title = `${a.title} · ${data.owner.name}`;
-    const implementations = softwareForAlgorithm(a.id);
-    const videos = (a.demos || []).filter(d => d.video && visibleProjects().some(p => p.id === d.robotId)).map(d => ({algorithm:a,demo:d}));
-    const source = linkMarkup(a.sourceUrl,"Reference / source link");
+    // Descriptions are left for the student to write. Retain the familiar
+    // technical headings; show each only after its text has been populated.
+    const sections = [
+      ["Introduction", a.introduction],
+      ["What it does", a.overview],
+      ["How it works", a.method],
+      ["Limitations and considerations", a.considerations],
+      ["Implementation notes", a.implementation]
+    ].filter(([, body]) => nonempty(body))
+      .map(([heading, body]) => `<section><h2>${text(heading)}</h2>${paragraphs(body)}</section>`).join("");
     root.innerHTML = `<div class="container"><div class="breadcrumb"><a href="algorithms.html">Algorithms</a><span aria-hidden="true">/</span><span>${text(a.shortName)}</span></div>
-      <div class="project-intro"><p class="eyebrow">${text(a.group)} · ALGORITHM</p><h1>${text(a.title)}</h1>${detailSubStatus(a)}${optionalDetailText(a.summary,"project-lede")}</div>
-      <div class="algorithm-detail-stack"><section><h2>What it does</h2>${paragraphs(a.overview)}</section><section><h2>How it works</h2>${paragraphs(a.method)}</section><section><h2>Limitations and considerations</h2>${paragraphs(a.considerations)}</section>
-      <section><h2>Where it appears in the software</h2>${implementations.length ? `<p>The following software entries explicitly reference this method. See each implementation for its own evidence status and design history.</p><div class="related-list">${implementations.map(item => `<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong><span>${text(item.status)} · ${text(item.type)} ↗</span></a>`).join("")}</div>` : `<p>No software entry has been linked to this method yet. This is a general engineering reference, not a claim of implementation.</p>`}</section>
-      ${a.implementation ? `<section><h2>Implementation notes</h2>${paragraphs(a.implementation)}</section>` : ""}
-      ${videos.length ? `<section><h2>Recorded demonstrations</h2><div class="demo-grid">${videos.map(item=>demoMarkup(item)).join("")}</div></section>` : ""}
-      ${source ? `<section><h2>Technical resources</h2>${source}</section>` : ""}</div>
-      <div class="next-action"><div><span class="eyebrow">EXPLORE MORE</span><h2>More algorithms</h2></div><a class="button button-outline" href="algorithms.html">Algorithms library ↗</a></div></div>`;
+      <div class="project-intro"><p class="eyebrow">${text(a.group)} · ALGORITHM</p><h1>${text(a.title)}</h1>${detailSubStatus(a)}</div>
+      ${sections ? `<div class="algorithm-detail-stack">${sections}</div>` : ""}</div>`;
   }
 
   function home() {
