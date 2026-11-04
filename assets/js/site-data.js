@@ -1581,6 +1581,45 @@ window.PORTFOLIO_DATA = {
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
+      id: "camera-performance-comparison",
+      skills: ["Python", "Vision", "Localisation", "Experimental Testing", "Data Analysis"],
+      engineeringSummary: {
+        challenge: "My robot needed reliable AprilTag detection for localisation and navigation, both while stationary and while moving.",
+        contribution: "I compared the Pi Camera 3 (rolling shutter) and Arducam OV9281 (global shutter), testing AprilTag detection while stationary and while moving at up to approximately 1 m/s.",
+        outcome: "The Pi Camera 3 performed better when stationary and at lower speeds, while the Arducam OV9281 performed better during faster movement.",
+        lessonsLearned: "Choose components for the conditions in which they will operate. The best camera for stationary localisation may not be the best camera while driving."
+      },
+      published: true,
+      title: "Camera Performance Comparison",
+      subtitle: "Pi Camera 3 vs Arducam OV9281",
+      status: "completed",
+      targetStart: "",
+      category: "robotics",
+      categoryOrder: 5,
+      image: "assets/images/IMG_2627 Bobbot.jpg",
+      imageAlt: "Photograph of the Bobbot autonomous mobile robot",
+      hideImageCaption: true,
+      summary: "Comparing rolling-shutter and global-shutter cameras for AprilTag detection while a mobile robot is stationary and moving.",
+      tags: ["Camera Comparison", "AprilTags", "Rolling Shutter", "Global Shutter"],
+      date: "",
+      contribution: "",
+      relatedProjectIds: ["autonomous-mobile-robot"],
+      sections: {
+        abstract: "",
+        introduction: "My robot needed reliable AprilTag detection for localisation and navigation. I compared a Pi Camera 3, which has a rolling shutter, with an Arducam OV9281, which has a global shutter.",
+        materialsMethods: "I tested AprilTag detection with the cameras stationary and while the robot was moving at speeds up to approximately 1 m/s. The aim was to see how camera performance changed with movement.",
+        projectPlan: "",
+        results: "The Pi Camera 3 performed better when stationary and at lower speeds. The Arducam OV9281 performed better during faster movement.",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: "",
+        relatedProjects: "",
+        references: ""
+      },
+      references: [],
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
       id: "gobilda-decode-starter-bot",
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Mechanical Assembly", "Electrical Design"],
