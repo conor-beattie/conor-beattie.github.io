@@ -1365,7 +1365,7 @@ window.PORTFOLIO_DATA = {
       status: "",
       targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "robotics",
-      categoryOrder: 3,
+      categoryOrder: 9,
       image: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg",
       imageAlt: "Photograph of the goBILDA DECODE starter robot during assembly, showing its metal chassis, wheels, motors, wiring and control hardware",
       imageCaption: "goBILDA DECODE Starter Bot with removable electrical panel",
