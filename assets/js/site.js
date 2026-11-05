@@ -682,7 +682,8 @@
     (entry.surfaceStudy?.materials || []).forEach(row => Object.values(row).forEach(scan));
     (entry.materialSelection || []).forEach(row => row.forEach(scan));
     (entry.surfaceStudy?.tests || []).forEach(row => Object.values(row).forEach(scan));
-    const ordered = [...first.map(id=>byId.get(id)),...all.filter(r=>!observed.has(r.id))];
+    // Gripper study retains its established numbered bibliography (1–6) when adding source 7.
+    const ordered = entry.preserveReferenceOrder ? all : [...first.map(id=>byId.get(id)),...all.filter(r=>!observed.has(r.id))];
     const numbers = new Map(ordered.map((r,i)=>[r.id,i+1]));
     const inline = value => text(value).replace(marker, (token,rawId) => {
       const id=rawId.toLowerCase(), n=numbers.get(id);
@@ -775,9 +776,14 @@
     // Compact material-choice table for the contact-pad study. Textual research
     // citations use the same numbered bibliography as the report prose.
     if(p.materialSelection?.length) {
-      const headers=['Status','Product Description','Filament Material','P1S Compatible','Reasoning','Reference'];
+      const headers=['Status','Product Description','Material','P1S Compatible','Reasoning','Reference'];
       const heading=headers.map(h=>`<th scope="col">${text(h)}</th>`).join('');
-      const rows=p.materialSelection.map(row=>`<tr>${row.map(cell=>`<td>${cites.inline(cell)}</td>`).join('')}</tr>`).join('');
+      const rows=p.materialSelection.map(row=>`<tr>${row.map(cell=>{
+        // Some product names link to their source; citation markers still use the bibliography system.
+        if (cell && typeof cell === 'object' && cell.label && href(cell.url))
+          return `<td><a href="${text(href(cell.url))}" target="_blank" rel="noopener noreferrer">${cites.inline(cell.label)}</a></td>`;
+        return `<td>${cites.inline(cell)}</td>`;
+      }).join('')}</tr>`).join('');
       const table=`<div class="investigation-table-wrap surface-table-wrap"><table class="investigation-table surface-table surface-materials-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`;
       if (p.id === 'gripper-contact-surfaces') add('materialsMethods:material-selection',table);
       else add('materialsMethods',subheading('Materials',cites.paragraphs(p.materialsIntro || '')+table));
