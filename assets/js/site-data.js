@@ -146,15 +146,15 @@ window.PORTFOLIO_DATA = {
     {
       id: "software",
       published: true,
-      title: "Software",
-      subtitle: "Behaviours, Python modules, control logic and development notes",
+      title: "Software Logic",
+      subtitle: "Flow diagrams showing how programmed routines combine reusable functions",
       image: "assets/diagrams/bobbot-return-to-base.svg"
     },
     {
       id: "algorithms",
       published: true,
-      title: "Algorithms",
-      subtitle: "The mathematical methods behind navigation, vision and control",
+      title: "Software Libraries",
+      subtitle: "Reusable software modules, from basic functions to robotics algorithms",
       image: "assets/images/navigation block diagram.jpg"
     }
   ],
@@ -175,6 +175,42 @@ window.PORTFOLIO_DATA = {
   // on its normal category/software page. Use unique positive whole numbers.
   software: [
     {
+      id: "acquire-object",
+      published: true,
+      title: "Acquire Object",
+      subtitle: "",
+      cardStatus: "",
+      projectStatus: "in-progress",
+      type: "Behaviour",
+      skills: ["Python"],
+      robotIds: ["autonomous-mobile-robot"],
+      algorithmIds: ["ibvs", "pbvs", "apriltag-pose", "local-obstacle-avoidance"],
+      summary: "Find, approach and pick up an object.",
+      sections: {},
+      sectionDetails: {},
+      references: [],
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "robot-behaviour",
+      published: true,
+      title: "Robot Behaviour",
+      subtitle: "",
+      cardStatus: "",
+      projectStatus: "in-progress",
+      type: "System",
+      skills: ["Python"],
+      robotIds: ["autonomous-mobile-robot"],
+      algorithmIds: [],
+      summary: "Coordinate the main sequence of autonomous robot operations.",
+      sections: {},
+      sectionDetails: {},
+      references: [],
+      sourceUrl: "",
+      demos: []
+    },
+    {
       id: "return-to-base",
       categoryOrder: 1,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
@@ -187,7 +223,7 @@ window.PORTFOLIO_DATA = {
       },
       published: true,
       featuredOrder: 5,
-      title: "Autonomous Return to Base",
+      title: "Return to Base",
       subtitle: "",
       cardStatus: "",
       projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
@@ -195,7 +231,7 @@ window.PORTFOLIO_DATA = {
 
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
-      algorithmIds: ["apriltag-routing", "distance-angle-control", "local-obstacle-avoidance", "wall-following", "dead-reckoning"],
+      algorithmIds: ["apriltag-pose", "pid", "local-obstacle-avoidance", "wall-following", "dead-reckoning"],
       tags: ["Python", "Navigation", "AprilTags", "Recovery"],
       status: "Code documented",
       summary: "Navigate back to the delivery area using a chain of arena tags, with obstacle avoidance, guide recovery and a conditional wall-following approach.",
@@ -239,10 +275,10 @@ window.PORTFOLIO_DATA = {
 
       type: "Behaviour",
       robotIds: ["autonomous-mobile-robot"],
-      algorithmIds: ["distance-angle-control", "local-obstacle-avoidance", "coordinate-transformations"],
+      algorithmIds: ["pid", "local-obstacle-avoidance", "coordinate-transformations"],
       tags: ["Perception", "Target Approach", "Sequencing"],
       status: "Write-up in progress",
-      summary: "Coordinate target selection, approach and stacking while responding to unavailable or obstructed targets.",
+      summary: "Coordinate robot movement, lifting and gripper operations to stack an object.",
       image: "assets/images/stack-object-cover.svg",
       sections: {
         abstract: "",
@@ -271,7 +307,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      title: "Arena Guide Search & Recovery",
+      title: "Guide Recovery",
       subtitle: "",
       cardStatus: "",
       projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
@@ -279,10 +315,10 @@ window.PORTFOLIO_DATA = {
 
       type: "Subroutine",
       robotIds: ["autonomous-mobile-robot"],
-      algorithmIds: ["apriltag-routing", "dead-reckoning"],
+      algorithmIds: ["apriltag-pose", "dead-reckoning"],
       tags: ["AprilTags", "Fault Recovery", "Search"],
       status: "Code documented",
-      summary: "Search for a missing arena tag and re-establish a viable visual navigation route.",
+      summary: "Search for a missing visual guide and restore a route for navigation.",
       image: "assets/images/guide-recovery-cover.svg",
       sections: {
         abstract: "",
@@ -300,46 +336,6 @@ window.PORTFOLIO_DATA = {
       codeFiles: ["skills/navigation/search_for_return_guide.py", "skills/navigation/search_rotate.py"], sourceUrl: "", demos: []
     },
     {
-      id: "wall-follow-skill",
-      categoryOrder: 4,
-      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
-      skills: ["Python", "Feedback Control"],
-      engineeringSummary: {
-        challenge: "",
-        contribution: "",
-        outcome: "",
-        lessonsLearned: ""
-      },
-      published: true,
-      title: "Follow Wall",
-      subtitle: "",
-      cardStatus: "",
-      projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
-      targetStart: "", // Optional provisional start period.
-
-      type: "Subroutine",
-      robotIds: ["autonomous-mobile-robot"],
-      algorithmIds: ["wall-following", "distance-angle-control"],
-      tags: ["Navigation", "Wall Geometry", "Feedback"],
-      status: "Needs integration review",
-      summary: "Travel alongside an arena wall using measured wall geometry and lateral correction.",
-      image: "assets/images/wall-follow-cover.svg",
-      sections: {
-        abstract: "",
-        introduction: "",
-        materialsMethods: "",
-        projectPlan: "",
-        resultsDiscussion: "",
-        conclusions: "",
-        lessonsLearned: "",
-        relatedProjects: "",
-        references: ""
-      },
-      sectionDetails: {},
-      references: [],
-      codeFiles: ["skills/navigation/follow_wall.py", "navigation/wall_following/wall_follower.py"], sourceUrl: "", demos: []
-    },
-    {
       id: "local-avoidance-skill",
       categoryOrder: 5,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
@@ -351,7 +347,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      title: "Local Obstacle Avoidance",
+      title: "Local Avoidance",
       subtitle: "",
       cardStatus: "",
       projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
@@ -362,7 +358,7 @@ window.PORTFOLIO_DATA = {
       algorithmIds: ["local-obstacle-avoidance", "coordinate-transformations"],
       tags: ["Obstacle Detection", "Navigation", "Recovery"],
       status: "Write-up in progress",
-      summary: "Temporarily take over motion when detected objects block the nominal route.",
+      summary: "Combine obstacle detection and avoidance methods to navigate around obstacles.",
       image: "assets/images/local-avoidance-cover.svg",
       sections: {
         abstract: "",
@@ -391,7 +387,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      title: "Visual Perception Pipeline",
+      title: "Perception Pipeline",
       subtitle: "",
       cardStatus: "",
       projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
@@ -402,7 +398,7 @@ window.PORTFOLIO_DATA = {
       algorithmIds: ["apriltag-pose", "coordinate-transformations"],
       tags: ["Vision", "AprilTags", "Perception"],
       status: "Write-up in progress",
-      summary: "Turn camera observations into measurements and identified targets for navigation behaviours.",
+      summary: "Process camera observations to identify targets and provide information for other routines.",
       image: "assets/images/perception-cover.svg",
       sections: {
         abstract: "",
@@ -431,7 +427,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      title: "Robot Localisation",
+      title: "Localisation",
       subtitle: "",
       cardStatus: "",
       projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
@@ -442,7 +438,7 @@ window.PORTFOLIO_DATA = {
       algorithmIds: ["odometry", "coordinate-transformations", "dead-reckoning"],
       tags: ["Pose", "Coordinate Frames", "Navigation"],
       status: "Write-up in progress",
-      summary: "Represent robot pose and use localisation to support route recovery and home-base decisions.",
+      summary: "Combine observations and position estimates to determine the robot’s location.",
       image: "assets/images/localisation-cover.svg",
       sections: {
         abstract: "",
@@ -471,7 +467,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      title: "Motion & Command Control",
+      title: "Motion Control",
       subtitle: "",
       cardStatus: "",
       projectStatus: "in-progress", // Optional: "planned"; existing status records evidence maturity.
@@ -479,10 +475,10 @@ window.PORTFOLIO_DATA = {
 
       type: "System",
       robotIds: ["autonomous-mobile-robot"],
-      algorithmIds: ["pid", "distance-angle-control", "motion-profiles"],
+      algorithmIds: ["pid", "pid", "velocity-control"],
       tags: ["Velocity", "Control", "Interfaces"],
       status: "Write-up in progress",
-      summary: "Convert motion objectives from navigation skills into robot velocity and actuator commands.",
+      summary: "Coordinate movement commands and controllers to control the robot.",
       image: "assets/images/motion-control-cover.svg",
       sections: {
         abstract: "",
@@ -502,391 +498,47 @@ window.PORTFOLIO_DATA = {
   ],
 
   /*
-    ALGORITHMS — ONE entry per method, NOT one entry per robot.
-
-    Each algorithm has zero or more demonstrations. Videos are stored under
-    assets/videos/<robot>/ and linked via demos[].video. The robotId must match
-    the ID of a project under projects[].id. Once you link a real video,
-    the same demonstration is displayed automatically on BOTH pages:
-       algorithm.html?id=ibvs
-       project.html?id=autonomous-mobile-robot
-
-    Do not add a robotId / video until that implementation has been tested.
-    Cross-links to software[] require no video and must reflect actual code use.
-    These initial entries are general descriptions, not claims of completed work.
-
-    Example to paste INSIDE an algorithm's demos: [
-      {
-        robotId: "autonomous-mobile-robot",
-        title: "IBVS — Bobbot",
-        description: "The robot aligns with a visual target.",
-        video: "assets/videos/bobbot/ibvs-demo.mp4",
-        poster: "", // Optional: assets/images/bobbot-ibvs-preview.webp
-        results: "Add the measured performance and test conditions."
-      }
-    ]
-    The following starting entries have demos: [] on purpose.
+    SOFTWARE LIBRARIES — individual reusable modules or recognised algorithms.
+    Existing and planned entries have separate short descriptions.
+    The eight pictured actuator primitives alone carry the Primitives tag.
+    Module interfaces can be documented with inputs, outputs and settings
+    once their exact parameter names have been verified from the code.
   */
-  // Algorithm detail explanations start blank. Fill introduction, overview,
-  // method and considerations when the student has written them.
-  // Card summaries and future/current ordering remain separate.
   algorithms: [
-    {
-      id: "ibvs",
-      published: true,
-      skills: ["Python", "Visual Servoing", "Vision", "Feedback Control"],
-      title: "IBVS — Image-Based Visual Servoing",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 1,
-
-      shortName: "IBVS",
-      group: "Visual Servoing",
-      summary: "Control robot motion from errors between observed and desired image features.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "",
-      demos: []
-    },
-    {
-      id: "pbvs",
-      published: true,
-      skills: ["Python", "Visual Servoing", "Vision", "Feedback Control"],
-      title: "PBVS — Position-Based Visual Servoing",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 2,
-
-      shortName: "PBVS",
-      group: "Visual Servoing",
-      summary: "Control robot motion using an estimated target position and orientation.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "",
-      demos: []
-    },
-    {
-      id: "pid",
-      published: true,
-      skills: ["Python", "Control", "Feedback Control"],
-      title: "PID — Proportional–Integral–Derivative Control",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 3,
-
-      shortName: "PID",
-      group: "Control",
-      summary: "Feedback control combining proportional, accumulated and changing error.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "",
-      demos: []
-    },
-    {
-      id: "pure-pursuit",
-      published: true,
-      skills: ["Python", "Navigation", "Path Following"],
-      title: "Pure Pursuit — Path Following",
-      subtitle: "",
-      status: "",
-      projectStatus: "planned",
-      categoryOrder: 1,
-
-      shortName: "Pure Pursuit",
-      group: "Navigation",
-      summary: "Follow a planned path by steering toward a lookahead point.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "",
-      demos: []
-    },
-    {
-      id: "apriltag-routing",
-      published: true,
-      skills: ["Python", "Vision", "Localisation", "Navigation"], title: "AprilTag Route Selection",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 4,
-      shortName: "Tag Route Selection", group: "Vision & localisation",
-
-      summary: "Choose from ordered arena guide markers to steer a robot along a return route.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "apriltag-pose",
-      published: true,
-      skills: ["Python", "Vision", "Localisation"], title: "AprilTag Pose Estimation",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 5,
-      shortName: "AprilTag Pose", group: "Vision & localisation",
-
-      summary: "Estimate camera-relative position and orientation from a known square marker.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "distance-angle-control",
-      published: true,
-      skills: ["Python", "Control", "Feedback Control"], title: "Distance–Angle Feedback Control",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 6,
-      shortName: "Distance–Angle", group: "Feedback control",
-
-      summary: "Turn a distance error and a steering-angle error into commanded motion.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "local-obstacle-avoidance",
-      published: true,
-      skills: ["Python", "Navigation", "Obstacle Avoidance"], title: "Local Obstacle Avoidance",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 7,
-      shortName: "Obstacle Avoidance", group: "Navigation",
-
-      summary: "Change local motion when objects obstruct a preferred direction.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "ftg",
-      published: true,
-      skills: ["Python", "Navigation", "Obstacle Avoidance"], title: "FTG — Follow the Gap",
-      subtitle: "",
-      status: "",
-      projectStatus: "planned",
-      categoryOrder: 2,
-      shortName: "FTG", group: "Navigation",
-
-      summary: "Steer through a suitable obstacle-free opening in a local scan or obstacle field.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "dwa",
-      published: true,
-      skills: ["Python", "Navigation", "Obstacle Avoidance", "Motion Control"], title: "DWA — Dynamic Window Approach",
-      subtitle: "",
-      status: "",
-      projectStatus: "planned",
-      categoryOrder: 3,
-      shortName: "DWA", group: "Navigation",
-
-      summary: "Evaluate short candidate velocity commands against obstacles and motion constraints.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "wall-following",
-      published: true,
-      skills: ["Python", "Navigation", "Feedback Control"], title: "Wall Following",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 8,
-      shortName: "Wall Follow", group: "Navigation",
-
-      summary: "Travel alongside a wall at a preferred side distance and heading.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "smooth-control-law",
-      published: true,
-      skills: ["Python", "Control", "Feedback Control", "Motion Control"], title: "Smooth Control Law",
-      subtitle: "",
-      status: "",
-      projectStatus: "planned",
-      categoryOrder: 4,
-      shortName: "Smooth Control", group: "Feedback control",
-
-      summary: "Generate a continuously varying corrective motion toward a target.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "odometry",
-      published: true,
-      skills: ["Python", "Localisation"], title: "Wheel Odometry",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 9,
-      shortName: "Odometry", group: "Localisation",
-
-      summary: "Estimate changes in robot pose from wheel motion.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "dead-reckoning",
-      published: true,
-      skills: ["Python", "Localisation"], title: "Dead Reckoning & Open-Loop Motion",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 10,
-      shortName: "Dead Reckoning", group: "Localisation",
-
-      summary: "Estimate or execute movement without absolute visual position corrections.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "coordinate-transformations",
-      published: true,
-      skills: ["Python", "Localisation", "Coordinate Transformations"], title: "Coordinate Frames & Transformations",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 11,
-      shortName: "Frames", group: "Robotics mathematics",
-
-      summary: "Convert target and robot measurements between camera, body and arena coordinate frames.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "a-star",
-      published: true,
-      skills: ["Python", "Navigation", "Path Planning"], title: "A* Path Planning",
-      subtitle: "",
-      status: "",
-      projectStatus: "planned",
-      categoryOrder: 5,
-      shortName: "A*", group: "Planning",
-
-      summary: "Find a graph or grid route using cost-so-far plus a heuristic estimate.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "slam",
-      published: true,
-      skills: ["Python", "Localisation", "Mapping"], title: "SLAM — Simultaneous Localisation and Mapping",
-      subtitle: "",
-      status: "",
-      projectStatus: "planned",
-      categoryOrder: 6,
-      shortName: "SLAM", group: "Localisation",
-
-      summary: "Estimate robot pose while constructing or updating a map.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "motion-profiles",
-      published: true,
-      skills: ["Python", "Motion Control"], title: "Motion Profiles",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 12,
-      shortName: "Profiles", group: "Motion control",
-
-      summary: "Constrain acceleration and speed to make transitions smoother and more repeatable.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    },
-    {
-      id: "visual-target-tracking",
-      published: true,
-      skills: ["Python", "Vision", "Visual Servoing"], title: "Visual Target Tracking",
-      subtitle: "",
-      status: "",
-      projectStatus: "in-progress",
-      categoryOrder: 13,
-      shortName: "Tracking", group: "Vision & localisation",
-
-      summary: "Maintain correspondence to an object or marker across camera frames.",
-      introduction: "",
-      overview: "",
-      method: "",
-      considerations: "",
-      implementation: "",
-      sourceUrl: "", demos: []
-    }
+    {"id": "apriltag-detection", "published": true, "skills": ["Python", "Vision"], "title": "AprilTag Detection", "shortName": "AprilTag Detection", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Vision", "summary": "Identify AprilTags in camera images.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "apriltag-pose", "published": true, "skills": ["Python", "Vision"], "title": "AprilTag Pose Estimation", "shortName": "AprilTag Pose Estimation", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Vision", "summary": "Calculate the position and orientation of a detected tag.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "colour-detection", "published": true, "skills": ["Python", "Vision"], "title": "Colour Detection", "shortName": "Colour Detection", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Vision", "summary": "Locate objects or features using colour.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "coordinate-transformations", "published": true, "skills": ["Python", "Localisation"], "title": "Coordinate Transformations", "shortName": "Coordinate Transformations", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Localisation", "summary": "Convert positions between robot, camera and world coordinates.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "dead-reckoning", "published": true, "skills": ["Python", "Localisation"], "title": "Dead Reckoning", "shortName": "Dead Reckoning", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Localisation", "summary": "Estimate robot position from previous position and movement.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "drive", "published": true, "skills": ["Python", "Motion Control"], "title": "Drive", "shortName": "Drive", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Motion Control", "summary": "Move the robot a specified distance or at a specified speed.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "ftg", "published": true, "skills": ["Python", "Obstacle Avoidance"], "title": "Follow-the-Gap", "shortName": "Follow-the-Gap", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Obstacle Avoidance", "summary": "Steer towards a suitable opening between obstacles.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "grab", "published": true, "skills": ["Python", "Primitives"], "title": "Grab", "shortName": "Grab", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Close the gripper to hold an object.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "grab.py"},
+    {"id": "ibvs", "published": true, "skills": ["Python", "Visual Servoing"], "title": "IBVS", "shortName": "IBVS", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Visual Servoing", "summary": "Guide robot movement using errors measured in camera images.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "lift-carry", "published": true, "skills": ["Python", "Primitives"], "title": "Lift Carry", "shortName": "Lift Carry", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Move the lifting mechanism to its carrying position.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "liftcarry.py"},
+    {"id": "lift-down", "published": true, "skills": ["Python", "Primitives"], "title": "Lift Down", "shortName": "Lift Down", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Lower the lifting mechanism.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "liftdown.py"},
+    {"id": "lift-idle", "published": true, "skills": ["Python", "Primitives"], "title": "Lift Idle", "shortName": "Lift Idle", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Move the lifting mechanism to its idle position.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "liftidle.py"},
+    {"id": "lift-middle", "published": true, "skills": ["Python", "Primitives"], "title": "Lift Middle", "shortName": "Lift Middle", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Move the lifting mechanism to its middle position.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "liftmiddle.py"},
+    {"id": "lift-up", "published": true, "skills": ["Python", "Primitives"], "title": "Lift Up", "shortName": "Lift Up", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Raise the lifting mechanism.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "liftup.py"},
+    {"id": "multi-apriltag-positioning", "published": true, "skills": ["Python", "Localisation"], "title": "Multi-AprilTag Positioning", "shortName": "Multi-AprilTag Positioning", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Localisation", "summary": "Combine observations of several tags to estimate position.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "object-detection", "published": true, "skills": ["Python", "Vision"], "title": "Object Detection", "shortName": "Object Detection", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Vision", "summary": "Identify target objects within an image.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "local-obstacle-avoidance", "published": true, "skills": ["Python", "Obstacle Avoidance"], "title": "Obstacle Avoidance", "shortName": "Obstacle Avoidance", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Obstacle Avoidance", "summary": "Adjust robot movement to avoid detected obstacles.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "pbvs", "published": true, "skills": ["Python", "Visual Servoing"], "title": "PBVS", "shortName": "PBVS", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Visual Servoing", "summary": "Guide robot movement using estimated position and orientation.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "pid", "published": true, "skills": ["Python", "Feedback Control"], "title": "PID Control", "shortName": "PID Control", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Feedback Control", "summary": "Adjust an output based on feedback and a target value.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "release", "published": true, "skills": ["Python", "Primitives"], "title": "Release", "shortName": "Release", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Open the gripper to release an object.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "release.py"},
+    {"id": "rotate", "published": true, "skills": ["Python", "Motion Control"], "title": "Rotate", "shortName": "Rotate", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Motion Control", "summary": "Turn the robot through a specified angle.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "stop", "published": true, "skills": ["Python", "Primitives"], "title": "Stop", "shortName": "Stop", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Actuators", "summary": "Stop the robot’s movement.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": [], "fileName": "stop.py"},
+    {"id": "velocity-control", "published": true, "skills": ["Python", "Motion Control"], "title": "Velocity Control", "shortName": "Velocity Control", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Motion Control", "summary": "Control linear and angular movement.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "wall-following", "published": true, "skills": ["Python", "Navigation"], "title": "Wall Following", "shortName": "Wall Following", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Navigation", "summary": "Maintain a target distance from a wall.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "odometry", "published": true, "skills": ["Python", "Localisation"], "title": "Wheel Odometry", "shortName": "Wheel Odometry", "subtitle": "", "status": "", "projectStatus": "in-progress", "group": "Localisation", "summary": "Estimate robot movement from wheel encoder measurements.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "a-star", "published": true, "skills": ["Python", "Path Planning"], "title": "A* Path Planning", "shortName": "A* Path Planning", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Path Planning", "summary": "Introduces route planning rather than simply reacting to the immediate environment.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "dwa", "published": true, "skills": ["Python", "Obstacle Avoidance"], "title": "Dynamic Window Approach (DWA)", "shortName": "Dynamic Window Approach (DWA)", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Obstacle Avoidance", "summary": "Introduces local motion planning that considers obstacles and feasible robot velocities.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "ekf", "published": true, "skills": ["Python", "Localisation"], "title": "Extended Kalman Filter (EKF)", "shortName": "Extended Kalman Filter (EKF)", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Localisation", "summary": "Introduces more advanced localisation through sensor fusion.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "polynomial-splines", "published": true, "skills": ["Python", "Motion Planning"], "title": "Polynomial Splines", "shortName": "Polynomial Splines", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Motion Planning", "summary": "Introduces smooth trajectory generation rather than paths with abrupt changes in direction.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "pure-pursuit", "published": true, "skills": ["Python", "Path Following"], "title": "Pure Pursuit", "shortName": "Pure Pursuit", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Path Following", "summary": "Introduces established geometric path-following techniques.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "slam", "published": true, "skills": ["Python", "Localisation"], "title": "SLAM", "shortName": "SLAM", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Localisation", "summary": "Introduces the ability to build a map while simultaneously estimating the robot’s position.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "smooth-control-law", "published": true, "skills": ["Python", "Feedback Control"], "title": "Smooth Control Law", "shortName": "Smooth Control Law", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Feedback Control", "summary": "Introduces smoother, more controlled movement towards a target position.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
+    {"id": "velocity-profiling", "published": true, "skills": ["Python", "Motion Control"], "title": "Velocity Profiling", "shortName": "Velocity Profiling", "subtitle": "", "status": "", "projectStatus": "planned", "group": "Motion Control", "summary": "Introduces controlled acceleration and deceleration for smoother robot movement.", "introduction": "", "overview": "", "method": "", "considerations": "", "implementation": "", "interface": {"inputs": [], "outputs": [], "settings": []}, "sourceUrl": "", "demos": []},
   ],
-
   /* PUBLICATION: published: false hides a project from public listings,
      direct project links and related-project links. It is still present
      in this public JavaScript file (not confidential). The unlisted live
@@ -1094,6 +746,7 @@ window.PORTFOLIO_DATA = {
         ],
         projectPlan: [
           { id: "schedule", heading: "Schedule", text: "" },
+          { id: "equipment", heading: "Equipment List", text: "" },
           { id: "budget", heading: "Budget", text: "Costs for filament, test materials and any outsourced printing will be recorded as they are established." },
           { id: "contingencies", heading: "Contingencies", text: "" },
         ],
@@ -1108,6 +761,19 @@ window.PORTFOLIO_DATA = {
         { activity: "Print Remaining Filaments", stage: 5 },
         { activity: "Outsource TPU 60–70A", stage: 5 },
         { activity: "Final Testing of All Materials", stage: 6 },
+      ],
+      projectEquipment: [
+        { name: "Bambu Lab P1S", notes: "Modified to attach directly to Filament Dryer and bypass AMS" },
+        { name: "Filament Dryer", notes: "Dry filament prior to use in the Bambu P1S" },
+        { name: "Filaments: TPU 90A, TPU (60A to 70A), SEBS 90A, PEBA 90", notes: "" },
+        { name: "Existing rubber bands", notes: "" },
+        { name: "CAD (AutoCAD Fusion)", notes: "" },
+        { name: "Digital force gauge", notes: "" },
+        { name: "Sliding-friction test fixture", notes: "" },
+        { name: "Gripper pull-out fixture", notes: "" },
+        { name: "Bobbot with gripper", notes: "" },
+        { name: "150 mm cardboard box", notes: "" },
+        { name: "Regulated power supply", notes: "consistent and reliable power source" }
       ],
       projectContingencies: [
         { risk: "TPU 60A–70A cannot be outsourced cost effectively", response: "Use an alternative filament from the material list." },

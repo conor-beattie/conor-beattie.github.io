@@ -738,3 +738,20 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 #project-list .algorithm-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:20px; }
 @media(max-width:950px) { #project-list .algorithm-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:650px) { #project-list .algorithm-grid { grid-template-columns:1fr; } }
+
+/* Software section introductions and link styling. */
+.section-introduction { max-width:920px; margin:0 0 32px; color:var(--ink-soft); font-size:.97rem; line-height:1.7; }
+.section-introduction p { margin:0 0 14px; }
+.section-introduction a { color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; font-weight:650; }
+/* Equipment table for the gripper-contact-pad study. */
+.project-equipment { min-width:620px; }
+.project-equipment th:first-child { width:45%; }
+.project-equipment td { overflow-wrap:anywhere; }
+@media(max-width:680px) { .section-introduction { font-size:.92rem; line-height:1.65; } }
+
+/* Optional module interface details and library links on individual software pages. */
+.library-file-name { margin:8px 0 18px; color:var(--muted); font-size:.88rem; }
+.library-file-name code { font-family:ui-monospace,Consolas,monospace; color:var(--ink); }
+.library-interface-list { padding-left:22px; line-height:1.75; }
+.software-detail-links { margin:28px 0 42px; max-width:1000px; }
+.software-detail-links h2 { font-size:1.35rem; margin:0 0 13px; letter-spacing:-.025em; }

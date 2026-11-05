@@ -281,7 +281,7 @@
     // too small to read, so the title, summary and tags are more useful here.
     return `<article class="software-card">
       <div class="software-card__body">
-      <div class="eyebrow-row"><span class="eyebrow">SOFTWARE${nonempty(item.type) ? " · " + text(item.type) : ""}</span></div>
+      <div class="eyebrow-row"><span class="eyebrow">SOFTWARE LOGIC${nonempty(item.type) ? " · " + text(item.type) : ""}</span></div>
       ${nonempty(item.title) ? `<h3><a href="${softwareUrl(item)}">${text(item.title)}</a></h3>` : ""}
       ${optionalCardText(item.subtitle, "project-card__subtitle")}
       ${optionalCardText(isPlannedProject(item) ? "Future Project" : item.cardStatus, "project-card__status")}${targetStartMarkup(item)}
@@ -298,20 +298,28 @@
     const future = sortByCategoryOrder(softwareItems.filter(isPlannedProject));
     const renderGroup = (title, items) => items.length ?
       `<section class="project-list-group"><h2 class="project-list-group__title">${title}</h2><div class="software-card-grid">${items.map(softwareCard).join("")}</div></section>` : "";
-    root.innerHTML = renderGroup("Software", current) + renderGroup("Future Software", future);
+    root.innerHTML = `<div class="software-card-grid">${[...softwareItems].sort((a,b)=>a.title.localeCompare(b.title, "en", {sensitivity:"base", numeric:true})).filter(item=>!isPlannedProject(item)).map(softwareCard).join("")}</div>`;
   }
   function softwareDetail() {
     const id=new URLSearchParams(location.search).get('id');
     const item=softwareById(id), root=$('#software-content');
-    if(!item){root.innerHTML=`<div class="container not-found"><p class="eyebrow">SOFTWARE NOT FOUND</p><h1>No software entry has that ID.</h1><a class="button button-primary" href="software.html">Browse Software ↗</a></div>`;return;}
+    if(!item){root.innerHTML=`<div class="container not-found"><p class="eyebrow">SOFTWARE NOT FOUND</p><h1>No software entry has that ID.</h1><a class="button button-primary" href="software.html">Browse Software Logic ↗</a></div>`;return;}
     document.title=`${item.title} · ${data.owner.name}`;
     // The detailed report is intentionally student-authored. Do not repopulate
     // empty sections from card summaries, code-file lists or linked methods.
     const rows=sectionLayouts(item);
     const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a></figure>` : '';
-    root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
-      <div class="project-intro"><p class="eyebrow">SOFTWARE${nonempty(item.type) ? ' · '+text(item.type) : ''}</p><h1>${text(item.title)}</h1>${optionalDetailText(item.subtitle,"project-intro__subtitle")}</div>
-      ${media}${engineeringSummary(item)}${detailLayout(rows,'Software sections')}</div>`;
+    const modules = relatedAlgorithms(item.algorithmIds).filter((a,i,items)=>items.findIndex(x=>x.id===a.id)===i);
+    const libraryLinks = modules.length ? `<section class="software-detail-links" aria-label="Software Libraries used"><h2>Software Libraries Used</h2><div class="method-chip-row">${chipLinks(modules,algorithmUrl)}</div></section>` : '';
+    const videos = (item.demos||[]).filter(d=>localMedia(d.video)).map(d=>{
+      const path=localMedia(d.video);
+      const poster=localMedia(d.poster);
+      return `<article class="demo-card"><h3>${text(d.title||item.title)}</h3><video class="demo-player" controls playsinline preload="none" ${poster ? `poster="${poster}"` : ''}><source src="${path}" type="${path.toLowerCase().endsWith('.webm')?'video/webm':'video/mp4'}" />Your browser does not support HTML video.</video>${optionalDetailText(d.description,'demo-results')}</article>`;
+    }).join('');
+    const demonstrations=videos ? `<section class="software-detail-links" aria-label="Video demonstrations"><h2>Video Demonstrations</h2><div class="demo-grid">${videos}</div></section>` : '';
+    root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software Logic</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
+      <div class="project-intro"><p class="eyebrow">SOFTWARE LOGIC${nonempty(item.type) ? ' · '+text(item.type) : ''}</p><h1>${text(item.title)}</h1>${optionalDetailText(item.subtitle,"project-intro__subtitle")}${optionalDetailText(item.summary,'project-lede')}${skillTags(item)}</div>
+      ${media}${demonstrations}${engineeringSummary(item)}${detailLayout(rows,'Software sections')}${libraryLinks}</div>`;
   }
   function algorithmsPage() {
     const gallery = $("#algorithm-groups");
@@ -324,14 +332,14 @@
     const future = alphabetic(visible.filter(isPlannedProject));
     const renderGroup = (title, items) => items.length ?
       `<section class="project-list-group"><h2 class="project-list-group__title">${title}</h2><div class="algorithm-grid">${items.map(algorithmCard).join("")}</div></section>` : "";
-    gallery.innerHTML = renderGroup("Algorithms", current) + renderGroup("Future Algorithms", future);
+    gallery.innerHTML = renderGroup("Implemented Libraries", current) + renderGroup("Future Libraries", future);
   }
   function algorithmDetail() {
     const id = new URLSearchParams(location.search).get("id");
     const selected = algorithm(id);
     const a = canShow(selected) ? selected : null;
     const root = $("#algorithm-content");
-    if (!a) { root.innerHTML = `<div class="container not-found"><p class="eyebrow">ALGORITHM NOT FOUND</p><h1>No algorithm has that ID.</h1><a class="button button-primary" href="algorithms.html">Browse algorithms ↗</a></div>`; return; }
+    if (!a) { root.innerHTML = `<div class="container not-found"><p class="eyebrow">ALGORITHM NOT FOUND</p><h1>No algorithm has that ID.</h1><a class="button button-primary" href="algorithms.html">Browse Software Libraries ↗</a></div>`; return; }
     document.title = `${a.title} · ${data.owner.name}`;
     // Descriptions are left for the student to write. Retain the familiar
     // technical headings; show each only after its text has been populated.
@@ -343,9 +351,13 @@
       ["Implementation notes", a.implementation]
     ].filter(([, body]) => nonempty(body))
       .map(([heading, body]) => `<section><h2>${text(heading)}</h2>${paragraphs(body)}</section>`).join("");
-    root.innerHTML = `<div class="container"><div class="breadcrumb"><a href="algorithms.html">Algorithms</a><span aria-hidden="true">/</span><span>${text(a.shortName)}</span></div>
-      <div class="project-intro"><p class="eyebrow">${text(a.group)} · ALGORITHM</p><h1>${text(a.title)}</h1>${detailSubStatus(a)}</div>
-      ${sections ? `<div class="algorithm-detail-stack">${sections}</div>` : ""}</div>`;
+    const io = a.interface || {};
+    const interfaceSections = [['Inputs',io.inputs],['Outputs',io.outputs],['Adjustable Settings',io.settings]]
+      .filter(([,values])=>Array.isArray(values)&&values.length)
+      .map(([heading,values])=>`<section><h2>${text(heading)}</h2><ul class="library-interface-list">${values.map(value=>`<li>${text(typeof value==='string'?value:value.name||'')}${value.description ? ` — ${text(value.description)}`:''}</li>`).join('')}</ul></section>`).join('');
+    root.innerHTML = `<div class="container"><div class="breadcrumb"><a href="algorithms.html">Software Libraries</a><span aria-hidden="true">/</span><span>${text(a.shortName)}</span></div>
+      <div class="project-intro"><p class="eyebrow">${isPlannedProject(a)?'FUTURE LIBRARY':'SOFTWARE LIBRARY'} · ${text(a.group)}</p><h1>${text(a.title)}</h1>${optionalDetailText(a.summary,'project-lede')}${a.fileName?`<p class="library-file-name">Python module: <code>${text(a.fileName)}</code></p>`:''}${skillTags(a,0,true)}</div>
+      ${(sections||interfaceSections) ? `<div class="algorithm-detail-stack">${sections}${interfaceSections}</div>` : ""}</div>`;
   }
 
   function home() {
@@ -380,7 +392,7 @@
     const section = $(".page-top");
     const listing = $("#project-list")?.closest("section");
     const cat = category(chosen);
-    if (title) title.textContent = activeSkill ? `Projects, Software & Algorithms · ${activeSkill}` : (cat ? cat.title : "All Projects");
+    if (title) title.textContent = activeSkill ? `Projects, Software Logic & Software Libraries · ${activeSkill}` : (cat ? cat.title : "All Projects");
     const description = $("#category-description");
     if (description) {
       description.textContent = !activeSkill && cat?.id === "electronics" ? cat.subtitle : "";
@@ -413,7 +425,7 @@
     if (chosen !== "all" && !category(chosen)) chosen = "all";
     const filterInfo = $("#skill-filter-info");
     if (filterInfo && requestedSkill) filterInfo.innerHTML = activeSkill ?
-      `Showing engineering projects, software and algorithms tagged <strong>${text(activeSkill)}</strong>. Future algorithms are listed separately. <a href="${previewUrl('projects.html')}">Clear skill filter</a>` :
+      `Showing engineering projects and software tagged <strong>${text(activeSkill)}</strong>. Future libraries are listed separately. <a href="${previewUrl('projects.html')}">Clear skill filter</a>` :
       `No skill named <strong>${text(requestedSkill)}</strong> is defined. <a href="${previewUrl('projects.html')}">Browse all projects</a>`;
     function refresh() {
       const term = (input.value || "").toLocaleLowerCase().trim();
@@ -443,7 +455,7 @@
       const total = currentCards.length + plannedCards.length + algorithmResults.length;
       container.innerHTML = total ?
         renderGroup("Projects",currentCards) + renderGroup("Future Projects",plannedCards.map(item=>({item,kind:"project"}))) +
-        renderAlgorithmGroup("Algorithms",activeAlgorithmResults) + renderAlgorithmGroup("Future Algorithms",futureAlgorithmResults) :
+        renderAlgorithmGroup("Software Libraries",activeAlgorithmResults) + renderAlgorithmGroup("Future Libraries",futureAlgorithmResults) :
         `<div class="empty-state"><h3>No matching work</h3><p>${requestedSkill ? 'Try clearing the skill filter or search.' : 'Try clearing the search or choosing another category.'}</p></div>`;
       count.textContent = requestedSkill ? `${total} matching entr${total===1?'y':'ies'}` :
         `${total} project${total===1?'':'s'}${plannedCards.length ? ` · ${plannedCards.length} planned` : ''}`;
@@ -820,6 +832,10 @@
       const schedule = `<div class="project-schedule-wrap" role="region" aria-label="Project schedule" tabindex="0"><table class="project-schedule"><thead><tr><th scope="col" rowspan="2">Activity</th><th scope="colgroup" colspan="6" class="project-schedule__stage-heading">Stage</th></tr><tr>${Array.from({length:6},(_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${scheduleRows}</tbody></table></div>`;
       add('projectPlan:schedule', schedule);
     }
+    if (Array.isArray(p.projectEquipment) && p.projectEquipment.length) {
+      const rows = p.projectEquipment.map(item=>`<tr><th scope="row">${text(item.name)}</th><td>${text(item.notes)}</td></tr>`).join('');
+      add('projectPlan:equipment',`<div class="investigation-table-wrap" role="region" aria-label="Equipment and materials" tabindex="0"><table class="investigation-table project-equipment"><thead><tr><th scope="col">Equipment / materials</th><th scope="col">Notes</th></tr></thead><tbody>${rows}</tbody></table></div>`);
+    }
     if (Array.isArray(p.projectContingencies) && p.projectContingencies.length) {
       const rows=p.projectContingencies.map(item=>`<tr><th scope="row">${text(item.risk)}</th><td>${text(item.response)}</td></tr>`).join('');
       add('projectPlan:contingencies',`<div class="investigation-table-wrap"><table class="investigation-table project-contingencies"><thead><tr><th scope="col">Risk</th><th scope="col">Contingency</th></tr></thead><tbody>${rows}</tbody></table></div>`);
@@ -842,7 +858,7 @@
     const linked=(p.relatedProjectIds||[]).map(id=>visibleProjects().find(item=>item.id===id)).filter(item=>item&&item.id!==p.id);
     if(p.showRelatedProjects !== false && linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}</div>`);
     const linkedSoftware=softwareItems.filter(item=>(item.robotIds||[]).includes(p.id));
-    if(p.showRelatedProjects !== false && linkedSoftware.length) add('relatedProjects',subheading('Related software and algorithms',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}</div>`));
+    if(p.showRelatedProjects !== false && linkedSoftware.length) add('relatedProjects',subheading('Related Software Logic',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}</div>`));
     return extra;
   }
   function softwareExtras(item, cites) {
