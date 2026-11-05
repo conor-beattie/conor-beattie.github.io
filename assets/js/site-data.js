@@ -1247,6 +1247,70 @@ window.PORTFOLIO_DATA = {
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
+      id: "dc-motor-comparison-selection",
+      // Comparative selection study. No measured results are reproduced until
+      // the original test records are available for documentation.
+      published: true,
+      title: "DC Motor Comparison & Selection",
+      subtitle: "Selecting Drive Motors for Robbot",
+      status: "completed",
+      category: "robotics",
+      categoryOrder: 6,
+      image: "assets/images/IMG_2756_robbot.jpg",
+      imageAlt: "Robbot differential-drive chassis with geared drive motors and wheels",
+      hideImageCaption: true,
+      summary: "Comparing four nominally identical DFRobot geared motors to select a suitable drive-wheel pair and repurpose another motor as a passive wheel support.",
+      skills: ["Component Selection", "Mechanical Adaptation"],
+      engineeringSummary: {
+        challenge: "Four nominally identical DFRobot FIT0186 geared motors were available for Robbot's differential-drive system. Manufacturing variations can produce differences in motor performance, potentially affecting straight-line movement.\n\nThe objective was to identify the most suitable pair for the robot's drive wheels.",
+        contribution: "I carried out a comparative assessment of four motors, labelled A, B, C and D, to evaluate their relative performance and suitability.\n\nRather than selecting two motors arbitrarily, I used the comparison to inform component selection.",
+        outcome: "Motors A and C were selected for the drive wheels, motor B was repurposed into a passive omni-wheel bearing support, and motor D was retained as a spare.",
+        lessonsLearned: "Nominally identical components do not necessarily perform identically. Comparing motors before assembly can help identify a suitable pairing and reduce potential performance differences.\n\nThe exercise also demonstrated how an unsuitable component could be repurposed into a useful mechanical assembly, avoiding the need to design and manufacture a separate wheel support."
+      },
+      relatedProjectIds: ["robotics-project-2", "motor-calibration-voltage-compensation"],
+      sections: {
+        abstract: "",
+        introduction: "",
+        materialsMethods: "",
+        projectPlan: "",
+        results: "The four motors were allocated according to their relative performance:",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: "",
+        relatedProjects: "",
+        references: ""
+      },
+      sectionDetails: {
+        results: [
+          {
+            heading: "Motors A and C",
+            text: "Selected for Robbot's left and right drive wheels."
+          },
+          {
+            heading: "Motor B",
+            text: "The worst-performing motor was dismantled and converted into a passive bearing support for an omni wheel. Removing the internal drive components allowed the wheel to rotate freely, while retaining the original motor mounting geometry maintained the same chassis height as the powered wheels."
+          },
+          {
+            heading: "Motor D",
+            text: "Retained as a spare drive motor."
+          }
+        ]
+      },
+      references: [
+        {
+          id: "dos-reis-geared-motor-data",
+          title: "dos Reis, W. P. N., Couto, G. E. & Morandin Junior, O. (2022). Direct current geared motor data: Voltage, current, and speed measured under different experimental conditions. Data in Brief, 40, 107802.",
+          url: "https://doi.org/10.1016/j.dib.2022.107802"
+        },
+        {
+          id: "nor-differential-steering",
+          title: "Nor, R. M. et al. (2012). Differential Steering Control for an Autonomous Mobile Robot: A Preliminary Experimental Study. Procedia Engineering.",
+          url: "https://doi.org/10.1016/j.proeng.2012.07.161"
+        }
+      ],
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
       id: "camera-performance-comparison",
       skills: ["Python", "Vision", "Localisation", "Experimental Testing", "Data Analysis"],
       engineeringSummary: {
