@@ -155,7 +155,7 @@ window.PORTFOLIO_DATA = {
       published: true,
       title: "Software Libraries",
       subtitle: "Reusable software modules, from basic functions to robotics algorithms",
-      image: "assets/images/navigation block diagram.jpg"
+      image: "assets/images/software_libaries_cover.png"
     }
   ],
 
@@ -1222,7 +1222,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "robotics",
       categoryOrder: 4,
-      image: "assets/images/motor-calibration-overview.svg",
+      image: "assets/images/motor_calibration.jpeg",
       imageAlt: "Illustration of a motor calibration experiment, showing controlled supply voltage, motor command, timing and measured distance",
       imageCaption: "Open-loop motor calibration test sequence (conceptual illustration, not experimental data)",
       summary: "Measuring how motor power, drive duration and supply voltage influence robot movement, and developing calibration curves for more consistent open-loop control.",
@@ -1262,7 +1262,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "",
       category: "robotics",
       categoryOrder: 5,
-      image: "assets/images/IMG_2627 Bobbot.jpg",
+      image: "assets/images/camera_comparison.jpeg",
       imageAlt: "Photograph of the Bobbot autonomous mobile robot",
       hideImageCaption: true,
       summary: "Comparing rolling-shutter and global-shutter cameras for AprilTag detection while a mobile robot is stationary and moving.",
