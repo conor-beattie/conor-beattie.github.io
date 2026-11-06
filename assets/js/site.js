@@ -311,6 +311,14 @@
     const media=item.flowchart ? `<figure class="flowchart-figure" id="flowchart"><a href="${img(item.flowchart)}" target="_blank" rel="noopener" title="Open flowchart at full size"><img src="${img(item.flowchart)}" alt="${text(item.imageAlt||`${item.title} control flowchart`)}" loading="eager"></a></figure>` : '';
     const modules = relatedAlgorithms(item.algorithmIds).filter((a,i,items)=>items.findIndex(x=>x.id===a.id)===i);
     const libraryLinks = modules.length ? `<section class="software-detail-links" aria-label="Software Libraries used"><h2>Software Libraries Used</h2><div class="method-chip-row">${chipLinks(modules,algorithmUrl)}</div></section>` : '';
+    // Explicit relationships: each software page links to its robot projects,
+    // and selected parent routines link to their documented child/supporting logic.
+    const relatedRobots = [...new Set(item.robotIds || [])]
+      .map(id => visibleProjects().find(p => p.id === id)).filter(Boolean);
+    const robotLinks = relatedRobots.length ? `<section class="software-detail-links" aria-label="Related Projects"><h2>Related Projects</h2><div class="related-list">${relatedRobots.map(p => `<a class="related-item" href="${projectUrl(p)}"><strong>${text(p.title)}</strong>${optionalCardText(p.subtitle,"related-item__subtitle","span")}</a>`).join('')}</div></section>` : '';
+    const relatedLogic = [...new Set(item.relatedSoftwareIds || [])]
+      .map(id => softwareById(id)).filter(s => s && s.id !== item.id);
+    const logicLinks = relatedLogic.length ? `<section class="software-detail-links" aria-label="Related Software Logic"><h2>Related Software Logic</h2><div class="related-list">${relatedLogic.map(s => `<a class="related-item" href="${softwareUrl(s)}"><strong>${text(s.title)}</strong></a>`).join('')}</div></section>` : '';
     const videos = (item.demos||[]).filter(d=>localMedia(d.video)).map(d=>{
       const path=localMedia(d.video);
       const poster=localMedia(d.poster);
@@ -319,7 +327,7 @@
     const demonstrations=videos ? `<section class="software-detail-links" aria-label="Video demonstrations"><h2>Video Demonstrations</h2><div class="demo-grid">${videos}</div></section>` : '';
     root.innerHTML=`<div class="container"><div class="breadcrumb"><a href="software.html">Software Logic</a><span aria-hidden="true">/</span><span>${text(item.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">SOFTWARE LOGIC${nonempty(item.type) ? ' · '+text(item.type) : ''}</p><h1>${text(item.title)}</h1>${optionalDetailText(item.subtitle,"project-intro__subtitle")}${optionalDetailText(item.summary,'project-lede')}${skillTags(item)}</div>
-      ${media}${demonstrations}${engineeringSummary(item)}${detailLayout(rows,'Software sections')}${libraryLinks}</div>`;
+      ${media}${demonstrations}${engineeringSummary(item)}${detailLayout(rows,'Software sections')}${libraryLinks}${robotLinks}${logicLinks}</div>`;
   }
   function algorithmsPage() {
     const gallery = $("#algorithm-groups");

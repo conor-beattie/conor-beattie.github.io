@@ -195,7 +195,8 @@ window.PORTFOLIO_DATA = {
 
   /*
     SOFTWARE — One meaningful behaviour/system per entry, independent of algorithms.
-    robotIds link to projects[].id; algorithmIds link to algorithms[].id.
+    robotIds link to projects[].id; relatedSoftwareIds link to other software[].id.
+    algorithmIds link to algorithms[].id.
     flowchart: local SVG illustration; sourceUrl: add the PUBLIC GitHub link when ready.
     Evidence status should describe actual test evidence, not merely code existence.
     Detail sections start blank for the student to write. Card descriptions and
@@ -219,7 +220,8 @@ window.PORTFOLIO_DATA = {
       projectStatus: "in-progress",
       type: "System",
       skills: ["Python"],
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
+      relatedSoftwareIds: ["search-for-object", "approach-object", "pickup-object", "return-to-base", "drop-off-object", "localisation-system"],
       algorithmIds: [],
       summary: "Show the sequence of autonomous behaviours, including success, failure and recovery transitions.",
       flowchart: "assets/diagrams/sr2026-robot-state-machine.svg",
@@ -240,7 +242,7 @@ window.PORTFOLIO_DATA = {
       projectStatus: "in-progress",
       type: "Behaviour",
       skills: ["Python"],
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: [],
       summary: "Prepare a search, find eligible objects and select a target.",
       sections: {},
@@ -259,7 +261,8 @@ window.PORTFOLIO_DATA = {
       projectStatus: "in-progress",
       type: "Behaviour",
       skills: ["Python"],
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
+      relatedSoftwareIds: ["perception-system", "local-avoidance-skill", "motion-control"],
       algorithmIds: [],
       summary: "Navigate towards the selected object and reach the pickup handoff position.",
       sections: {},
@@ -278,7 +281,7 @@ window.PORTFOLIO_DATA = {
       projectStatus: "in-progress",
       type: "Behaviour",
       skills: ["Python"],
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: [],
       summary: "Perform final positioning and grasp the selected object.",
       sections: {},
@@ -297,7 +300,7 @@ window.PORTFOLIO_DATA = {
       projectStatus: "in-progress",
       type: "Behaviour",
       skills: ["Python"],
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: [],
       summary: "Complete final positioning and release the object in the delivery region.",
       sections: {},
@@ -326,7 +329,8 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional start period.
 
       type: "Behaviour",
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
+      relatedSoftwareIds: ["guide-recovery", "local-avoidance-skill"],
       algorithmIds: ["apriltag-pose", "pid", "local-obstacle-avoidance", "wall-following", "dead-reckoning"],
       tags: ["Python", "Navigation", "AprilTags", "Recovery"],
       status: "Code documented",
@@ -370,7 +374,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional start period.
 
       type: "Behaviour",
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: ["pid", "local-obstacle-avoidance", "coordinate-transformations"],
       tags: ["Perception", "Target Approach", "Sequencing"],
       status: "Write-up in progress",
@@ -410,7 +414,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: ["apriltag-pose", "dead-reckoning"],
       tags: ["AprilTags", "Fault Recovery", "Search"],
       status: "Code documented",
@@ -450,7 +454,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional start period.
 
       type: "Subroutine",
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: ["local-obstacle-avoidance", "coordinate-transformations"],
       tags: ["Obstacle Detection", "Navigation", "Recovery"],
       status: "Write-up in progress",
@@ -490,7 +494,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional start period.
 
       type: "System",
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: ["apriltag-pose", "coordinate-transformations"],
       tags: ["Vision", "AprilTags", "Perception"],
       status: "Write-up in progress",
@@ -530,7 +534,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional start period.
 
       type: "System",
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: ["odometry", "coordinate-transformations", "dead-reckoning"],
       tags: ["Pose", "Coordinate Frames", "Navigation"],
       status: "Write-up in progress",
@@ -570,7 +574,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "", // Optional provisional start period.
 
       type: "System",
-      robotIds: ["autonomous-mobile-robot"],
+      robotIds: ["autonomous-mobile-robot", "robotics-project-2"],
       algorithmIds: ["pid", "pid", "velocity-control"],
       tags: ["Velocity", "Control", "Interfaces"],
       status: "Write-up in progress",
