@@ -219,10 +219,10 @@
   }
 
   function projectCard(p) {
-    return `<article class="project-card">
-      <a href="${projectUrl(p)}" class="project-card__image" aria-label="View project: ${text(p.title)}">
+    return `<article class="project-card${nonempty(p.image) ? '' : ' project-card--no-image'}">
+      ${nonempty(p.image) ? `<a href="${projectUrl(p)}" class="project-card__image" aria-label="View project: ${text(p.title)}">
         <img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" />
-      </a>
+      </a>` : ''}
       <div class="project-card__body">
         <div class="eyebrow-row">${optionalCardText(kindLabel(p), "eyebrow", "span")}${previewDrafts && !isPublished(p) ? '<span class="preview-draft-tag">DRAFT</span>' : ''}</div>
         ${nonempty(p.title) ? `<h3 class="project-card__title"><a href="${projectUrl(p)}">${text(p.title)}</a></h3>` : ""}
@@ -734,7 +734,9 @@
     const details = (entry.sectionDetails?.[key] || []).map(item => {
       // A subsection-specific evidence table is appended directly below its
       // matching heading, not below all headings in the parent report section.
-      const content = cites.paragraphs(item.text || '') + (extras[`${key}:${item.id}`] || '');
+      const linkedProject = item.relatedProjectId && visibleProjects().find(p => p.id === item.relatedProjectId);
+      const projectLink = linkedProject ? `<p><a class="inline-project-link" href="${projectUrl(linkedProject)}">${text(linkedProject.title)} ↗</a></p>` : '';
+      const content = cites.paragraphs(item.text || '') + projectLink + (extras[`${key}:${item.id}`] || '');
       return subheading(item.heading || "Further details", content, item.showEmpty === true);
     }).join("");
     const content = base + details + (extras[key] || "") + (key==='references' ? cites.bibliography() : '');
@@ -870,7 +872,8 @@
     ].filter(Boolean);
     if(resources.length) add('materialsMethods',subheading('Project files & media',`<div class="resource-links">${resources.join("")}</div>`));
     const linked=(p.relatedProjectIds||[]).map(id=>visibleProjects().find(item=>item.id===id)).filter(item=>item&&item.id!==p.id);
-    if(p.showRelatedProjects !== false && linked.length) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}</div>`);
+    const relatedPageLinks = (p.relatedPages || []).filter(page => nonempty(page.title) && /^(?:[a-z0-9-]+\.html)(?:#[a-z0-9-]+)?$/i.test(page.url || ''));
+    if(p.showRelatedProjects !== false && (linked.length || relatedPageLinks.length)) add('relatedProjects',`<div class="related-list">${linked.map(item=>`<a class="related-item" href="${projectUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}${relatedPageLinks.map(page=>`<a class="related-item" href="${text(page.url)}"><strong>${text(page.title)}</strong><span class="related-item__summary">${text(page.summary || '')} ↗</span></a>`).join("")}</div>`);
     const linkedSoftware=softwareItems.filter(item=>(item.robotIds||[]).includes(p.id));
     if(p.showRelatedProjects !== false && linkedSoftware.length) add('relatedProjects',subheading('Related Software Logic',`<div class="related-list">${linkedSoftware.map(item=>`<a class="related-item" href="${softwareUrl(item)}"><strong>${text(item.title)}</strong>${optionalCardText(item.subtitle,"related-item__subtitle","span")}<span class="related-item__summary">${text(item.summary)} ↗</span></a>`).join("")}</div>`));
     return extra;
@@ -901,7 +904,7 @@
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
         <h1>${text(p.title)}</h1>${optionalDetailText(p.subtitle,"project-intro__subtitle")}${optionalDetailText(p.hideDetailStatus ? "" : displayProgress(p),"project-intro__status")}${targetStartMarkup(p,true)}${optionalDetailText(p.hideDetailSummary ? "" : p.summary,"project-lede")}${skillTags(p)}</div>
-      <figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}${p.hideImageCaption ? "" : `<figcaption>${text(p.imageCaption||p.title)}</figcaption>`}</figure>
+      ${nonempty(p.image) ? `<figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}${p.hideImageCaption ? "" : `<figcaption>${text(p.imageCaption||p.title)}</figcaption>`}</figure>` : ''}
       ${engineeringSummary(p)}
       ${detailLayout(rows)}
     </div>`;

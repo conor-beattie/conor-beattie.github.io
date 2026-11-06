@@ -184,7 +184,7 @@ window.PORTFOLIO_DATA = {
       published: true,
       title: "Software Logic",
       subtitle: "Flow diagrams showing how programmed routines combine reusable functions",
-      image: "assets/diagrams/bobbot-return-to-base.svg"
+      image: "assets/diagrams/sr2026-robot-state-machine.svg"
     },
     {
       id: "algorithms",
@@ -216,6 +216,7 @@ window.PORTFOLIO_DATA = {
       id: "robot-behaviour", // Retain id to preserve existing page URLs.
       categoryOrder: 1,
       published: true,
+      featuredOrder: 4,
       title: "Robot State Machine",
       subtitle: "",
       cardStatus: "",
@@ -325,7 +326,6 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      featuredOrder: 5,
       title: "Return to Base",
       subtitle: "",
       cardStatus: "",
@@ -665,7 +665,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      featuredOrder: 2,                  // URL: project.html?id=autonomous-mobile-robot
+      featuredOrder: 1,                  // URL: project.html?id=autonomous-mobile-robot
       title: "Autonomous Mobile Robot",
       subtitle: "Bobbot",
       status: "",
@@ -744,7 +744,6 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      featuredOrder: 1,
       "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 2: Gripper Jaw Assembly",
       status: "planned",
@@ -799,6 +798,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       "published": true,
+      featuredOrder: 5,
       "title": "Improving Gripper Reliability on an Autonomous Mobile Robot",
       subtitle: "Part 1: Gripper Contact Pads",
       status: "in-progress",
@@ -863,6 +863,7 @@ window.PORTFOLIO_DATA = {
       projectSchedule: [
         { activity: "Initial CAD Design", stage: 1 },
         { activity: "Procure Materials", stage: 1 },
+        { activity: "Modify P1S to feed filament from dryer, bypassing AMS", stage: 1 },
         { activity: "Build Test Equipment & Print First Filament", stage: 2 },
         { activity: "Preliminary Test of First Filament", stage: 3 },
         { activity: "CAD - Design Iteration (if required)", stage: 4 },
@@ -1111,7 +1112,7 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      featuredOrder: 3,
+      featuredOrder: 2,
       relatedProjectIds: ["robot-io-mapping", "mobile-robot-power-distribution"],
       title: "Modular Robot I/O & TeleOp Controller",
       subtitle: "",
@@ -1164,7 +1165,7 @@ window.PORTFOLIO_DATA = {
       },
       published: true,
       featuredOrder: 6,
-      title: "Robot I/O Mapping & Hardware Abstraction",
+      title: "Robot I/O Mapping",
       subtitle: "",
       status: "",
       targetStart: "", // Optional provisional date or period; hidden when empty.
@@ -1240,8 +1241,8 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: ""
       },
       published: true,
-      featuredOrder: 4,
-      title: "Mobile Robot Power Distribution & Electrical Architecture",
+      featuredOrder: 3,
+      title: "Mobile Robot Power Distribution",
       subtitle: "",
       status: "",
       targetStart: "", // Optional provisional date or period; hidden when empty.
@@ -1281,7 +1282,7 @@ window.PORTFOLIO_DATA = {
           { heading: "Electrical architecture", text: "A nominal 12 V NiMH battery supplies the robot through a main fuse and on/off switch to an eight-channel power distribution board. From there the diagram identifies branches for motor controllers, regulated low-voltage supplies and additional mechanisms.\n\nThe drive system uses a RoboClaw motor controller for the front motors. A second controller and rear motors are shown as possible future additions. Separate supply paths are identified for the Raspberry Pi and other logic devices, and for the servo distribution board. The diagram also shows a USB hub linking supporting devices such as cameras and microcontrollers to the Pi." },
           { heading: "Power distribution & protection", text: "The drawing identifies a 20 A main fuse and individual protected supply branches. It shows a 5 V regulator for control electronics and a separate 6 V regulator for servo power, alongside common supply and ground buses and labelled connectors. These choices make the intended distribution and electrical loads easier to review before wiring.\n\nThe schematic also identifies a battery-voltage monitor, main connectors and a chassis bond. Fuse values, regulator capacities, return-current paths and conductor ratings still need to be checked against actual device specifications and worst-case loads before final installation; the diagram alone is not evidence of electrical validation." },
           { heading: "Design documentation", text: "The one-line diagram is an early system-level design document. Rather than show every wire and terminal, it records the functional power routes between major components. Each branch can then be developed into the detailed wiring diagram, connector list and physical harness needed for construction.\n\nDashed outlines and labels distinguish planned expansions from the core design, including additional drive motors, collector and shooter motors, an arm and further servos. That allows the electrical architecture to evolve without obscuring the current system." },
-          { heading: "Control system integration", text: "The Raspberry Pi remains responsible for higher-level tasks such as vision, navigation and autonomous control. The Arduino Mega provides low-level TeleOp, encoder counting and hardware interfacing, while motor drivers deliver power to the motors. The electrical diagram shows how those devices are powered and connected at system level; it does not describe their software protocol or pin-by-pin I/O mapping.\n\nThose details are covered in the related Modular Robot I/O & TeleOp Controller and Robot I/O Mapping & Hardware Abstraction projects." },
+          { heading: "Control system integration", text: "The Raspberry Pi remains responsible for higher-level tasks such as vision, navigation and autonomous control. The Arduino Mega provides low-level TeleOp, encoder counting and hardware interfacing, while motor drivers deliver power to the motors. The electrical diagram shows how those devices are powered and connected at system level; it does not describe their software protocol or pin-by-pin I/O mapping.\n\nThose details are covered in the related Modular Robot I/O & TeleOp Controller and Robot I/O Mapping projects." },
           { heading: "Design choices & future expansion", text: "The electrical system is divided into functional branches so that changes to one subsystem need not require a complete redesign. Separate regulated outputs distinguish logic power from servo power, and labelled connections are intended to simplify assembly and troubleshooting.\n\nThe drawing explicitly reserves space for future capabilities, but these additions are not treated as installed equipment. As the robot develops, the diagram can be updated to reflect actual components and revised current requirements." }
         ]
       },
@@ -1289,8 +1290,35 @@ window.PORTFOLIO_DATA = {
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
+      id: "electrical-control-panel",
+      published: true,
+      title: "Electrical Control Panel",
+      subtitle: "",
+      status: "",
+      category: "electronics",
+      categoryOrder: 4,
+      image: "", // Add the plastic-panel cover photograph here when available.
+      imageAlt: "",
+      summary: "",
+      skills: [],
+      relatedProjectIds: [],
+      sections: {
+        abstract: "",
+        introduction: "",
+        materialsMethods: "",
+        projectPlan: "",
+        results: "",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: "",
+        relatedProjects: "",
+        references: ""
+      },
+      references: [],
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
       id: "robotics-project-2",
-      // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Mechanical Assembly", "Systems Integration"],
       engineeringSummary: {
         challenge: "",
@@ -1302,18 +1330,21 @@ window.PORTFOLIO_DATA = {
       title: "Autonomous Mobile Robot",
       subtitle: "Robbot",
       status: "In Progress",
-      targetStart: "", // Optional provisional date or period; hidden when empty.
+      targetStart: "",
       category: "robotics",
       categoryOrder: 2,
       image: "assets/images/IMG_2756_robbot.jpg",
-      imageAlt: "Robot project photo — replace or update caption",
-      summary: "Robbot is Bobbot on a budget.  Where Bobbot doesn’t set a specific price on utility Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost",
+      imageAlt: "Photograph of the Robbot autonomous mobile robot chassis",
+      summary: "Robbot is Bobbot on a budget. Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost.",
       tags: ["Robotics", "Mechanical Design", "Control"],
       date: "",
-      contribution: "",
+      relatedProjectIds: ["autonomous-mobile-robot", "electrical-control-panel", "robot-control-electronics", "mobile-robot-power-distribution"],
+      relatedPages: [
+        { title: "Project Timeline", url: "timeline.html", summary: "Development schedule for the main engineering projects." }
+      ],
       sections: {
         abstract: "",
-        introduction: "",
+        introduction: "Robbot is an ongoing project to develop a cost-effective alternative to Bobbot.",
         materialsMethods: "",
         projectPlan: "",
         results: "",
@@ -1321,7 +1352,16 @@ window.PORTFOLIO_DATA = {
         conclusions: "",
         lessonsLearned: "",
         relatedProjects: "",
-        references: "",
+        references: ""
+      },
+      sectionDetails: {
+        introduction: [
+          { heading: "Chassis", text: "Robbot retains the same chassis dimensions as Bobbot and a similar cross-member design, but uses 2020 aluminium extrusion. Preliminary testing suggests this construction is satisfactory. The initial Robbot build used 2040 extrusion, which added weight and cost. It also raised the floor and the height of some of the robot’s mass." },
+          { heading: "Drivetrain", text: "Robbot uses the same two-wheel-drive configuration with a rear omni wheel as Bobbot. The goBILDA wheels were retained for reliability, while DFRobot FIT0186 motors were introduced.\n\nThe initial motor brackets could only be mounted below the chassis, raising the overall centre of gravity. Replacing the motor brackets allowed the wheel mounts to sit above the chassis rails, giving approximately 10 mm of ground clearance.\n\nMotor testing was used to select a suitably matched drive pair. The worst-performing motor was then dismantled and repurposed as a passive bearing support for the omni wheel, simplifying the mounting arrangement.", relatedProjectId: "dc-motor-comparison-selection" },
+          { heading: "Gripper", text: "Future project." },
+          { heading: "Lift", text: "Future project." },
+          { heading: "Electrical and Controls", text: "Robbot will use the removable Electrical Control Panel shared between the robot builds." }
+        ]
       },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
@@ -1342,7 +1382,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "",
       category: "robotics",
       categoryOrder: 3,
-      image: "assets/images/navigation-block-diagram-revised.png",
+      image: "assets/images/navigation block diagram - revised.png",
       imageAlt: "Revised block diagram of a robot navigation architecture showing configurable navigation stages, shared motion-control components and future planning and LiDAR-based navigation.",
       hideImageCaption: true,
       imageFullSize: true,

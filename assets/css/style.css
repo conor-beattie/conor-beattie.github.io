@@ -796,3 +796,7 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
   .timeline-table thead th.timeline-corner { width: 205px; }
   .timeline-project-label { font-size: .75rem; }
 }
+
+/* Optional project photographs and in-context links to related studies. */
+.project-card--no-image .project-card__body { padding-top:30px; }
+.inline-project-link { color:var(--accent-deep); text-decoration:underline; text-underline-offset:3px; font-weight:650; }
