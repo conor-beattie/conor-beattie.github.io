@@ -265,6 +265,8 @@ window.PORTFOLIO_DATA = {
       relatedSoftwareIds: ["perception-system", "local-avoidance-skill", "motion-control"],
       algorithmIds: [],
       summary: "Navigate towards the selected object and reach the pickup handoff position.",
+      flowchart: "assets/diagrams/approach-object-flowchart-v2.svg",
+      imageAlt: "Approach Object flowchart showing Stage 1 timed approach, Stage 2 visual servoing, obstacle avoidance, target recovery and the handoff to Pickup Object.",
       sections: {},
       sectionDetails: {},
       references: [],

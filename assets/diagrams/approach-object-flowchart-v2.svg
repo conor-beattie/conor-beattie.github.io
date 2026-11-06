@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="1980" viewBox="0 0 1400 1980" role="img" aria-label="Approach Object flowchart: track selected target, choose Stage 2 visual servoing (PBVS, IBVS or Smooth Control) or Stage 1 timed navigation, avoid obstacles, recover or fail, and transition successfully to Pickup Object.">
+<defs>
+  <marker id="arrow" markerWidth="10" markerHeight="10" refX="8.5" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M1,1 L9,5 L1,9 Z" fill="#35465A"/></marker>
+  <style>
+    text { font-family: 'Arial', 'Liberation Sans', sans-serif; fill: #243449; }
+    .heading { font-size: 33px; font-weight: 700; letter-spacing: 1px; }
+    .subhead { font-size: 16px; fill:#64748B; }
+    .node { font-size:21px; font-weight: 600; }
+    .second { font-size:17px; font-weight:400; }
+    .edge { font-size:17px; font-weight:700; fill:#3A5269; stroke:none; }
+    .path { fill:none; stroke:#35465A; stroke-width:2.6; stroke-linecap:round; stroke-linejoin:round; marker-end:url(#arrow); }
+    .path-muted { fill:none; stroke:#64748B; stroke-width:2.4; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:8 6; marker-end:url(#arrow); }
+  </style>
+</defs>
+<rect width="1400" height="1980" fill="#FFFFFF"/>
+<text x="700" y="55" class="heading" text-anchor="middle">APPROACH OBJECT</text>
+<line x1="110" y1="78" x2="1290" y2="78" stroke="#DAE3EB" stroke-width="2"/>
+
+<rect x="535" y="102" width="330" height="68" rx="34.0" fill="#E9F5F2" stroke="#38857B" stroke-width="2.5"/>
+<text x="700.0" y="143.0" text-anchor="middle" class="node">Selected target received</text>
+<rect x="530" y="220" width="340" height="84" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<text x="700.0" y="257.0" text-anchor="middle" class="node">Lock target</text>
+<text x="700.0" y="281.0" text-anchor="middle" class="second">and begin tracking</text>
+<polygon points="700,337 826,406 700,475 574,406" fill="#FFF4DF" stroke="#BD873F" stroke-width="2.5"/>
+<text x="700" y="401.0" text-anchor="middle" class="node">Wall geometry</text>
+<text x="700" y="425.0" text-anchor="middle" class="node">required?</text>
+<rect x="114" y="375" width="345" height="86" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<line x1="131" x2="131" y1="377" y2="459" stroke="#3A709F" stroke-width="2.0"/>
+<line x1="442" x2="442" y1="377" y2="459" stroke="#3A709F" stroke-width="2.0"/>
+<text x="286.5" y="425.0" text-anchor="middle" class="node">Acquire Wall Geometry</text>
+<polygon points="700,543 833,620 700,697 567,620" fill="#FFF4DF" stroke="#BD873F" stroke-width="2.5"/>
+<text x="700" y="615.0" text-anchor="middle" class="node">Visual servoing</text>
+<text x="700" y="639.0" text-anchor="middle" class="node">available?</text>
+<rect x="510" y="764" width="380" height="108" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<line x1="527" x2="527" y1="766" y2="870" stroke="#3A709F" stroke-width="2.0"/>
+<line x1="873" x2="873" y1="766" y2="870" stroke="#3A709F" stroke-width="2.0"/>
+<text x="700" y="794" text-anchor="middle" class="node">Visual Servo Approach</text>
+<text x="700" y="818" text-anchor="middle" class="second">Stage 2</text>
+<text x="700" y="847" text-anchor="middle" class="second">PBVS · IBVS · Smooth Control</text>
+<rect x="963" y="778" width="315" height="83" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<line x1="980" x2="980" y1="780" y2="859" stroke="#3A709F" stroke-width="2.0"/>
+<line x1="1261" x2="1261" y1="780" y2="859" stroke="#3A709F" stroke-width="2.0"/>
+<text x="1120.5" y="814.5" text-anchor="middle" class="node">Align to Target</text>
+<text x="1120.5" y="838.5" text-anchor="middle" class="second">Stage 1</text>
+<polygon points="700,909 825,971 700,1033 575,971" fill="#FFF4DF" stroke="#BD873F" stroke-width="2.5"/>
+<text x="700" y="978.0" text-anchor="middle" class="node">Path blocked?</text>
+<rect x="108" y="1011" width="350" height="80" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<line x1="125" x2="125" y1="1013" y2="1089" stroke="#3A709F" stroke-width="2.0"/>
+<line x1="441" x2="441" y1="1013" y2="1089" stroke="#3A709F" stroke-width="2.0"/>
+<text x="283.0" y="1058.0" text-anchor="middle" class="node">Local Avoidance</text>
+<rect x="108" y="1177" width="350" height="90" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<line x1="125" x2="125" y1="1179" y2="1265" stroke="#3A709F" stroke-width="2.0"/>
+<line x1="441" x2="441" y1="1179" y2="1265" stroke="#3A709F" stroke-width="2.0"/>
+<text x="283.0" y="1217.0" text-anchor="middle" class="node">Resume / Reacquire</text>
+<text x="283.0" y="1241.0" text-anchor="middle" class="node">Target</text>
+<polygon points="283,1318 413,1390 283,1462 153,1390" fill="#FFF4DF" stroke="#BD873F" stroke-width="2.5"/>
+<text x="283" y="1385.0" text-anchor="middle" class="node">Recovery</text>
+<text x="283" y="1409.0" text-anchor="middle" class="node">successful?</text>
+<polygon points="700,1128 830,1198 700,1268 570,1198" fill="#FFF4DF" stroke="#BD873F" stroke-width="2.5"/>
+<text x="700" y="1193.0" text-anchor="middle" class="node">Stage 2</text>
+<text x="700" y="1217.0" text-anchor="middle" class="node">result?</text>
+<rect x="963" y="1052" width="315" height="84" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<line x1="980" x2="980" y1="1054" y2="1134" stroke="#3A709F" stroke-width="2.0"/>
+<line x1="1261" x2="1261" y1="1054" y2="1134" stroke="#3A709F" stroke-width="2.0"/>
+<text x="1120.5" y="1089.0" text-anchor="middle" class="node">Timed Approach</text>
+<text x="1120.5" y="1113.0" text-anchor="middle" class="second">Stage 1</text>
+<polygon points="1120,1191 1248,1260 1120,1329 992,1260" fill="#FFF4DF" stroke="#BD873F" stroke-width="2.5"/>
+<text x="1120" y="1255.0" text-anchor="middle" class="node">Approach</text>
+<text x="1120" y="1279.0" text-anchor="middle" class="node">complete?</text>
+<polygon points="700,1420 831,1490 700,1560 569,1490" fill="#FFF4DF" stroke="#BD873F" stroke-width="2.5"/>
+<text x="700" y="1485.0" text-anchor="middle" class="node">Handoff geometry</text>
+<text x="700" y="1509.0" text-anchor="middle" class="node">valid?</text>
+<rect x="535" y="1632" width="330" height="86" rx="10" fill="#EAF3FD" stroke="#3A709F" stroke-width="2.5"/>
+<text x="700.0" y="1670.0" text-anchor="middle" class="node">Return distance</text>
+<text x="700.0" y="1694.0" text-anchor="middle" class="second">and bearing to Pickup</text>
+<rect x="542" y="1815" width="316" height="80" rx="40.0" fill="#E5F6EE" stroke="#278361" stroke-width="2.5"/>
+<text x="700.0" y="1848.0" text-anchor="middle" class="node">SUCCESS</text>
+<text x="700.0" y="1876.0" text-anchor="middle" class="second">→ Pickup Object</text>
+<rect x="119" y="1815" width="328" height="80" rx="40.0" fill="#FCEBEB" stroke="#B65B57" stroke-width="2.5"/>
+<text x="283.0" y="1862.0" text-anchor="middle" class="node">FAILURE</text>
+<rect x="963" y="1815" width="315" height="80" rx="40.0" fill="#FCEBEB" stroke="#B65B57" stroke-width="2.5"/>
+<text x="1120.5" y="1862.0" text-anchor="middle" class="node">FAILURE</text>
+<path d="M700 170 V220" class="path"/>
+<path d="M700 304 V337" class="path"/>
+<path d="M574 406 H459" class="path"/>
+<text x="510" y="394" class="edge" text-anchor="middle">Yes</text>
+<path d="M283 461 V570 H567 V620" class="path"/>
+<path d="M700 475 V543" class="path"/>
+<text x="726" y="521" class="edge" text-anchor="middle">No</text>
+<path d="M700 697 V764" class="path"/>
+<text x="725" y="747" class="edge" text-anchor="middle">Yes</text>
+<path d="M833 620 H1120 V778" class="path"/>
+<text x="914" y="602" class="edge" text-anchor="middle">No</text>
+<path d="M1120 861 V1052" class="path"/>
+<path d="M700 872 V909" class="path"/>
+<path d="M700 1033 V1128" class="path"/>
+<text x="724" y="1082" class="edge" text-anchor="middle">No</text>
+<path d="M575 971 H458 V1051" class="path"/>
+<text x="526" y="960" class="edge" text-anchor="middle">Yes</text>
+<path d="M283 1091 V1177" class="path"/>
+<path d="M283 1267 V1318" class="path"/>
+<path d="M153 1390 H67 V818 H510" class="path-muted"/>
+<text x="111" y="1373" class="edge" text-anchor="middle">Yes</text>
+<path d="M283 1462 V1815" class="path"/>
+<text x="310" y="1525" class="edge" text-anchor="middle">No</text>
+<path d="M700 1268 V1420" class="path"/>
+<text x="725" y="1360" class="edge" text-anchor="middle">Reached</text>
+<path d="M830 1198 H917 V1094 H963" class="path-muted"/>
+<text x="913" y="1180" class="edge" text-anchor="middle">Perception lost</text>
+<path d="M570 1198 H505 V1750 H283 V1815" class="path"/>
+<text x="530" y="1168" class="edge" text-anchor="middle">Failed</text>
+<path d="M1120 1136 V1191" class="path"/>
+<path d="M992 1260 H923 V1490 H831" class="path"/>
+<text x="964" y="1244" class="edge" text-anchor="middle">Yes</text>
+<path d="M1120 1329 V1815" class="path"/>
+<text x="1150" y="1370" class="edge" text-anchor="middle">No</text>
+<path d="M700 1560 V1632" class="path"/>
+<text x="728" y="1603" class="edge" text-anchor="middle">Yes</text>
+<path d="M569 1490 H505" class="path"/>
+<text x="540" y="1474" class="edge" text-anchor="middle">No</text>
+<path d="M700 1718 V1815" class="path"/>
+</svg>
