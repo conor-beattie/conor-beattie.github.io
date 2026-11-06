@@ -755,3 +755,44 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 .library-interface-list { padding-left:22px; line-height:1.75; }
 .software-detail-links { margin:28px 0 42px; max-width:1000px; }
 .software-detail-links h2 { font-size:1.35rem; margin:0 0 13px; letter-spacing:-.025em; }
+
+/* PROJECT TIMELINE — three workstreams across seasonal development years. */
+.page-top--timeline { padding: 52px 0 25px; }
+.page-top--timeline h1 { font-size: clamp(2.1rem, 3.7vw, 3.1rem); margin: 0; }
+.timeline-page { padding: 0 0 74px; }
+.timeline-scroll { max-width: 100%; overflow-x: auto; overscroll-behavior-x: contain; border: 1px solid var(--line); border-radius: 11px; background: var(--white); }
+.timeline-table { border-collapse: collapse; width: 100%; min-width: 940px; table-layout: fixed; text-align: left; line-height: 1.3; }
+.timeline-table th, .timeline-table td { box-sizing: border-box; }
+.timeline-table thead th { text-align: center; padding: 12px 4px 8px; font-size: .79rem; font-weight: 650; color: var(--ink); background: var(--white); }
+.timeline-table thead tr:last-child th { padding: 7px 2px 13px; font-size: .70rem; color: var(--muted); font-weight: 550; border-bottom: 1px solid var(--line); }
+.timeline-table thead th.timeline-corner { width: 226px; text-align: left; padding-left: 18px; }
+.timeline-table thead th[scope="colgroup"] + th[scope="colgroup"] { border-left: 1px solid var(--line); }
+.timeline-table .timeline-group-row th { padding: 21px 17px 9px; border-top: 1px solid var(--line); background: var(--white); font-size: .72rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; color: var(--ink-soft); }
+.timeline-table .timeline-workstream:first-of-type .timeline-group-row th { border-top: 0; }
+.timeline-project-label { padding: 11px 12px 11px 17px; font-size: .80rem; font-weight: 580; background: var(--white); }
+.timeline-project-label a { color: var(--ink); text-decoration: underline; text-decoration-color: #b2c9c3; text-underline-offset: 3px; }
+.timeline-project-label a:hover { color: var(--accent-deep); text-decoration-color: var(--accent); }
+.timeline-project-label a span { font-size: .73rem; color: var(--accent); }
+.timeline-season-cell { height: 39px; padding: 0; border-left: 1px solid var(--white); background: #f1f5f4; position: relative; }
+.timeline-season-cell:nth-of-type(4n + 1) { box-shadow: inset 2px 0 #d7e2df; }
+.timeline-bar { position: absolute; inset: 11px 0; background: #7398cc; }
+.timeline-bar--first { border-radius: 4px 0 0 4px; }
+.timeline-bar--last { border-radius: 0 4px 4px 0; }
+.timeline-bar--first.timeline-bar--last { border-radius: 4px; }
+.timeline-bar--in-progress { background: #098d80; }
+.timeline-bar--planned { background: #7398cc; }
+.timeline-bar--longer-term { background: repeating-linear-gradient(115deg, #7398cc 0 8px, #b9cfe7 8px 13px); }
+.timeline-milestone { position: absolute; width: 13px; height: 13px; top: 13px; left: calc(50% - 7px); background: #7398cc; border: 2px solid var(--white); transform: rotate(45deg); border-radius: 2px; }
+.timeline-legend { display: flex; gap: 12px 23px; flex-wrap: wrap; align-items: center; padding: 15px 3px 0; color: var(--muted); font-size: .75rem; }
+.timeline-legend span { display: inline-flex; align-items: center; gap: 7px; }
+.timeline-key { width: 18px; height: 11px; display: inline-block; border-radius: 2px; background: #7398cc; }
+.timeline-key--in-progress { background: #098d80; }
+.timeline-key--planned { background: #7398cc; }
+.timeline-key--longer-term { background: repeating-linear-gradient(115deg, #7398cc 0 7px, #b9cfe7 7px 11px); }
+.timeline-key--start { width: 11px; height: 11px; margin: 0 3px; border: 2px solid var(--white); background: #7398cc; transform: rotate(45deg); }
+@media (max-width: 700px) {
+  .page-top--timeline { padding: 35px 0 20px; }
+  .timeline-table { min-width: 850px; }
+  .timeline-table thead th.timeline-corner { width: 205px; }
+  .timeline-project-label { font-size: .75rem; }
+}

@@ -131,7 +131,8 @@
       const featured = page === 'home' && location.hash === '#featured';
       const selected = (page === 'home' && el.dataset.nav === 'home' && !featured) ||
         (featured && el.dataset.nav === 'selected') ||
-        (page === 'about' && el.dataset.nav === 'about');
+        (page === 'about' && el.dataset.nav === 'about') ||
+        (page === 'timeline' && el.dataset.nav === 'timeline');
       if (selected) el.setAttribute('aria-current', 'page');
       else el.removeAttribute('aria-current');
     });
@@ -1011,6 +1012,51 @@
     }
   }
 
+  function timeline() {
+    const root = $("#project-timeline");
+    const plan = data.projectTimeline;
+    if (!root || !Array.isArray(plan?.years) || !Array.isArray(plan?.groups)) return;
+    const years = plan.years;
+    const seasons = plan.seasons || ["Autumn", "Winter", "Spring", "Summer"];
+    const quarters = years.length * seasons.length;
+    // Use the project's existing page only if a real, published entry is available.
+    const label = item => {
+      const project = visibleProjects().find(p => p.id === item.projectId);
+      return project
+        ? `<a href="${projectUrl(project)}">${text(item.title)} <span aria-hidden="true">↗</span></a>`
+        : text(item.title);
+    };
+    const seasonText = index => {
+      const year = Math.floor(index / seasons.length);
+      return `${seasons[index % seasons.length]} ${years[year]}`;
+    };
+    const row = item => {
+      const start = Math.max(0, Math.min(quarters - 1, item.start));
+      const hasEnd = Number.isInteger(item.end);
+      const end = hasEnd ? Math.max(start, Math.min(quarters - 1, item.end)) : start;
+      const period = hasEnd ? `${seasonText(start)} to ${seasonText(end)}` : `Starts ${seasonText(start)}; no end date set`;
+      const cells = Array.from({length:quarters},(_,i)=>{
+        let bar = '';
+        if (!hasEnd && i === start) {
+          bar = '<span class="timeline-milestone" aria-hidden="true"></span>';
+        } else if (hasEnd && i >= start && i <= end) {
+          const state = ['in-progress','planned','longer-term'].includes(item.status) ? item.status : 'planned';
+          bar = `<span class="timeline-bar timeline-bar--${state}${i === start ? ' timeline-bar--first' : ''}${i === end ? ' timeline-bar--last' : ''}" aria-hidden="true"></span>`;
+        }
+        return `<td class="timeline-season-cell">${bar}</td>`;
+      }).join('');
+      return `<tr class="timeline-project-row"><th scope="row" class="timeline-project-label">${label(item)}<span class="visually-hidden"> — ${period}</span></th>${cells}</tr>`;
+    };
+    const heads = years.map(year=>`<th scope="colgroup" colspan="${seasons.length}">${text(year)}</th>`).join('');
+    const seasonHeads = years.flatMap(()=>seasons.map(name=>`<th scope="col">${text(name)}</th>`)).join('');
+    const groups = plan.groups.map(group =>
+      `<tbody class="timeline-workstream"><tr class="timeline-group-row"><th scope="rowgroup" colspan="${quarters + 1}">${text(group.title)}</th></tr>${(group.projects || []).map(row).join('')}</tbody>`
+    ).join('');
+    root.innerHTML = `<div class="timeline-scroll" role="region" aria-label="Project timeline by season; scroll horizontally for later years" tabindex="0">
+      <table class="timeline-table"><thead><tr><th class="timeline-corner" scope="col" rowspan="2">Project</th>${heads}</tr><tr>${seasonHeads}</tr></thead>${groups}</table>
+    </div><div class="timeline-legend" aria-label="Timeline legend"><span><i class="timeline-key timeline-key--in-progress" aria-hidden="true"></i>In progress</span><span><i class="timeline-key timeline-key--planned" aria-hidden="true"></i>Planned</span><span><i class="timeline-key timeline-key--longer-term" aria-hidden="true"></i>Longer term</span><span><i class="timeline-key timeline-key--start" aria-hidden="true"></i>Start date only</span></div>`;
+  }
+
   function development() {
     const root = $("#development-content");
     if (!root) return;
@@ -1030,6 +1076,7 @@
     if (page === "project") projectDetail();
     if (page === "about") about();
     if (page === "development") development();
+    if (page === "timeline") timeline();
     previewBanner();
     previewNavigation();
   });

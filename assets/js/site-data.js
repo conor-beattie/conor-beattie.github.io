@@ -113,6 +113,40 @@ window.PORTFOLIO_DATA = {
     email: ""            // optional — public email appears on site if provided
   },
 
+  // Project Timeline: four seasons per academic development year. Indices 0–11
+  // run from Autumn 2026 through Summer 2029. Leave end null for start-only.
+  // projectId is optional and must match a published Projects-page ID.
+  projectTimeline: {
+    years: ["2026/27", "2027/28", "2028/29"],
+    seasons: ["Autumn", "Winter", "Spring", "Summer"],
+    groups: [
+      {
+        title: "Autonomous Navigation",
+        projects: [
+          { title: "Stage 2 — Reactive Control", start: 0, end: 2, status: "in-progress" },
+          { title: "Stage 3 — Path Planning", start: 3, end: 6, status: "planned" },
+          { title: "Stage 4 — LiDAR / SLAM", start: 7, end: 11, status: "longer-term" }
+        ]
+      },
+      {
+        title: "Gripper Development",
+        projects: [
+          { title: "Part 1 — Contact Pads", start: 0, end: 1, status: "in-progress", projectId: "gripper-contact-surfaces" },
+          { title: "Part 2 — Jaw Assembly", start: 2, end: 3, status: "planned", projectId: "robotic-gripper-grasp-detection" },
+          { title: "Part 3 — Contact Sensing", start: 3, end: 3, status: "planned", projectId: "gripper-contact-sensing" }
+        ]
+      },
+      {
+        title: "Robot Development",
+        projects: [
+          { title: "Robbot", start: 4, end: 7, status: "planned", projectId: "robotics-project-2" },
+          { title: "New Lift Mechanism", start: 4, end: 7, status: "planned" },
+          { title: "Robotic Arm", start: 8, end: null, status: "planned" }
+        ]
+      }
+    ]
+  },
+
   categories: [
     {
       id: "robotics",
