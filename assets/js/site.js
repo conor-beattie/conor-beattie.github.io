@@ -295,11 +295,10 @@
   function software() {
     const root = $("#software-grid");
     if (!root) return;
-    const current = sortByCategoryOrder(softwareItems.filter(item => !isPlannedProject(item)));
-    const future = sortByCategoryOrder(softwareItems.filter(isPlannedProject));
-    const renderGroup = (title, items) => items.length ?
-      `<section class="project-list-group"><h2 class="project-list-group__title">${title}</h2><div class="software-card-grid">${items.map(softwareCard).join("")}</div></section>` : "";
-    root.innerHTML = `<div class="software-card-grid">${[...softwareItems].sort((a,b)=>a.title.localeCompare(b.title, "en", {sensitivity:"base", numeric:true})).filter(item=>!isPlannedProject(item)).map(softwareCard).join("")}</div>`;
+    // Software Logic follows the robot's operating hierarchy, not alphabetical order.
+    // Software Libraries remain alphabetical on their own page.
+    const items = sortByCategoryOrder(softwareItems.filter(item => !isPlannedProject(item)));
+    root.innerHTML = `<div class="software-card-grid">${items.map(softwareCard).join("")}</div>`;
   }
   function softwareDetail() {
     const id=new URLSearchParams(location.search).get('id');

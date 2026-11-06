@@ -208,28 +208,12 @@ window.PORTFOLIO_DATA = {
   // If featuredOrder is missing, the entry is NOT selected; it still appears
   // on its normal category/software page. Use unique positive whole numbers.
   software: [
+
     {
-      id: "acquire-object",
+      id: "robot-behaviour", // Retain id to preserve existing page URLs.
+      categoryOrder: 1,
       published: true,
-      title: "Acquire Object",
-      subtitle: "",
-      cardStatus: "",
-      projectStatus: "in-progress",
-      type: "Behaviour",
-      skills: ["Python"],
-      robotIds: ["autonomous-mobile-robot"],
-      algorithmIds: ["ibvs", "pbvs", "apriltag-pose", "local-obstacle-avoidance"],
-      summary: "Find, approach and pick up an object.",
-      sections: {},
-      sectionDetails: {},
-      references: [],
-      sourceUrl: "",
-      demos: []
-    },
-    {
-      id: "robot-behaviour",
-      published: true,
-      title: "Robot Behaviour",
+      title: "Robot State Machine",
       subtitle: "",
       cardStatus: "",
       projectStatus: "in-progress",
@@ -237,7 +221,85 @@ window.PORTFOLIO_DATA = {
       skills: ["Python"],
       robotIds: ["autonomous-mobile-robot"],
       algorithmIds: [],
-      summary: "Coordinate the main sequence of autonomous robot operations.",
+      summary: "Show the sequence of autonomous behaviours, including success, failure and recovery transitions.",
+      flowchart: "assets/diagrams/sr2026-robot-state-machine.svg",
+      imageAlt: "Robot State Machine flowchart for SR2026 Stage 1, showing search, approach, pickup, return, drop-off and recovery paths.",
+      sections: {},
+      sectionDetails: {},
+      references: [],
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "search-for-object",
+      categoryOrder: 2,
+      published: true,
+      title: "Search for Object",
+      subtitle: "",
+      cardStatus: "",
+      projectStatus: "in-progress",
+      type: "Behaviour",
+      skills: ["Python"],
+      robotIds: ["autonomous-mobile-robot"],
+      algorithmIds: [],
+      summary: "Prepare a search, find eligible objects and select a target.",
+      sections: {},
+      sectionDetails: {},
+      references: [],
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "approach-object",
+      categoryOrder: 3,
+      published: true,
+      title: "Approach Object",
+      subtitle: "",
+      cardStatus: "",
+      projectStatus: "in-progress",
+      type: "Behaviour",
+      skills: ["Python"],
+      robotIds: ["autonomous-mobile-robot"],
+      algorithmIds: [],
+      summary: "Navigate towards the selected object and reach the pickup handoff position.",
+      sections: {},
+      sectionDetails: {},
+      references: [],
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "pickup-object",
+      categoryOrder: 4,
+      published: true,
+      title: "Pickup Object",
+      subtitle: "",
+      cardStatus: "",
+      projectStatus: "in-progress",
+      type: "Behaviour",
+      skills: ["Python"],
+      robotIds: ["autonomous-mobile-robot"],
+      algorithmIds: [],
+      summary: "Perform final positioning and grasp the selected object.",
+      sections: {},
+      sectionDetails: {},
+      references: [],
+      sourceUrl: "",
+      demos: []
+    },
+    {
+      id: "drop-off-object",
+      categoryOrder: 6,
+      published: true,
+      title: "Drop-off Object",
+      subtitle: "",
+      cardStatus: "",
+      projectStatus: "in-progress",
+      type: "Behaviour",
+      skills: ["Python"],
+      robotIds: ["autonomous-mobile-robot"],
+      algorithmIds: [],
+      summary: "Complete final positioning and release the object in the delivery region.",
       sections: {},
       sectionDetails: {},
       references: [],
@@ -246,7 +308,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "return-to-base",
-      categoryOrder: 1,
+      categoryOrder: 5,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Feedback Control"],
       engineeringSummary: {
@@ -291,7 +353,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "stack-object",
-      categoryOrder: 2,
+      categoryOrder: 7,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python"],
       engineeringSummary: {
@@ -331,7 +393,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "guide-recovery",
-      categoryOrder: 3,
+      categoryOrder: 10,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python"],
       engineeringSummary: {
@@ -371,7 +433,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "local-avoidance-skill",
-      categoryOrder: 5,
+      categoryOrder: 11,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python"],
       engineeringSummary: {
@@ -411,7 +473,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "perception-system",
-      categoryOrder: 6,
+      categoryOrder: 8,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Computer Vision"],
       engineeringSummary: {
@@ -451,7 +513,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "localisation-system",
-      categoryOrder: 7,
+      categoryOrder: 9,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python"],
       engineeringSummary: {
@@ -491,7 +553,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       id: "motion-control",
-      categoryOrder: 8,
+      categoryOrder: 12,
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Python", "Motor Control", "Feedback Control"],
       engineeringSummary: {

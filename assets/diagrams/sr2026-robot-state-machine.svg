@@ -1,0 +1,121 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:ev="http://www.w3.org/2001/xml-events" xmlns:xlink="http://www.w3.org/1999/xlink" baseProfile="full" height="1890px" version="1.1" viewBox="0 0 1430 1890" width="1430px">
+  <title>Robot State Machine — normal mode SR2026 Stage 1</title>
+  <desc>Main sequential flow chart grouping preparation, global object search and target selection into Search for Object. Approach Object is navigation to an object; Return to Base is navigation to a region. Pickup and drop-off are separate handoff actions. Side paths show only parent-level transitions.</desc>
+  <defs>
+    <marker id="flowarrow" markerHeight="10" markerUnits="strokeWidth" markerWidth="10" orient="auto" refX="9" refY="5">
+      <path d="M0 0 L10 5 L0 10 Z" fill="#5579AD"/>
+    </marker>
+  </defs>
+  <rect fill="white" height="1890" width="1430" x="0" y="0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="30" font-weight="bold" text-anchor="start" x="58" y="74">ROBOT STATE MACHINE</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,207 700,247" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,311 700,353" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,419 700,446" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,538 700,573" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="730" y="557">Yes</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,639 700,665" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,757 700,792" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="730" y="774">Yes</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,858 700,884" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,976 700,1012" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="730" y="993">Yes</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,1078 700,1124" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="777" y="1100">Both outcomes</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,1190 700,1219" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,1311 700,1348" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="730" y="1332">Yes</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,1414 700,1441" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,1533 700,1569" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="730" y="1550">Yes</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,1635 700,1661" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="700,1753 700,1790" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="730" y="1771">Yes</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="125,1707 125,386 535,386" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <polyline fill="none" points="555,930 125,930" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="520" y="908">No</text>
+  <polyline fill="none" points="555,1707 125,1707" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="520" y="1685">No</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="555,492 470,492" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="503" y="467">No: exhausted</text>
+  <polyline fill="none" points="175,492 125,492" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="206" y="468">Recovered</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="845,711 1005,711 1005,374 865,374" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="916" y="685">No: reselect</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="845,1265 1095,1265 1095,1157 865,1157" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="938" y="1241">No: retry</text>
+  <polyline fill="none" points="845,1487 1170,1487 1170,1157 1095,1157" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="944" y="1464">No: recover</text>
+  <polyline fill="none" marker-end="url(#flowarrow)" points="865,1823 1290,1823 1290,398 865,398" stroke="#5278AA" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.15"/>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="13.2" font-weight="bold" text-anchor="middle" x="945" y="1800">Next object</text>
+  <rect fill="#EAF6F4" height="54" rx="27" stroke="#15828A" stroke-width="2.3" width="260" x="570" y="153"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="180">Begin autonomous</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="247.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="247.0" y2="311.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="247.0" y2="311.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="269">Init Escape</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="296">leave starting position</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="354.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="354.0" y2="418.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="354.0" y2="418.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="376">Search for Object</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="403">prepare  ·  scan  ·  select target</text>
+  <polygon fill="#F3F8FC" points="700,446 845,492 700,538 555,492" stroke="#5278AA" stroke-width="2.2"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="481.0">Search</text>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="503.0">successful?</text>
+  <rect fill="#EDF8F8" height="68" stroke="#15828A" stroke-width="2.2" width="290" x="175.0" y="458.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="193.0" x2="193.0" y1="458.0" y2="526.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="447.0" x2="447.0" y1="458.0" y2="526.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="320" y="482">Recover Localisation</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="320" y="509">search exhausted; retry on failure</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="574.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="574.0" y2="638.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="574.0" y2="638.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="596">Approach Object</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="623">navigate towards selected object</text>
+  <polygon fill="#F3F8FC" points="700,665 845,711 700,757 555,711" stroke="#5278AA" stroke-width="2.2"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="700.0">Approach</text>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="722.0">successful?</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="793.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="793.0" y2="857.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="793.0" y2="857.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="815">Pickup Object</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="842">final alignment  ·  grasp  ·  verify</text>
+  <polygon fill="#F3F8FC" points="700,884 845,930 700,976 555,930" stroke="#5278AA" stroke-width="2.2"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="919.0">Pickup</text>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="941.0">successful?</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="1013.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="1013.0" y2="1077.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="1013.0" y2="1077.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="1035">Post-Pickup Realign</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="1062">reverse  ·  lift  ·  rotate</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="1125.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="1125.0" y2="1189.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="1125.0" y2="1189.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="1147">Recover Localisation</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="1174">recover pose for return navigation</text>
+  <polygon fill="#F3F8FC" points="700,1219 845,1265 700,1311 555,1265" stroke="#5278AA" stroke-width="2.2"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="1254.0">Localisation</text>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="1276.0">recovered?</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="1349.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="1349.0" y2="1413.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="1349.0" y2="1413.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="1371">Return to Base</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="1398">navigate towards delivery region</text>
+  <polygon fill="#F3F8FC" points="700,1441 845,1487 700,1533 555,1487" stroke="#5278AA" stroke-width="2.2"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="1476.0">Return</text>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="1498.0">successful?</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="1570.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="1570.0" y2="1634.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="1570.0" y2="1634.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="1592">Drop-off Object</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="1619">final placement  ·  release</text>
+  <polygon fill="#F3F8FC" points="700,1661 845,1707 700,1753 555,1707" stroke="#5278AA" stroke-width="2.2"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="1696.0">Drop-off</text>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="17" font-weight="bold" text-anchor="middle" x="700" y="1718.0">successful?</text>
+  <rect fill="#EDF8F8" height="64" stroke="#15828A" stroke-width="2.2" width="330" x="535.0" y="1791.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="553.0" x2="553.0" y1="1791.0" y2="1855.0"/>
+  <line stroke="#15828A" stroke-width="1.85" x1="847.0" x2="847.0" y1="1791.0" y2="1855.0"/>
+  <text dominant-baseline="middle" fill="#22394B" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" x="700" y="1813">Post-Dropoff Realign</text>
+  <text dominant-baseline="middle" fill="#536776" font-family="Arial, Helvetica, sans-serif" font-size="12.8" font-weight="normal" text-anchor="middle" x="700" y="1840">reverse  ·  lower lift  ·  rotate</text>
+</svg>
