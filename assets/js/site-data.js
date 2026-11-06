@@ -123,9 +123,9 @@ window.PORTFOLIO_DATA = {
       {
         title: "Autonomous Navigation",
         projects: [
-          { title: "Stage 2 — Reactive Control", start: 0, end: 2, status: "in-progress" },
-          { title: "Stage 3 — Path Planning", start: 3, end: 6, status: "planned" },
-          { title: "Stage 4 — LiDAR / SLAM", start: 7, end: 11, status: "longer-term" }
+          { title: "Stage 2 — Reactive Control", start: 0, end: 2, status: "in-progress", projectId: "robot-navigation-architecture" },
+          { title: "Stage 3 — Path Planning", start: 3, end: 6, status: "planned", projectId: "robot-navigation-architecture" },
+          { title: "Stage 4 — LiDAR / SLAM", start: 7, end: 11, status: "longer-term", projectId: "robot-navigation-architecture" }
         ]
       },
       {
@@ -1244,6 +1244,45 @@ window.PORTFOLIO_DATA = {
       sections: {
         abstract: "",
         introduction: "",
+        materialsMethods: "",
+        projectPlan: "",
+        results: "",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: "",
+        relatedProjects: "",
+        references: "",
+      },
+      references: [],
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "robot-navigation-architecture",
+      skills: ["Systems Design", "Navigation", "Software Architecture"],
+      engineeringSummary: {
+        challenge: "",
+        contribution: "",
+        outcome: "",
+        lessonsLearned: ""
+      },
+      published: true,
+      title: "Robot Navigation Architecture",
+      subtitle: "",
+      status: "in-progress",
+      targetStart: "",
+      category: "robotics",
+      categoryOrder: 3,
+      image: "assets/images/navigation-block-diagram-revised.png",
+      imageAlt: "Revised block diagram of a robot navigation architecture showing configurable navigation stages, shared motion-control components and future planning and LiDAR-based navigation.",
+      hideImageCaption: true,
+      imageFullSize: true,
+      summary: "A configurable navigation architecture showing how one robot program can support timed motion, reactive control, planned navigation and future LiDAR-based navigation.",
+      tags: ["Robotics", "Navigation", "Systems Design"],
+      date: "",
+      relatedProjectIds: ["autonomous-mobile-robot", "robotics-project-2"],
+      sections: {
+        abstract: "",
+        introduction: "This block diagram shows how I have designed the robot's navigation system to support different methods of autonomous movement within the same program. The navigation method can be selected through configuration, allowing the different stages to share common motion-control components.\n\nI am currently working on Stage 2, approximately one year into a three-year robotics development project. Stages 3 and 4 show the planned progression towards path planning, trajectory tracking and LiDAR-based navigation.",
         materialsMethods: "",
         projectPlan: "",
         results: "",
