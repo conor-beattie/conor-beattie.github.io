@@ -141,7 +141,9 @@ window.PORTFOLIO_DATA = {
         projects: [
           { title: "Robbot", start: 4, end: 7, status: "planned", projectId: "robotics-project-2" },
           { title: "New Lift Mechanism", start: 4, end: 7, status: "planned" },
-          { title: "Robotic Arm", start: 8, end: null, status: "planned" }
+          { title: "Robotic Arm", start: 8, end: null, status: "planned" },
+          { title: "FTC BioBuzz (School Team)", start: 0, end: 1, status: "in-progress" },
+          { title: "FTC 2027/28 (School Team)", start: 4, end: 5, status: "planned" }
         ]
       }
     ]
