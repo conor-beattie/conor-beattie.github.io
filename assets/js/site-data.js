@@ -718,10 +718,10 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
-      relatedProjectIds: ["mechanical-gripper", "bobbot-lift-original-cad-design", "gripper-contact-surfaces", "robotic-gripper-grasp-detection", "gripper-contact-sensing", "electrical-control-panel"],
+      relatedProjectIds: ["bobbot-drivetrain-design", "robotics-project-2", "mechanical-gripper", "bobbot-lift-original-cad-design", "gripper-contact-surfaces", "robotic-gripper-grasp-detection", "gripper-contact-sensing", "electrical-control-panel"],
       sectionDetails: {
         introduction: [
-          { heading: "Drivetrain/Chassis", text: "I am not sure what inspired me to build a 2wd plus rear omni wheel robot. But the design seems to work well for my intended purpose and has worked well from the start with minimal modification. The drivetrain/chassis is built mostly from goBILDA parts that I had on hand from a [previous robot kit](project:gobilda-decode-starter-bot)." },
+          { heading: "Drivetrain/Chassis", text: "Bobbot uses a two wheel drive layout with a rear omni wheel. The chassis design, dimensions and construction are covered in [Bobbot Drivetrain Design](project:bobbot-drivetrain-design)." },
           { heading: "Gripper", text: "The [original gripper](project:mechanical-gripper) (which predates Bobbot) was designed for picking up cones. It has been modified slightly since then mainly by making it wider and adding some rubber bands to increase contact resistance. The gripper is now being overhauled completely to something more suitable for grasping cardboard boxes. You can find the progress of these improvements via the Gripper Studies ([Part 1](project:gripper-contact-surfaces), [Part 2](project:robotic-gripper-grasp-detection), and [Part 3](project:gripper-contact-sensing))." },
           { heading: "Lift", text: "The original lift (after its initial iterations) still exists. You can find out more about the history of the lift [here](project:bobbot-lift-original-cad-design)." },
           { heading: "Autonomous Control", text: "The autonomous control is based around the premise of the the Student Robotics competition. Essentially navigating around an arena and picking up and delivering carboard boxes all with the guide of April Tags. The navigational aspects of the control logic is designed to evolve via 4 stages. I am currently working through Stage 2 in the progression. Stage 3 will still continue to utilize the arena model. But Stage 4 will likely see Bobbot navigating around the house possibly staying within lanes similar to F1Tenth (albeit at very low speeds.)" }
@@ -729,6 +729,169 @@ window.PORTFOLIO_DATA = {
       },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
+      id: "bobbot-drivetrain-design",
+      published: true,
+      title: "Bobbot Drivetrain Design",
+      subtitle: "Original Chassis and Drivetrain",
+      status: "",
+      category: "cad",
+      categoryOrder: 1,
+      image: "assets/images/bobbot_drivetrain_photo.jpg",
+      imageFallback: "assets/images/IMG_2627 Bobbot.jpg",
+      imageAlt: "Bobbot two wheel drive chassis and rear omni wheel",
+      hideImageCaption: true,
+      summary: "The original two wheel drive platform, documenting chassis geometry, wheel placement and a goBILDA based construction that has required little modification.",
+      skills: ["CAD", "Mechanical Design", "Mechanical Assembly"],
+      relatedProjectIds: ["autonomous-mobile-robot", "robbot-drivetrain-design", "gobilda-decode-starter-bot"],
+      sections: {
+        introduction: "I am not sure what inspired me to build a 2wd plus rear omni wheel robot. But the design seems to work well for my intended purpose and has worked well from the start with minimal modification. The drivetrain/chassis is built mostly from goBILDA parts that I had on hand from a [previous robot kit](project:gobilda-decode-starter-bot).",
+        materialsMethods: "",
+        results: "",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: ""
+      },
+      sectionLabels: { materialsMethods: "Chassis Design" },
+      sectionDetails: {
+        materialsMethods: [
+          {
+            heading: "Chassis Dimensions and Layout",
+            text: "The chassis geometry establishes the positions of the two drive wheels and rear omni wheel, along with the space available for the lift, gripper and electrical components. The main measurements to document are the overall length and width, wheel positions, cross member layout and ground clearance.",
+            media: [
+              {type: "image", src: "assets/images/bobbot_drivetrain_CAD.png", alt: "Bobbot chassis CAD drawing and dimensions", caption: "Chassis CAD and key dimensions", optional: true}
+            ]
+          },
+          {
+            heading: "Construction",
+            text: "The frame uses mainly goBILDA parts already available from an earlier robot kit. This provided a practical starting platform for the robot's mechanical experiments without first needing a custom chassis.",
+            media: [
+              {type: "image", src: "assets/images/bobbot_drivetrain_photo.jpg", alt: "Assembled Bobbot chassis", caption: "Assembled drivetrain", optional: true},
+              {type: "image", src: "assets/images/bobbot_drivetrain_mounts.jpg", alt: "Bobbot drive motor and wheel mounting", caption: "Wheel and motor mounting", optional: true}
+            ]
+          },
+          {
+            heading: "Ground Clearance",
+            text: "The original Bobbot drivetrain had approximately 24 mm of ground clearance. This provided a useful reference when developing the lower clearance arrangement on Robbot.",
+            media: [
+              {type: "image", src: "assets/images/bobbot_drivetrain_omni.jpg", alt: "Bobbot rear omni wheel and its support", caption: "Rear omni wheel support", optional: true}
+            ]
+          }
+        ]
+      },
+      references: [],
+      links: {github: "", cad: "", video: "", downloads: ""}
+    },
+    {
+      id: "robbot-drivetrain-design",
+      published: true,
+      title: "Robbot Drivetrain Design",
+      subtitle: "Reducing the Cost of the Original Platform",
+      status: "",
+      category: "cad",
+      categoryOrder: 2,
+      image: "assets/images/robbot_drivetrain_photo.jpg",
+      imageFallback: "assets/images/IMG_2756_robbot.jpg",
+      imageAlt: "Robbot drivetrain made from aluminium extrusion and geared motors",
+      hideImageCaption: true,
+      summary: "Recreating Bobbot's two wheel drive layout at lower cost through aluminium extrusion, alternative motors, revised mounting geometry and a reused omni wheel support.",
+      skills: ["Mechanical Design", "Component Selection", "Mechanical Adaptation"],
+      relatedProjectIds: ["robotics-project-2", "bobbot-drivetrain-design", "dc-motor-comparison-selection"],
+      sections: {
+        introduction: "Robbot uses the same two wheel drive configuration with a rear omni wheel as Bobbot. The aim was to achieve a comparable drivetrain at a substantially lower cost.",
+        materialsMethods: "",
+        results: "",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: ""
+      },
+      sectionLabels: { materialsMethods: "Design and Construction" },
+      sectionDetails: {
+        materialsMethods: [
+          {
+            heading: "Chassis",
+            text: "Robbot retains the same chassis dimensions as Bobbot and a similar cross member design, but uses 2020 aluminium extrusion. Preliminary testing suggests this construction is satisfactory. The initial Robbot build used 2040 extrusion, which added weight and cost. It also raised the Robbot's floor clearance which raised the centre of mass which wasn't ideal.",
+            media: [
+              {type: "image", src: "assets/images/robbot_drivetrain_CAD.png", alt: "Robbot chassis CAD model", caption: "Chassis and drivetrain CAD", optional: true},
+              {type: "image", src: "assets/images/robbot_drivetrain_photo.jpg", alt: "Assembled Robbot drivetrain", caption: "Robbot chassis and drivetrain", optional: true}
+            ]
+          },
+          {
+            heading: "Motor Selection",
+            text: "While the goBILDA yellow jacket motors were a simple and reliable solution for Bobbot, they were far too expensive (£50/each) to replicate on Robbot. So instead both 25D and 37D class motors were considered. Ultimately, I selected the 37D DFRobot FIT0186 motors (£15/each) as finding a reliable, 12V, encoder equipped 25D model at a competive price proved difficult."
+          },
+          {
+            heading: "Motor Mounting and Ground Clearance",
+            text: "The initial motor brackets could only be mounted below the chassis, increasing ground clearance. Previous testing had shown that, for this style of robot, lower ground clearance improved overall performance. However, the risk of the chassis bottoming out limited ground clearance to a minimum of 10 mm.\n\nAfter researching alternative motor mounts and calculating their vertical offsets, I found brackets that allowed the motors to be mounted above the chassis instead reducing ground clearance to 12 mm. This was an improvement over Bobbot's 24 mm clearance. However, this introduced another challenge: mounting the single non driven rear omni wheel at a similar height. The solution was to use the identical motor bracket and motor but leave the motor unpowered and remove its internal gearing. The motor assembly would both serve as a passive support for the omni wheel and allow it to rotate freely. This maintained the correct wheel height and eliminated the need to fit separate pillow blocks and bearings into the limited space available.",
+            media: [
+              {type: "image", src: "assets/images/robbot_drivetrain_mount_original.jpg", alt: "Original Robbot motor bracket mounted beneath chassis", caption: "Original motor mounting", optional: true},
+              {type: "image", src: "assets/images/robbot_drivetrain_mount_revised.jpg", alt: "Revised Robbot motor bracket mounted above chassis", caption: "Revised motor mounting", optional: true},
+              {type: "image", src: "assets/images/robbot_drivetrain_omni.jpg", alt: "Unpowered motor assembly supporting Robbot rear omni wheel", caption: "Repurposed motor supporting the omni wheel", optional: true}
+            ]
+          },
+          {
+            heading: "Motor Comparison",
+            text: "Four motors were tested to select a suitably matched drive pair. The third motor was kept for a spare. And the worst performing motor was dismantled and repurposed as a passive bearing support for the omni wheel.",
+            relatedProjectId: "dc-motor-comparison-selection"
+          }
+        ]
+      },
+      references: [],
+      links: {github: "", cad: "", video: "", downloads: ""}
+    },
+    {
+      id: "parallel-plate-drivetrain-design",
+      published: true,
+      title: "Parallel Plate Drivetrain Design",
+      subtitle: "goBILDA Belt Drive Proof of Concept",
+      status: "",
+      category: "cad",
+      categoryOrder: 3,
+      image: "assets/images/parallel_plate_drivetrain_photo.jpg",
+      imageOptional: true,
+      imageAlt: "Physical parallel plate mecanum drivetrain proof of concept",
+      hideImageCaption: true,
+      summary: "Exploring a parallel plate mecanum drivetrain made with standard goBILDA components instead of custom cut aluminium, with pulley geometry designed around available belt lengths.",
+      skills: ["CAD", "Mechanism Design", "Prototyping", "Mechanical Design"],
+      relatedProjectIds: ["printed-mechanisms"],
+      sections: {
+        introduction: "This project explores whether a parallel plate mecanum drivetrain can be constructed using standard goBILDA parts rather than custom cut aluminium plates. The approach was to develop an alternative belt driven side while retaining a conventional direct drive mecanum arrangement on the other side for the proof of concept.",
+        materialsMethods: "",
+        results: "The one side parallel plate drivetrain was built and run alongside the direct drive side. This demonstrated that the proposed mechanical arrangement could operate, rather than establishing a quantified comparison of drivetrain performance.",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: ""
+      },
+      sectionLabels: { materialsMethods: "Design and Development", resultsDiscussion: "Prototype" },
+      sectionDetails: {
+        materialsMethods: [
+          {
+            heading: "Alternative Construction",
+            text: "The aim was to use the existing goBILDA channel system for a parallel plate style arrangement without needing custom machined or cut aluminium plates. The design also had to accommodate the mecanum wheel, shafts and bearings within the available space.",
+            media: [
+              {type: "image", src: "assets/images/parallel_plate_drivetrain_CAD.png", alt: "Parallel plate goBILDA drivetrain CAD", caption: "CAD design and component layout", optional: true}
+            ]
+          },
+          {
+            heading: "Pulley and Belt Geometry",
+            text: "One of the interesting challenges was working backwards from commercially available belt lengths to determine suitable pulley sizes and centre distances. The geometry was revised in CAD to fit the transmission into the chosen arrangement, rather than specifying a belt length that might be difficult to obtain. The printed pulley design is documented separately.",
+            media: [
+              {type: "image", src: "assets/images/parallel_plate_drivetrain_belt_geometry.png", alt: "Parallel plate belt length and pulley centre distance calculation", caption: "Pulley sizing and centre distance calculations", optional: true}
+            ]
+          },
+          {
+            heading: "Physical Prototype",
+            text: "The prototype used a direct drive mecanum wheel on one side and a parallel plate belt driven arrangement on the other. The assembled prototype was run to demonstrate the two arrangements, rather than as a finished competition robot.",
+            media: [
+              {type: "image", src: "assets/images/parallel_plate_drivetrain_photo.jpg", alt: "Assembled parallel plate prototype", caption: "One side parallel plate proof of concept", optional: true},
+              {type: "video", src: "assets/videos/parallel_plate_drivetrain_demo.mp4", caption: "Running prototype demonstration", optional: true}
+            ]
+          }
+        ]
+      },
+      references: [],
+      links: {github: "", cad: "", video: "", downloads: ""}
     },
     {
       id: "mechanical-gripper",
@@ -747,7 +910,7 @@ window.PORTFOLIO_DATA = {
       status: "",
       targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "cad",
-      categoryOrder: 1,
+      categoryOrder: 4,
       image: "assets/images/gripper_bobbot.png",
       imageAlt: "CAD model of the original Bobbot gripper",
       summary: "The original gripper with an angled grip and over center linkage",
@@ -777,7 +940,7 @@ window.PORTFOLIO_DATA = {
       subtitle: "",
       status: "",
       category: "cad",
-      categoryOrder: 2,
+      categoryOrder: 5,
       image: "assets/images/gripper_bobbot.png",
       imageAlt: "Temporary cover using the original gripper CAD image until a lift drawing is added",
       hideImageCaption: true,
@@ -815,7 +978,7 @@ window.PORTFOLIO_DATA = {
       status: "planned",
       targetStart: "", // Optional provisional date or period; hidden when empty.
       "category": "cad",
-      categoryOrder: 4,
+      categoryOrder: 7,
       "image": "assets/images/Watch_This_Space.png",
       "imageAlt": "",
       "imageCaption": "",
@@ -870,7 +1033,7 @@ window.PORTFOLIO_DATA = {
       status: "in-progress",
       targetStart: "", // Optional provisional date or period; hidden when empty.
       "category": "cad",
-      categoryOrder: 3,
+      categoryOrder: 6,
       "image": "assets/images/gripper_bobbot_orig.jpeg",
       "imageAlt": "CAD of the existing Bobbot gripper used as a baseline for contact pad tests",
       "imageCaption": "Existing Bobbot gripper",
@@ -1131,6 +1294,7 @@ window.PORTFOLIO_DATA = {
       subtitle: "",
       status: "",
       targetStart: "", // Optional provisional date or period; hidden when empty.
+      relatedProjectIds: ["parallel-plate-drivetrain-design"],
       category: "fabrication",
       categoryOrder: 1,
       image: "assets/images/Pulley.png",
@@ -1404,7 +1568,7 @@ window.PORTFOLIO_DATA = {
       summary: "Robbot is Bobbot on a budget. Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost.",
       tags: ["Robotics", "Mechanical Design", "Control"],
       date: "",
-      relatedProjectIds: ["autonomous-mobile-robot", "electrical-control-panel", "robot-control-electronics", "mobile-robot-power-distribution"],
+      relatedProjectIds: ["robbot-drivetrain-design", "autonomous-mobile-robot", "electrical-control-panel", "robot-control-electronics", "mobile-robot-power-distribution"],
       relatedPages: [
         { title: "Project Timeline", url: "timeline.html", summary: "Development schedule for the main engineering projects." }
       ],
@@ -1422,8 +1586,8 @@ window.PORTFOLIO_DATA = {
       },
       sectionDetails: {
         introduction: [
-          { heading: "Chassis", text: "Robbot retains the same chassis dimensions as Bobbot and a similar cross member design, but uses 2020 aluminium extrusion. Preliminary testing suggests this construction is satisfactory. The initial Robbot build used 2040 extrusion, which added weight and cost. It also raised the Robbot's floor clearance which raised the centre of mass which wasn't ideal." },
-          { heading: "Drivetrain", text: "Robbot uses the same two wheel drive configuration with a rear omni wheel as Bobbot. While the goBILDA yellow jacket motors were a simple and reliable solution for Bobbot, they were far too expensive (£50/each) to replicate on Robbot. So instead both 25D and 37D class motors were considered. Ultimately, I selected the 37D DFRobot FIT0186 motors (£15/each) as finding a reliable, 12V, encoder equipped 25D model at a competive price proved difficult.\n\nThe initial motor brackets could only be mounted below the chassis, increasing ground clearance. Previous testing had shown that, for this style of robot, lower ground clearance improved overall performance. However, the risk of the chassis bottoming out limited ground clearance to a minimum of 10 mm.\n\nAfter researching alternative motor mounts and calculating their vertical offsets, I found brackets that allowed the motors to be mounted above the chassis instead reducing ground clearance to 12 mm. This was an improvement over Bobbot's 24 mm clearance. However, this introduced another challenge: mounting the single non driven rear omni wheel at a similar height. The solution was to use the identical motor bracket and motor but leave the motor unpowered and remove its internal gearing. The motor assembly would both serve as a passive support for the omni wheel and allow it to rotate freely. This maintained the correct wheel height and eliminated the need to fit separate pillow blocks and bearings into the limited space available. One can see this in the photos above.\n\nFour motors were tested to select a suitably matched drive pair. The third motor was kept for a spare. And the worst performing motor was dismantled and repurposed as a passive bearing support for the omni wheel.", relatedProjectId: "dc-motor-comparison-selection" },
+          { heading: "Chassis", text: "Robbot retains Bobbot's overall chassis dimensions, but uses aluminium extrusion. The construction is covered in [Robbot Drivetrain Design](project:robbot-drivetrain-design)." },
+          { heading: "Drivetrain", text: "Robbot uses the same two wheel drive configuration with a rear omni wheel as Bobbot, but aims to achieve comparable performance at lower cost. The motor choices, mounting brackets and omni wheel support are explained in [Robbot Drivetrain Design](project:robbot-drivetrain-design)." },
           { heading: "Gripper", text: "Future project." },
           { heading: "Lift", text: "Future project." },
           { heading: "Electrical and Controls", text: "Robbot uses the easily removable Electrical Control Panel. This panel is shared between all robot builds." }
@@ -1713,7 +1877,7 @@ window.PORTFOLIO_DATA = {
       status: "",
       targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "cad",
-      categoryOrder: 6,
+      categoryOrder: 9,
       image: "assets/images/Shooter CAD.png",
       imageAlt: "CAD illustration — replace with the second design project",
       summary: "Shooter design for FTC BioBuzz Pollen.",
@@ -1752,7 +1916,7 @@ window.PORTFOLIO_DATA = {
       status: "planned",
       targetStart: "", // Optional provisional date or period; hidden when empty.
       category: "cad",
-      categoryOrder: 5,
+      categoryOrder: 8,
       image: "assets/images/Watch_This_Space.png",
       imageAlt: "",
       summary: "Using sensor feedback to detect contact and reduce failed pickups.",

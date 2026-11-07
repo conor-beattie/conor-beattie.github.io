@@ -221,7 +221,7 @@
   function projectCard(p) {
     return `<article class="project-card${nonempty(p.image) ? '' : ' project-card--no-image'}">
       ${nonempty(p.image) ? `<a href="${projectUrl(p)}" class="project-card__image" aria-label="View project: ${text(p.title)}">
-        <img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy" />
+        <img src="${img(p.image)}" alt="${text(p.imageAlt || p.title)}" loading="lazy"${nonempty(p.imageFallback) ? ` data-fallback-src="${img(p.imageFallback)}"` : ''}${p.imageOptional === true ? ' data-optional-cover="true"' : ''} />
       </a>` : ''}
       <div class="project-card__body">
         <div class="eyebrow-row">${optionalCardText(kindLabel(p), "eyebrow", "span")}${previewDrafts && !isPublished(p) ? '<span class="preview-draft-tag">DRAFT</span>' : ''}</div>
@@ -749,24 +749,27 @@
       const valid = type === "video" ? /\.(mp4|webm)$/i.test(path) : /\.(png|jpe?g|webp|svg)$/i.test(path);
       if (!valid) return null;
       const poster = localMedia(item.poster);
-      return { ...item, type, path, poster: /\.(png|jpe?g|webp|svg)$/i.test(poster) ? poster : "" };
+      return { ...item, type, path, optional: item.optional === true, poster: /\.(png|jpe?g|webp|svg)$/i.test(poster) ? poster : "" };
     }).filter(Boolean);
     if (!media.length) return "";
     const figures = media.map(item => {
       const caption = nonempty(item.caption) ? `<figcaption>${text(item.caption)}</figcaption>` : "";
       const wideClass = item.wide === true ? " project-evidence-item--wide" : "";
+      const pendingClass = item.optional ? " project-evidence-item--pending" : "";
+      const readyAttribute = item.optional ? ' data-optional-evidence-resource="true"' : '';
       if (item.type === "video") {
         const name = text(item.alt || item.caption || "Project demonstration video");
         const mime = /\.webm$/i.test(item.path) ? "video/webm" : "video/mp4";
-        return `<figure class="project-evidence-item${wideClass}"><video controls playsinline preload="metadata" aria-label="${name}"${item.poster ? ` poster="${item.poster}"` : ""}><source src="${item.path}" type="${mime}"/>Your browser does not support HTML video.</video>${caption}</figure>`;
+        return `<figure class="project-evidence-item${wideClass}${pendingClass}"><video controls playsinline preload="metadata" aria-label="${name}"${readyAttribute}${item.poster ? ` poster="${item.poster}"` : ""}><source src="${item.path}" type="${mime}"/>Your browser does not support HTML video.</video>${caption}</figure>`;
       }
       const description = text(item.alt || item.caption || fallbackLabel);
-      return `<figure class="project-evidence-item${wideClass}"><a href="${item.path}" target="_blank" rel="noopener noreferrer" aria-label="Open full size image: ${description}"><img src="${item.path}" alt="${description}" loading="lazy" decoding="async" /></a>${caption}</figure>`;
+      return `<figure class="project-evidence-item${wideClass}${pendingClass}"><a href="${item.path}" target="_blank" rel="noopener noreferrer" aria-label="Open full size image: ${description}"><img src="${item.path}" alt="${description}" loading="${item.optional ? 'eager' : 'lazy'}" decoding="async"${readyAttribute} /></a>${caption}</figure>`;
     }).join("");
-    return `<div class="project-evidence-grid${media.length === 1 ? " project-evidence-grid--single" : ""}">${figures}</div>`;
+    return `<div class="project-evidence-grid${media.length === 1 ? " project-evidence-grid--single" : ""}${media.every(item => item.optional) ? " project-evidence-grid--pending" : ""}">${figures}</div>`;
   }
 
-  const sectionLayouts = (entry, extras={}, cites=citationContext(entry)) => STANDARD_SECTIONS.map(([key,label]) => {
+  const sectionLayouts = (entry, extras={}, cites=citationContext(entry)) => STANDARD_SECTIONS.map(([key,defaultLabel]) => {
+    const label = nonempty(entry.sectionLabels?.[key]) ? entry.sectionLabels[key] : defaultLabel;
     if (key === 'resultsDiscussion') {
       // Keep all previous results, commentary and nested details intact, as
       // distinguishable subsections of one report section on every project.
@@ -972,7 +975,7 @@
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
         <h1>${text(p.title)}</h1>${optionalDetailText(p.subtitle,"project-intro__subtitle")}${optionalDetailText(p.hideDetailStatus ? "" : displayProgress(p),"project-intro__status")}${targetStartMarkup(p,true)}${optionalDetailText(p.hideDetailSummary ? "" : p.summary,"project-lede")}${skillTags(p)}</div>
-      ${nonempty(p.image) ? `<figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"/>`}${p.hideImageCaption ? "" : `<figcaption>${text(p.imageCaption||p.title)}</figcaption>`}</figure>` : ''}
+      ${nonempty(p.image) ? `<figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"${nonempty(p.imageFallback) ? ` data-fallback-src="${img(p.imageFallback)}"` : ''}${p.imageOptional === true ? ' data-optional-cover="true"' : ''}/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"${nonempty(p.imageFallback) ? ` data-fallback-src="${img(p.imageFallback)}"` : ''}${p.imageOptional === true ? ' data-optional-cover="true"' : ''}/>`}${p.hideImageCaption ? "" : `<figcaption>${text(p.imageCaption||p.title)}</figcaption>`}</figure>` : ''}
       ${engineeringSummary(p)}
       ${detailLayout(rows)}
     </div>`;
@@ -1142,6 +1145,37 @@
     root.innerHTML = `<div class="container"><div class="project-intro"><p class="eyebrow">UNLISTED WORKSPACE</p><h1>Development Projects</h1><p>Preview published and draft projects on the live website. Selecting projects or using site navigation keeps development mode active until you choose <strong>Exit to public view</strong> above. Drafts are unlisted, not private: their content remains accessible in the public repository and to anyone with a preview URL.</p></div><div class="project-grid">${data.projects.map(devCard).join("")}</div></div>`;
   }
 
+  // A missing cover image falls back to the existing robot photograph, or is
+  // hidden when optional. No empty/broken photo is shown in a published card.
+  document.addEventListener("error", event => {
+    const element = event.target;
+    if (element?.tagName !== "IMG") return;
+    const fallback = element.getAttribute("data-fallback-src");
+    if (fallback) {
+      element.removeAttribute("data-fallback-src");
+      element.src = fallback;
+      return;
+    }
+    if (element.getAttribute("data-optional-cover") === "true") {
+      const holder = element.closest(".project-card__image, .project-hero-media");
+      const card = holder?.closest(".project-card");
+      holder?.remove();
+      card?.classList.add("project-card--no-image");
+    }
+  }, true);
+
+  // Named CAD / photo / video slots are already wired up in project data.
+  // They appear as soon as the correct assets are uploaded to GitHub Pages.
+  const showOptionalEvidence = element => {
+    if (element?.getAttribute?.("data-optional-evidence-resource") !== "true") return;
+    const figure = element.closest(".project-evidence-item--pending");
+    if (!figure) return;
+    figure.classList.remove("project-evidence-item--pending");
+    figure.closest(".project-evidence-grid")?.classList.remove("project-evidence-grid--pending");
+  };
+  document.addEventListener("load", event => showOptionalEvidence(event.target), true);
+  document.addEventListener("loadedmetadata", event => showOptionalEvidence(event.target), true);
+
   document.addEventListener("DOMContentLoaded", () => {
     siteShell();
     const page = document.body.dataset.page;
@@ -1151,7 +1185,12 @@
     if (page === "software-detail") softwareDetail();
     if (page === "algorithms") algorithmsPage();
     if (page === "algorithm") algorithmDetail();
-    if (page === "project") projectDetail();
+    if (page === "project") {
+      projectDetail();
+      // Load metadata for optional local video slots even while the video
+      // remains hidden waiting for its named file to be uploaded.
+      $$("video[data-optional-evidence-resource]").forEach(video => video.load());
+    }
     if (page === "about") about();
     if (page === "development") development();
     if (page === "timeline") timeline();
