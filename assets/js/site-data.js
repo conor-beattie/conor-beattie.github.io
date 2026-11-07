@@ -123,7 +123,7 @@ window.PORTFOLIO_DATA = {
       {
         title: "Autonomous Navigation",
         projects: [
-          { title: "Stage 2 — Reactive Control", start: 0, end: 2, status: "in-progress", projectId: "robot-navigation-architecture" },
+          { title: "Stage 2 — Visual Navigation", start: 0, end: 2, status: "in-progress", projectId: "robot-navigation-architecture" },
           { title: "Stage 3 — Path Planning", start: 3, end: 6, status: "planned", projectId: "robot-navigation-architecture" },
           { title: "Stage 4 — LiDAR / SLAM", start: 7, end: 11, status: "longer-term", projectId: "robot-navigation-architecture" }
         ]
@@ -690,10 +690,11 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
+      relatedProjectIds: ["mechanical-gripper", "bobbot-lift-original-cad-design", "gripper-contact-surfaces", "robotic-gripper-grasp-detection", "gripper-contact-sensing", "electrical-control-panel"],
       sectionDetails: {
         introduction: [
           { heading: "Drivetrain/Chassis", text: "I am not sure what inspired me to build a 2wd plus rear omni wheel robot. But the design seems to work well for my intended purpose and has worked well from the start with minimal modification. The drivetrain/chassis is built mostly from goBILDA parts that I had on hand from a [previous robot kit](project:gobilda-decode-starter-bot)." },
-          { heading: "Gripper", text: "The original gripper (which predates Bobbot) was designed for picking up cones. It has been modified slightly since then mainly by making it wider and adding some rubber bands to increase contact resistance. The gripper is now being overhauled completely to something more suitable for grasping cardboard boxes. You can find the progress of these improvements via the Gripper Studies ([Part 1](project:gripper-contact-surfaces), [Part 2](project:robotic-gripper-grasp-detection), and [Part 3](project:gripper-contact-sensing))." },
+          { heading: "Gripper", text: "The [original gripper](project:mechanical-gripper) (which predates Bobbot) was designed for picking up cones. It has been modified slightly since then mainly by making it wider and adding some rubber bands to increase contact resistance. The gripper is now being overhauled completely to something more suitable for grasping cardboard boxes. You can find the progress of these improvements via the Gripper Studies ([Part 1](project:gripper-contact-surfaces), [Part 2](project:robotic-gripper-grasp-detection), and [Part 3](project:gripper-contact-sensing))." },
           { heading: "Lift", text: "The original lift (after its initial iterations) still exists. You can find out more about the history of the lift [here](project:bobbot-lift-original-cad-design)." },
           { heading: "Autonomous Control", text: "The autonomous control is based around the premise of the the Student Robotics competition. Essentially navigating around an arena and picking up and delivering carboard boxes all with the guide of April Tags. The navigational aspects of the control logic is designed to evolve via 4 stages. I am currently working through Stage 2 in the progression. Stage 3 will still continue to utilize the arena model. But Stage 4 will likely see Bobbot navigating around the house possibly staying within lanes similar to F1Tenth (albeit at very low speeds.)" }
         ]
@@ -713,7 +714,7 @@ window.PORTFOLIO_DATA = {
       },
       published: true,
       featuredOrder: 7,
-      title: "Bobbot Gripper — Original CAD Design",
+      title: "Gripper — Original CAD Design",
       subtitle: "",
       status: "",
       targetStart: "", // Optional provisional date or period; hidden when empty.
@@ -721,14 +722,14 @@ window.PORTFOLIO_DATA = {
       categoryOrder: 1,
       image: "assets/images/gripper_bobbot.png",
       imageAlt: "CAD model of the original Bobbot gripper",
-      summary: "The original gripper built for Bobbot with an angled grip and over center linkage ",
+      summary: "The original gripper with an angled grip and over center linkage",
       tags: ["CAD", "Mechanisms", "Design"],
       date: "",
-      relatedProjectIds: ["robotic-gripper-grasp-detection", "gripper-contact-surfaces", "autonomous-mobile-robot"],
+      relatedProjectIds: ["autonomous-mobile-robot", "gripper-contact-surfaces", "robotic-gripper-grasp-detection", "gripper-contact-sensing"],
       contribution: "",
       sections: {
         abstract: "",
-        introduction: "This is the first gripper design for the autonomous mobile robot Bobbot. The jaws are mounted on a dual gear rack and close around a cardboard cube approximately 150 mm across.",
+        introduction: "The original gripper (which predates Bobbot) was designed for picking up cones. It has been modified slightly since then mainly by making it wider and adding some rubber bands to increase contact resistance. The gripper is now being overhauled completely to something more suitable for grasping cardboard boxes. You can find the progress of these improvements via the Gripper Studies ([Part 1](project:gripper-contact-surfaces), [Part 2](project:robotic-gripper-grasp-detection), and [Part 3](project:gripper-contact-sensing)).",
         materialsMethods: "",
         projectPlan: "",
         results: "",
@@ -749,14 +750,15 @@ window.PORTFOLIO_DATA = {
       status: "",
       category: "cad",
       categoryOrder: 2,
-      image: "",
-      imageAlt: "",
-      summary: "Original lift mechanism for Bobbot.",
+      image: "assets/images/gripper_bobbot.png",
+      imageAlt: "Temporary cover using the original gripper CAD image until a lift drawing is added",
+      hideImageCaption: true,
+      summary: "Original design with dual gear racks and without a ball bearing carriage",
       skills: [],
       relatedProjectIds: ["autonomous-mobile-robot"],
       sections: {
         abstract: "",
-        introduction: "",
+        introduction: "The original CAD lift design shows two parallel gear racks. However, keeping both racks accurately aligned proved difficult, and even small misalignments caused binding and excessive friction.\n\nThe design evolved into a single gear rack combined with a ball bearing carriage. The gear rack provided the linear actuation while the ball bearing carriage operated as the gantry.",
         materialsMethods: "",
         projectPlan: "",
         results: "",
@@ -1149,7 +1151,7 @@ window.PORTFOLIO_DATA = {
       },
       published: true,
       featuredOrder: 2,
-      relatedProjectIds: ["robot-io-mapping", "mobile-robot-power-distribution"],
+      relatedProjectIds: ["robot-io-mapping", "mobile-robot-power-distribution", "electrical-control-panel"],
       title: "Modular Robot I/O & TeleOp Controller",
       subtitle: "",
       status: "",
@@ -1214,7 +1216,7 @@ window.PORTFOLIO_DATA = {
       summary: "A common io.* interface that lets robot software command motors, read sensors and use controllers without knowing which hardware backend implements each operation.",
       tags: ["Robot I/O", "Hardware Abstraction", "Python", "Interface Design"],
       date: "",
-      relatedProjectIds: ["robot-control-electronics", "mobile-robot-power-distribution"],
+      relatedProjectIds: ["robot-control-electronics", "mobile-robot-power-distribution", "electrical-control-panel"],
       sectionLabels: {
         architecture: "Control and I/O architecture",
         hardware: "The io.* interface contract",
@@ -1291,7 +1293,7 @@ window.PORTFOLIO_DATA = {
       summary: "A one line electrical design showing how a mobile robot distributes battery power to its drive motors, control electronics, cameras, servos and future expansion systems.",
       tags: ["Electrical Design", "Power Distribution", "System Integration", "Robotics"],
       date: "",
-      relatedProjectIds: ["robot-control-electronics", "robot-io-mapping"],
+      relatedProjectIds: ["robot-control-electronics", "robot-io-mapping", "electrical-control-panel"],
       sectionLabels: {
         architecture: "Electrical architecture",
         hardware: "Power distribution & protection",
@@ -1337,7 +1339,7 @@ window.PORTFOLIO_DATA = {
       imageAlt: "",
       summary: "",
       skills: [],
-      relatedProjectIds: [],
+      relatedProjectIds: ["gobilda-decode-starter-bot", "autonomous-mobile-robot", "robotics-project-2", "robot-control-electronics", "robot-io-mapping", "mobile-robot-power-distribution"],
       sections: {
         abstract: "",
         introduction: "",
@@ -1587,6 +1589,47 @@ window.PORTFOLIO_DATA = {
       links: { github: "", cad: "", video: "", downloads: "" }
     },
     {
+      id: "biobuzz-proof-of-concept",
+      published: true,
+      title: "BioBuzz Robot — Proof of Concept",
+      subtitle: "Personal Home Project",
+      status: "",
+      category: "robotics",
+      categoryOrder: 7,
+      image: "assets/images/biobuzz-proof-of-concept-front.jpg",
+      imageAlt: "Front view of a home built BioBuzz proof of concept robot with orange printed mechanisms, a rubber band assembly, metal frame and yellow ball",
+      hideImageCaption: true,
+      summary: "A personal home prototype bringing together a shooter, passive ball sorter, rubber band lift, intake ramp and bumper guards to explore their mechanical integration.",
+      skills: ["Mechanical Assembly", "Prototyping", "Systems Integration"],
+      projectPhotos: [
+        {
+          src: "assets/images/biobuzz-proof-of-concept-overhead.jpg",
+          alt: "Overhead view of the prototype showing the ball channel, orange printed components and the larger and smaller balls",
+          caption: "Overhead view of the mechanisms and their layout"
+        }
+      ],
+      relatedProjectIds: ["cad-project-2"],
+      sections: {
+        abstract: "",
+        introduction: "This was a personal home project inspired by the FTC BioBuzz challenge, separate from the school FTC team. I assembled a proof of concept robot to demonstrate the mechanical ideas and explore how the mechanisms could work together on one chassis. It was not intended to be a finished competition robot.",
+        materialsMethods: "",
+        projectPlan: "",
+        results: "",
+        discussion: "",
+        conclusions: "",
+        lessonsLearned: "",
+        relatedProjects: "",
+        references: ""
+      },
+      sectionDetails: {
+        introduction: [
+          { heading: "Mechanisms", text: "The prototype combines a shooter, rubber band lift, passive ball sorter, intake ramp and bumper guards. The passive ball sorter uses the difference in ball sizes: the smaller ball can pass through an opening while the larger ball cannot. The intake ramp and bumper guards were simple 3D printed parts that were iterated as part of the build." }
+        ]
+      },
+      references: [],
+      links: { github: "", cad: "", video: "", downloads: "" }
+    },
+    {
       id: "gobilda-decode-starter-bot",
       // Demonstrated skills only. Existing legacy tags below are retained for reference, not shown.
       skills: ["Mechanical Assembly", "Electrical Design"],
@@ -1608,7 +1651,7 @@ window.PORTFOLIO_DATA = {
       imageCaption: "goBILDA DECODE Starter Bot with removable electrical panel",
       summary: "An FTC style starter robot assembled from the goBILDA StarterBot Assembly Manual and Starter Kit components. It's Electrical Panel was built separately and was built to be removable and integrate with other robots.",
       tags: ["Robotics", "goBILDA", "FTC", "Robot Assembly"],
-      relatedProjectIds: ["mobile-robot-power-distribution", "robot-control-electronics"],
+      relatedProjectIds: ["mobile-robot-power-distribution", "robot-control-electronics", "electrical-control-panel"],
       date: "",
       sections: {
         abstract: "",
@@ -1661,6 +1704,7 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
+      relatedProjectIds: ["biobuzz-proof-of-concept"],
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
     },

@@ -802,6 +802,17 @@
     const inv=p.investigation||{}, surface=p.surfaceStudy||{};
     const extra={};
     const add=(key,content)=>{ if(content) extra[key]=(extra[key]||"")+content; };
+    // Optional supporting project photographs, without duplicating the hero cover.
+    const projectPhotos = (Array.isArray(p.projectPhotos) ? p.projectPhotos : [])
+      .filter(photo => localMedia(photo.src))
+      .slice(0, 4);
+    if (projectPhotos.length) {
+      const figures = projectPhotos.map(photo => {
+        const file = localMedia(photo.src);
+        return `<figure class="investigation-media"><a href="${file}" target="_blank" rel="noopener noreferrer" aria-label="Open full size project photograph"><img src="${file}" alt="${text(photo.alt || photo.caption || p.title)}" loading="lazy" /></a>${photo.caption ? `<figcaption>${text(photo.caption)}</figcaption>` : ''}</figure>`;
+      }).join('');
+      add('introduction', `<div class="investigation-media-grid">${figures}</div>`);
+    }
     const structured=(key,label,fn)=>nestedEvidence(fn(p,key,label,cites),label);
     if(inv.criteria?.length) add('introduction',structured('investigation-criteria','Engineering criteria',investigationSection));
     if(surface.benchmarks?.length) add('introduction',structured('surface-benchmarks','Success criteria against rubber bands',surfaceStudySection));
