@@ -177,7 +177,7 @@
   );
   // Do not show a robot/algorithm link until a real video has been assigned.
   const localMedia = (path) => {
-    if (!path || typeof path !== "string" || !/^assets\/(videos|images)\/[a-zA-Z0-9_ ./()-]+\.(mp4|webm|webp|png|jpe?g)$/i.test(path) || path.includes("..")) return "";
+    if (!path || typeof path !== "string" || !/^assets\/(videos|images)\/[a-zA-Z0-9_ ./()-]+\.(mp4|webm|webp|png|jpe?g|svg)$/i.test(path) || path.includes("..")) return "";
     return escape(path);
   };
 
@@ -736,6 +736,36 @@
     return {inline, bibliography, paragraphs:value=>String(value || "").split(/\n\s*\n/).filter(Boolean)
       .map(par=>`<p>${inline(par)}</p>`).join("")};
   }
+  // Optional media attached to an ordinary report section or one named subsection.
+  // project.sectionMedia.introduction = [{type:"image",src:"assets/images/example.jpg",caption:"..."}]
+  // project.sectionDetails.materialsMethods[0].media = [{type:"video",src:"assets/videos/example.mp4"}]
+  // Existing projectPhotos and printPhotos continue to work independently.
+  function projectEvidence(items, fallbackLabel = "Project media") {
+    if (!Array.isArray(items)) return "";
+    const media = items.map(item => {
+      if (!item || typeof item !== "object") return null;
+      const type = item.type === "video" ? "video" : "image";
+      const path = localMedia(item.src);
+      const valid = type === "video" ? /\.(mp4|webm)$/i.test(path) : /\.(png|jpe?g|webp|svg)$/i.test(path);
+      if (!valid) return null;
+      const poster = localMedia(item.poster);
+      return { ...item, type, path, poster: /\.(png|jpe?g|webp|svg)$/i.test(poster) ? poster : "" };
+    }).filter(Boolean);
+    if (!media.length) return "";
+    const figures = media.map(item => {
+      const caption = nonempty(item.caption) ? `<figcaption>${text(item.caption)}</figcaption>` : "";
+      const wideClass = item.wide === true ? " project-evidence-item--wide" : "";
+      if (item.type === "video") {
+        const name = text(item.alt || item.caption || "Project demonstration video");
+        const mime = /\.webm$/i.test(item.path) ? "video/webm" : "video/mp4";
+        return `<figure class="project-evidence-item${wideClass}"><video controls playsinline preload="metadata" aria-label="${name}"${item.poster ? ` poster="${item.poster}"` : ""}><source src="${item.path}" type="${mime}"/>Your browser does not support HTML video.</video>${caption}</figure>`;
+      }
+      const description = text(item.alt || item.caption || fallbackLabel);
+      return `<figure class="project-evidence-item${wideClass}"><a href="${item.path}" target="_blank" rel="noopener noreferrer" aria-label="Open full size image: ${description}"><img src="${item.path}" alt="${description}" loading="lazy" decoding="async" /></a>${caption}</figure>`;
+    }).join("");
+    return `<div class="project-evidence-grid${media.length === 1 ? " project-evidence-grid--single" : ""}">${figures}</div>`;
+  }
+
   const sectionLayouts = (entry, extras={}, cites=citationContext(entry)) => STANDARD_SECTIONS.map(([key,label]) => {
     if (key === 'resultsDiscussion') {
       // Keep all previous results, commentary and nested details intact, as
@@ -743,13 +773,15 @@
       // Legacy #results and #discussion deep links also remain valid.
       const combined = ['resultsDiscussion', 'results', 'discussion'].map(sourceKey => {
         const body = hasText(entry.sections?.[sourceKey]) ? cites.paragraphs(entry.sections[sourceKey]) : '';
+        const sectionImages = projectEvidence(entry.sectionMedia?.[sourceKey], entry.title || 'Project media');
         const nested = (entry.sectionDetails?.[sourceKey] || []).map(item =>
-          subheading(item.heading || 'Further details', cites.paragraphs(item.text || ''))).join('');
+          subheading(item.heading || 'Further details', cites.paragraphs(item.text || '') +
+            projectEvidence(item.media, item.heading || entry.title || 'Project media'))).join('');
         const extra = extras[sourceKey] || '';
-        if (!body && !nested && !extra) return '';
-        if (sourceKey === 'resultsDiscussion') return body + nested + extra;
+        if (!body && !sectionImages && !nested && !extra) return '';
+        if (sourceKey === 'resultsDiscussion') return body + sectionImages + nested + extra;
         const label = sourceKey === 'results' ? 'Results' : 'Discussion';
-        return `<div class="standard-subsection" id="${sourceKey}"><h3>${label}</h3>${body}${nested}${extra}</div>`;
+        return `<div class="standard-subsection" id="${sourceKey}"><h3>${label}</h3>${body}${sectionImages}${nested}${extra}</div>`;
       }).join('');
       return {key,label,content:combined + (extras.resultsDiscussion || '')};
     }
@@ -759,10 +791,12 @@
       // matching heading, not below all headings in the parent report section.
       const linkedProject = item.relatedProjectId && visibleProjects().find(p => p.id === item.relatedProjectId);
       const projectLink = linkedProject ? `<p><a class="inline-project-link" href="${projectUrl(linkedProject)}">${text(linkedProject.title)} ↗</a></p>` : '';
-      const content = cites.paragraphs(item.text || '') + projectLink + (extras[`${key}:${item.id}`] || '');
+      const content = cites.paragraphs(item.text || '') + projectLink + (extras[`${key}:${item.id}`] || '') +
+        projectEvidence(item.media, item.heading || entry.title || 'Project media');
       return subheading(item.heading || "Further details", content, item.showEmpty === true);
     }).join("");
-    const content = base + details + (extras[key] || "") + (key==='references' ? cites.bibliography() : '');
+    const content = base + projectEvidence(entry.sectionMedia?.[key], entry.title || 'Project media') +
+      details + (extras[key] || "") + (key==='references' ? cites.bibliography() : '');
     return {key,label,content};
   }).filter(row => row.content.trim());
   const sectionMarkup = rows => rows.map(row => sectionShell(row.key,row.label,row.content)).join("");

@@ -21,6 +21,34 @@
   8. For 3D prints: keep `image` as the CAD render and list 1–4 real print photos
      under `printPhotos`. Optional printer settings belong in `printDetails`.
 
+  PROJECT SECTION PHOTOS, CAD IMAGES & VIDEOS (optional):
+  Place media below a standard section's main text using a `sectionMedia` object,
+  or immediately below a named subsection's text using that `sectionDetails` item.
+  No media are shown unless these fields are supplied. Existing projectPhotos,
+  printPhotos and cover images are unchanged.
+
+  Example fields within a single projects[] entry:
+    sectionMedia: {
+      introduction: [
+        {type: "image", src: "assets/images/robot-overview.jpg", alt: "Robot", caption: "Overall view"}
+      ]
+    },
+    sectionDetails: {
+      materialsMethods: [
+        {heading: "Motor mounts", text: "The mounting design...", media: [
+          {type: "image", src: "assets/images/original-mount.jpg", caption: "Original mounting"},
+          {type: "image", src: "assets/images/revised-mount.jpg", caption: "Revised mounting"},
+          {type: "video", src: "assets/videos/drivetrain-test.mp4", caption: "Running prototype"}
+        ]}
+      ]
+    },
+
+  Image types: .jpg, .jpeg, .png, .webp, .svg, stored in assets/images/.
+  Video types: .mp4, .webm, stored in assets/videos/. Optional `poster` is an image
+  path for a video. Set `wide: true` to span both columns; a single item fills
+  the available width automatically. Captions and alt text are optional.
+  Click any image to view it full size in a separate browser tab.
+
   CATEGORY LISTING ORDER:
   Use categoryOrder: 1, 2, 3, ... independently in each project category
   (Robotics, CAD, Fabrication, Electronics) or for software entries.
