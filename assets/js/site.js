@@ -693,10 +693,33 @@
     // Gripper study retains its established numbered bibliography (1–6) when adding source 7.
     const ordered = entry.preserveReferenceOrder ? all : [...first.map(id=>byId.get(id)),...all.filter(r=>!observed.has(r.id))];
     const numbers = new Map(ordered.map((r,i)=>[r.id,i+1]));
-    const inline = value => text(value).replace(marker, (token,rawId) => {
-      const id=rawId.toLowerCase(), n=numbers.get(id);
-      return n ? `<a class="inline-citation" href="#ref-${id}" aria-label="Reference ${n}">[${n}]</a>` : token;
-    });
+    // Inline text links are opt-in: [label](project:project-id) for published
+    // portfolio entries or [label](https://example.org/) for external sources.
+    // This keeps ordinary project writing escaped, including citation markers.
+    const inline = value => {
+      const raw = String(value || "");
+      const linkPattern = /\[([^\]\n]+)\]\((project:[a-z0-9-]+|https:\/\/[^\s)]+)\)/gi;
+      const citationText = chunk => text(chunk).replace(marker, (token,rawId) => {
+        const id=rawId.toLowerCase(), n=numbers.get(id);
+        return n ? `<a class="inline-citation" href="#ref-${id}" aria-label="Reference ${n}">[${n}]</a>` : token;
+      });
+      let out = '', pos = 0;
+      for (const match of raw.matchAll(linkPattern)) {
+        out += citationText(raw.slice(pos, match.index));
+        const target = match[2];
+        let url = '', external = false;
+        if (target.startsWith('project:')) {
+          const project = visibleProjects().find(p => p.id === target.slice(8));
+          if (project) url = projectUrl(project);
+        } else {
+          url = href(target);
+          external = Boolean(url);
+        }
+        out += url ? `<a class="inline-project-link" href="${text(url)}"${external ? ' target="_blank" rel="noopener noreferrer"' : ''}>${text(match[1])}</a>` : text(match[1]);
+        pos = match.index + match[0].length;
+      }
+      return out + citationText(raw.slice(pos));
+    };
     const citedCount = first.length;
     const itemHtml = (ref,n) => {
       const url=href(ref.url);
