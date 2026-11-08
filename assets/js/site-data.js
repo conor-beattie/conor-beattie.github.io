@@ -1525,6 +1525,12 @@ window.PORTFOLIO_DATA = {
       image: "assets/images/electrical_panel_top.jpg",
       imageAlt: "Removable electrical control panel with a motor controller, Arduino Mega, power distribution and wiring in a plastic enclosure",
       hideImageCaption: true,
+      // The project detail view compares the early shoebox prototype with the finished panel.
+      // Project listing cards continue to use image above, unchanged.
+      detailCompareImage: "assets/images/electrical_panel_prototype.jpg",
+      detailCompareAlt: "Early electronics prototype assembled in a cardboard shoebox",
+      detailCompareCaption: "Initial shoebox prototype",
+      detailMainCaption: "Removable electrical control panel",
       summary: "A removable electrical control panel used across different robot builds to reuse existing electrical components and simplify power distribution, control and wiring.",
       skills: [],
       relatedProjectIds: ["gobilda-decode-starter-bot", "autonomous-mobile-robot", "robotics-project-2", "robot-control-electronics", "robot-io-mapping", "mobile-robot-power-distribution"],
@@ -1542,13 +1548,6 @@ window.PORTFOLIO_DATA = {
       },
       sectionDetails: {
         introduction: [
-          {
-            heading: "Prototype Build",
-            text: "This earlier prototype shows the electronics assembled inside a shoebox before development of the removable electrical control panel.",
-            media: [
-              { type: "image", src: "assets/images/electrical_panel_prototype.jpg", alt: "Prototype electronics layout assembled inside a shoebox before being transferred to the removable electrical control panel", caption: "Initial shoebox prototype of the electrical control system" }
-            ]
-          },
           {
             heading: "Used on Different Robots",
             text: "The photographs show the same removable panel on Bobbot, the goBILDA DECODE Starter Bot and a smaller mecanum test robot.",

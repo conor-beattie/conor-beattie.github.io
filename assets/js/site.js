@@ -966,6 +966,20 @@
     return extras;
   }
 
+  // Opt-in two-image comparison on a project detail page. The listing card
+  // continues to use the original project image without modification.
+  function projectHero(p) {
+    if (!nonempty(p.image)) return '';
+    if (nonempty(p.detailCompareImage)) {
+      const figure = (src, alt, caption) => `<figure class="project-hero-comparison-item"><a href="${img(src)}" target="_blank" rel="noopener noreferrer" aria-label="Open full size image: ${text(alt)}"><img src="${img(src)}" alt="${text(alt)}"/></a>${nonempty(caption) ? `<figcaption>${text(caption)}</figcaption>` : ''}</figure>`;
+      return `<div class="project-hero-comparison" role="group" aria-label="Initial prototype and completed control panel">
+        ${figure(p.detailCompareImage, p.detailCompareAlt || 'Initial prototype', p.detailCompareCaption || '')}
+        ${figure(p.image, p.imageAlt || p.title, p.detailMainCaption || '')}
+      </div>`;
+    }
+    return `<figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"${nonempty(p.imageFallback) ? ` data-fallback-src="${img(p.imageFallback)}"` : ''}${p.imageOptional === true ? ' data-optional-cover="true"' : ''}/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"${nonempty(p.imageFallback) ? ` data-fallback-src="${img(p.imageFallback)}"` : ''}${p.imageOptional === true ? ' data-optional-cover="true"' : ''}/>`}${p.hideImageCaption ? "" : `<figcaption>${text(p.imageCaption||p.title)}</figcaption>`}</figure>`;
+  }
+
   function projectDetail() {
     const id=new URLSearchParams(location.search).get('id');
     const p=visibleProjects().find(item=>item.id===id);
@@ -979,7 +993,7 @@
       <div class="breadcrumb"><a href="projects.html">Projects</a><span aria-hidden="true">/</span><span>${text(p.title)}</span></div>
       <div class="project-intro"><p class="eyebrow">${text(kindLabel(p))} ${p.date ? '· '+text(p.date):''} ${previewDrafts&&!isPublished(p) ? ' · DRAFT':''}</p>
         <h1>${text(p.title)}</h1>${optionalDetailText(p.subtitle,"project-intro__subtitle")}${optionalDetailText(p.hideDetailStatus ? "" : displayProgress(p),"project-intro__status")}${targetStartMarkup(p,true)}${optionalDetailText(p.hideDetailSummary ? "" : p.summary,"project-lede")}${skillTags(p)}</div>
-      ${nonempty(p.image) ? `<figure class="project-hero-media ${p.imageFullSize ? 'project-hero-media--diagram':''}">${p.imageFullSize ? `<a href="${img(p.image)}" target="_blank" rel="noopener noreferrer" aria-label="Open the diagram at full size"><img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"${nonempty(p.imageFallback) ? ` data-fallback-src="${img(p.imageFallback)}"` : ''}${p.imageOptional === true ? ' data-optional-cover="true"' : ''}/></a>` : `<img src="${img(p.image)}" alt="${text(p.imageAlt||p.title)}"${nonempty(p.imageFallback) ? ` data-fallback-src="${img(p.imageFallback)}"` : ''}${p.imageOptional === true ? ' data-optional-cover="true"' : ''}/>`}${p.hideImageCaption ? "" : `<figcaption>${text(p.imageCaption||p.title)}</figcaption>`}</figure>` : ''}
+      ${projectHero(p)}
       ${engineeringSummary(p)}
       ${detailLayout(rows)}
     </div>`;

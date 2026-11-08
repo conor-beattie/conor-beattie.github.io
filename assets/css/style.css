@@ -814,3 +814,14 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 .project-evidence-grid--single .project-evidence-item img { max-height:650px; }
 .project-evidence-item figcaption { padding:9px 12px; color:var(--muted); font-size:.78rem; line-height:1.5; }
 @media (max-width:600px) { .project-evidence-grid { grid-template-columns:minmax(0,1fr); gap:12px; } }
+
+
+/* Optional before-and-after project hero. Used only by entries with detailCompareImage.
+   The project card keeps its normal single cover photograph. */
+.project-hero-comparison { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:0 0 68px; }
+.project-hero-comparison-item { margin:0; min-width:0; border:1px solid var(--line); border-radius:var(--radius); background:var(--wash); overflow:hidden; }
+.project-hero-comparison-item a { display:block; }
+.project-hero-comparison-item a:focus-visible { outline:3px solid var(--accent-deep); outline-offset:-3px; }
+.project-hero-comparison-item img { width:100%; aspect-ratio:4/3; object-fit:contain; display:block; }
+.project-hero-comparison-item figcaption { padding:10px 13px; color:var(--muted); font-size:.8rem; }
+@media (max-width:650px) { .project-hero-comparison { grid-template-columns:1fr; margin-bottom:42px; } }
