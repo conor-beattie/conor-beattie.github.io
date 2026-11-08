@@ -1522,14 +1522,15 @@ window.PORTFOLIO_DATA = {
       status: "",
       category: "electronics",
       categoryOrder: 4,
-      image: "", // Add the plastic-panel cover photograph here when available.
-      imageAlt: "",
-      summary: "",
+      image: "assets/images/electrical_panel_top.jpg",
+      imageAlt: "Removable electrical control panel with a motor controller, Arduino Mega, power distribution and wiring in a plastic enclosure",
+      hideImageCaption: true,
+      summary: "A removable electrical control panel used across different robot builds for power distribution, control and wiring integration.",
       skills: [],
       relatedProjectIds: ["gobilda-decode-starter-bot", "autonomous-mobile-robot", "robotics-project-2", "robot-control-electronics", "robot-io-mapping", "mobile-robot-power-distribution"],
       sections: {
         abstract: "",
-        introduction: "",
+        introduction: "This removable electrical control panel was built to share the control electronics, power distribution and wiring connections between different robot builds. Keeping the electronics together in one plastic enclosure makes it easier to transfer the system rather than building a separate control panel for each robot.",
         materialsMethods: "",
         projectPlan: "",
         results: "",
@@ -1538,6 +1539,19 @@ window.PORTFOLIO_DATA = {
         lessonsLearned: "",
         relatedProjects: "",
         references: ""
+      },
+      sectionDetails: {
+        introduction: [
+          {
+            heading: "Used on Different Robots",
+            text: "The photographs show the same removable panel on Bobbot, the goBILDA DECODE Starter Bot and a smaller mecanum test robot.",
+            media: [
+              { type: "image", src: "assets/images/electrical_panel_bobbot.jpeg", alt: "Removable electrical control panel mounted on Bobbot", caption: "Electrical Control Panel on Bobbot" },
+              { type: "image", src: "assets/images/IMG_2734 goBilda Decode Starter Bot.jpg", alt: "goBILDA DECODE Starter Bot with the removable electrical panel", caption: "Electrical Control Panel on the goBILDA DECODE Starter Bot" },
+              { type: "image", src: "assets/images/electrical_panel_small_robot.png", alt: "Removable electrical control panel on a smaller mecanum test robot", caption: "Electrical Control Panel on a smaller test robot" }
+            ]
+          }
+        ]
       },
       references: [],
       links: { github: "", cad: "", video: "", downloads: "" }
