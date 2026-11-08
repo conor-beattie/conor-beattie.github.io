@@ -1558,7 +1558,7 @@ window.PORTFOLIO_DATA = {
       targetStart: "",
       category: "robotics",
       categoryOrder: 2,
-      image: ""assets/images/robbot_drivetrain_photo.jpg",
+      image: "assets/images/robbot_drivetrain_photo.jpg",
       imageAlt: "Photograph of the Robbot autonomous mobile robot chassis",
       summary: "Robbot is Bobbot on a budget. Robbot is designed to extract as much of Bobbot’s functionality and performance as possible without the cost.",
       tags: ["Robotics", "Mechanical Design", "Control"],
