@@ -734,7 +734,7 @@ window.PORTFOLIO_DATA = {
       id: "bobbot-drivetrain-design",
       published: true,
       title: "Bobbot Drivetrain Design",
-      subtitle: "Original Chassis and Drivetrain",
+      subtitle: "",
       status: "",
       category: "cad",
       categoryOrder: 1,
@@ -742,7 +742,7 @@ window.PORTFOLIO_DATA = {
       imageFallback: "assets/images/IMG_2627 Bobbot.jpg",
       imageAlt: "Bobbot two wheel drive chassis and rear omni wheel",
       hideImageCaption: true,
-      summary: "The original two wheel drive platform, documenting chassis geometry, wheel placement and a goBILDA based construction that has required little modification.",
+      summary: "The original 3 wheel chassis with 2WD and a rear omni.",
       skills: ["CAD", "Mechanical Design", "Mechanical Assembly"],
       relatedProjectIds: ["autonomous-mobile-robot", "robbot-drivetrain-design", "gobilda-decode-starter-bot"],
       sections: {
@@ -758,24 +758,20 @@ window.PORTFOLIO_DATA = {
         materialsMethods: [
           {
             heading: "Chassis Dimensions and Layout",
-            text: "The chassis geometry establishes the positions of the two drive wheels and rear omni wheel, along with the space available for the lift, gripper and electrical components. The main measurements to document are the overall length and width, wheel positions, cross member layout and ground clearance.",
+            text: "The chassis dimensions were largely determined by the available goBILDA channel lengths and the desire to keep the overall robot, including its gripper, within 500 mm. The spacing of the crossbeams was selected to accommodate the lift and provide enough internal space for other components. The chassis and drivetrain have the following dimensions.",
+            specifications: [
+              { label: "Longitudinal channels", value: "360 mm" },
+              { label: "Crossbeam channels", value: "240 mm" },
+              { label: "Wheel diameter", value: "96 mm" },
+              { label: "Track width", value: "276 mm" },
+              { label: "Longitudinal wheel spacing", value: "216 mm" },
+              { label: "Ground clearance", value: "24 mm" }
+            ],
+            postText: "The two drive wheels are powered by goBILDA Yellow Jacket motors through a pair of 30 tooth spur gears for each wheel. The gears provide a 1:1 ratio, while their 24 mm centre distance matches the hole spacing of the goBILDA channels. The gear arrangement also allows each wheel to be mounted on a separate axle supported by bearings on both sides, rather than directly on the motor output shaft. This allows the motor to transmit torque while the wheel axle bearings support most of the wheel loads, reducing bending forces on the motor shaft.",
             media: [
-              {type: "image", src: "assets/images/bobbot_drivetrain_CAD.png", alt: "Bobbot chassis CAD drawing and dimensions", caption: "Chassis CAD and key dimensions", optional: true}
-            ]
-          },
-          {
-            heading: "Construction",
-            text: "The frame uses mainly goBILDA parts already available from an earlier robot kit. This provided a practical starting platform for the robot's mechanical experiments without first needing a custom chassis.",
-            media: [
-              {type: "image", src: "assets/images/bobbot_drivetrain_photo.jpg", alt: "Assembled Bobbot chassis", caption: "Assembled drivetrain", optional: true},
-              {type: "image", src: "assets/images/bobbot_drivetrain_mounts.jpg", alt: "Bobbot drive motor and wheel mounting", caption: "Wheel and motor mounting", optional: true}
-            ]
-          },
-          {
-            heading: "Ground Clearance",
-            text: "The original Bobbot drivetrain had approximately 24 mm of ground clearance. This provided a useful reference when developing the lower clearance arrangement on Robbot.",
-            media: [
-              {type: "image", src: "assets/images/bobbot_drivetrain_omni.jpg", alt: "Bobbot rear omni wheel and its support", caption: "Rear omni wheel support", optional: true}
+              {type: "image", src: "assets/images/bobbot_drivetrain_CAD.png", alt: "Bobbot chassis CAD drawing and dimensions", caption: "Dimensioned chassis CAD", optional: true},
+              {type: "image", src: "assets/images/bobbot_drivetrain_mounts.jpg", alt: "Underside view of Bobbot's wheel and motor assembly", caption: "Underside drivetrain construction"},
+              {type: "image", src: "assets/images/bobbot_drivetrain_omni.jpg", alt: "Bobbot rear omni wheel mounted between two goBILDA channels", caption: "Rear omni wheel support"}
             ]
           }
         ]
@@ -787,7 +783,7 @@ window.PORTFOLIO_DATA = {
       id: "robbot-drivetrain-design",
       published: true,
       title: "Robbot Drivetrain Design",
-      subtitle: "Reducing the Cost of the Original Platform",
+      subtitle: "",
       status: "",
       category: "cad",
       categoryOrder: 2,
@@ -795,7 +791,7 @@ window.PORTFOLIO_DATA = {
       imageFallback: "assets/images/IMG_2756_robbot.jpg",
       imageAlt: "Robbot drivetrain made from aluminium extrusion and geared motors",
       hideImageCaption: true,
-      summary: "Recreating Bobbot's two wheel drive layout at lower cost through aluminium extrusion, alternative motors, revised mounting geometry and a reused omni wheel support.",
+      summary: "Recreating Bobbot's two wheel drive layout at lower cost.",
       skills: ["Mechanical Design", "Component Selection", "Mechanical Adaptation"],
       relatedProjectIds: ["robotics-project-2", "bobbot-drivetrain-design", "dc-motor-comparison-selection"],
       sections: {
@@ -813,8 +809,8 @@ window.PORTFOLIO_DATA = {
             heading: "Chassis",
             text: "Robbot retains the same chassis dimensions as Bobbot and a similar cross member design, but uses 2020 aluminium extrusion. Preliminary testing suggests this construction is satisfactory. The initial Robbot build used 2040 extrusion, which added weight and cost. It also raised the Robbot's floor clearance which raised the centre of mass which wasn't ideal.",
             media: [
-              {type: "image", src: "assets/images/robbot_drivetrain_CAD.png", alt: "Robbot chassis CAD model", caption: "Chassis and drivetrain CAD", optional: true},
-              {type: "image", src: "assets/images/robbot_drivetrain_photo.jpg", alt: "Assembled Robbot drivetrain", caption: "Robbot chassis and drivetrain", optional: true}
+              {type: "image", src: "assets/images/robbot_drivetrain_2040.jpg", alt: "Early Robbot chassis built with 2040 aluminium extrusion", caption: "Original 2040 chassis"},
+              {type: "image", src: "assets/images/robbot_drivetrain_CAD.png", alt: "Robbot chassis CAD model", caption: "Chassis and drivetrain CAD", optional: true}
             ]
           },
           {
@@ -825,9 +821,8 @@ window.PORTFOLIO_DATA = {
             heading: "Motor Mounting and Ground Clearance",
             text: "The initial motor brackets could only be mounted below the chassis, increasing ground clearance. Previous testing had shown that, for this style of robot, lower ground clearance improved overall performance. However, the risk of the chassis bottoming out limited ground clearance to a minimum of 10 mm.\n\nAfter researching alternative motor mounts and calculating their vertical offsets, I found brackets that allowed the motors to be mounted above the chassis instead reducing ground clearance to 12 mm. This was an improvement over Bobbot's 24 mm clearance. However, this introduced another challenge: mounting the single non driven rear omni wheel at a similar height. The solution was to use the identical motor bracket and motor but leave the motor unpowered and remove its internal gearing. The motor assembly would both serve as a passive support for the omni wheel and allow it to rotate freely. This maintained the correct wheel height and eliminated the need to fit separate pillow blocks and bearings into the limited space available.",
             media: [
-              {type: "image", src: "assets/images/robbot_drivetrain_mount_original.jpg", alt: "Original Robbot motor bracket mounted beneath chassis", caption: "Original motor mounting", optional: true},
-              {type: "image", src: "assets/images/robbot_drivetrain_mount_revised.jpg", alt: "Revised Robbot motor bracket mounted above chassis", caption: "Revised motor mounting", optional: true},
-              {type: "image", src: "assets/images/robbot_drivetrain_omni.jpg", alt: "Unpowered motor assembly supporting Robbot rear omni wheel", caption: "Repurposed motor supporting the omni wheel", optional: true}
+              {type: "image", src: "assets/images/robbot_drivetrain_mount_original.jpg", alt: "Initial 2020 chassis with high motor mounting profile and greater ground clearance", caption: "Initial 2020 mounting"},
+              {type: "image", src: "assets/images/robbot_drivetrain_mount_revised.jpg", alt: "Revised 2020 chassis with low mounting profile and visible rear omni wheel", caption: "Revised 2020 mounting and rear omni wheel"}
             ]
           },
           {
@@ -844,7 +839,7 @@ window.PORTFOLIO_DATA = {
       id: "parallel-plate-drivetrain-design",
       published: true,
       title: "Parallel Plate Drivetrain Design",
-      subtitle: "goBILDA Belt Drive Proof of Concept",
+      subtitle: "",
       status: "",
       category: "cad",
       categoryOrder: 3,
@@ -852,7 +847,7 @@ window.PORTFOLIO_DATA = {
       imageOptional: true,
       imageAlt: "Physical parallel plate mecanum drivetrain proof of concept",
       hideImageCaption: true,
-      summary: "Exploring a parallel plate mecanum drivetrain made with standard goBILDA components instead of custom cut aluminium, with pulley geometry designed around available belt lengths.",
+      summary: "Exploring a parallel plate mecanum drivetrain made with standard goBILDA components instead of a custom cut aluminium plate.",
       skills: ["CAD", "Mechanism Design", "Prototyping", "Mechanical Design"],
       relatedProjectIds: ["printed-mechanisms"],
       sections: {

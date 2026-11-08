@@ -794,7 +794,11 @@
       // matching heading, not below all headings in the parent report section.
       const linkedProject = item.relatedProjectId && visibleProjects().find(p => p.id === item.relatedProjectId);
       const projectLink = linkedProject ? `<p><a class="inline-project-link" href="${projectUrl(linkedProject)}">${text(linkedProject.title)} ↗</a></p>` : '';
-      const content = cites.paragraphs(item.text || '') + projectLink + (extras[`${key}:${item.id}`] || '') +
+      const specs = Array.isArray(item.specifications) && item.specifications.length
+        ? `<div class="investigation-table-wrap"><table class="investigation-table" aria-label="${text(item.heading || 'Specifications')}"><tbody>${item.specifications.map(row=>`<tr><th scope="row">${text(row.label)}</th><td>${text(row.value)}</td></tr>`).join('')}</tbody></table></div>`
+        : '';
+      const content = cites.paragraphs(item.text || '') + specs + cites.paragraphs(item.postText || '') +
+        projectLink + (extras[`${key}:${item.id}`] || '') +
         projectEvidence(item.media, item.heading || entry.title || 'Project media');
       return subheading(item.heading || "Further details", content, item.showEmpty === true);
     }).join("");
