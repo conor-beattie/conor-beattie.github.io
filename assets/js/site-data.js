@@ -1543,6 +1543,13 @@ window.PORTFOLIO_DATA = {
       sectionDetails: {
         introduction: [
           {
+            heading: "Prototype Build",
+            text: "This earlier prototype shows the electronics assembled inside a shoebox before development of the removable electrical control panel.",
+            media: [
+              { type: "image", src: "assets/images/electrical_panel_prototype.jpg", alt: "Prototype electronics layout assembled inside a shoebox before being transferred to the removable electrical control panel", caption: "Initial shoebox prototype of the electrical control system" }
+            ]
+          },
+          {
             heading: "Used on Different Robots",
             text: "The photographs show the same removable panel on Bobbot, the goBILDA DECODE Starter Bot and a smaller mecanum test robot.",
             media: [
