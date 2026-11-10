@@ -1098,7 +1098,7 @@ window.PORTFOLIO_DATA = {
         projectPlan: [
           { id: "schedule", heading: "Schedule", text: "" },
           { id: "equipment", heading: "Equipment List", text: "" },
-          { id: "budget", heading: "Budget", text: "Costs for filament, test materials and any outsourced printing will be recorded as they are established." },
+          { id: "budget", heading: "Budget", text: "" },
           { id: "contingencies", heading: "Contingencies", text: "" },
         ],
       },
@@ -1127,6 +1127,15 @@ window.PORTFOLIO_DATA = {
         { name: "Bobbot with gripper", notes: "" },
         { name: "150 mm cardboard box", notes: "" },
         { name: "Regulated power supply", notes: "consistent and reliable power source" }
+      ],
+      // Estimated material costs for Part 1. Total is calculated by the page renderer.
+      projectBudget: [
+        { item: "TPU 90A — 150 g", cost: 5 },
+        { item: "SEBS 90A — 100 g", cost: 9 },
+        { item: "PEBA 90A — 100 g", cost: 8 },
+        { item: "Silicone 30A", cost: 2 },
+        { item: "Outsourced TPU 60–70A", cost: 30 },
+        { item: "cardboard boxes", cost: 1 }
       ],
       projectContingencies: [
         { risk: "TPU 60A–70A cannot be outsourced cost effectively", response: "Use an alternative filament from the material list." },

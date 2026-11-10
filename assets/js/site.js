@@ -942,6 +942,14 @@
       const rows = p.projectEquipment.map(item=>`<tr><th scope="row">${text(item.name)}</th><td>${text(item.notes)}</td></tr>`).join('');
       add('projectPlan:equipment',`<div class="investigation-table-wrap" role="region" aria-label="Equipment and materials" tabindex="0"><table class="investigation-table project-equipment"><thead><tr><th scope="col">Equipment / materials</th><th scope="col">Notes</th></tr></thead><tbody>${rows}</tbody></table></div>`);
     }
+    // A compact cost table, used only when a project supplies estimated budget items.
+    if (Array.isArray(p.projectBudget) && p.projectBudget.length) {
+      const cost = value => Number(value);
+      const rows = p.projectBudget.map(item => `<tr><td>${text(item.item)}</td><td>£${text(item.cost)}</td></tr>`).join('');
+      const total = p.projectBudget.reduce((sum,item) => sum + cost(item.cost), 0);
+      const budget = `<div class="investigation-table-wrap" role="region" aria-label="Estimated project budget" tabindex="0"><table class="investigation-table project-budget"><thead><tr><th scope="col">Item</th><th scope="col">Estimated cost</th></tr></thead><tbody>${rows}<tr><th scope="row">Total</th><td><strong>£${text(total)}</strong></td></tr></tbody></table></div>`;
+      add('projectPlan:budget', budget);
+    }
     if (Array.isArray(p.projectContingencies) && p.projectContingencies.length) {
       const rows=p.projectContingencies.map(item=>`<tr><th scope="row">${text(item.risk)}</th><td>${text(item.response)}</td></tr>`).join('');
       add('projectPlan:contingencies',`<div class="investigation-table-wrap"><table class="investigation-table project-contingencies"><thead><tr><th scope="col">Risk</th><th scope="col">Contingency</th></tr></thead><tbody>${rows}</tbody></table></div>`);
