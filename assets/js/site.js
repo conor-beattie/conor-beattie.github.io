@@ -689,6 +689,7 @@
     // cite specific journal papers without adding prose just to force a cite.
     (entry.surfaceStudy?.materials || []).forEach(row => Object.values(row).forEach(scan));
     (entry.materialSelection || []).forEach(row => row.forEach(scan));
+    (entry.scopeLimitations || []).forEach(row => { if (row.referenceId) scan(`[@${row.referenceId}]`); });
     (entry.surfaceStudy?.tests || []).forEach(row => Object.values(row).forEach(scan));
     // Gripper study retains its established numbered bibliography (1–6) when adding source 7.
     const ordered = entry.preserveReferenceOrder ? all : [...first.map(id=>byId.get(id)),...all.filter(r=>!observed.has(r.id))];
@@ -860,6 +861,20 @@
     if(surface.materials?.length) add('materialsMethods',structured('surface-materials','Material shortlist and decisions',surfaceStudySection));
     // Compact material-choice table for the contact-pad study. Textual research
     // citations use the same numbered bibliography as the report prose.
+    // Phase 1 / optional Phase 2 research and scope, displayed at the end of Introduction.
+    if (p.id === 'gripper-contact-surfaces' && p.scopeLimitations?.length) {
+      const headers = ['Variable', 'Phase', 'Research findings / limitation acknowledged', 'Scope and Limitations *', 'Source'];
+      const heading = headers.map(h => `<th scope="col">${text(h)}</th>`).join('');
+      const rows = p.scopeLimitations.map(item => {
+        const source = item.referenceId
+          ? `<a href="#ref-${text(item.referenceId)}">${text(item.source || '')}</a>`
+          : text(item.source || '');
+        return `<tr><td>${text(item.variable)}</td><td>${text(item.phase)}</td><td>${text(item.finding)}</td><td>${text(item.scope)}</td><td>${source}</td></tr>`;
+      }).join('');
+      const table = `<div class="investigation-table-wrap surface-table-wrap" role="region" aria-label="Study scope and limitations" tabindex="0"><table class="investigation-table surface-table scope-limitations-table"><thead><tr>${heading}</tr></thead><tbody>${rows}</tbody></table></div>`;
+      const notes = (p.scopeLimitationsNotes || []).map(note => `<p class="scope-limitations-note">${text(note)}</p>`).join('');
+      add('introduction:scope-limitations', table + notes);
+    }
     if(p.materialSelection?.length) {
       const headers=['Status','Product Description','Material','P1S Compatible','Reasoning','Reference'];
       const heading=headers.map(h=>`<th scope="col">${text(h)}</th>`).join('');

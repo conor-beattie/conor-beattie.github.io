@@ -1060,6 +1060,20 @@ window.PORTFOLIO_DATA = {
         relatedProjects: "",
         references: "",
       },
+      // Short A3/webpage scope table; keep the student's wording unchanged.
+      scopeLimitations: [
+        { variable: "Elastomer Type", phase: "1", finding: "Different contact materials produce different gripping forces.", scope: "Compare TPU, SEBS, PEBA and silicone against rubber bands.", source: "" },
+        { variable: "Elastomer Durometer", phase: "1", finding: "TPU 60A produced higher friction but greater wear than TPU 95A.", scope: "Compare TPU 90A with TPU 60–70A.", source: "Stoica (2025)", referenceId: "stoica-2025" },
+        { variable: "Infill Density", phase: "2**", finding: "Increasing infill from 70% to 100% increased friction and wear for TPU 60A, but reduced friction for TPU 95A.", scope: "Change infill density to 50% or 100%", source: "Stoica (2025)", referenceId: "stoica-2025" },
+        { variable: "Pad Thickness", phase: "2**", finding: "Thickness affects pad compliance.", scope: "Modify pad thickness", source: "" },
+        { variable: "Pad Geometry", phase: "2**", finding: "Performance may be improved via pad geometry", scope: "Add internal voids or flexible ribs", source: "Kargar & Berselli (2024) Fig 2a", referenceId: "kargar-berselli-2024" },
+        { variable: "Surface Texture", phase: "2**", finding: "Flat pads produced higher friction; Textured pads showed greater dynamic grip stability.", scope: "Add a spiral protrusion pattern", source: "Kargar & Berselli (2025) Fig 3", referenceId: "kargar-berselli-2025" },
+        { variable: "Wear Resistance", phase: "Future", finding: "TPU 60A produced higher friction but more wear than TPU 95A.", scope: "Test for wear resistance", source: "Stoica (2025)", referenceId: "stoica-2025" },
+      ],
+      scopeLimitationsNotes: [
+        "* Where applicable Phase 2 modifications utilises methods and/or designs in the cited study",
+        "** Phase 2: Select one suitable modification for each of the two best-performing pads, based on Phase 1 results. Variables not selected remain future work."
+      ],
       // Proposal-stage outline. Short provisional text is replaced by actual evidence as work progresses.
       sectionDetails: {
         introduction: [
@@ -1067,6 +1081,11 @@ window.PORTFOLIO_DATA = {
           { id: "literature", heading: "Literature Review", text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. Published studies were reviewed to identify 3D-printable filaments that have shown promising results in gripping research. These studies are cited in the References & Resources section. Kargar & Berselli (2025) tested 10A and 30A silicone pads with different surface patterns. They found that flat pads generally had higher friction, but some patterns reduced stick–slip [@kargar-berselli-2025]." },
           { id: "aim", heading: "Study Aim", text: "This project will investigate whether different gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance." },
           { id: "requirements", heading: "Objectives", text: "The objectives are to identify suitable flexible contact pad materials, compare their frictional and gripping performance against the existing rubber bands, and investigate how material type and durometer affect the results.\n\nMaterial selection will focus on filaments compatible with the available Bambu Lab P1S printer, with outsourcing considered for softer materials that cannot be printed reliably." },
+          { id: "scope-limitations", heading: "Scope and Limitations", text: "The study will be carried out in two phases. An overview of the materials, scope and study limitations is provided below.",
+            media: [
+              { type: "image", src: "assets/images/gripper-pad-angled-ribs-kargar-2024.png", alt: "Angled-rib soft pad beneath a rigid core, Kargar and Berselli 2024 Figure 2a", caption: "Angled-rib pad design — Kargar & Berselli (2024), Fig. 2a" },
+              { type: "image", src: "assets/images/gripper-pad-spiral-protrusion-kargar-2025.png", alt: "Spiral protrusion pattern in a silicone gripping pad, Kargar and Berselli 2025 Figure 3", caption: "Spiral protrusion pattern — Kargar & Berselli (2025), Fig. 3" },
+            ] },
         ],
         materialsMethods: [
           { id: "material-selection", heading: "Material Selection", text: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers.\n\nA 30A silicone sheet from goBILDA has also been selected, avoiding the need for moulding." },
@@ -1264,6 +1283,11 @@ window.PORTFOLIO_DATA = {
                 "id": "kargar-berselli-2025",
                 "name": "Kargar & Berselli (2025) — Enhancing gripping stability for delicate object handling: frictional insights into textured soft pads",
                 "url": "https://doi.org/10.1007/s00170-025-16625-1"
+        },
+        {
+                "id": "kargar-berselli-2024",
+                "name": "Kargar & Berselli (2024) — Soft pads for robotic limbs: achieving human finger compliance via finite element optimization",
+                "url": "https://doi.org/10.1007/s00170-024-14086-6"
         }
 ],
             "links": {
