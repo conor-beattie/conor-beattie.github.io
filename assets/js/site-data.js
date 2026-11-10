@@ -1062,13 +1062,14 @@ window.PORTFOLIO_DATA = {
       },
       // Short A3/webpage scope table; keep the student's wording unchanged.
       scopeLimitations: [
-        { variable: "Elastomer Type", phase: "1", finding: "Different contact materials produce different gripping forces.", scope: "Compare TPU, SEBS, PEBA and silicone against rubber bands.", source: "" },
+        { variable: "Elastomer Type", phase: "1", finding: "Different contact materials produce different gripping forces.", scope: "Compare TPU, TPE, PEBA and adhesive backed silicone against rubber bands.", source: "" },
         { variable: "Elastomer Durometer", phase: "1", finding: "TPU 60A produced higher friction but greater wear than TPU 95A.", scope: "Compare TPU 90A with TPU 60–70A.", source: "Stoica (2025)", referenceId: "stoica-2025" },
         { variable: "Infill Density", phase: "2**", finding: "Increasing infill from 70% to 100% increased friction and wear for TPU 60A, but reduced friction for TPU 95A.", scope: "Change infill density to 50% or 100%", source: "Stoica (2025)", referenceId: "stoica-2025" },
         { variable: "Pad Thickness", phase: "2**", finding: "Thickness affects pad compliance.", scope: "Modify pad thickness", source: "" },
         { variable: "Pad Geometry", phase: "2**", finding: "Performance may be improved via pad geometry", scope: "Add internal voids or flexible ribs", source: "Kargar & Berselli (2024) Fig 2a", referenceId: "kargar-berselli-2024" },
         { variable: "Surface Texture", phase: "2**", finding: "Flat pads produced higher friction; Textured pads showed greater dynamic grip stability.", scope: "Add a spiral protrusion pattern", source: "Kargar & Berselli (2025) Fig 3", referenceId: "kargar-berselli-2025" },
         { variable: "Wear Resistance", phase: "Future", finding: "TPU 60A produced higher friction but more wear than TPU 95A.", scope: "Test for wear resistance", source: "Stoica (2025)", referenceId: "stoica-2025" },
+        { variable: "Elastomer Type", phase: "Future", finding: "Silicone molded pads", scope: "Compare to adhesive backed silicone", source: "" },
       ],
       scopeLimitationsNotes: [
         "* Where applicable Phase 2 modifications utilises methods and/or designs in the cited study",
@@ -1077,8 +1078,8 @@ window.PORTFOLIO_DATA = {
       // Proposal-stage outline. Short provisional text is replaced by actual evidence as work progresses.
       sectionDetails: {
         introduction: [
-          { id: "background", heading: "Background", text: "The original Bobbot gripper was a good first pass, but its angled grip and over centre linkage were better suited to other applications (for instance, it does a great job picking up and delivering Pot Noodle containers). For small cardboard boxes, some immediate modifications were required. As a quick fix, the grip was widened and rubber bands were added to improve frictional contact. Now it is time to make a more permanent change, undertaken in three phases. The first phase, and the purpose of this project, is to find a more suitable gripper material." },
-          { id: "literature", heading: "Literature Review", text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D-printable materials have become more viable. Published studies were reviewed to identify 3D-printable filaments that have shown promising results in gripping research. These studies are cited in the References & Resources section. Kargar & Berselli (2025) tested 10A and 30A silicone pads with different surface patterns. They found that flat pads generally had higher friction, but some patterns reduced stick–slip [@kargar-berselli-2025]." },
+          { id: "background", heading: "Background", text: "Robotic grippers are widely used in industry to pick up, hold and move objects. Their contact surfaces play an important role in gripping performance, providing friction while reducing the risk of slipping or damaging objects.\n\nMy robot currently uses rubber bands on its gripper jaws to improve its grip on cardboard boxes. These were intended as a temporary solution, and this project investigates more suitable elastomer contact pads." },
+          { id: "literature", heading: "Literature Review", text: "Gripping surfaces are often made of soft materials with high coefficients of friction [@wikipedia-robot-end-effector]. Historically, rubber and silicone have been common choices, but in recent years 3D printable materials have become more viable. Published studies were reviewed to identify 3D printable filaments that have shown promising results in gripping research." },
           { id: "aim", heading: "Study Aim", text: "This project will investigate whether different gripper pads can improve pickup and retention reliability compared with rubber bands, and how material type and durometer affect performance." },
           { id: "requirements", heading: "Objectives", text: "The objectives are to identify suitable flexible contact pad materials, compare their frictional and gripping performance against the existing rubber bands, and investigate how material type and durometer affect the results.\n\nMaterial selection will focus on filaments compatible with the available Bambu Lab P1S printer, with outsourcing considered for softer materials that cannot be printed reliably." },
           { id: "scope-limitations", heading: "Scope and Limitations", text: "The study will be carried out in two phases. An overview of the materials, scope and study limitations is provided below.",
@@ -1088,13 +1089,13 @@ window.PORTFOLIO_DATA = {
             ] },
         ],
         materialsMethods: [
-          { id: "material-selection", heading: "Material Selection", text: "Published studies were reviewed to identify 3D-printable filaments previously used in gripping research. These studies are cited in the table below. Material testing follows two pathways: comparing TPU with other filament materials, and comparing TPU at different durometers.\n\nA 30A silicone sheet from goBILDA has also been selected, avoiding the need for moulding." },
-          { id: "pad-design", heading: "Contact-Pad Design", text: "An initial L-shaped contact pad was designed in CAD to fit the existing goBILDA gripper plate. A first prototype was 3D printed and fitted to check the dimensions, mounting arrangement and overall fit before material testing.",
+          { id: "material-selection", heading: "Material Selection", text: "Published studies were reviewed to identify 3D printable filaments previously tested in gripping research. Phase 1 testing focuses on testing and comparing various 3D filaments at 90A durometer as well as comparing the filaments to adhesive backed silicone. Additionally, TPU will be tested at both 90A and 60-70A to compare how durometer affects gripping. Silicone molds remain a future testing possibility. The table below details the selection process." },
+          { id: "pad-design", heading: "Contact-Pad Design", text: "An initial contact pad was designed in CAD to fit the existing goBILDA plate. A first prototype was 3D printed and fitted to check the dimensions and overall fit before material testing.",
             media: [
               { type: "image", src: "assets/images/gripper_contact_pad_CAD.png", alt: "CAD drawing of the initial L-shaped contact pad and its mounting arrangement", caption: "Initial contact pad CAD design" },
               { type: "image", src: "assets/images/gripper_contact_pad_prototype.jpg", alt: "First 3D printed L-shaped contact pad fitted to the existing goBILDA gripper plate", caption: "First printed prototype fitted to the gripper" }
             ] },
-          { id: "manufacturing", heading: "3D Printed Specimens", text: "Specimen dimensions, print orientation and material specific printing settings will be recorded when the samples are manufactured." },
+          { id: "manufacturing", heading: "3D Printed Specimens", text: "Specimens will be printed at 70% infill. This initial starting point is based on a similar study on belts and cardboard where TPU 60A at 70% gave the best overall balance of friction and wear (Stoica, 2025) [@stoica-2025].\n\nSpecimens will be printed using a 0.4 mm nozzle, 0.2 mm layer height and consistent infill pattern, wall settings and print orientation. Nozzle temperature, bed temperature, printing speed and flow rate will follow the filament manufacturers' recommendations" },
           { id: "sliding-friction", heading: "Static Friction Test", text: "A horizontal pull test will measure sliding resistance between each candidate material and cardboard. The normal load and the method of applying the pull will be defined before testing.\n\nSimilar friction tests were carried out by Kargar & Berselli (2025) [@kargar-berselli-2025], while Stoica et al. (2025) investigated friction in cardboard handling systems [@stoica-2025].\n\nAlternative — Sliding Friction Test: If static-friction results do not explain slipping during robot tests, sliding friction testing may also be used to investigate stick–slip [@kargar-berselli-2025]." },
           { id: "gripper-pull-out", heading: "Gripper Pull-Out Test", text: "Each pad will be fitted to the existing gripper, and the force required to pull the cardboard object from the jaws will be measured under controlled gripping conditions.\n\nSimilar pull out tests were carried out by Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]." },
           { id: "robot-pickup", heading: "Robot Pickup Test", text: "Repeated pickup, carry and dropoff trials will assess the reliability of the complete gripping operation. The number of attempts and criteria for success will be set before testing.\n\nAl-Hadithi et al. (2026) demonstrated repeated gripping operations [@al-hadithi-2026], while Liu & Hung (2022) investigated gripper payload [@liu-hung-2022]." },
@@ -1117,6 +1118,8 @@ window.PORTFOLIO_DATA = {
         { activity: "Prepare Remaining Specimens", stage: 5 },
         { activity: "Outsource TPU 60–70A", stage: 5 },
         { activity: "Final Testing of All Materials", stage: 6 },
+        { activity: "Phase 2 Modifications CAD Design", stage: 7 },
+        { activity: "Test Phase 2 Filaments", stage: 8 },
       ],
       projectEquipment: [
         { name: "Bambu Lab P1S", notes: "Modified to attach directly to Filament Dryer and bypass AMS" },

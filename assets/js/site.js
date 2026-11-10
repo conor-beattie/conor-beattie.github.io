@@ -926,16 +926,17 @@
     // Proposal-stage schedule and risk planning live alongside other journal sections.
     // Table contents are editable project data; the bars represent STAGES, not dates.
     if (Array.isArray(p.projectSchedule) && p.projectSchedule.length) {
+      const stageCount = Math.max(6, ...p.projectSchedule.map(task => Number(task.stage) || 0));
       const scheduleRows = p.projectSchedule.map(task => {
         const activity=text(task.activity);
         const stage=Number(task.stage);
-        const cells=Array.from({length:6},(_,i)=> {
+        const cells=Array.from({length:stageCount},(_,i)=> {
           const active=i+1 === stage;
           return `<td class="project-schedule__cell${active ? ' project-schedule__cell--active' : ''}">${active ? `<span class="project-schedule__bar" aria-label="Stage ${i+1}"><span class="visually-hidden">Stage ${i+1}</span></span>` : ''}</td>`;
         }).join('');
         return `<tr><th scope="row">${activity}</th>${cells}</tr>`;
       }).join('');
-      const schedule = `<div class="project-schedule-wrap" role="region" aria-label="Project schedule" tabindex="0"><table class="project-schedule"><thead><tr><th scope="col" rowspan="2">Activity</th><th scope="colgroup" colspan="6" class="project-schedule__stage-heading">Stage</th></tr><tr>${Array.from({length:6},(_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${scheduleRows}</tbody></table></div>`;
+      const schedule = `<div class="project-schedule-wrap" role="region" aria-label="Project schedule" tabindex="0"><table class="project-schedule"><thead><tr><th scope="col" rowspan="2">Activity</th><th scope="colgroup" colspan="${stageCount}" class="project-schedule__stage-heading">Stage</th></tr><tr>${Array.from({length:stageCount},(_,i)=>`<th scope="col">${i+1}</th>`).join('')}</tr></thead><tbody>${scheduleRows}</tbody></table></div>`;
       add('projectPlan:schedule', schedule);
     }
     if (Array.isArray(p.projectEquipment) && p.projectEquipment.length) {

@@ -695,17 +695,17 @@ body[data-page="home"] .hero h1:last-child { margin-bottom: 0; }
 .detail-section .portfolio-references p { font-size:.88rem; margin:5px 0 0; }
 .portfolio-references li:target { background:var(--wash); border-radius:4px; }
 
-/* Proposal schedule: six sequential stages, with each work item placed in one stage. */
+/* Proposal schedule: sequential stages, with each work item placed in one stage. */
 .project-schedule-wrap { width:100%; max-width:100%; overflow-x:auto; margin:15px 0 20px; border:1px solid var(--line); border-radius:10px; }
 .project-schedule { width:100%; min-width:810px; border-collapse:separate; border-spacing:0; table-layout:fixed; font-size:.87rem; }
 .project-schedule thead th { background:var(--wash); color:var(--ink); font-size:.85rem; font-weight:700; text-align:center; padding:10px 4px; border-bottom:1px solid var(--line); }
 .project-schedule thead tr:first-child th { padding:12px 10px 6px; }
-.project-schedule thead th:first-child { width:38%; text-align:left; padding-left:16px !important; }
+.project-schedule thead tr:first-child th:first-child { width:38%; text-align:left; padding-left:16px !important; }
 .project-schedule__stage-heading { letter-spacing:.035em; }
 .project-schedule tbody th { font-weight:500; text-align:left; padding:12px 15px; color:var(--ink); line-height:1.4; }
 .project-schedule tbody tr:nth-child(even) { background:var(--wash); }
 .project-schedule tbody tr + tr > * { border-top:1px solid var(--line); }
-.project-schedule__cell { width:10.33%; text-align:center; padding:7px 5px; border-left:1px solid var(--line); }
+.project-schedule__cell { text-align:center; padding:7px 5px; border-left:1px solid var(--line); }
 .project-schedule__bar { display:block; min-height:19px; height:100%; border-radius:5px; background:linear-gradient(90deg, var(--accent-deep), var(--accent)); box-shadow:0 1px 2px rgba(0,0,0,.08); }
 .project-schedule__cell--active { padding:6px 5px; }
 .project-contingencies { min-width:670px; }
