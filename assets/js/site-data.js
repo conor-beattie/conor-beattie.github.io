@@ -1255,11 +1255,6 @@ window.PORTFOLIO_DATA = {
                 "url": "https://en.wikipedia.org/wiki/Robot_end_effector#Levels_of_force"
         },
         {
-                "id": "al-hadithi-2026",
-                "name": "Al-Hadithi, Pastor & Lin (2026) — Design and Experimental Validation of a 3D-Printed Hybrid Soft Robotic Gripper for Delicate Object Manipulation",
-                "url": "https://doi.org/10.3390/electronics15040848"
-        },
-        {
                 "id": "bialek-rybarczyk-2023",
                 "name": "Białek & Rybarczyk (2023) — A Comparative Study of Different Fingertips on the Object Pulling Forces in Robotic Gripper Jaws",
                 "url": "https://doi.org/10.3390/app13031247"
