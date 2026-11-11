@@ -1099,6 +1099,13 @@ window.PORTFOLIO_DATA = {
           { id: "sliding-friction", heading: "Static Friction Test", text: "A horizontal pull test will measure sliding resistance between each candidate material and cardboard. The normal load and the method of applying the pull will be defined before testing.\n\nSimilar friction tests were carried out by Kargar & Berselli (2025)" },
           { id: "gripper-pull-out", heading: "Gripper Pull-Out Test", text: "Each pad will be fitted to the existing gripper, and the force required to pull the cardboard object from the jaws will be measured under controlled gripping conditions.\n\nSimilar pull out tests were carried out by Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]." },
           { id: "robot-pickup", heading: "Robot Pickup Test", text: "Repeated pickup, carry and dropoff trials will assess the reliability of the complete gripping operation. The number of attempts and criteria for success will be set before testing." },
+          { id: "safety", heading: "Safety", text: "", table: {
+            headers: ["Hazard", "Precaution"],
+            rows: [
+              ["Filament emissions", "No selected filament was identified as presenting an unusually high emission risk. Standard ventilation precautions will be maintained."],
+              ["PEBA heated bed", "PEBA requires a bed temperature of up to 105°C. Allow the bed to cool before removing prints."]
+            ]
+          } },
         ],
         projectPlan: [
           { id: "schedule", heading: "Schedule", text: "" },
@@ -1261,7 +1268,7 @@ window.PORTFOLIO_DATA = {
         },
         {
                 "id": "perspektive3d-peba",
-                "name": "perspektive3d — PEBA 90A filament demonstration (YouTube video; title not independently verified)",
+                "name": "perspektive3d — Better than TPU? What I learned about PEBA Filament",
                 "url": "https://www.youtube.com/watch?v=pVdkjnWaO64&t=365s"
         },
         {

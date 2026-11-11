@@ -798,7 +798,12 @@
       const specs = Array.isArray(item.specifications) && item.specifications.length
         ? `<div class="investigation-table-wrap"><table class="investigation-table" aria-label="${text(item.heading || 'Specifications')}"><tbody>${item.specifications.map(row=>`<tr><th scope="row">${text(row.label)}</th><td>${text(row.value)}</td></tr>`).join('')}</tbody></table></div>`
         : '';
-      const content = cites.paragraphs(item.text || '') + specs + cites.paragraphs(item.postText || '') +
+      // Optional simple subsection table, e.g. a two-column hazard/precaution list.
+      const detailTable = Array.isArray(item.table?.headers) && item.table.headers.length &&
+        Array.isArray(item.table?.rows) && item.table.rows.length
+        ? `<div class="investigation-table-wrap" role="region" aria-label="${text(item.heading || 'Details')}" tabindex="0"><table class="investigation-table"><thead><tr>${item.table.headers.map(header=>`<th scope="col">${text(header)}</th>`).join('')}</tr></thead><tbody>${item.table.rows.map(row=>`<tr>${row.map(cell=>`<td>${cites.inline(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
+        : '';
+      const content = cites.paragraphs(item.text || '') + specs + detailTable + cites.paragraphs(item.postText || '') +
         projectLink + (extras[`${key}:${item.id}`] || '') +
         projectEvidence(item.media, item.heading || entry.title || 'Project media');
       return subheading(item.heading || "Further details", content, item.showEmpty === true);
@@ -863,7 +868,7 @@
     // citations use the same numbered bibliography as the report prose.
     // Phase 1 / optional Phase 2 research and scope, displayed at the end of Introduction.
     if (p.id === 'gripper-contact-surfaces' && p.scopeLimitations?.length) {
-      const headers = ['Variable', 'Phase', 'Research findings / limitation acknowledged', 'Scope and Limitations *', 'Source'];
+      const headers = ['Variable', 'Phase', 'Research findings', 'Scope and Limitations *', 'Source'];
       const heading = headers.map(h => `<th scope="col">${text(h)}</th>`).join('');
       const rows = p.scopeLimitations.map(item => {
         const source = item.referenceId
