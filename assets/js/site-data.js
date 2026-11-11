@@ -1096,9 +1096,9 @@ window.PORTFOLIO_DATA = {
               { type: "image", src: "assets/images/gripper_contact_pad_prototype.jpg", alt: "First 3D printed L-shaped contact pad fitted to the existing goBILDA gripper plate", caption: "First printed prototype fitted to the gripper" }
             ] },
           { id: "manufacturing", heading: "3D Printed Specimens", text: "Specimens will be printed at 70% infill. This initial starting point is based on a similar study on belts and cardboard where TPU 60A at 70% gave the best overall balance of friction and wear (Stoica, 2025) [@stoica-2025].\n\nSpecimens will be printed using a 0.4 mm nozzle, 0.2 mm layer height and consistent infill pattern, wall settings and print orientation. Nozzle temperature, bed temperature, printing speed and flow rate will follow the filament manufacturers' recommendations" },
-          { id: "sliding-friction", heading: "Static Friction Test", text: "A horizontal pull test will measure sliding resistance between each candidate material and cardboard. The normal load and the method of applying the pull will be defined before testing.\n\nSimilar friction tests were carried out by Kargar & Berselli (2025) [@kargar-berselli-2025], while Stoica et al. (2025) investigated friction in cardboard handling systems [@stoica-2025].\n\nAlternative — Sliding Friction Test: If static-friction results do not explain slipping during robot tests, sliding friction testing may also be used to investigate stick–slip [@kargar-berselli-2025]." },
+          { id: "sliding-friction", heading: "Static Friction Test", text: "A horizontal pull test will measure sliding resistance between each candidate material and cardboard. The normal load and the method of applying the pull will be defined before testing.\n\nSimilar friction tests were carried out by Kargar & Berselli (2025)" },
           { id: "gripper-pull-out", heading: "Gripper Pull-Out Test", text: "Each pad will be fitted to the existing gripper, and the force required to pull the cardboard object from the jaws will be measured under controlled gripping conditions.\n\nSimilar pull out tests were carried out by Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]." },
-          { id: "robot-pickup", heading: "Robot Pickup Test", text: "Repeated pickup, carry and dropoff trials will assess the reliability of the complete gripping operation. The number of attempts and criteria for success will be set before testing.\n\nAl-Hadithi et al. (2026) demonstrated repeated gripping operations [@al-hadithi-2026], while Liu & Hung (2022) investigated gripper payload [@liu-hung-2022]." },
+          { id: "robot-pickup", heading: "Robot Pickup Test", text: "Repeated pickup, carry and dropoff trials will assess the reliability of the complete gripping operation. The number of attempts and criteria for success will be set before testing." },
         ],
         projectPlan: [
           { id: "schedule", heading: "Schedule", text: "" },
@@ -1163,7 +1163,7 @@ window.PORTFOLIO_DATA = {
                 "TPU",
                 "Yes",
                 "Baseline TPU",
-                "Robotic gripper study using TPU 90A [@al-hadithi-2026]; Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]"
+                ""
         ],
         [
                 "Selected",
@@ -1171,7 +1171,7 @@ window.PORTFOLIO_DATA = {
                 "Silicone",
                 "N/A",
                 "Adhesive-backed sheet; no moulding",
-                "Kargar & Berselli (2025) [@kargar-berselli-2025]"
+                ""
         ],
         [
                 "Selected",
@@ -1179,7 +1179,7 @@ window.PORTFOLIO_DATA = {
                 "TPE",
                 "Yes",
                 "Compare TPE vs TPU (both 90A)",
-                ""
+                "Liu & Hung (2022) [@liu-hung-2022]"
         ],
         [
                 "Selected",
@@ -1203,7 +1203,7 @@ window.PORTFOLIO_DATA = {
                 "TPU",
                 "Yes",
                 "Lower durometer TPU if 60A–70A cannot be outsourced",
-                "Białek & Rybarczyk (2023) [@bialek-rybarczyk-2023]; Liu & Hung (2022) [@liu-hung-2022]"
+                ""
         ],
         [
                 "Alternative",
@@ -1221,22 +1221,6 @@ window.PORTFOLIO_DATA = {
                 "Already owned; alternative TPU durometer if required",
                 ""
         ],
-        [
-                "Not Selected",
-                "BotFeeder Filastic TPE",
-                "TPE",
-                "Not researched",
-                "Not available to purchase in the UK",
-                "Liu & Hung (2022) [@liu-hung-2022]"
-        ],
-        [
-                "Alternative",
-                "colorFabb varioShore TPU",
-                "Foaming TPU",
-                "Yes",
-                "",
-                "3D-printed elastomeric foam robotic gripper study"
-        ]
 ],
       testMethods: [
         {
