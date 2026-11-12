@@ -769,6 +769,25 @@
     return `<div class="project-evidence-grid${media.length === 1 ? " project-evidence-grid--single" : ""}${media.every(item => item.optional) ? " project-evidence-grid--pending" : ""}">${figures}</div>`;
   }
 
+  // Optional ordered technical blocks for detailed engineering design histories.
+  // Supports heading, paragraph, equation, list and evidence table inside a subsection.
+  function technicalBlocks(blocks, cites) {
+    if (!Array.isArray(blocks)) return "";
+    return blocks.map(block => {
+      if (!block || typeof block !== "object") return "";
+      if (block.type === "heading") return `<h4 class="technical-subheading">${text(block.text || "")}</h4>`;
+      if (block.type === "paragraph") return `<p>${cites.inline(block.text || "")}</p>`;
+      if (block.type === "equation") return `<p class="technical-equation" role="math">${text(block.text || "")}</p>`;
+      if (block.type === "list" && Array.isArray(block.items)) return `<ul class="technical-list">${block.items.map(item => `<li>${cites.inline(item)}</li>`).join("")}</ul>`;
+      if (block.type === "table" && Array.isArray(block.headers) && Array.isArray(block.rows)) {
+        const headers = block.headers.map(h => `<th scope="col">${text(h)}</th>`).join("");
+        const body = block.rows.map(row => `<tr>${row.map(cell => `<td>${cites.inline(cell)}</td>`).join("")}</tr>`).join("");
+        return `<div class="investigation-table-wrap technical-table-wrap" role="region" aria-label="Technical design comparison" tabindex="0"><table class="investigation-table technical-design-table"><thead><tr>${headers}</tr></thead><tbody>${body}</tbody></table></div>${block.note ? `<p class="technical-table-note">${cites.inline(block.note)}</p>` : ""}`;
+      }
+      return "";
+    }).join("");
+  }
+
   const sectionLayouts = (entry, extras={}, cites=citationContext(entry)) => STANDARD_SECTIONS.map(([key,defaultLabel]) => {
     const label = nonempty(entry.sectionLabels?.[key]) ? entry.sectionLabels[key] : defaultLabel;
     if (key === 'resultsDiscussion') {
@@ -803,7 +822,7 @@
         Array.isArray(item.table?.rows) && item.table.rows.length
         ? `<div class="investigation-table-wrap" role="region" aria-label="${text(item.heading || 'Details')}" tabindex="0"><table class="investigation-table"><thead><tr>${item.table.headers.map(header=>`<th scope="col">${text(header)}</th>`).join('')}</tr></thead><tbody>${item.table.rows.map(row=>`<tr>${row.map(cell=>`<td>${cites.inline(cell)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`
         : '';
-      const content = cites.paragraphs(item.text || '') + specs + detailTable + cites.paragraphs(item.postText || '') +
+      const content = cites.paragraphs(item.text || '') + technicalBlocks(item.blocks, cites) + specs + detailTable + cites.paragraphs(item.postText || '') +
         projectLink + (extras[`${key}:${item.id}`] || '') +
         projectEvidence(item.media, item.heading || entry.title || 'Project media');
       return subheading(item.heading || "Further details", content, item.showEmpty === true);

@@ -838,7 +838,7 @@ window.PORTFOLIO_DATA = {
     {
       id: "parallel-plate-drivetrain-design",
       published: true,
-      title: "Parallel Plate Drivetrain Design",
+      title: "Parallel Plate — Design Considerations",
       subtitle: "",
       status: "",
       category: "cad",
@@ -851,39 +851,451 @@ window.PORTFOLIO_DATA = {
       skills: ["CAD", "Mechanism Design", "Prototyping", "Mechanical Design"],
       relatedProjectIds: ["printed-mechanisms"],
       sections: {
-        introduction: "This project explores whether a parallel plate mecanum drivetrain can be constructed using standard goBILDA parts rather than custom cut aluminium plates. The approach was to develop an alternative belt driven side while retaining a conventional direct drive mecanum arrangement on the other side for the proof of concept.",
+        introduction: "The parallel-plate drivetrain was developed through a series of design iterations. Initial decisions established the wheel positions, chassis structure and motor placement, while subsequent investigations identified further constraints involving transmission geometry, component interference and assembly.",
         materialsMethods: "",
-        results: "The one side parallel plate drivetrain was built and run alongside the direct drive side. This demonstrated that the proposed mechanical arrangement could operate, rather than establishing a quantified comparison of drivetrain performance.",
-        discussion: "",
-        conclusions: "",
-        lessonsLearned: ""
+        results: "", discussion: "", conclusions: "", lessonsLearned: ""
       },
-      sectionLabels: { materialsMethods: "Design and Development", resultsDiscussion: "Prototype" },
+      sectionLabels: { materialsMethods: "Design Considerations" },
       sectionDetails: {
         materialsMethods: [
-          {
-            heading: "Alternative Construction",
-            text: "The aim was to use the existing goBILDA channel system for a parallel plate style arrangement without needing custom machined or cut aluminium plates. The design also had to accommodate the mecanum wheel, shafts and bearings within the available space.",
-            media: [
-              {type: "image", src: "assets/images/parallel_plate_drivetrain_CAD.png", alt: "Parallel plate goBILDA drivetrain CAD", caption: "CAD design and component layout", optional: true}
-            ]
-          },
-          {
-            heading: "Pulley and Belt Geometry",
-            text: "One of the interesting challenges was working backwards from commercially available belt lengths to determine suitable pulley sizes and centre distances. The geometry was revised in CAD to fit the transmission into the chosen arrangement, rather than specifying a belt length that might be difficult to obtain. The printed pulley design is documented separately.",
-            media: [
-              {type: "image", src: "assets/images/parallel_plate_drivetrain_belt_geometry.png", alt: "Parallel plate belt length and pulley centre distance calculation", caption: "Pulley sizing and centre distance calculations", optional: true}
-            ]
-          },
-          {
-            heading: "Physical Prototype",
-            text: "The prototype used a direct drive mecanum wheel on one side and a parallel plate belt driven arrangement on the other. The assembled prototype was run to demonstrate the two arrangements, rather than as a finished competition robot.",
-            media: [
-              {type: "image", src: "assets/images/parallel_plate_drivetrain_photo.jpg", alt: "Assembled parallel plate prototype", caption: "One side parallel plate proof of concept", optional: true},
-              {type: "video", src: "assets/videos/parallel_plate_drivetrain_demo.mp4", caption: "Running prototype demonstration", optional: true}
-            ]
-          }
-        ]
+        {
+                "heading": "1. Chassis Structure and Wheel Placement",
+                "text": "The chassis was designed around standard goBILDA parallel plates with 24 mm hole spacing, avoiding the need for custom-machined aluminium plates.\n\nThe wheels were positioned at the third mounting hole from each end (H3 and H15), providing a 288 mm wheelbase. Moving the wheels further out would cause them to protrude beyond the chassis, while moving them inwards would reduce the wheelbase.",
+                "blocks": [
+                        {
+                                "type": "heading",
+                                "text": "Plate Spacing and Cross-Bracing"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The initial design targeted approximately 56 mm separation between the parallel plates, providing a compact drivetrain while preserving interior space for the intake mechanism."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "However, accommodating the pulleys, bearings, hubs and mounting hardware ultimately required increasing the separation to 64 mm."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "This was less desirable because the wider drivetrain occupied an additional 8 mm of interior space per assembly, reducing the space available for the intake."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Standard goBILDA beams and standoffs were considered for connecting and reinforcing the plates. Both were available in the required lengths, with different trade-offs in weight, rigidity, mounting flexibility, and cost. For the prototype to confirm axial width and to save time and money standoffs were 3D printed in PETG."
+                        }
+                ],
+                "media": [
+                        {
+                                "type": "image",
+                                "src": "assets/images/parallel_plate_drivetrain_CAD.png",
+                                "alt": "CAD layout of the parallel plate mecanum drivetrain",
+                                "caption": "CAD design and component layout",
+                                "optional": true
+                        }
+                ]
+        },
+        {
+                "heading": "2. Motor Positioning and Weight Distribution",
+                "text": "",
+                "blocks": [
+                        {
+                                "type": "heading",
+                                "text": "Front Motors"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The front motors were preferably positioned centrally or slightly rearward to preserve space at the front of the robot for the intake mechanism."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Their mounting positions also needed to accommodate the transmission and provide sufficient clearance from the wheel assemblies."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Rear Motors"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The rear motors were positioned as close as practical to the front motors to concentrate weight towards the middle of the robot."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "A minimum separation of 48 mm between front and rear motors was required to accommodate their mounting arrangements."
+                        }
+                ]
+        },
+        {
+                "heading": "3. Independent Wheel Support",
+                "text": "The wheels were mounted on separate bearing-supported axles rather than directly on the motor shafts.\n\nThis arrangement reduced cantilevered loads on the motor shafts and allowed the wheels to be supported independently of the transmission. However, the wheel and motor axles required a minimum separation of 48 mm to accommodate the associated components."
+        },
+        {
+                "heading": "4. Transmission Design",
+                "text": "",
+                "blocks": [
+                        {
+                                "type": "heading",
+                                "text": "Spur-Gear Investigation"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The initial transmission concept used a 20T:100T MOD 0.8 spur-gear arrangement, providing a 5:1 reduction at 48 mm shaft spacing."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "A 30T:90T alternative was subsequently investigated, providing a 3:1 reduction at the same shaft spacing."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Although these configurations were viable, they offered limited flexibility in motor positioning and transmission ratios when using the gears available."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Timing-Belt Transmission"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The design subsequently evolved towards an HTD-5M timing-belt transmission using 3D printed pulleys."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The ability to design and print custom pulley sizes provided greater flexibility in motor positioning and transmission ratios. Pulley tooth counts could be selected to suit the available mounting positions and existing belt stock, rather than being restricted to the spur gears available."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "This flexibility introduced additional design considerations, including pulley tooth engagement, interference between adjacent pulleys, ground clearance and belt tensioning."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The transmission also needed to maintain consistent reduction ratios across all four mecanum wheels."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Pulley Size — Design Considerations"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Smaller pulleys were more compact but increased belt forces for a given transmitted torque and offered fewer teeth in engagement. Larger pulleys provided improved tooth engagement and reduced belt forces, particularly desirable when using 3D printed pulleys."
+                        },
+                        {
+                                "type": "table",
+                                "headers": [
+                                        "Pulley size",
+                                        "Design considerations"
+                                ],
+                                "rows": [
+                                        [
+                                                "16T",
+                                                "Common, compact, but higher belt tension so preferred more teeth for a 3D printed pulley"
+                                        ],
+                                        [
+                                                "20T",
+                                                "Minimum size desired; approximately 9–10 teeth engaged"
+                                        ],
+                                        [
+                                                "24T",
+                                                "Common size; preferable to 20T for more teeth engaged and lower forces"
+                                        ]
+                                ]
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Pulley Spacing and Maximum Size"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The maximum pulley size depended on the separation between neighbouring shafts, particularly where two pulleys occupied the same plane."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Calculations established theoretical limits for equal-sized pulley pairs, with smaller practical limits adopted to allow sufficient clearance and facilitate belt installation."
+                        },
+                        {
+                                "type": "table",
+                                "headers": [
+                                        "Shaft spacing (mm)",
+                                        "Theoretical maximum (1:1)",
+                                        "Practical maximum",
+                                        "Practical notes"
+                                ],
+                                "rows": [
+                                        [
+                                                "48",
+                                                "28T",
+                                                "26T",
+                                                "Only 1.1 mm clearance between pulleys at 28T"
+                                        ],
+                                        [
+                                                "72",
+                                                "43T",
+                                                "40T",
+                                                "40T was determined more sensible for clearance between pulleys and belt installation."
+                                        ],
+                                        [
+                                                "96",
+                                                "58T",
+                                                "48T",
+                                                "Ground clearance limits to 48T (12.7 mm)"
+                                        ],
+                                        [
+                                                "120",
+                                                "73T",
+                                                "48T",
+                                                "Ground clearance limits to 48T (12.7 mm)"
+                                        ]
+                                ],
+                                "note": "*Theoretical values use the approximate HTD-5M pulley-envelope dimensions adopted during design. Practical limits are design preferences rather than universal pulley limits."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Belt Selection and Tensioning"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The final belt selection was constrained by the HTD-5M belts already available in stock."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Pulley combinations and motor mounting positions were investigated to identify configurations compatible with these belt lengths."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Suitable belt tension was also required to prevent slack or tooth skipping without imposing excessive loads on the shafts and bearings."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Belt Length, Axle Spacing and Pulley Selection"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Several front and rear transmission combinations were investigated using the available belt lengths and standard 24 mm mounting-hole spacing."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "For equal-sized HTD-5M pulleys, the approximate belt pitch length was calculated using:"
+                        },
+                        {
+                                "type": "equation",
+                                "text": "L ≈ 2C + 5N"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Where:"
+                        },
+                        {
+                                "type": "list",
+                                "items": [
+                                        "L = Belt pitch length (mm)",
+                                        "C = Axle centre distance (mm)",
+                                        "N = Number of teeth on each pulley"
+                                ]
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The calculation could also be rearranged to determine the required pulley size for a particular belt length and axle spacing:"
+                        },
+                        {
+                                "type": "equation",
+                                "text": "N ≈ (L − 2C) / 5"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The following configurations were investigated:"
+                        },
+                        {
+                                "type": "table",
+                                "headers": [
+                                        "Configuration",
+                                        "Transmission",
+                                        "Axle positions",
+                                        "Axle spacing (mm)",
+                                        "Belt length (mm)",
+                                        "Pulley sizes",
+                                        "Calculated length (mm)"
+                                ],
+                                "rows": [
+                                        [
+                                                "A",
+                                                "Front",
+                                                "H3–H10",
+                                                "168",
+                                                "580",
+                                                "48T:48T",
+                                                "576"
+                                        ],
+                                        [
+                                                "A",
+                                                "Rear",
+                                                "H12–H15",
+                                                "72",
+                                                "390",
+                                                "48T:48T",
+                                                "384"
+                                        ],
+                                        [
+                                                "B",
+                                                "Front",
+                                                "H3–H9",
+                                                "144",
+                                                "520",
+                                                "46T:46T",
+                                                "518"
+                                        ],
+                                        [
+                                                "B",
+                                                "Rear",
+                                                "H12–H15",
+                                                "72",
+                                                "330",
+                                                "37T:37T",
+                                                "329"
+                                        ],
+                                        [
+                                                "C",
+                                                "Front",
+                                                "H3–H7",
+                                                "96",
+                                                "390",
+                                                "39T:39T",
+                                                "387"
+                                        ],
+                                        [
+                                                "C",
+                                                "Rear",
+                                                "H12–H15",
+                                                "72",
+                                                "330",
+                                                "37T:37T",
+                                                "329"
+                                        ]
+                                ],
+                                "note": "*Calculated lengths are approximate belt pitch lengths. Small differences from nominal belt lengths would need to be accommodated through suitable tensioning or mounting adjustment."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Configuration A — 48T Pulleys"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "An early arrangement used 48T pulleys for both transmissions, providing a consistent 1:1 ratio."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "However, positioning the front motor at H10 and rear motor at H12 left only 48 mm between their shafts. The neighbouring 48T pulleys would interfere if mounted in the same plane, making this arrangement unsuitable without further changes."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Configuration B — 46T Front / 37T Rear"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "This configuration used the 520 mm and 330 mm belts, with the front motor at H9 and rear motor at H12."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Although the calculated belt lengths were suitable, the neighbouring motor pulleys had only approximately 3.65 mm clearance, leaving limited space for assembly."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Configuration C — 39T Front / 37T Rear (Selected Prototype)"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Moving the front motor to H7 increased the separation between the front and rear motors to 120 mm."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The 39T and 37T pulleys maintained consistent 1:1 transmission ratios while substantially improving clearance between neighbouring pulleys."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Configuration C was selected and physically assembled using custom 3D printed pulleys, with 390 mm and 330 mm HTD-5M belts for the front and rear transmissions respectively."
+                        }
+                ],
+                "media": [
+                        {
+                                "type": "image",
+                                "src": "assets/images/parallel_plate_drivetrain_belt_geometry.png",
+                                "alt": "Parallel plate pulley design and belt length calculations",
+                                "caption": "Pulley sizing and centre distance calculations",
+                                "optional": true
+                        }
+                ]
+        },
+        {
+                "heading": "5. Component Interference and Packaging",
+                "text": "",
+                "blocks": [
+                        {
+                                "type": "heading",
+                                "text": "Component Clearance"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Motor bodies, pulleys, mounting bolts, hubs and other components had to coexist within the limited space between and around the parallel plates."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Several proposed configurations were rejected because neighbouring pulleys or other drivetrain components would interfere with one another."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Ground Clearance"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The 104 mm mecanum wheels placed the axle centres approximately 52 mm above the ground."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "As pulley diameter increased, available ground clearance decreased. A 48T pulley provided an estimated 12.7 mm clearance, making larger pulleys progressively less attractive."
+                        },
+                        {
+                                "type": "heading",
+                                "text": "Axial Packaging"
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The assembly also needed sufficient space along the shaft axes for bearings, pulleys, hubs, mounting hardware and fasteners."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "These constraints were considered separately from the pulley-diameter calculations, since a configuration could satisfy the shaft-spacing requirements but still prove difficult to assemble."
+                        }
+                ]
+        },
+        {
+                "heading": "6. Manufacturing and Assembly",
+                "text": "",
+                "blocks": [
+                        {
+                                "type": "paragraph",
+                                "text": "The design prioritised standard goBILDA components and 3D printed parts to reduce cost and avoid custom-machined components."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "The use of 3D printing also allowed transmission components and mounting arrangements to be revised as the design developed."
+                        },
+                        {
+                                "type": "paragraph",
+                                "text": "Component accessibility, belt installation and practical assembly clearance were therefore considered alongside the geometric calculations."
+                        }
+                ],
+                "media": [
+                        {
+                                "type": "image",
+                                "src": "assets/images/parallel_plate_drivetrain_photo.jpg",
+                                "alt": "Built parallel plate mecanum drivetrain prototype",
+                                "caption": "Physical prototype assembled using Configuration C",
+                                "optional": true
+                        },
+                        {
+                                "type": "video",
+                                "src": "assets/videos/parallel_plate_drivetrain_demo.mp4",
+                                "caption": "Running prototype demonstration",
+                                "optional": true
+                        }
+                ]
+        }
+]
       },
       references: [],
       links: {github: "", cad: "", video: "", downloads: ""}
@@ -1049,7 +1461,7 @@ window.PORTFOLIO_DATA = {
       ],
       "contribution": "Planned independent work: design interchangeable contact pads, manufacture samples and measure grip, friction, damage and repeatability.",
       sections: {
-        abstract: "This study will investigate the use of flexible 3D-printed filaments and silicone as contact pad materials for a robotic gripper. Candidate materials will be selected based on their expected softness, flexibility and frictional properties. Proposed materials include TPU 90A, TPU 60A–70A, TPE 90A, PEBA 90A and silicone 30A. Their frictional performance will be compared through controlled tests and evaluated during gripping operations on an autonomous mobile robot.",
+        abstract: "This study will investigate the use of flexible 3D printed filaments and silicone as contact pad materials for a robotic gripper. Candidate materials will be selected based on their expected softness, flexibility and frictional properties. Proposed materials include TPU 90A, TPU 60A–70A, SEBS 90A, PEBA 90A and silicone 30A. Their frictional performance will be compared through controlled tests and evaluated during gripping operations on an autonomous mobile robot.",
         introduction: "",
         materialsMethods: "",
         projectPlan: "",
@@ -1062,7 +1474,7 @@ window.PORTFOLIO_DATA = {
       },
       // Short A3/webpage scope table; keep the student's wording unchanged.
       scopeLimitations: [
-        { variable: "Elastomer Type", phase: "1", finding: "Different contact materials produce different gripping forces.", scope: "Compare TPU, TPE, PEBA and adhesive backed silicone against rubber bands.", source: "" },
+        { variable: "Elastomer Type", phase: "1", finding: "Different contact materials produce different gripping forces.", scope: "Compare TPU, SEBS, PEBA and adhesive backed silicone against rubber bands.", source: "" },
         { variable: "Elastomer Durometer", phase: "1", finding: "TPU 60A produced higher friction but greater wear than TPU 95A.", scope: "Compare TPU 90A with TPU 60–70A.", source: "Stoica (2025)", referenceId: "stoica-2025" },
         { variable: "Infill Density", phase: "2**", finding: "Increasing infill from 70% to 100% increased friction and wear for TPU 60A, but reduced friction for TPU 95A.", scope: "Change infill density to 50% or 100%", source: "Stoica (2025)", referenceId: "stoica-2025" },
         { variable: "Pad Thickness", phase: "2**", finding: "Thickness affects pad compliance.", scope: "Modify pad thickness", source: "" },
@@ -1112,6 +1524,7 @@ window.PORTFOLIO_DATA = {
           { id: "equipment", heading: "Equipment List", text: "" },
           { id: "budget", heading: "Budget", text: "" },
           { id: "contingencies", heading: "Contingencies", text: "" },
+          { id: "next-stages", heading: "Next Stages", text: "Following Part 1, subsequent work includes:\n\n[Part 2 - Gripper Jaw Assembly](project:robotic-gripper-grasp-detection). Researches alternative gripping mechanisms.\n\n[Part 3 - Gripper Contact Sensing](project:gripper-contact-sensing). Introduces feedback to verify gripping success." },
         ],
       },
       // Proposal schedule: stage numbers are sequential work stages, not calendar dates.
@@ -1183,9 +1596,9 @@ window.PORTFOLIO_DATA = {
         [
                 "Selected",
                 "Recreus Filaflex SEBS 90A",
-                "TPE",
+                "SEBS",
                 "Yes",
-                "Compare TPE vs TPU (both 90A)",
+                "Compare SEBS vs TPU (both 90A)",
                 "Liu & Hung (2022) [@liu-hung-2022]"
         ],
         [
@@ -1319,7 +1732,7 @@ window.PORTFOLIO_DATA = {
       category: "fabrication",
       categoryOrder: 1,
       image: "assets/images/Pulley.png",
-      imageAlt: "Illustrative 3D-printed gears and fabricated components",
+      imageAlt: "Illustrative 3D printed gears and fabricated components",
       summary: "A HTD-5M design I developed with a 14 mm bore compatible with goBilda.",
       tags: ["3D Printing", "Prototyping", "Materials"],
       date: "3D Printed PETG Pulleys",
@@ -2020,7 +2433,7 @@ window.PORTFOLIO_DATA = {
       printPhotos: [
         {
           src: "assets/images/rubber_band_intake_bumpers_ramp.jpeg",
-          caption: "3D-printed rubber band intake"
+          caption: "3D printed rubber band intake"
         }
       ],
       // Optional print-profile details; blank values are hidden from the public page.
